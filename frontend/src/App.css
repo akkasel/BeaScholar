@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  font-family: 'Poppins', sans-serif;
 }
 
 .App-logo {
@@ -36,3 +37,157 @@
     transform: rotate(360deg);
   }
 }
+
+.sign-in-container .login-heading {
+  text-align: left;
+  font-size: 3rem;
+  font-weight: bold;
+  color: #C4084F;
+  margin-bottom: 0.0025%;
+}
+
+.sign-in-container h2 {
+  text-align: left;
+  font-size: 1.2rem;
+  font-weight: normal;
+  font-family: 'Poppins', sans-serif;
+}
+
+.login-page {
+  background-image: url('../public/eclipse.svg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.sign-in-container {
+  max-width: 400px;
+  margin: auto;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  /* Adjust background color if needed */
+  width: 25%; /* Add this line */
+  max-width: 500px; /* Adjust the max-width as needed */
+
+  /* background-image: url('../public/eclipse.svg');  Add the background image */
+  background-size: cover; /* Resize the image to cover the entire container */
+  background-position: center; /* Center the image within the container */
+  background-repeat: no-repeat; /* Prevent the image from repeating */
+  position: relative; /* Add position relative for the card to be positioned on top */
+}
+
+.sign-in-container h1 {
+  text-align: center;
+  color: #333; /* Adjust text color to match the design */
+}
+
+.sign-in-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group {
+  position: relative;
+  margin-bottom: 20px;
+  width: 100%; /* Add this line */
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px 35px 10px 10px; /* Adjust padding to make space for icons */
+  border: 2px solid #ccc; /* Adjust border color as needed */
+  border-radius: 5px;
+  box-sizing: border-box; /* Add this line */
+}
+
+.input-group i {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  color: #333; /* Adjust icon color as needed */
+}
+
+button {
+  background-color: #C4084F; /* Adjust button color as needed */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.social-login {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.social-login button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.social-icon {
+  width: 50px; /* Adjust this value to change the width */
+  height: 50px; /* Adjust this value to change the height */
+  color: #282c34;
+}
+
+.fab fa-microsoft-f social-icon {
+  font-size: 24px; /* Adjust icon size as needed */
+  color: #282c34;
+}
+
+.daftar-disini-text {
+  font-weight: bold;
+  color: #C4084F;
+  text-decoration: underline;
+  font-size: 14px;
+}
+
+.baru-di-beascholar {
+  font-weight: normal;
+  text-align: left;
+  margin-right: 5px; 
+  font-size: 14px;
+}
+.baru-di-beascholar-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2%;
+}
+
+.apakah-kamu-expert-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5%;
+  
+}
+
+.apakah-kamu-expert {
+  font-weight: normal;
+  text-align: left;
+  margin-right: 5px; 
+  font-size: 14px;
+}
+
+.login-sebagai-expert {
+  font-weight: bold;
+  color: #FF6C37;
+  text-decoration: underline;
+  font-size: 14px;
+}
+
+/* Add other styles based on the design such as fonts, colors, etc. */
+
