@@ -262,16 +262,18 @@ button {
 
 /* Sidebar Styles */
 .sidebar-container {
-  height: 100vh; /* Set the height to 100% of the viewport height */
+  height: 100%; /* Set the height to 100% to make the sidebar full-height */
   position: fixed; /* Make the sidebar fixed */
   left: 0; /* Position the sidebar on the left */
-  overflow-x: hidden; /* Hide horizontal scrollbar */
+ 
 }
 
 /* Active Menu Item Styles */
 .sidebar-container .menu-item.active {
   background-color: #772F32 !important; /* Set the desired dark red color */
   color: #fff !important; /* Set the text color to white */
+  flex: 0 0 250px; /* Sidebar width and not allowed to grow or shrink */
+  height: 100vh; /* Full viewport height */
 }
 
 .menu-item {
@@ -284,7 +286,124 @@ button {
   color: #fff !important; /* Set the text color to white */
 }
 
+.home-page {
+  display: flex;
+  height: 100vh; /* Set the height to 100vh to make it full-screen */
+}
 
+.home-content {
+  flex: 1; /* Make the content take up the remaining space */
+  padding: 20px;
+}
+
+.welcome-section {
+  background-color: #fff; /* or any other desired background color */
+  display: flex;
+  justify-content: left;
+  align-items: left;
+}
+
+.welcome-content {
+  display: flex;
+  align-items: left;
+}
+
+.welcome-content h1 {
+  font-size: 40px; /* or any other desired font size */
+  margin-right: 400px;
+  margin-left: 30px;
+  text-align: left;
+  color: #ca3c4f; /* or any other desired color */
+}
+
+.welcome-text {
+  margin-right: 40px;
+  text-align: left;
+
+}
+
+.welcome-text h1 {
+  font-size: 40px;
+  margin-bottom: 5px; /* Reduced margin-bottom */
+}
+
+.welcome-text p {
+  font-size: 40px;
+  font-weight: bold;
+  text-align: left;
+  margin-right: 300px;
+  margin-left: 30px;
+  margin-top: 0;
+}
+
+.illustration {
+  width: 200px; /* adjust the width as per your illustration size */
+  height: 200px; /* adjust the height as per your illustration size */
+}
+
+.selamat-datang {
+  color: #C4084F;
+}
+
+.nama-user {
+  color: #FF6C37;
+}
+
+.illustration img {
+  max-width: 200%;
+  max-height: 200%;
+}
+
+.interview-history-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px;
+  margin-top: 20px;
+}
+
+.cari-beasiswa-container {
+  display: inline-flex;
+  justify-content: flex-start; /* Align items to the left */
+}
+
+.cari-beasiswa-text {
+  font-size: 24px;
+  margin-right: 950px;
+}
+
+.logo-kaca-pembesar {
+  margin-right: 10px;
+  
+}
+
+.search-bar {
+  display: flex; /* Arrange elements horizontally */
+  align-items: center; /* Vertically center elements */
+  width: 100%; /* Take full width of container */
+  border-radius: 5px; /* Rounded corners */
+  padding: 5px; /* Add some padding */
+  margin-left: 10px;
+}
+
+.search-bar input {
+  flex: 1; /* Take up remaining space */
+  outline: none; /* Remove default outline */
+  padding: 5px; /* Add padding */
+  font-size: 16px; /* Set font size */
+}
+
+.search-bar button {
+  background-color: #FF6C37;
+  color: white; /* White text */
+  padding: 5px 10px; /* Add padding */
+  cursor: pointer; /* Pointer cursor on hover */
+  border-radius: 5px; /* Rounded corners */
+  margin-left: 10px;
+}
+
+.search-bar button i {
+  font-size: 14px; /* Set icon size */
+}
 
 /* Add other styles based on the design such as fonts, colors, etc. */
 
