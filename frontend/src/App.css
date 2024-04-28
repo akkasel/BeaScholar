@@ -211,5 +211,80 @@ button {
   margin-bottom: 5%;
 }
 
+.daftar-expert-container {
+  max-width: 800px;
+  margin: auto;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  /* Adjust background color if needed */
+  width: 70%; /* Add this line */
+ 
+  max-width: 1000px; /* Adjust the max-width as needed */
+
+  /* background-image: url('../public/eclipse.svg');  Add the background image */
+  background-size: cover; /* Resize the image to cover the entire container */
+  background-position: center; /* Center the image within the container */
+  background-repeat: no-repeat; /* Prevent the image from repeating */
+  position: relative; /* Add position relative for the card to be positioned on top */
+}
+
+.daftar-expert-container .h2 {
+  text-align: center;
+  color: #333; /* Adjust text color to match the design */
+}
+
+.daftar-expert-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.daftar-expert-container .daftar-expert-heading {
+  text-align: left;
+  font-size: 3rem;
+  font-weight: bold;
+  color: #C4084F;
+  margin-bottom: 0.0025%;
+}
+
+.daftar-expert-container .daftar-expert-h2 {
+  text-align: left;
+  font-size: 14px;
+  font-weight: normal;
+  color: black;
+}
+
+.daftar-expert-container .text-biasa-di-expert-signup-page {
+  text-align: left;
+  font-weight: bold;
+}
+
+/* Sidebar Styles */
+.sidebar-container {
+  height: 100vh; /* Set the height to 100% of the viewport height */
+  position: fixed; /* Make the sidebar fixed */
+  left: 0; /* Position the sidebar on the left */
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+}
+
+/* Active Menu Item Styles */
+.sidebar-container .menu-item.active {
+  background-color: #772F32 !important; /* Set the desired dark red color */
+  color: #fff !important; /* Set the text color to white */
+}
+
+.menu-item {
+  margin-top: 30px;
+  font-weight: bold;
+  color: #fff !important; /* Set the text color to white */
+}
+
+.link-menu-item {
+  color: #fff !important; /* Set the text color to white */
+}
+
+
+
 /* Add other styles based on the design such as fonts, colors, etc. */
 
