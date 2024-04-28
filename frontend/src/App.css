@@ -263,7 +263,7 @@ button {
 /* Sidebar Styles */
 .sidebar-container {
   height: 100%; /* Set the height to 100% to make the sidebar full-height */
-  position: fixed; /* Make the sidebar fixed */
+  position: absolute;
   left: 0; /* Position the sidebar on the left */
  
 }
@@ -288,7 +288,7 @@ button {
 
 .home-page {
   display: flex;
-  height: 100vh; /* Set the height to 100vh to make it full-screen */
+  height: 200vh; /* Set the height to 100vh to make it full-screen */
 }
 
 .home-content {
@@ -404,6 +404,127 @@ button {
 .search-bar button i {
   font-size: 14px; /* Set icon size */
 }
+
+.card-container {
+  width: 300px;
+  border-radius: 8px;
+  margin-left: 10px;
+  margin-top: 20px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  border: 1px solid #FA6339;
+}
+
+.card-header {
+  background-color: #fff;
+  text-align: center;
+  padding: 20px;
+  position: relative;
+}
+
+.card-header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.card-logo {
+  width: 50px; /* Adjust based on the actual logo size */
+  height: 50px;
+  border: 2px solid #FA6339; /* Added blue outline */
+  border-radius: 50%; /* Makes it round */
+  padding: 5px; /* Adjust padding to fit the logo */
+}
+
+.card-header-badge-container {
+  text-align: right;
+  margin-top: 0;
+}
+
+.card-header-badge {
+  display: inline-block;
+  background-color: #ffcc00;
+  padding: 0 12px;
+  border-radius: 5px;
+  font-size: 12px;
+  color: #333;
+  margin-left: 4px;
+  font-weight: bold;
+}
+
+.national {
+  background-color: #E8D2FF; 
+}
+
+.education-level {
+  background-color: #FFC7B3; 
+}
+
+.card-title {
+  color: #333;
+  font-size: 18px;
+  margin: 0;
+  text-align: left;
+}
+
+.card-subtitle {
+  color: #666;
+  font-size: 12px;
+  line-height: 1.5;
+  margin: 10px 0 20px;
+  text-align: left;
+}
+
+.card-button {
+  background-color: #FA6339;
+  color: #ffffff;
+  border: none;
+  padding: 10px 15px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 20px;
+  transition: background-color 0.3s;
+  outline: none;
+  margin-left: 100px;
+}
+
+.card-button:hover {
+  background-color: #C4084F;
+}
+
+/* Container for the scholarship cards */
+.list-of-scholarship-card-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Creates a 4-column grid */
+  gap: 20px; /* Adjust the gap between cards as needed */
+  margin: 20px; /* Adjust margin as needed */
+}
+
+/* Ensure the ScholarshipCard has a max-width to control its size */
+.ScholarshipCard {
+  max-width: 200px; /* Adjust width as needed */
+  margin: 0 auto; /* Centers the card in the grid area */
+}
+
+@media (max-width: 1200px) { /* Adjust breakpoint as needed */
+  .scholarship-card-container {
+    grid-template-columns: repeat(3, 1fr); /* 3 columns for smaller screens */
+  }
+}
+
+@media (max-width: 768px) { /* Adjust breakpoint as needed */
+  .scholarship-card-container {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns for even smaller screens */
+  }
+}
+
+@media (max-width: 480px) { /* Adjust breakpoint as needed */
+  .scholarship-card-container {
+    grid-template-columns: 1fr; /* 1 column for mobile screens */
+  }
+}
+
 
 /* Add other styles based on the design such as fonts, colors, etc. */
 

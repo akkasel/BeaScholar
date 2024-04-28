@@ -12,8 +12,14 @@ import kacaPembesarSvg from "../../img/kacapembesar.svg";
 import InterviewHistory from "./content/interviewSection/InterviewHistory";
 import DocumentHistory from "./content/documentSection/DocumentHistory";
 import SearchBar from "./content/SearchBar";
+import ScholarshipCard from "./content/ScholarshipCard";
 
 const HomePage = () => {
+
+  // Placeholder data for the cards. Replace with your actual data.
+  const scholarshipCardsData = Array(6).fill(0); // Example for 10 cards
+
+  
   return (
     <div>
       <TopBar /> {/* Render the TopBar component */}
@@ -129,6 +135,14 @@ const HomePage = () => {
           <div>
             <SearchBar />
           </div>
+
+          {/* Container for the ScholarshipCard components */}
+          <div className="list-of-scholarship-card-container">
+            {scholarshipCardsData.map((_, index) => (
+              <ScholarshipCard key={index} />
+            ))}
+          </div>
+
         </div>
       </div>
     </div>
