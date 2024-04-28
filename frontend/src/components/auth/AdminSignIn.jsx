@@ -7,7 +7,7 @@ import microsoftSvg from '../../img/microsoft.svg';
 import googleSvg from '../../img/google.svg';
 
 
-const SignIn = () => {
+const AdminSignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -39,7 +39,7 @@ const SignIn = () => {
     <div className="login-page">
     <div className="sign-in-container">
       <form onSubmit={signIn}>
-      <h1 className="login-heading">Login</h1>
+      <h1 className="login-heading">Login sebagai Admin</h1>
         <h2>Selamat datang kembali di BeaScholar!</h2>
         
         <div className="input-group">
@@ -62,33 +62,17 @@ const SignIn = () => {
           <i className="fas fa-lock input-icon"></i>
         </div>
 
-        <div className="baru-di-beascholar-container"> 
-          <label className="baru-di-beascholar">Baru di BeaScholar? </label>
-          <a className="daftar-disini-text" href="/signup">Daftar disini!</a> {/* Jangan lupa di href nya nanti simpan link untuk ke page Sign Up*/}
-        </div>
-
         <div className="apakah-kamu-expert-container"> 
-          <label className="apakah-kamu-expert">Apakah kamu seorang Expert? </label>
-          <a className="login-sebagai-expert" href="/expert-signin">Login sebagai Expert</a> {/* Jangan lupa di href nya nanti simpan link untuk ke page Sign Up*/}
+          <label className="apakah-kamu-expert">Belum punya akun sebagai Admin? </label>
+          <a className="login-sebagai-expert" href="/admin-signup">Daftar disini!</a> {/* Jangan lupa di href nya nanti simpan link untuk ke page Sign Up*/}
         </div>
 
-        <button type="submit">Login</button>
+        <button type="submit">Login sebagai admin</button>
         
-        <div className="social-login">
-          <button onClick={handleGoogleSignIn}>
-          <img src={googleSvg} alt="Facebook" className="social-icon" />
-          </button>
-          <button onClick={handleFacebookSignIn}>
-          <img src={facebookSvg} alt="Facebook" className="social-icon" />
-          </button>
-          <button onClick={handleFacebookSignIn}>
-          <img src={microsoftSvg} alt="Facebook" className="social-icon" />
-          </button>
-        </div>
       </form>
     </div>
     </div>
   );
 };
 
-export default SignIn;
+export default AdminSignIn;

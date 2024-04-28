@@ -165,7 +165,7 @@ button {
 .baru-di-beascholar-container {
   display: flex;
   align-items: center;
-  margin-bottom: 2%;
+  margin-bottom: 4%;
 }
 
 .apakah-kamu-expert-container {
@@ -173,6 +173,20 @@ button {
   align-items: center;
   margin-bottom: 5%;
   
+}
+
+.belum-punya-akun-expert {
+  font-weight: normal;
+  text-align: left;
+  margin-right: 1px;
+  font-size: 12px;
+}
+
+.daftar-disini-expert-text {
+  font-weight: bold;
+  color: #C4084F;
+  text-decoration: underline;
+  font-size: 12px;
 }
 
 .apakah-kamu-expert {
@@ -187,6 +201,14 @@ button {
   color: #FF6C37;
   text-decoration: underline;
   font-size: 14px;
+}
+
+.sign-in-container .daftar-sebagai-admin-heading {
+  text-align: left;
+  font-size: 3rem;
+  font-weight: bold;
+  color: #C4084F;
+  margin-bottom: 5%;
 }
 
 /* Add other styles based on the design such as fonts, colors, etc. */

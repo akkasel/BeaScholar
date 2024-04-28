@@ -6,7 +6,7 @@ import facebookSvg from '../../img/facebook.svg';
 import microsoftSvg from '../../img/microsoft.svg';
 import googleSvg from '../../img/google.svg';
 
-const SignUp = () => {
+const AdminSignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -38,8 +38,7 @@ const SignUp = () => {
     <div className="login-page">
     <div className="sign-in-container">
       <form onSubmit={signUp}>
-        <h1 className="login-heading">Daftar</h1>
-        <h2>Siap untuk meraih masa depanmu?</h2>
+        <h1 className="daftar-sebagai-admin-heading">Daftar sebagai Admin</h1>
 
         <div className="input-group">
           <input
@@ -70,27 +69,16 @@ const SignUp = () => {
         </div>
 
         <div className="baru-di-beascholar-container"> 
-          <label className="baru-di-beascholar">Sudah punya akun BeaScholar? </label>
-          <a className="daftar-disini-text" href="/signin">Login disini!</a> {/* Jangan lupa di href nya nanti simpan link untuk ke page Sign Up*/}
+          <label className="baru-di-beascholar">Sudah punya akun sebagai Admin? </label>
+          <a className="daftar-disini-text" href="/admin-signin">Login disini!</a> {/* Jangan lupa di href nya nanti simpan link untuk ke page Sign Up*/}
         </div>
 
-        <button type="submit">Daftar</button>
+        <button type="submit">Daftar sebagai Admin</button>
 
-        <div className="social-login">
-          <button onClick={handleGoogleSignUp}>
-          <img src={googleSvg} alt="Facebook" className="social-icon" />
-          </button>
-          <button onClick={handleFacebookSignUp}>
-          <img src={facebookSvg} alt="Facebook" className="social-icon" />
-          </button>
-          <button onClick={handleFacebookSignUp}>
-          <img src={microsoftSvg} alt="Facebook" className="social-icon" />
-          </button>
-        </div>
       </form>
     </div>
     </div>
   );
 };
 
-export default SignUp;
+export default AdminSignUp;

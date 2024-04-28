@@ -1,89 +1,82 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
-
+import '../../App.css';
 import facebookSvg from '../../img/facebook.svg';
 import microsoftSvg from '../../img/microsoft.svg';
 import googleSvg from '../../img/google.svg';
 
-const SignUp = () => {
+
+const ExpertSignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const signUp = (e) => {
+  const signIn = (e) => {
     e.preventDefault();
-    createUserWithEmailAndPassword(auth, email, password)
+    signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        console.log(userCredential);
+        // User signed in
       })
       .catch((error) => {
-        console.log(error);
+        // Handle errors here.
       });
   };
 
-  // Add methods to handle social SignUp here
-  const handleGoogleSignUp = () => {
+  // Add methods to handle social login here
+  const handleGoogleSignIn = () => {
     // Google sign-in logic
   };
 
-  const handleFacebookSignUp = () => {
+  const handleFacebookSignIn = () => {
     // Facebook sign-in logic
   };
 
-  const handleMicrosoftSignUp = () => {
+  const handleMicrosoftSignIn = () => {
     // Microsoft sign-in logic
   };
 
   return (
     <div className="login-page">
     <div className="sign-in-container">
-      <form onSubmit={signUp}>
-        <h1 className="login-heading">Daftar</h1>
-        <h2>Siap untuk meraih masa depanmu?</h2>
-
+      <form onSubmit={signIn}>
+      <h1 className="login-heading">Login sebagai Expert</h1>
+        <h2>Selamat datang kembali di BeaScholar!</h2>
+        
         <div className="input-group">
           <input
             type="email"
-            placeholder="Email"
+            placeholder="Masukan Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-          ></input>
+          />
           <i className="fas fa-envelope input-icon"></i>
         </div>
-
+        
         <div className="input-group">
           <input
             type="password"
-            placeholder="Password"
+            placeholder="Masukan Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-          ></input>
-          <i className="fas fa-lock input-icon"></i>
-        </div>
-
-        <div className="input-group">
-          <input
-            type="password"
-            placeholder="Konfirmasi Password"
-          ></input>
+          />
           <i className="fas fa-lock input-icon"></i>
         </div>
 
         <div className="baru-di-beascholar-container"> 
-          <label className="baru-di-beascholar">Sudah punya akun BeaScholar? </label>
-          <a className="daftar-disini-text" href="/signin">Login disini!</a> {/* Jangan lupa di href nya nanti simpan link untuk ke page Sign Up*/}
+          <label className="belum-punya-akun-expert">Belum punya akun sebagai Expert? </label>
+          <a className="daftar-disini-expert-text" href="/expert-signup">Daftar sebagai Expert disini!</a> {/* Jangan lupa di href nya nanti simpan link untuk ke page Sign Up*/}
         </div>
 
-        <button type="submit">Daftar</button>
-
+        <button type="submit">Login sebagai Expert</button>
+        
         <div className="social-login">
-          <button onClick={handleGoogleSignUp}>
+          <button onClick={handleGoogleSignIn}>
           <img src={googleSvg} alt="Facebook" className="social-icon" />
           </button>
-          <button onClick={handleFacebookSignUp}>
+          <button onClick={handleFacebookSignIn}>
           <img src={facebookSvg} alt="Facebook" className="social-icon" />
           </button>
-          <button onClick={handleFacebookSignUp}>
+          <button onClick={handleFacebookSignIn}>
           <img src={microsoftSvg} alt="Facebook" className="social-icon" />
           </button>
         </div>
@@ -93,4 +86,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default ExpertSignIn;
