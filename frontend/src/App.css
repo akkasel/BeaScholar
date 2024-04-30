@@ -674,5 +674,12 @@ button {
   height: 120vh;
 }
 
+.container-avatar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 /* Add other styles based on the design such as fonts, colors, etc. */
 

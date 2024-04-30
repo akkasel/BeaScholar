@@ -14,6 +14,7 @@ import FeedbackInterviewPage from './components/interview/FeedbackInterviewPage'
 import DocumentPage from './components/document/DocumentPage';
 import DaftarHasilAnalisisDokumenPage from './components/document/DaftarHasilAnalisisDokumenPage';
 import FeedbackDokumenPage from './components/document/FeedbackDokumenPage';
+import ProfilePage from './components/profile/ProfilePage';
 
 function App() {
   return (
@@ -30,10 +31,12 @@ function App() {
           <Route path="/interview" element={<InterviewPage />} />
           <Route path="/daftar-jadwal-interview" element={<DaftarJadwalInterviewPage />} />
           <Route path="/feedback-interview" element={<FeedbackInterviewPage />} />
-          
+
           <Route path="/document" element={<DocumentPage />} />
           <Route path="/daftar-hasil-analisis-dokumen" element={<DaftarHasilAnalisisDokumenPage />} />
           <Route path="/feedback-dokumen" element={<FeedbackDokumenPage />} />
+
+          <Route path="/profile" element={<ProfilePage />} />
 
 
           {/* Route yang berkaitan dengan role Expert simpan dibawah sini */}
