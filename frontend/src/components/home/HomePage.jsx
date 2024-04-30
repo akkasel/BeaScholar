@@ -14,6 +14,7 @@ import DocumentHistory from "./content/documentSection/DocumentHistory";
 import SearchBar from "./content/SearchBar";
 import ScholarshipCard from "./content/ScholarshipCard";
 
+
 const HomePage = () => {
 
   // Placeholder data for the cards. Replace with your actual data.

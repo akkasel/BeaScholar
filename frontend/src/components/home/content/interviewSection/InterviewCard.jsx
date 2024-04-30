@@ -2,7 +2,7 @@ import React from 'react';
 
 const InterviewCard = ({ date, time }) => {
   const cardStyle = {
-    border: '2px solid #FFC0CB', // pink border as seen in the screenshot
+    border: '2px solid #FFC0CB',
     borderRadius: '16px',
     padding: '15px',
     marginBottom: '20px',

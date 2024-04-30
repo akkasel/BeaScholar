@@ -123,6 +123,8 @@ button {
   padding: 10px;
   font-size: 16px;
   cursor: pointer;
+
+
 }
 
 .social-login {
@@ -477,16 +479,9 @@ button {
 }
 
 .card-button {
-  background-color: #FA6339;
-  color: #ffffff;
-  border: none;
-  padding: 10px 15px;
-  font-size: 14px;
-  cursor: pointer;
-  border-radius: 20px;
-  transition: background-color 0.3s;
-  outline: none;
-  margin-left: 100px;
+  position: absolute; /* Make the button element positionable */
+  top: 5px; /* Set the bottom position from the card's edge */
+  left: 40px;
 }
 
 .card-button:hover {
@@ -523,6 +518,120 @@ button {
   .scholarship-card-container {
     grid-template-columns: 1fr; /* 1 column for mobile screens */
   }
+}
+
+.interview-page {
+  display: flex;
+  height: 140vh; 
+  
+}
+
+
+.latihan-interview-text {
+  font-weight: bold;
+  color: #C4084F;
+}
+
+.rocket-icon {
+  margin-top: 25px;
+  margin-right: 15px;
+}
+
+
+.interview-header-container {
+  display: flex;
+  justify-content: flex-start; /* Align items to the left */
+  margin-left: 80px;
+  
+}
+
+.interview-page-container {
+  display: flexbox;
+}
+
+.form-input-container {
+  display: flexbox;
+  justify-content: flex-start; /* Align items to the left */
+  margin-left: 80px;
+  width: 1000px;
+}
+
+
+.text-interview {
+  font-weight: bold;
+}
+
+.checkbox-card-container {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  border-color: "#C4084";
+}
+
+.text-interview-container {
+  text-align: left;
+  margin-bottom: 8px; /* Adjust the value as needed */
+}
+
+.text-filter-not-selected {
+  margin-right: 30px;
+  margin-left: 30px;
+  color: gainsboro;
+}
+
+.text-filter {
+  margin-right: 30px;
+  margin-left: 30px;
+  font-weight: bold;
+}
+
+.daftar-jadwal-interview-page {
+  display: flex;
+  height: 300vh; /* Set the height to 100vh to make it full-screen */
+}
+
+.search-bar-daftar-jadwal-interview {
+  margin-left: 60px;
+}
+
+.filter-button-container {
+  margin-bottom: 20px;
+}
+
+.text-header-item {
+  margin: 5px;
+  color: grey;
+  font-size: 14px;
+  text-align: left;
+}
+
+.text-content-item {
+  margin: 5px;
+  color: black;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: left;
+}
+
+.container-text-header-item {
+  display: inline;
+}
+
+.container-all-text-item {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin: 16px;
+}
+
+.container-text-content-item {
+  display: inline-block;
+}
+
+.container-button-jadwal-interview-item {
+  position: absolute; /* Make the button element positionable */
+  bottom: 10px; /* Set the bottom position from the card's edge */
+  right: 20px; /* Set the left position from the card's edge */
 }
 
 

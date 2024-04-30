@@ -8,6 +8,8 @@ import AdminSignIn from './components/auth/AdminSignIn';
 import AdminSignUp from './components/auth/AdminSignUp';
 import HomePage from './components/home/HomePage';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import InterviewPage from './components/interview/InterviewPage';
+import DaftarJadwalInterviewPage from './components/interview/DaftarJadwalInterviewPage';
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
           <Route path="/admin-signin" element={<AdminSignIn />} />
           <Route path="/admin-signup" element={<AdminSignUp />} />
           <Route path="/home" element={<HomePage />} />
+          <Route path="/interview" element={<InterviewPage />} />
+          <Route path="/daftar-jadwal-interview" element={<DaftarJadwalInterviewPage />} />
         </Routes>
       </div>
     </BrowserRouter>
