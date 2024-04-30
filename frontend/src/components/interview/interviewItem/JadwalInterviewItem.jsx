@@ -86,7 +86,7 @@ const JadwalInterviewItem = () => {
       </div>
 
       <div className="container-button-jadwal-interview-item">
-        <Button
+        <Button href="/feedback-interview"
           variant="contained"
           endIcon={<img src={arrowrightSvg} />}
           sx={{
