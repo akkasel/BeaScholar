@@ -11,7 +11,7 @@ const ExpertSignUp = () => {
   const [university, setUniversity] = useState("");
   const [cv, setCv] = useState(null);
   const [essay, setEssay] = useState(null);
-  const [identityNumber, setIdentityNumber] = useState(null);
+  const [ktp, setKtp] = useState(null);
   const [photo, setPhoto] = useState(null);
 
   const signUp = async (e) => {
@@ -39,7 +39,7 @@ const ExpertSignUp = () => {
   };
 
   const handleKTPChange = (e) => {
-    setCv(e.target.files[0]);
+    setKtp(e.target.files[0]);
   };
 
   const handleEssayChange = (e) => {
@@ -104,7 +104,7 @@ const ExpertSignUp = () => {
           <input
             type="file"
             placeholder="KTP"
-            value={identityNumber}
+            value={ktp}
             onChange={handleKTPChange}
           />
           <i className="fas fa-id-card input-icon"></i>

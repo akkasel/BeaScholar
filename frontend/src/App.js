@@ -11,6 +11,9 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import InterviewPage from './components/interview/InterviewPage';
 import DaftarJadwalInterviewPage from './components/interview/DaftarJadwalInterviewPage';
 import FeedbackInterviewPage from './components/interview/FeedbackInterviewPage';
+import DocumentPage from './components/document/DocumentPage';
+import DaftarHasilAnalisisDokumenPage from './components/document/DaftarHasilAnalisisDokumenPage';
+import FeedbackDokumenPage from './components/document/FeedbackDokumenPage';
 
 function App() {
   return (
@@ -21,10 +24,16 @@ function App() {
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/auth-details" element={<AuthDetails />} />
+
           <Route path="/home" element={<HomePage />} />
+
           <Route path="/interview" element={<InterviewPage />} />
           <Route path="/daftar-jadwal-interview" element={<DaftarJadwalInterviewPage />} />
           <Route path="/feedback-interview" element={<FeedbackInterviewPage />} />
+          
+          <Route path="/document" element={<DocumentPage />} />
+          <Route path="/daftar-hasil-analisis-dokumen" element={<DaftarHasilAnalisisDokumenPage />} />
+          <Route path="/feedback-dokumen" element={<FeedbackDokumenPage />} />
 
 
           {/* Route yang berkaitan dengan role Expert simpan dibawah sini */}

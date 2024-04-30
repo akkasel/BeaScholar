@@ -669,5 +669,10 @@ button {
   height: 150vh
 }
 
+.document-page {
+  display: flex;
+  height: 120vh;
+}
+
 /* Add other styles based on the design such as fonts, colors, etc. */
 

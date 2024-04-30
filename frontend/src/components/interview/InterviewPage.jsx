@@ -274,7 +274,7 @@ const InterviewPage = () => {
                   <FormControlLabel
                     control={
                       <Checkbox
-                        defaultChecked
+                        
                         sx={{
                           color: "#C4084F", // Change the checkbox color
                           "&.Mui-checked": {
@@ -288,7 +288,7 @@ const InterviewPage = () => {
                   <FormControlLabel
                     control={
                       <Checkbox
-                        defaultChecked
+                        
                         sx={{
                           color: "#C4084F", // Change the checkbox color
                           "&.Mui-checked": {
@@ -302,7 +302,7 @@ const InterviewPage = () => {
                   <FormControlLabel
                     control={
                       <Checkbox
-                        defaultChecked
+                        
                         sx={{
                           color: "#C4084F", // Change the checkbox color
                           "&.Mui-checked": {
