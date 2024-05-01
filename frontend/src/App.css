@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  font-family: 'Poppins', sans-serif;
 }
 
 .App-logo {
@@ -36,3 +37,649 @@
     transform: rotate(360deg);
   }
 }
+
+.sign-in-container .login-heading {
+  text-align: left;
+  font-size: 3rem;
+  font-weight: bold;
+  color: #C4084F;
+  margin-bottom: 0.0025%;
+}
+
+.sign-in-container h2 {
+  text-align: left;
+  font-size: 1.2rem;
+  font-weight: normal;
+  font-family: 'Poppins', sans-serif;
+}
+
+.login-page {
+  background-image: url('../public/eclipse.svg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.sign-in-container {
+  max-width: 400px;
+  margin: auto;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  /* Adjust background color if needed */
+  width: 25%; /* Add this line */
+  max-width: 500px; /* Adjust the max-width as needed */
+
+  /* background-image: url('../public/eclipse.svg');  Add the background image */
+  background-size: cover; /* Resize the image to cover the entire container */
+  background-position: center; /* Center the image within the container */
+  background-repeat: no-repeat; /* Prevent the image from repeating */
+  position: relative; /* Add position relative for the card to be positioned on top */
+}
+
+.sign-in-container h1 {
+  text-align: center;
+  color: #333; /* Adjust text color to match the design */
+}
+
+.sign-in-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group {
+  position: relative;
+  margin-bottom: 20px;
+  width: 100%; /* Add this line */
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px 35px 10px 10px; /* Adjust padding to make space for icons */
+  border: 2px solid #ccc; /* Adjust border color as needed */
+  border-radius: 5px;
+  box-sizing: border-box; /* Add this line */
+}
+
+.input-group i {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  color: #333; /* Adjust icon color as needed */
+}
+
+button {
+  background-color: #C4084F; /* Adjust button color as needed */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+
+
+}
+
+.social-login {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.social-login button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.social-icon {
+  width: 50px; /* Adjust this value to change the width */
+  height: 50px; /* Adjust this value to change the height */
+  color: #282c34;
+}
+
+.fab fa-microsoft-f social-icon {
+  font-size: 24px; /* Adjust icon size as needed */
+  color: #282c34;
+}
+
+.daftar-disini-text {
+  font-weight: bold;
+  color: #C4084F;
+  text-decoration: underline;
+  font-size: 14px;
+}
+
+.baru-di-beascholar {
+  font-weight: normal;
+  text-align: left;
+  margin-right: 5px; 
+  font-size: 14px;
+}
+.baru-di-beascholar-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 4%;
+}
+
+.apakah-kamu-expert-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5%;
+  
+}
+
+.belum-punya-akun-expert {
+  font-weight: normal;
+  text-align: left;
+  margin-right: 1px;
+  font-size: 12px;
+}
+
+.daftar-disini-expert-text {
+  font-weight: bold;
+  color: #C4084F;
+  text-decoration: underline;
+  font-size: 12px;
+}
+
+.apakah-kamu-expert {
+  font-weight: normal;
+  text-align: left;
+  margin-right: 5px; 
+  font-size: 14px;
+}
+
+.login-sebagai-expert {
+  font-weight: bold;
+  color: #FF6C37;
+  text-decoration: underline;
+  font-size: 14px;
+}
+
+.sign-in-container .daftar-sebagai-admin-heading {
+  text-align: left;
+  font-size: 3rem;
+  font-weight: bold;
+  color: #C4084F;
+  margin-bottom: 5%;
+}
+
+.daftar-expert-container {
+  max-width: 800px;
+  margin: auto;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  /* Adjust background color if needed */
+  width: 70%; /* Add this line */
+ 
+  max-width: 1000px; /* Adjust the max-width as needed */
+
+  /* background-image: url('../public/eclipse.svg');  Add the background image */
+  background-size: cover; /* Resize the image to cover the entire container */
+  background-position: center; /* Center the image within the container */
+  background-repeat: no-repeat; /* Prevent the image from repeating */
+  position: relative; /* Add position relative for the card to be positioned on top */
+}
+
+.daftar-expert-container .h2 {
+  text-align: center;
+  color: #333; /* Adjust text color to match the design */
+}
+
+.daftar-expert-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.daftar-expert-container .daftar-expert-heading {
+  text-align: left;
+  font-size: 3rem;
+  font-weight: bold;
+  color: #C4084F;
+  margin-bottom: 0.0025%;
+}
+
+.daftar-expert-container .daftar-expert-h2 {
+  text-align: left;
+  font-size: 14px;
+  font-weight: normal;
+  color: black;
+}
+
+.daftar-expert-container .text-biasa-di-expert-signup-page {
+  text-align: left;
+  font-weight: bold;
+}
+
+/* Sidebar Styles */
+.sidebar-container {
+  height: 100%; /* Set the height to 100% to make the sidebar full-height */
+  position: absolute;
+  left: 0; /* Position the sidebar on the left */
+ 
+}
+
+/* Active Menu Item Styles */
+.sidebar-container .menu-item.active {
+  background-color: #772F32 !important; /* Set the desired dark red color */
+  color: #fff !important; /* Set the text color to white */
+  flex: 0 0 250px; /* Sidebar width and not allowed to grow or shrink */
+  height: 100vh; /* Full viewport height */
+}
+
+.menu-item {
+  margin-top: 30px;
+  font-weight: bold;
+  color: #fff !important; /* Set the text color to white */
+}
+
+.link-menu-item {
+  color: #fff !important; /* Set the text color to white */
+}
+
+.home-page {
+  display: flex;
+  height: 200vh; /* Set the height to 100vh to make it full-screen */
+}
+
+.home-content {
+  flex: 1; /* Make the content take up the remaining space */
+  padding: 20px;
+}
+
+.welcome-section {
+  background-color: #fff; /* or any other desired background color */
+  display: flex;
+  justify-content: left;
+  align-items: left;
+}
+
+.welcome-content {
+  display: flex;
+  align-items: left;
+}
+
+.welcome-content h1 {
+  font-size: 40px; /* or any other desired font size */
+  margin-right: 400px;
+  margin-left: 30px;
+  text-align: left;
+  color: #ca3c4f; /* or any other desired color */
+}
+
+.welcome-text {
+  margin-right: 40px;
+  text-align: left;
+
+}
+
+.welcome-text h1 {
+  font-size: 40px;
+  margin-bottom: 5px; /* Reduced margin-bottom */
+}
+
+.welcome-text p {
+  font-size: 40px;
+  font-weight: bold;
+  text-align: left;
+  margin-right: 300px;
+  margin-left: 30px;
+  margin-top: 0;
+}
+
+.illustration {
+  width: 200px; /* adjust the width as per your illustration size */
+  height: 200px; /* adjust the height as per your illustration size */
+}
+
+.selamat-datang {
+  color: #C4084F;
+}
+
+.nama-user {
+  color: #FF6C37;
+}
+
+.illustration img {
+  max-width: 200%;
+  max-height: 200%;
+}
+
+.interview-history-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px;
+  margin-top: 20px;
+}
+
+.cari-beasiswa-container {
+  display: inline-flex;
+  justify-content: flex-start; /* Align items to the left */
+}
+
+.cari-beasiswa-text {
+  font-size: 24px;
+  margin-right: 950px;
+}
+
+.logo-kaca-pembesar {
+  margin-right: 10px;
+  
+}
+
+.search-bar {
+  display: flex; /* Arrange elements horizontally */
+  align-items: center; /* Vertically center elements */
+  width: 100%; /* Take full width of container */
+  border-radius: 5px; /* Rounded corners */
+  padding: 5px; /* Add some padding */
+  margin-left: 10px;
+}
+
+.search-bar input {
+  flex: 1; /* Take up remaining space */
+  outline: none; /* Remove default outline */
+  padding: 5px; /* Add padding */
+  font-size: 16px; /* Set font size */
+}
+
+.search-bar button {
+  background-color: #FF6C37;
+  color: white; /* White text */
+  padding: 5px 10px; /* Add padding */
+  cursor: pointer; /* Pointer cursor on hover */
+  border-radius: 5px; /* Rounded corners */
+  margin-left: 10px;
+}
+
+.search-bar button i {
+  font-size: 14px; /* Set icon size */
+}
+
+.card-container {
+  width: 300px;
+  border-radius: 8px;
+  margin-left: 10px;
+  margin-top: 20px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  border: 1px solid #FA6339;
+}
+
+.card-header {
+  background-color: #fff;
+  text-align: center;
+  padding: 20px;
+  position: relative;
+}
+
+.card-header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.card-logo {
+  width: 50px; /* Adjust based on the actual logo size */
+  height: 50px;
+  border: 2px solid #FA6339; /* Added blue outline */
+  border-radius: 50%; /* Makes it round */
+  padding: 5px; /* Adjust padding to fit the logo */
+}
+
+.card-header-badge-container {
+  text-align: right;
+  margin-top: 0;
+}
+
+.card-header-badge {
+  display: inline-block;
+  background-color: #ffcc00;
+  padding: 0 12px;
+  border-radius: 5px;
+  font-size: 12px;
+  color: #333;
+  margin-left: 4px;
+  font-weight: bold;
+}
+
+.national {
+  background-color: #E8D2FF; 
+}
+
+.education-level {
+  background-color: #FFC7B3; 
+}
+
+.card-title {
+  color: #333;
+  font-size: 18px;
+  margin: 0;
+  text-align: left;
+}
+
+.card-subtitle {
+  color: #666;
+  font-size: 12px;
+  line-height: 1.5;
+  margin: 10px 0 20px;
+  text-align: left;
+}
+
+.card-button {
+  position: absolute; /* Make the button element positionable */
+  top: 5px; /* Set the bottom position from the card's edge */
+  left: 40px;
+}
+
+.card-button:hover {
+  background-color: #C4084F;
+}
+
+/* Container for the scholarship cards */
+.list-of-scholarship-card-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Creates a 4-column grid */
+  gap: 20px; /* Adjust the gap between cards as needed */
+  margin: 20px; /* Adjust margin as needed */
+}
+
+/* Ensure the ScholarshipCard has a max-width to control its size */
+.ScholarshipCard {
+  max-width: 200px; /* Adjust width as needed */
+  margin: 0 auto; /* Centers the card in the grid area */
+}
+
+@media (max-width: 1200px) { /* Adjust breakpoint as needed */
+  .scholarship-card-container {
+    grid-template-columns: repeat(3, 1fr); /* 3 columns for smaller screens */
+  }
+}
+
+@media (max-width: 768px) { /* Adjust breakpoint as needed */
+  .scholarship-card-container {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns for even smaller screens */
+  }
+}
+
+@media (max-width: 480px) { /* Adjust breakpoint as needed */
+  .scholarship-card-container {
+    grid-template-columns: 1fr; /* 1 column for mobile screens */
+  }
+}
+
+.interview-page {
+  display: flex;
+  height: 140vh; 
+  
+}
+
+
+.latihan-interview-text {
+  font-weight: bold;
+  color: #C4084F;
+}
+
+.rocket-icon {
+  margin-top: 25px;
+  margin-right: 15px;
+}
+
+
+.interview-header-container {
+  display: flex;
+  justify-content: flex-start; /* Align items to the left */
+  margin-left: 80px;
+  
+}
+
+.interview-page-container {
+  display: flexbox;
+}
+
+.form-input-container {
+  display: flexbox;
+  justify-content: flex-start; /* Align items to the left */
+  margin-left: 80px;
+  width: 1000px;
+}
+
+
+.text-interview {
+  font-weight: bold;
+}
+
+.text-interview-orange {
+  font-weight: bold;
+  color: #FF6C37;
+}
+
+.checkbox-card-container {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  border-color: "#C4084";
+}
+
+.text-interview-container {
+  text-align: left;
+  margin-bottom: 8px; /* Adjust the value as needed */
+}
+
+.text-filter-not-selected {
+  margin-right: 30px;
+  margin-left: 30px;
+  color: gainsboro;
+}
+
+.text-filter {
+  margin-right: 30px;
+  margin-left: 30px;
+  font-weight: bold;
+}
+
+.daftar-jadwal-interview-page {
+  display: flex;
+  height: 300vh; /* Set the height to 100vh to make it full-screen */
+}
+
+.search-bar-daftar-jadwal-interview {
+  margin-left: 60px;
+}
+
+.filter-button-container {
+  margin-bottom: 20px;
+}
+
+.text-header-item {
+  margin: 5px;
+  color: grey;
+  font-size: 14px;
+  text-align: left;
+}
+
+.text-content-item {
+  margin: 5px;
+  color: black;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: left;
+}
+
+.container-text-header-item {
+  display: inline;
+}
+
+.container-all-text-item {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin: 16px;
+}
+
+.container-text-content-item {
+  display: inline-block;
+}
+
+.container-button-jadwal-interview-item {
+  position: absolute; /* Make the button element positionable */
+  bottom: 10px; /* Set the bottom position from the card's edge */
+  right: 20px; /* Set the left position from the card's edge */
+}
+
+.container-feedback-header {
+  display: flex;
+  flex-direction: row;
+  text-align: left;
+  margin: 16px;
+  margin-top: 20px;
+}
+.arrow-back-icon {
+  position: absolute; /* Make the button element positionable */
+}
+
+.container-feedback-title {
+  text-align: left;
+  margin-left: 80px;
+  margin-top: 20px;
+}
+
+.card-feedback-interview {
+  text-align: left;
+}
+
+.text-container-feedback {
+  padding: 20px;
+}
+
+.feedback-interview-page {
+  display: flex;
+  height: 150vh
+}
+
+.document-page {
+  display: flex;
+  height: 120vh;
+}
+
+.container-avatar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Add other styles based on the design such as fonts, colors, etc. */
+
