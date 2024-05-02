@@ -7,57 +7,11 @@ import homelogoSvg from "../../img/homelogo.svg";
 import miclogoSvg from "../../img/miclogo.svg";
 import personlogoSvg from "../../img/personlogo.svg";
 import documentlogoSvg from "../../img/documentlogo.svg";
-import rocketSvg from "../../img/rocket.svg";
-import TextField from "@mui/material/TextField";
-import MuiMenuItem from "@mui/material/MenuItem";
-import FormGroup from "@mui/material/FormGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Card from "@mui/material/Card";
 import Button from "@mui/material/Button";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import arrowrightSvg from "../../img/arrowright.svg";
 import arrowleftSvg from "../../img/arrowleft.svg";
 
 const FeedbackDokumenPage = () => {
-  // untuk textfield tingkat pendidikan
-  const tingkatPendidikan = [
-    {
-      value: "SMA",
-      label: "SMA",
-    },
-    {
-      value: "SMK",
-      label: "SMK",
-    },
-    {
-      value: "S1",
-      label: "S1",
-    },
-    {
-      value: "S2",
-      label: "S2",
-    },
-    {
-      value: "S3",
-      label: "S3",
-    },
-  ];
-
-  // untuk textfield lingkup beasiswa
-  const lingkupBeasiswa = [
-    {
-      value: "Dalam Negeri",
-      label: "Dalam Negeri",
-    },
-    {
-      value: "Luar Negeri",
-      label: "Luar Negeri",
-    },
-  ];
 
   return (
     <div>

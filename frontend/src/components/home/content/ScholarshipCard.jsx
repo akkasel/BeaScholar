@@ -1,13 +1,7 @@
 import React from 'react';
 import bcalogoSvg from '../../../img/bcalogo.svg';
 import {
-  Card,
-  CardHeader,
-  Avatar,
-  CardContent,
-  Typography,
   Button,
-  Box,
 } from "@mui/material";
 import arrowrightSvg from "../../../img/arrowright.svg";
 
@@ -17,7 +11,7 @@ const ScholarshipCard = () => {
     <div className="card-container">
       <div className="card-header">
         <div className="card-header-top">
-          <img src={bcalogoSvg} alt="BCA" className="card-logo" /> {/* You'll need to replace with the actual BCA logo */}
+          <img src={bcalogoSvg} alt="BCA" className="card-logo" />
           <div className="card-header-badge-container">
             <span className="card-header-badge national">Nasional</span>
             <span className="card-header-badge education-level">Beasiswa S1</span>

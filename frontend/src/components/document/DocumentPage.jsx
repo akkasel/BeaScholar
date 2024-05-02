@@ -52,6 +52,7 @@ const DocumentPage = () => {
     },
   ];
 
+  // untuk handle input file dokumen
   const handleInputFile = (e) => {
     setFile(e.target.files[0]);
   };

@@ -8,18 +8,7 @@ import miclogoSvg from "../../img/miclogo.svg";
 import personlogoSvg from "../../img/personlogo.svg";
 import documentlogoSvg from "../../img/documentlogo.svg";
 import headphoneSvg from "../../img/headphone.svg";
-import rocketSvg from "../../img/rocket.svg";
-import TextField from "@mui/material/TextField";
-import MuiMenuItem from "@mui/material/MenuItem";
-import FormGroup from "@mui/material/FormGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Card from "@mui/material/Card";
-import Button from "@mui/material/Button";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import SearchBar from "../home/content/SearchBar";
 import JadwalInterviewItem from "./interviewItem/JadwalInterviewItem";
 import JadwalInterviewItemLive from "./interviewItem/JadwalInterviewItemLive";
@@ -154,6 +143,8 @@ const DaftarJadwalInterviewPage = () => {
             </SearchBar>
           </div>
 
+          {/* Ini contoh frontend dari jadwal interview untuk yang Live (saat ini bisa zoom sekarang)
+          & yang biasa (yang bukan live, yang bukan live itu artinya belum jam nya) */}
           <JadwalInterviewItemLive />
           <JadwalInterviewItem />
           <JadwalInterviewItem />

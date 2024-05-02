@@ -17,8 +17,8 @@ import ScholarshipCard from "./content/ScholarshipCard";
 
 const HomePage = () => {
 
-  // Placeholder data for the cards. Replace with your actual data.
-  const scholarshipCardsData = Array(6).fill(0); // Example for 10 cards
+  // placeholder data for the cards. Replace with your actual data.
+  const scholarshipCardsData = Array(6).fill(0); // example for 6 cards
 
   
   return (
@@ -31,8 +31,8 @@ const HomePage = () => {
               button: {
                 // Styling for the active menu item
                 "&.active": {
-                  backgroundColor: "#772F32", // Change this to the desired color
-                  color: "#FFFFFF", // Change this to the desired color
+                  backgroundColor: "#772F32",
+                  color: "#FFFFFF",
                 },
                 // Styling for the hover state
                 "&:hover": {
