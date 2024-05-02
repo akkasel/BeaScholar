@@ -3,12 +3,9 @@ import {
   Card,
   CardHeader,
   Avatar,
-  CardContent,
-  Typography,
   Button,
-  Box,
 } from "@mui/material";
-import contohprofileimageSvg from "../../../img/contohprofileimage.svg"; // Import your profile image
+import contohprofileimageSvg from "../../../img/contohprofileimage.svg";
 import arrowrightSvg from "../../../img/arrowright.svg";
 
 const JadwalInterviewItemLive = () => {

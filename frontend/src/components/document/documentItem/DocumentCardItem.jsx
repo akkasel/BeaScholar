@@ -1,14 +1,8 @@
 import React from "react";
 import {
   Card,
-  CardHeader,
-  Avatar,
-  CardContent,
-  Typography,
   Button,
-  Box,
 } from "@mui/material";
-import contohprofileimageSvg from "../../../img/contohprofileimage.svg"; // Import your profile image
 import arrowrightSvg from "../../../img/arrowright.svg";
 import downloadiconSvg from "../../../img/downloadicon.svg";
 

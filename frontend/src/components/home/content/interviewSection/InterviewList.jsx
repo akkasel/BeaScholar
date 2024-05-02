@@ -5,7 +5,7 @@ const InterviewList = () => {
   const interviews = [
     { date: '28 Feb', time: '09.00' },
     { date: '28 Feb', time: '13.00' },
-    // ... add more interviews here
+    // ... add more interviews attribute here
   ];
 
   const listStyle = {
