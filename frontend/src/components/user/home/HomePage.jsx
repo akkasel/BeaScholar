@@ -1,17 +1,17 @@
 import React, { useState } from "react";
-import "../../App.css";
-import TopBar from "../TopBar";
+import "../../../App.css";
+import TopBar from "../../TopBar";
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Link } from "react-router-dom";
-import homelogoSvg from "../../img/homelogo.svg";
-import miclogoSvg from "../../img/miclogo.svg";
-import personlogoSvg from "../../img/personlogo.svg";
-import documentlogoSvg from "../../img/documentlogo.svg";
-import gambarheaderSvg from "../../img/gambarheader.svg";
-import kacaPembesarSvg from "../../img/kacapembesar.svg";
+import homelogoSvg from "../../../img/homelogo.svg";
+import miclogoSvg from "../../../img/miclogo.svg";
+import personlogoSvg from "../../../img/personlogo.svg";
+import documentlogoSvg from "../../../img/documentlogo.svg";
+import gambarheaderSvg from "../../../img/gambarheader.svg";
+import kacaPembesarSvg from "../../../img/kacapembesar.svg";
 import InterviewHistory from "./content/interviewSection/InterviewHistory";
 import DocumentHistory from "./content/documentSection/DocumentHistory";
-import SearchBar from "./content/SearchBar";
+import SearchBar from "../../SearchBar";
 import ScholarshipCard from "./content/ScholarshipCard";
 
 

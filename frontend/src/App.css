@@ -81,6 +81,48 @@
   background-position: center; /* Center the image within the container */
   background-repeat: no-repeat; /* Prevent the image from repeating */
   position: relative; /* Add position relative for the card to be positioned on top */
+
+  z-index: 1; /* Untuk ngatur lapisannya */
+}
+
+.sign-in-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  padding: 2px;
+  background: linear-gradient(45deg, #C4084F, #FF6C37, #6B00D5);
+  -webkit-mask:
+     linear-gradient(#fff 0 0) content-box,
+     linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+
+  z-index: -1; /* untuk ngatur lapisannya */
+}
+
+.daftar-expert-container {
+  margin: auto;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1; /* untuk ngatur lapisannya */
+}
+
+.daftar-expert-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  padding: 2px;
+  background: linear-gradient(45deg, #C4084F, #FF6C37, #6B00D5);
+  -webkit-mask:
+     linear-gradient(#fff 0 0) content-box,
+     linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+
+  z-index: -1; /* untuk ngatur lapisannya */
 }
 
 .sign-in-container h1 {
