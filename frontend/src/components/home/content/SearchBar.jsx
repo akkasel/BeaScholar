@@ -10,17 +10,14 @@ const SearchBar = () => {
           className="search-input"
         />
         <div className="search-icon">
-       
           <i className="fas fa-search"></i>
-  
-    
         </div>
       </div>
       <div className="filter-button-container">
         <button type="filter">
-        <i className="fas fa-filter"></i>
-      </button></div>
-      
+          <i className="fas fa-filter"></i>
+        </button>
+      </div>
     </div>
   );
 };

@@ -5,7 +5,7 @@ const DocumentList = () => {
   const documents = [
     { date: '28 Feb', time: '09.00' },
     { date: '28 Feb', time: '13.00' },
-    // ... add more documents here
+    // ... add more documents date & time attribute here, or other attribute
   ];
 
   const listStyle = {

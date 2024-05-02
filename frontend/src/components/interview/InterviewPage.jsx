@@ -18,8 +18,6 @@ import Button from "@mui/material/Button";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import JadwalInterviewItem from "./interviewItem/JadwalInterviewItem";
 import arrowrightSvg from "../../img/arrowright.svg";
 
 const InterviewPage = () => {
