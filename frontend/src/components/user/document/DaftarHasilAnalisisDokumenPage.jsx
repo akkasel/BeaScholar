@@ -1,19 +1,18 @@
 import React, { useState } from "react";
-import "../../App.css";
-import TopBar from "../TopBar";
+import "../../../App.css";
+import TopBar from "../../TopBar";
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Link } from "react-router-dom";
-import homelogoSvg from "../../img/homelogo.svg";
-import miclogoSvg from "../../img/miclogo.svg";
-import personlogoSvg from "../../img/personlogo.svg";
-import documentlogoSvg from "../../img/documentlogo.svg";
-import headphoneSvg from "../../img/headphone.svg";
+import homelogoSvg from "../../../img/homelogo.svg";
+import miclogoSvg from "../../../img/miclogo.svg";
+import personlogoSvg from "../../../img/personlogo.svg";
+import documentlogoSvg from "../../../img/documentlogo.svg";
 import Card from "@mui/material/Card";
-import SearchBar from "../home/content/SearchBar";
-import JadwalInterviewItem from "./interviewItem/JadwalInterviewItem";
-import JadwalInterviewItemLive from "./interviewItem/JadwalInterviewItemLive";
+import SearchBar from "../../SearchBar";
+import documentCardItem from "./documentItem/documentCardItem";
+import dokumenemotSvg from "../../../img/dokumenemot.svg";
 
-const DaftarJadwalInterviewPage = () => {
+const DaftarHasilAnalisisDokumenPage = () => {
   return (
     <div>
       <TopBar /> {/* Render the TopBar component */}
@@ -100,16 +99,16 @@ const DaftarJadwalInterviewPage = () => {
         </Sidebar>
 
         <div className="interview-page-container">
-          {/*Header text "Latihan Interview"*/}
+          {/*Header text "Daftar hasil analisis dokumen"*/}
           <div className="interview-header-container">
             <img
               className="rocket-icon"
-              src={headphoneSvg}
+              src={dokumenemotSvg}
               alt="Icon"
               width={40}
               height={40}
             />
-            <h1 className="latihan-interview-text">Daftar Sesi Interview</h1>
+            <h1 className="latihan-interview-text">Daftar Hasil Analisis Dokumen</h1>
           </div>
 
           <div>
@@ -131,9 +130,9 @@ const DaftarJadwalInterviewPage = () => {
                     marginLeft:'80px',
                 }}
               >
-                <span className="text-filter">Semua Interview</span>
-                <span className="text-filter-not-selected">Interview Live</span>
-                <span className="text-filter-not-selected">Interview Selesai</span>
+                <span className="text-filter">Semua Dokumen</span>
+                <span className="text-filter-not-selected">Belum Dianalisis</span>
+                <span className="text-filter-not-selected">Sudah Dianalisis</span>
             </Card>
           </div>
 
@@ -143,13 +142,11 @@ const DaftarJadwalInterviewPage = () => {
             </SearchBar>
           </div>
 
-          {/* Ini contoh frontend dari jadwal interview untuk yang Live (saat ini bisa zoom sekarang)
-          & yang biasa (yang bukan live, yang bukan live itu artinya belum jam nya) */}
-          <JadwalInterviewItemLive />
-          <JadwalInterviewItem />
-          <JadwalInterviewItem />
-          <JadwalInterviewItem />
-          <JadwalInterviewItem />
+          <documentCardItem />
+          <documentCardItem />
+          <documentCardItem />
+          <documentCardItem />
+          <documentCardItem />
          
 
           {/* Add your input form here */}
@@ -159,4 +156,4 @@ const DaftarJadwalInterviewPage = () => {
   );
 };
 
-export default DaftarJadwalInterviewPage;
+export default DaftarHasilAnalisisDokumenPage;

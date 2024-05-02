@@ -1,19 +1,19 @@
 import React, { useState } from "react";
-import "../../App.css";
-import TopBar from "../TopBar";
+import "../../../App.css";
+import TopBar from "../../TopBar";
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Link } from "react-router-dom";
-import homelogoSvg from "../../img/homelogo.svg";
-import miclogoSvg from "../../img/miclogo.svg";
-import personlogoSvg from "../../img/personlogo.svg";
-import documentlogoSvg from "../../img/documentlogo.svg";
+import homelogoSvg from "../../../img/homelogo.svg";
+import miclogoSvg from "../../../img/miclogo.svg";
+import personlogoSvg from "../../../img/personlogo.svg";
+import documentlogoSvg from "../../../img/documentlogo.svg";
 import TextField from "@mui/material/TextField";
 import MuiMenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
-import arrowrightSvg from "../../img/arrowright.svg";
-import pencilSvg from "../../img/pencil.svg";
+import arrowrightSvg from "../../../img/arrowright.svg";
+import pencilSvg from "../../../img/pencil.svg";
 import Avatar from "@mui/material/Avatar";
-import contohprofileimageSvg from "../../img/contohprofileimage.svg";
+import contohprofileimageSvg from "../../../img/contohprofileimage.svg";
 
 const ProfilePage = () => {
   // untuk textfield tingkat pendidikan

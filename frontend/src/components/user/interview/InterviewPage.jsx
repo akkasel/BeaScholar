@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import "../../App.css";
-import TopBar from "../TopBar";
+import "../../../App.css";
+import TopBar from "../../TopBar";
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Link } from "react-router-dom";
-import homelogoSvg from "../../img/homelogo.svg";
-import miclogoSvg from "../../img/miclogo.svg";
-import personlogoSvg from "../../img/personlogo.svg";
-import documentlogoSvg from "../../img/documentlogo.svg";
+import homelogoSvg from "../../../img/homelogo.svg";
+import miclogoSvg from "../../../img/miclogo.svg";
+import personlogoSvg from "../../../img/personlogo.svg";
+import documentlogoSvg from "../../../img/documentlogo.svg";
+import rocketSvg from "../../../img/rocket.svg";
 import TextField from "@mui/material/TextField";
 import MuiMenuItem from "@mui/material/MenuItem";
 import FormGroup from "@mui/material/FormGroup";
@@ -14,29 +15,33 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Card from "@mui/material/Card";
 import Button from "@mui/material/Button";
-import kacaPembesarSvg from "../../img/kacapembesar.svg";
-import { Box, Typography } from "@mui/material";
-import arrowrightSvg from "../../img/arrowright.svg";
-import pinmerahSvg from "../../img/pinmerah.svg";
-import robotSvg from "../../img/robot.svg";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
+import arrowrightSvg from "../../../img/arrowright.svg";
 
-const DocumentPage = () => {
-  // ini untuk nampung file nya
-  const [file, setFile] = useState(null);
-
-  // untuk textfield jenis dokumen
-  const jenisDokumen = [
+const InterviewPage = () => {
+  // untuk textfield tingkat pendidikan
+  const tingkatPendidikan = [
     {
-      value: "Essay",
-      label: "Essay",
+      value: "SMA",
+      label: "SMA",
     },
     {
-      value: "CV",
-      label: "CV",
+      value: "SMK",
+      label: "SMK",
     },
     {
-      value: "Dokumen lainnya",
-      label: "Dokumen lainnya",
+      value: "S1",
+      label: "S1",
+    },
+    {
+      value: "S2",
+      label: "S2",
+    },
+    {
+      value: "S3",
+      label: "S3",
     },
   ];
 
@@ -52,15 +57,10 @@ const DocumentPage = () => {
     },
   ];
 
-  // untuk handle input file dokumen
-  const handleInputFile = (e) => {
-    setFile(e.target.files[0]);
-  };
-
   return (
     <div>
       <TopBar /> {/* Render the TopBar component */}
-      <div className="document-page">
+      <div className="interview-page">
         {/* Render the SideBar component */}
         <Sidebar backgroundColor="#CA3C4F" className="sidebar-container">
           <Menu
@@ -147,25 +147,54 @@ const DocumentPage = () => {
           <div className="interview-header-container">
             <img
               className="rocket-icon"
-              src={pinmerahSvg}
+              src={rocketSvg}
               alt="Icon"
               width={40}
               height={40}
             />
-            <h1 className="latihan-interview-text">Analisa Dokumen</h1>
+            <h1 className="latihan-interview-text">Latihan Interview</h1>
           </div>
 
+          {/* Nama */}
           <div className="form-input-container">
-            {/* Jenis Dokumen */}
             <div className="text-interview-container">
-              <span className="text-interview">Jenis Dokumen</span>
+              <span className="text-interview">Nama</span>
+            </div>
+            <div className="">
+              <TextField
+                fullWidth
+                id="outlined-textfield-nama"
+                label="Masukan nama disini..."
+                variant="outlined"
+                width="200px"
+                sx={{
+                  // Root class for the input field
+                  "& .MuiOutlinedInput-root": {
+                    // Class for the border around the input field
+                    "& .MuiOutlinedInput-notchedOutline": {
+                      borderColor: "#C4084F",
+                      borderWidth: "2px",
+                    },
+                  },
+                  // Class for the label of the input field
+                  "& .MuiInputLabel-outlined": {
+                    color: "#121212",
+                  },
+                }}
+              />
+            </div>
+            <br></br>
+
+            {/* Tingkat Pendidikan */}
+            <div className="text-interview-container">
+              <span className="text-interview">Tingkat Pendidikan</span>
             </div>
             <div>
               <TextField
                 fullWidth
                 id="outlined-select-tingkat-pendidikan"
                 select
-                defaultValue="Essay"
+                defaultValue="SMA"
                 sx={{
                   // Root class for the input field
                   "& .MuiOutlinedInput-root": {
@@ -181,7 +210,7 @@ const DocumentPage = () => {
                   },
                 }}
               >
-                {jenisDokumen.map((option) => (
+                {tingkatPendidikan.map((option) => (
                   <MuiMenuItem key={option.value} value={option.value}>
                     {option.label}
                   </MuiMenuItem>
@@ -193,9 +222,7 @@ const DocumentPage = () => {
 
             {/* Lingkup Beasiswa */}
             <div className="text-interview-container">
-              <span className="text-interview">
-                Lingkup Beasiswa (Nasional / Luar Negeri)
-              </span>
+              <span className="text-interview">Lingkup Beasiswa</span>
             </div>
             <div>
               <TextField
@@ -230,7 +257,7 @@ const DocumentPage = () => {
 
             {/* Jenis Interview*/}
             <div className="text-interview-container">
-              <span className="text-interview">Jenis Tingkatan Beasiswa</span>
+              <span className="text-interview">Jenis Interview</span>
             </div>
             <div>
               <Card
@@ -245,6 +272,7 @@ const DocumentPage = () => {
                   <FormControlLabel
                     control={
                       <Checkbox
+                        
                         sx={{
                           color: "#C4084F", // Change the checkbox color
                           "&.Mui-checked": {
@@ -258,6 +286,7 @@ const DocumentPage = () => {
                   <FormControlLabel
                     control={
                       <Checkbox
+                        
                         sx={{
                           color: "#C4084F", // Change the checkbox color
                           "&.Mui-checked": {
@@ -271,6 +300,7 @@ const DocumentPage = () => {
                   <FormControlLabel
                     control={
                       <Checkbox
+                        
                         sx={{
                           color: "#C4084F", // Change the checkbox color
                           "&.Mui-checked": {
@@ -287,102 +317,73 @@ const DocumentPage = () => {
 
             <br />
 
-            {/* Pilih Jenis Analisa */}
+            {/* Deskripsi Diri */}
             <div className="text-interview-container">
-              <span className="text-interview">Pilih Jenis Analisa</span>
+              <span className="text-interview">Deskripsi Diri (opsional)</span>
             </div>
-            <div>
-              <Card
-                className="checkbox-card-container"
+            <div className="">
+              <TextField
+                fullWidth
+                id="outlined-textfield-nama"
+                label="Tulis deskripsi dirimu disini..."
                 variant="outlined"
+                width="200px"
                 sx={{
-                  border: "2px solid #C4084F !important",
-                  borderColor: "#C4084F !important",
+                  // Root class for the input field
+                  "& .MuiOutlinedInput-root": {
+                    // Class for the border around the input field
+                    "& .MuiOutlinedInput-notchedOutline": {
+                      borderColor: "#C4084F",
+                      borderWidth: "2px",
+                    },
+                  },
+                  // Class for the label of the input field
+                  "& .MuiInputLabel-outlined": {
+                    color: "#121212",
+                  },
                 }}
-              >
-                <FormGroup sx={{ marginLeft: "10px" }}>
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        sx={{
-                          color: "#C4084F", // Change the checkbox color
-                          "&.Mui-checked": {
-                            color: "#C4084F", // Change the color of the checked state
-                          },
-                        }}
-                      />
-                    }
-                    label={
-                      <Box sx={{ display: "flex", alignItems: "center" }}>
-                        <img
-                          src={robotSvg}
-                          alt="Image 2"
-                          style={{ marginRight: "10px" }}
-                          width="20px"
-                        />
-                        <Typography
-                          variant="body2"
-                          fontWeight="bold"
-                          fontFamily="Poppins"
-                          fontSize="15px"
-                        >
-                          Analisa Dokumen oleh AI (Instant)
-                        </Typography>
-                      </Box>
-                    }
-                  />
-
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        sx={{
-                          color: "#C4084F", // Change the checkbox color
-                          "&.Mui-checked": {
-                            color: "#C4084F", // Change the color of the checked state
-                          },
-                        }}
-                      />
-                    }
-                    label={
-                      <Box sx={{ display: "flex", alignItems: "center" }}>
-                        <img
-                          src={kacaPembesarSvg}
-                          alt="Image 2"
-                          style={{ marginRight: "10px" }}
-                          width="20px"
-                        />
-                        <Typography
-                          variant="body2"
-                          fontWeight="bold"
-                          fontFamily="Poppins"
-                          fontSize="15px"
-                        >
-                          Analisa Dokumen oleh Human Expert (1-2 Hari)
-                        </Typography>
-                      </Box>
-                    }
-                  />
-                </FormGroup>
-              </Card>
+              />
             </div>
 
             <br />
 
-            {/* Masukan file */}
+            {/* Pilih waktu interview */}
             <div className="text-interview-container">
-              <span className="text-interview">
-                Masukan file kamu disini (.pdf):
-              </span>
+              <span className="text-interview">Pilih Waktu Interview</span>
             </div>
-            <div className="input-group">
-              <input
-                type="file"
-                placeholder="KTP"
-                value={file}
-                onChange={handleInputFile}
-              />
+            <div>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DateTimePicker
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      width: "1000px",
+                      "& fieldset": {
+                        border: "2px solid",
+                        borderColor: "#C4084F", // Change the border color
+                      },
+                      "&:hover fieldset": {
+                        border: "2px solid",
+                        borderColor: "#C4084F", // Change the border color on hover
+                      },
+                      "&.Mui-focused fieldset": {
+                        border: "2px solid",
+                        borderColor: "#C4084F", // Change the border color on focus
+                      },
+                    },
+                    "& .MuiCalendarPicker-root": {
+                      border: "2px solid",
+                      color: "#C4084F", // Change the color of the calendar
+                    },
+                    "& .MuiClockPicker-root": {
+                      border: "2px solid",
+                      color: "#C4084F", // Change the color of the time picker
+                    },
+                  }}
+                />
+              </LocalizationProvider>
             </div>
 
+            <br />
             <br />
 
             {/* Jadwalkan Interview Sekarang Button */}
@@ -405,7 +406,7 @@ const DocumentPage = () => {
                   px: 3, // Add some horizontal padding
                 }}
               >
-                Submit
+                Jadwalkan Latihan Interview Sekarang!
               </Button>
             </div>
             {/* Add your input form here */}
@@ -416,4 +417,4 @@ const DocumentPage = () => {
   );
 };
 
-export default DocumentPage;
+export default InterviewPage;

@@ -6,15 +6,15 @@ import ExpertSignIn from './components/auth/ExpertSignIn';
 import ExpertSignUp from './components/auth/ExpertSignUp';
 import AdminSignIn from './components/auth/AdminSignIn';
 import AdminSignUp from './components/auth/AdminSignUp';
-import HomePage from './components/home/HomePage';
+import HomePage from './components/user/home/HomePage';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import InterviewPage from './components/interview/InterviewPage';
-import DaftarJadwalInterviewPage from './components/interview/DaftarJadwalInterviewPage';
-import FeedbackInterviewPage from './components/interview/FeedbackInterviewPage';
-import DocumentPage from './components/document/DocumentPage';
-import DaftarHasilAnalisisDokumenPage from './components/document/DaftarHasilAnalisisDokumenPage';
-import FeedbackDokumenPage from './components/document/FeedbackDokumenPage';
-import ProfilePage from './components/profile/ProfilePage';
+import InterviewPage from './components/user/interview/InterviewPage';
+import DaftarJadwalInterviewPage from './components/user/interview/DaftarJadwalInterviewPage';
+import FeedbackInterviewPage from './components/user/interview/FeedbackInterviewPage';
+import DocumentPage from './components/user/document/DocumentPage';
+import DaftarHasilAnalisisDokumenPage from './components/user/document/DaftarHasilAnalisisDokumenPage';
+import FeedbackDokumenPage from './components/user/document/FeedbackDokumenPage';
+import ProfilePage from './components/user/profile/ProfilePage';
 
 function App() {
   return (

@@ -1,5 +1,5 @@
 import React from "react";
-import pinSvg from "../../../../img/pin.svg";
+import pinSvg from "../../../../../img/pin.svg";
 
 const DocumentHistoryHeader = () => {
   const headerStyle = {
