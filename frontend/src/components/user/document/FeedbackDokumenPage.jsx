@@ -1,64 +1,17 @@
 import React, { useState } from "react";
-import "../../App.css";
-import TopBar from "../TopBar";
+import "../../../App.css";
+import TopBar from "../../TopBar";
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Link } from "react-router-dom";
-import homelogoSvg from "../../img/homelogo.svg";
-import miclogoSvg from "../../img/miclogo.svg";
-import personlogoSvg from "../../img/personlogo.svg";
-import documentlogoSvg from "../../img/documentlogo.svg";
-import rocketSvg from "../../img/rocket.svg";
-import TextField from "@mui/material/TextField";
-import MuiMenuItem from "@mui/material/MenuItem";
-import FormGroup from "@mui/material/FormGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
+import homelogoSvg from "../../../img/homelogo.svg";
+import miclogoSvg from "../../../img/miclogo.svg";
+import personlogoSvg from "../../../img/personlogo.svg";
+import documentlogoSvg from "../../../img/documentlogo.svg";
 import Card from "@mui/material/Card";
 import Button from "@mui/material/Button";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import JadwalInterviewItem from "./interviewItem/JadwalInterviewItem";
-import arrowrightSvg from "../../img/arrowright.svg";
-import arrowleftSvg from "../../img/arrowleft.svg";
+import arrowleftSvg from "../../../img/arrowleft.svg";
 
-const FeedbackInterviewPage = () => {
-  // untuk textfield tingkat pendidikan
-  const tingkatPendidikan = [
-    {
-      value: "SMA",
-      label: "SMA",
-    },
-    {
-      value: "SMK",
-      label: "SMK",
-    },
-    {
-      value: "S1",
-      label: "S1",
-    },
-    {
-      value: "S2",
-      label: "S2",
-    },
-    {
-      value: "S3",
-      label: "S3",
-    },
-  ];
-
-  // untuk textfield lingkup beasiswa
-  const lingkupBeasiswa = [
-    {
-      value: "Dalam Negeri",
-      label: "Dalam Negeri",
-    },
-    {
-      value: "Luar Negeri",
-      label: "Luar Negeri",
-    },
-  ];
+const FeedbackDokumenPage = () => {
 
   return (
     <div>
@@ -146,9 +99,9 @@ const FeedbackInterviewPage = () => {
         </Sidebar>
 
         <div className="interview-page-container">
-          {/*Header text "Feedback Interview"*/}
+          {/*Header text "Feedback Dokumen"*/}
           <div className="container-feedback-header">
-            <Button href="/daftar-jadwal-interview">
+            <Button href="/daftar-hasil-analisis-dokumen">
               <img
                 className="arrow-back-icon"
                 src={arrowleftSvg}
@@ -160,13 +113,15 @@ const FeedbackInterviewPage = () => {
           </div>
 
           <div className="container-feedback-title">
-            <h1 className="latihan-interview-text">Feedback Interview</h1>
+            <h1 className="latihan-interview-text">
+              Hasil Analisa Dokumen Kamu
+            </h1>
           </div>
 
           {/* Nama */}
           <div className="form-input-container">
             <div className="text-interview-container">
-              <span className="text-interview">Tanggal Interview: </span>
+              <span className="text-interview">Tanggal Pengumpulan: </span>
               <span className="text-interview-orange">1 Maret 2024</span>
             </div>
 
@@ -184,7 +139,7 @@ const FeedbackInterviewPage = () => {
 
             {/* Masukan Positif */}
             <div className="text-interview-container">
-              <span className="text-interview">Masukan Positif</span>
+              <span className="text-interview">Hasil Analisa</span>
             </div>
             <div className="card-feedback-interview">
               <Card
@@ -197,17 +152,11 @@ const FeedbackInterviewPage = () => {
               >
                 <div className="text-container-feedback">
                   <div>
-                    <span>1. Intonasi sangat jelas</span>
-                  </div>
-
-                  <div>
-                    <span>2. Penggunaan bahasa Inggris yang baik</span>
-                  </div>
-
-                  <div>
                     <span>
-                      3. Percaya diri, dan mampu menjawab semua pertanyaan
-                      dengan lancar
+                      Pemohon memiliki pemahaman yang mendalam tentang topik
+                      yang dibahas, menunjukkan komitmen yang kuat terhadap
+                      pendidikan, serta kemampuan untuk mengemukakan gagasan
+                      secara jelas dan persuasif.
                     </span>
                   </div>
                 </div>
@@ -218,9 +167,7 @@ const FeedbackInterviewPage = () => {
 
             {/* Hal yang perlu ditingkatkan */}
             <div className="text-interview-container">
-              <span className="text-interview">
-                Hal yang perlu ditingkatkan
-              </span>
+              <span className="text-interview">Hal yang perlu direvisi</span>
             </div>
             <div className="card-feedback-interview">
               <Card
@@ -233,7 +180,11 @@ const FeedbackInterviewPage = () => {
               >
                 <div className="text-container-feedback">
                   <div>
-                    <span>Tidak ada</span>
+                    <span>
+                      1. Kehalusan dan Konsistensi: Memastikan keseluruhan
+                      tulisan memiliki alur yang lancar dan konsisten dalam
+                      penggunaan bahasa dan gagasan.
+                    </span>
                   </div>
                 </div>
               </Card>
@@ -272,4 +223,4 @@ const FeedbackInterviewPage = () => {
   );
 };
 
-export default FeedbackInterviewPage;
+export default FeedbackDokumenPage;

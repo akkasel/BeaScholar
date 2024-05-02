@@ -5,10 +5,10 @@ import {
   Avatar,
   Button,
 } from "@mui/material";
-import contohprofileimageSvg from "../../../img/contohprofileimage.svg";
-import arrowrightSvg from "../../../img/arrowright.svg";
+import contohprofileimageSvg from "../../../../img/contohprofileimage.svg";
+import arrowrightSvg from "../../../../img/arrowright.svg";
 
-const JadwalInterviewItem = () => {
+const JadwalInterviewItemLive = () => {
   return (
     <Card
       className="checkbox-card-container"
@@ -78,12 +78,12 @@ const JadwalInterviewItem = () => {
           <span className="text-header-item">Tanggal/Waktu:</span>
         </div>
         <div className="container-text-content-item">
-          <span className="text-content-item">28 Feb/15.00 WIB</span>
+          <span className="text-content-item">29 Feb/11.00 WIB</span>
         </div>
       </div>
 
       <div className="container-button-jadwal-interview-item">
-        <Button href="/feedback-interview"
+        <Button
           variant="contained"
           endIcon={<img src={arrowrightSvg} />}
           sx={{
@@ -93,18 +93,20 @@ const JadwalInterviewItem = () => {
             width: "200px",
             padding: "0px",
             fontWeight: "bold",
-            background: "linear-gradient(to right, #FA6339, #C73950)", // Gradient background
-            "&:hover": { background: "linear-gradient(to right, #FA6339, #C73950)" },
+            background: "linear-gradient(to bottom, #940566, #C70E4E)", // Gradient background
+            "&:hover": {
+              background: "linear-gradient(to bottom, #940566, #C70E4E)",
+            },
 
             justifyContent: "space-between", // Distribute space between text and icon
             px: 3, // Add some horizontal padding
           }}
         >
-          Lihat Feedback
+          Interview Sekarang
         </Button>
       </div>
     </Card>
   );
 };
 
-export default JadwalInterviewItem;
+export default JadwalInterviewItemLive;

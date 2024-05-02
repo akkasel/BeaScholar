@@ -1,5 +1,5 @@
 import React from "react";
-import bulbSvg from "../../../../img/bulb.svg";
+import bulbSvg from "../../../../../img/bulb.svg";
 
 const InterviewHistoryHeader = () => {
   const headerStyle = {

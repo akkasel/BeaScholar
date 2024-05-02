@@ -1,33 +1,14 @@
 import React from "react";
 import {
   Card,
+  CardHeader,
+  Avatar,
   Button,
 } from "@mui/material";
-import arrowrightSvg from "../../../img/arrowright.svg";
-import downloadiconSvg from "../../../img/downloadicon.svg";
+import contohprofileimageSvg from "../../../../img/contohprofileimage.svg";
+import arrowrightSvg from "../../../../img/arrowright.svg";
 
-const DocumentCardItem = () => {
-  const DownloadButton = () => {
-    return (
-      <Button
-        variant="outlined"
-        startIcon={<img src={downloadiconSvg}></img>}
-        sx={{
-          textTransform: "none", // Remove capitalization
-          borderColor:"#C4084F",
-          backgroundColor: "#FFFF", // Pink color
-          color: "#C4084F", // White text color for contrast
-          "&:hover": {
-            backgroundColor: "#C4084F", // Slightly lighter pink on hover
-            color:"#FFFF",
-          },
-        }}
-      >
-        Download
-      </Button>
-    );
-  };
-
+const JadwalInterviewItem = () => {
   return (
     <Card
       className="checkbox-card-container"
@@ -46,6 +27,25 @@ const DocumentCardItem = () => {
         marginLeft: "80px",
       }}
     >
+      <CardHeader
+        avatar={
+          <Avatar
+            alt="Profile Image"
+            src={contohprofileimageSvg}
+            style={{ width: "80px", height: "80px" }}
+          />
+        }
+      ></CardHeader>
+
+      <div className="container-all-text-item">
+        <div className="container-text-header-item">
+          <span className="text-header-item">Nama:</span>
+        </div>
+        <div className="container-text-content-item">
+          <span className="text-content-item">Amanda</span>
+        </div>
+      </div>
+
       <div className="container-all-text-item">
         <div className="container-text-header-item">
           <span className="text-header-item">Tingkat Pendidikan:</span>
@@ -82,18 +82,8 @@ const DocumentCardItem = () => {
         </div>
       </div>
 
-      <div className="container-all-text-item">
-        <div className="container-text-header-item">
-          <span className="text-header-item">Dokumen yang dikumpulkan:</span>
-        </div>
-        <div className="container-text-content-item">
-          <DownloadButton></DownloadButton>
-        </div>
-      </div>
-
       <div className="container-button-jadwal-interview-item">
-        <Button
-          href="/feedback-dokumen"
+        <Button href="/feedback-interview"
           variant="contained"
           endIcon={<img src={arrowrightSvg} />}
           sx={{
@@ -104,9 +94,7 @@ const DocumentCardItem = () => {
             padding: "0px",
             fontWeight: "bold",
             background: "linear-gradient(to right, #FA6339, #C73950)", // Gradient background
-            "&:hover": {
-              background: "linear-gradient(to right, #FA6339, #C73950)",
-            },
+            "&:hover": { background: "linear-gradient(to right, #FA6339, #C73950)" },
 
             justifyContent: "space-between", // Distribute space between text and icon
             px: 3, // Add some horizontal padding
@@ -119,4 +107,4 @@ const DocumentCardItem = () => {
   );
 };
 
-export default DocumentCardItem;
+export default JadwalInterviewItem;
