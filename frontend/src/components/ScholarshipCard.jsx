@@ -1,10 +1,7 @@
-import React from 'react';
-import bcalogoSvg from '../../../../img/bcalogo.svg';
-import {
-  Button,
-} from "@mui/material";
-import arrowrightSvg from "../../../../img/arrowright.svg";
-
+import React from "react";
+import bcalogoSvg from "../img/bcalogo.svg";
+import { Button } from "@mui/material";
+import arrowrightSvg from "../img/arrowright.svg";
 
 const ScholarshipCard = () => {
   return (
@@ -14,12 +11,19 @@ const ScholarshipCard = () => {
           <img src={bcalogoSvg} alt="BCA" className="card-logo" />
           <div className="card-header-badge-container">
             <span className="card-header-badge national">Nasional</span>
-            <span className="card-header-badge education-level">Beasiswa S1</span>
+            <span className="card-header-badge education-level">
+              Beasiswa S1
+            </span>
           </div>
         </div>
         <h2 className="card-title">Beasiswa PPTI BCA</h2>
-        <p className="card-subtitle">Lingkup Beasiswa: Nasional <br/> Tingkat Pendidikan: S1 <br/> Penyelenggara: PT. BCA</p>
-        <Button className='card-button'
+        <p className="card-subtitle">
+          Lingkup Beasiswa: Nasional <br /> Tingkat Pendidikan: S1 <br />{" "}
+          Penyelenggara: PT. BCA
+        </p>
+        <Button
+          className="card-button"
+          href="/scholarship-detail-item"
           variant="contained"
           endIcon={<img src={arrowrightSvg} />}
           sx={{
@@ -30,7 +34,9 @@ const ScholarshipCard = () => {
             padding: "5px",
             fontWeight: "bold",
             background: "linear-gradient(to right, #FA6339, #C73950)", // Gradient background
-            "&:hover": { background: "linear-gradient(to right, #FA6339, #C73950)" },
+            "&:hover": {
+              background: "linear-gradient(to right, #FA6339, #C73950)",
+            },
 
             justifyContent: "space-between", // Distribute space between text and icon
             px: 3, // Add some horizontal padding
@@ -44,4 +50,3 @@ const ScholarshipCard = () => {
 };
 
 export default ScholarshipCard;
-

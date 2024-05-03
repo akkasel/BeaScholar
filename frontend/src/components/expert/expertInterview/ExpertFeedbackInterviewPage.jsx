@@ -19,11 +19,11 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import JadwalInterviewItem from "./interviewItem/JadwalInterviewItem";
 import arrowrightSvg from "../../../img/arrowright.svg";
 import arrowleftSvg from "../../../img/arrowleft.svg";
+import TopBarExpert from "../../TopBarExpert";
 
-const FeedbackInterviewPage = () => {
+const ExpertFeedbackInterviewPage = () => {
   // untuk textfield tingkat pendidikan
   const tingkatPendidikan = [
     {
@@ -62,17 +62,16 @@ const FeedbackInterviewPage = () => {
 
   return (
     <div>
-      <TopBar /> {/* Render the TopBar component */}
+      <TopBarExpert /> {/* Render the TopBar component */}
       <div className="feedback-interview-page">
-        {/* Render the SideBar component */}
         <Sidebar backgroundColor="#CA3C4F" className="sidebar-container">
           <Menu
             menuItemStyles={{
               button: {
                 // Styling for the active menu item
                 "&.active": {
-                  backgroundColor: "#772F32", // Change this to the desired color
-                  color: "#FFFFFF", // Change this to the desired color
+                  backgroundColor: "#772F32",
+                  color: "#FFFFFF",
                 },
                 // Styling for the hover state
                 "&:hover": {
@@ -93,7 +92,7 @@ const FeedbackInterviewPage = () => {
                   height: "18px",
                 }}
               />
-              <Link className="link-menu-item" to="/home">
+              <Link className="link-menu-item" to="/expert-home">
                 Dashboard
               </Link>
             </MenuItem>
@@ -108,7 +107,10 @@ const FeedbackInterviewPage = () => {
                   height: "18px",
                 }}
               />
-              <Link className="link-menu-item" to="/interview">
+              <Link
+                className="link-menu-item"
+                to="/expert-daftar-jadwal-interview"
+              >
                 Interview
               </Link>
             </MenuItem>
@@ -123,7 +125,7 @@ const FeedbackInterviewPage = () => {
                   height: "18px",
                 }}
               />
-              <Link className="link-menu-item" to="/document">
+              <Link className="link-menu-item" to="/expert-daftar-hasil-analisis-dokumen">
                 Dokumen
               </Link>
             </MenuItem>
@@ -138,7 +140,7 @@ const FeedbackInterviewPage = () => {
                   height: "18px",
                 }}
               />
-              <Link className="link-menu-item" to="/profile">
+              <Link className="link-menu-item" to="/expert-profile">
                 Profile
               </Link>
             </MenuItem>
@@ -149,7 +151,8 @@ const FeedbackInterviewPage = () => {
           {/*Header text "Feedback Interview"*/}
           <div className="container-feedback-header">
             <br />
-            <Button href="/daftar-jadwal-interview">
+            <br />
+            <Button href="/expert-daftar-jadwal-interview">
               <img
                 className="arrow-back-icon"
                 src={arrowleftSvg}
@@ -177,8 +180,8 @@ const FeedbackInterviewPage = () => {
             </div>
 
             <div className="text-interview-container">
-              <span className="text-interview">Interviewer / Expert: </span>
-              <span className="text-interview-orange">Ms. Leony</span>
+              <span className="text-interview">Identitas Peserta: </span>
+              <span className="text-interview-orange">Amanda</span>
             </div>
 
             <br />
@@ -187,32 +190,25 @@ const FeedbackInterviewPage = () => {
             <div className="text-interview-container">
               <span className="text-interview">Masukan Positif</span>
             </div>
-            <div className="card-feedback-interview">
-              <Card
-                className="checkbox-card-container"
-                variant="outlined"
+
+            <div className="text-field-feedback-expert-container">
+              <TextField
                 sx={{
-                  border: "2px solid FF6C37 !important",
-                  borderColor: "#FF6C37 !important",
+                  "& .MuiOutlinedInput-root": {
+                    height: "auto",
+                    fontSize: "1.2rem", // Increase font size to match the increased height
+                    alignItems: "left",
+                    border: "2px solid #FF6C37",
+                    borderRadius: "10px",
+                  },
+                  "& .MuiOutlinedInput-input": {
+                    padding: "10px", // Adjust the padding to position the text correctly
+                    alignItems: "left",
+                  },
+                  width: "1000px", // Adjust the width value as needed
                 }}
-              >
-                <div className="text-container-feedback">
-                  <div>
-                    <span>1. Intonasi sangat jelas</span>
-                  </div>
-
-                  <div>
-                    <span>2. Penggunaan bahasa Inggris yang baik</span>
-                  </div>
-
-                  <div>
-                    <span>
-                      3. Percaya diri, dan mampu menjawab semua pertanyaan
-                      dengan lancar
-                    </span>
-                  </div>
-                </div>
-              </Card>
+                multiline // Add this prop to enable multiple lines
+              />
             </div>
 
             <br />
@@ -223,21 +219,24 @@ const FeedbackInterviewPage = () => {
                 Hal yang perlu ditingkatkan
               </span>
             </div>
-            <div className="card-feedback-interview">
-              <Card
-                className="checkbox-card-container"
-                variant="outlined"
+            <div className="text-field-feedback-expert-container">
+              <TextField
                 sx={{
-                  border: "2px solid FF6C37 !important",
-                  borderColor: "#FF6C37 !important",
+                  "& .MuiOutlinedInput-root": {
+                    height: "auto",
+                    fontSize: "1.2rem", // Increase font size to match the increased height
+                    alignItems: "left",
+                    border: "2px solid #FF6C37",
+                    borderRadius: "10px",
+                  },
+                  "& .MuiOutlinedInput-input": {
+                    padding: "10px", // Adjust the padding to position the text correctly
+                    alignItems: "left",
+                  },
+                  width: "1000px", // Adjust the width value as needed
                 }}
-              >
-                <div className="text-container-feedback">
-                  <div>
-                    <span>Tidak ada</span>
-                  </div>
-                </div>
-              </Card>
+                multiline // Add this prop to enable multiple lines
+              />
             </div>
 
             <br />
@@ -248,21 +247,51 @@ const FeedbackInterviewPage = () => {
                 Catatan tambahan dari Interviewer
               </span>
             </div>
-            <div className="card-feedback-interview">
-              <Card
-                className="checkbox-card-container"
-                variant="outlined"
+            <div className="text-field-feedback-expert-container">
+              <TextField
                 sx={{
-                  border: "2px solid FF6C37 !important",
-                  borderColor: "#FF6C37 !important",
+                  "& .MuiOutlinedInput-root": {
+                    height: "auto",
+                    fontSize: "1.2rem", // Increase font size to match the increased height
+                    alignItems: "left",
+                    border: "2px solid #FF6C37",
+                    borderRadius: "10px",
+                  },
+                  "& .MuiOutlinedInput-input": {
+                    padding: "10px", // Adjust the padding to position the text correctly
+                    alignItems: "left",
+                  },
+                  width: "1000px", // Adjust the width value as needed
+                }}
+                multiline // Add this prop to enable multiple lines
+              />
+            </div>
+
+            <br />
+
+            {/* Simpan Button */}
+            <div>
+              <Button
+                variant="contained"
+                endIcon={<img src={arrowrightSvg} />}
+                sx={{
+                  fontFamily: "'Poppins', sans-serif", // Use the Poppins font
+                  textTransform: "none", // Remove capitalization
+                  borderRadius: "10px", // Apply rounded edges
+                  width: "200px",
+                  fontWeight: "bold",
+                  background: "linear-gradient(to right, #FA6339, #C73950)", // Gradient background
+                  "&:hover": {
+                    background: "linear-gradient(to right, #FA6339, #C73950)",
+                  },
+
+                  justifyContent: "space-between", // Distribute space between text and icon
+                  position: "absolute",
+                  right: 200,
                 }}
               >
-                <div className="text-container-feedback">
-                  <div>
-                    <span>Tidak ada</span>
-                  </div>
-                </div>
-              </Card>
+                Simpan
+              </Button>
             </div>
 
             {/* Add your input form here */}
@@ -273,4 +302,4 @@ const FeedbackInterviewPage = () => {
   );
 };
 
-export default FeedbackInterviewPage;
+export default ExpertFeedbackInterviewPage;

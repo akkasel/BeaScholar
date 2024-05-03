@@ -1,10 +1,9 @@
 import React from "react";
-import bulbSvg from "../../../../../img/bulb.svg";
+import pinSvg from "../../../../../img/pin.svg";
 
-const InterviewHistoryHeader = () => {
+const DocumentHistoryHeader = () => {
   const headerStyle = {
     padding: "20px",
-    backgroundColor: "#FFFFFF", 
     display: "flex",
     alignItems: "left",
     borderRadius: "16px 16px 0 0", // rounded corners on the top
@@ -15,24 +14,25 @@ const InterviewHistoryHeader = () => {
     color: "#333333", // dark text color
     fontWeight: "bold",
     fontSize: "16px",
+
   };
 
   const allLinkStyle = {
     textDecoration: "none",
     color: "#727272", 
     fontWeight: "bold",
-    marginLeft: "140px",
+    marginLeft: "20px",
   };
 
   return (
     <div style={headerStyle}>
-      <img src={bulbSvg} alt="Icon" width={40} height={40} />
-      <h2 style={titleStyle}>Interview Sebelumnya</h2>
-      <a href="/daftar-jadwal-interview" style={allLinkStyle}>
+      <img src={pinSvg} alt="Icon" width={40} height={40} />
+      <h2 style={titleStyle}>Hasil Analisis Dokumen Sebelumnya</h2>
+      <a href="/expert-daftar-hasil-analisis-dokumen" style={allLinkStyle}>
         Lihat semuanya →
       </a>
     </div>
   );
 };
 
-export default InterviewHistoryHeader;
+export default DocumentHistoryHeader;

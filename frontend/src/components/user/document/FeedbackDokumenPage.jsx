@@ -12,7 +12,6 @@ import Button from "@mui/material/Button";
 import arrowleftSvg from "../../../img/arrowleft.svg";
 
 const FeedbackDokumenPage = () => {
-
   return (
     <div>
       <TopBar /> {/* Render the TopBar component */}
@@ -101,6 +100,7 @@ const FeedbackDokumenPage = () => {
         <div className="interview-page-container">
           {/*Header text "Feedback Dokumen"*/}
           <div className="container-feedback-header">
+            <br />
             <Button href="/daftar-hasil-analisis-dokumen">
               <img
                 className="arrow-back-icon"

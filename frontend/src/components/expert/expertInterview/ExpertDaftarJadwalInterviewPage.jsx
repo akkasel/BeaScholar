@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../../../App.css";
-import TopBar from "../../TopBar";
+import TopBarExpert from "../../TopBarExpert";
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Link } from "react-router-dom";
 import homelogoSvg from "../../../img/homelogo.svg";
@@ -10,13 +10,13 @@ import documentlogoSvg from "../../../img/documentlogo.svg";
 import headphoneSvg from "../../../img/headphone.svg";
 import Card from "@mui/material/Card";
 import SearchBar from "../../SearchBar";
-import JadwalInterviewItem from "./interviewItem/JadwalInterviewItem";
-import JadwalInterviewItemLive from "./interviewItem/JadwalInterviewItemLive";
+import ExpertJadwalInterviewItem from "./expertInterviewItem/ExpertJadwalInterviewItem";
+import ExpertJadwalInterviewItemLive from "./expertInterviewItem/ExpertJadwalInterviewItemLive";
 
-const DaftarJadwalInterviewPage = () => {
+const ExpertDaftarJadwalInterviewPage = () => {
   return (
     <div>
-      <TopBar /> {/* Render the TopBar component */}
+      <TopBarExpert /> {/* Render the TopBar component */}
       <div className="daftar-jadwal-interview-page">
         {/* Render the SideBar component */}
         <Sidebar backgroundColor="#CA3C4F" className="sidebar-container">
@@ -25,8 +25,8 @@ const DaftarJadwalInterviewPage = () => {
               button: {
                 // Styling for the active menu item
                 "&.active": {
-                  backgroundColor: "#772F32", // Change this to the desired color
-                  color: "#FFFFFF", // Change this to the desired color
+                  backgroundColor: "#772F32",
+                  color: "#FFFFFF",
                 },
                 // Styling for the hover state
                 "&:hover": {
@@ -47,7 +47,7 @@ const DaftarJadwalInterviewPage = () => {
                   height: "18px",
                 }}
               />
-              <Link className="link-menu-item" to="/home">
+              <Link className="link-menu-item" to="/expert-home">
                 Dashboard
               </Link>
             </MenuItem>
@@ -62,7 +62,7 @@ const DaftarJadwalInterviewPage = () => {
                   height: "18px",
                 }}
               />
-              <Link className="link-menu-item" to="/interview">
+              <Link className="link-menu-item" to="/expert-daftar-jadwal-interview">
                 Interview
               </Link>
             </MenuItem>
@@ -77,7 +77,7 @@ const DaftarJadwalInterviewPage = () => {
                   height: "18px",
                 }}
               />
-              <Link className="link-menu-item" to="/document">
+              <Link className="link-menu-item" to="/expert-daftar-hasil-analisis-dokumen">
                 Dokumen
               </Link>
             </MenuItem>
@@ -92,7 +92,7 @@ const DaftarJadwalInterviewPage = () => {
                   height: "18px",
                 }}
               />
-              <Link className="link-menu-item" to="/profile">
+              <Link className="link-menu-item" to="/expert-profile">
                 Profile
               </Link>
             </MenuItem>
@@ -146,11 +146,11 @@ const DaftarJadwalInterviewPage = () => {
 
           {/* Ini contoh frontend dari jadwal interview untuk yang Live (saat ini bisa zoom sekarang)
           & yang biasa (yang bukan live, yang bukan live itu artinya belum jam nya) */}
-          <JadwalInterviewItemLive />
-          <JadwalInterviewItem />
-          <JadwalInterviewItem />
-          <JadwalInterviewItem />
-          <JadwalInterviewItem />
+          <ExpertJadwalInterviewItemLive />
+          <ExpertJadwalInterviewItem />
+          <ExpertJadwalInterviewItem />
+          <ExpertJadwalInterviewItem />
+          <ExpertJadwalInterviewItem />
          
 
           {/* Add your input form here */}
@@ -160,4 +160,4 @@ const DaftarJadwalInterviewPage = () => {
   );
 };
 
-export default DaftarJadwalInterviewPage;
+export default ExpertDaftarJadwalInterviewPage;

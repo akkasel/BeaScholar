@@ -1,42 +1,52 @@
 import React, { useState } from "react";
 import "../../../App.css";
-import TopBar from "../../TopBar";
+import TopBarAdmin from "../../TopBarAdmin";
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Link } from "react-router-dom";
 import homelogoSvg from "../../../img/homelogo.svg";
 import miclogoSvg from "../../../img/miclogo.svg";
 import personlogoSvg from "../../../img/personlogo.svg";
 import documentlogoSvg from "../../../img/documentlogo.svg";
+import Card from "@mui/material/Card";
+import SearchBar from "../../SearchBar";
+import dokumenemotSvg from "../../../img/dokumenemot.svg";
+import verifikasilogoSvg from "../../../img/verifikasilogo.svg";
+import uploadbeasiswalogoSvg from "../../../img/uploadbeasiswalogo.svg";
+import rocketSvg from "../../../img/rocket.svg";
 import TextField from "@mui/material/TextField";
 import MuiMenuItem from "@mui/material/MenuItem";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import Card from "@mui/material/Card";
 import Button from "@mui/material/Button";
-import kacaPembesarSvg from "../../../img/kacapembesar.svg";
-import { Box, Typography } from "@mui/material";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import arrowrightSvg from "../../../img/arrowright.svg";
-import pinmerahSvg from "../../../img/pinmerah.svg";
-import robotSvg from "../../../img/robot.svg";
+import togaiconSvg from "../../../img/togaicon.svg";
 
-const DocumentPage = () => {
-  // ini untuk nampung file nya
-  const [file, setFile] = useState(null);
-
-  // untuk textfield jenis dokumen
-  const jenisDokumen = [
+const UploadBeasiswaPage = () => {
+  // untuk textfield tingkat pendidikan
+  const tingkatPendidikan = [
     {
-      value: "Essay",
-      label: "Essay",
+      value: "SMA",
+      label: "SMA",
     },
     {
-      value: "CV",
-      label: "CV",
+      value: "SMK",
+      label: "SMK",
     },
     {
-      value: "Dokumen lainnya",
-      label: "Dokumen lainnya",
+      value: "S1",
+      label: "S1",
+    },
+    {
+      value: "S2",
+      label: "S2",
+    },
+    {
+      value: "S3",
+      label: "S3",
     },
   ];
 
@@ -52,24 +62,20 @@ const DocumentPage = () => {
     },
   ];
 
-  // untuk handle input file dokumen
-  const handleInputFile = (e) => {
-    setFile(e.target.files[0]);
-  };
-
   return (
     <div>
-      <TopBar /> {/* Render the TopBar component */}
-      <div className="document-page">
+      <TopBarAdmin /> {/* Render the TopBar component */}
+      <div className="daftar-jadwal-interview-page">
         {/* Render the SideBar component */}
+        {/* Sidebar */}
         <Sidebar backgroundColor="#CA3C4F" className="sidebar-container">
           <Menu
             menuItemStyles={{
               button: {
                 // Styling for the active menu item
                 "&.active": {
-                  backgroundColor: "#772F32", // Change this to the desired color
-                  color: "#FFFFFF", // Change this to the desired color
+                  backgroundColor: "#772F32",
+                  color: "#FFFFFF",
                 },
                 // Styling for the hover state
                 "&:hover": {
@@ -90,13 +96,13 @@ const DocumentPage = () => {
                   height: "18px",
                 }}
               />
-              <Link className="link-menu-item" to="/home">
+              <Link className="link-menu-item" to="/admin-home">
                 Dashboard
               </Link>
             </MenuItem>
             <MenuItem className="menu-item">
               <img
-                src={miclogoSvg}
+                src={verifikasilogoSvg}
                 alt="Icon"
                 style={{
                   marginTop: "5px",
@@ -105,13 +111,13 @@ const DocumentPage = () => {
                   height: "18px",
                 }}
               />
-              <Link className="link-menu-item" to="/interview">
-                Interview
+              <Link className="link-menu-item" to="/admin-verifikasi">
+                Verifikasi
               </Link>
             </MenuItem>
             <MenuItem className="menu-item">
               <img
-                src={documentlogoSvg}
+                src={uploadbeasiswalogoSvg}
                 alt="Icon"
                 style={{
                   marginTop: "5px",
@@ -120,8 +126,8 @@ const DocumentPage = () => {
                   height: "18px",
                 }}
               />
-              <Link className="link-menu-item" to="/document">
-                Dokumen
+              <Link className="link-menu-item" to="/admin-upload-beasiswa">
+                Beasiswa
               </Link>
             </MenuItem>
             <MenuItem className="menu-item">
@@ -135,38 +141,42 @@ const DocumentPage = () => {
                   height: "18px",
                 }}
               />
-              <Link className="link-menu-item" to="/profile">
+              <Link className="link-menu-item" to="/admin-profile">
                 Profile
               </Link>
             </MenuItem>
           </Menu>
         </Sidebar>
-
         <div className="interview-page-container">
           {/*Header text "Latihan Interview"*/}
+          <br />
           <div className="interview-header-container">
-            <br />
             <img
               className="rocket-icon"
-              src={pinmerahSvg}
+              src={togaiconSvg}
               alt="Icon"
               width={40}
               height={40}
             />
-            <h1 className="latihan-interview-text">Analisa Dokumen</h1>
+            <h1 className="latihan-interview-text">
+              Upload Informasi Beasiswa
+            </h1>
           </div>
 
+          <br />
+
+          {/* Nama */}
           <div className="form-input-container">
-            {/* Jenis Dokumen */}
             <div className="text-interview-container">
-              <span className="text-interview">Jenis Dokumen</span>
+              <span className="text-interview">Nama Beasiswa</span>
             </div>
-            <div>
+            <div className="">
               <TextField
                 fullWidth
-                id="outlined-select-tingkat-pendidikan"
-                select
-                defaultValue="Essay"
+                id="outlined-textfield-nama"
+                label="Ketik nama beasiswa disini..."
+                variant="outlined"
+                width="200px"
                 sx={{
                   // Root class for the input field
                   "& .MuiOutlinedInput-root": {
@@ -181,22 +191,14 @@ const DocumentPage = () => {
                     color: "#121212",
                   },
                 }}
-              >
-                {jenisDokumen.map((option) => (
-                  <MuiMenuItem key={option.value} value={option.value}>
-                    {option.label}
-                  </MuiMenuItem>
-                ))}
-              </TextField>
+              />
             </div>
 
             <br />
 
             {/* Lingkup Beasiswa */}
             <div className="text-interview-container">
-              <span className="text-interview">
-                Lingkup Beasiswa (Nasional / Luar Negeri)
-              </span>
+              <span className="text-interview">Lingkup Beasiswa</span>
             </div>
             <div>
               <TextField
@@ -288,105 +290,99 @@ const DocumentPage = () => {
 
             <br />
 
-            {/* Pilih Jenis Analisa */}
-            <div className="text-interview-container">
-              <span className="text-interview">Pilih Jenis Analisa</span>
-            </div>
-            <div>
-              <Card
-                className="checkbox-card-container"
-                variant="outlined"
-                sx={{
-                  border: "2px solid #C4084F !important",
-                  borderColor: "#C4084F !important",
-                }}
-              >
-                <FormGroup sx={{ marginLeft: "10px" }}>
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        sx={{
-                          color: "#C4084F", // Change the checkbox color
-                          "&.Mui-checked": {
-                            color: "#C4084F", // Change the color of the checked state
-                          },
-                        }}
-                      />
-                    }
-                    label={
-                      <Box sx={{ display: "flex", alignItems: "center" }}>
-                        <img
-                          src={robotSvg}
-                          alt="Image 2"
-                          style={{ marginRight: "10px" }}
-                          width="20px"
-                        />
-                        <Typography
-                          variant="body2"
-                          fontWeight="bold"
-                          fontFamily="Poppins"
-                          fontSize="15px"
-                        >
-                          Analisa Dokumen oleh AI (Instant)
-                        </Typography>
-                      </Box>
-                    }
-                  />
-
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        sx={{
-                          color: "#C4084F", // Change the checkbox color
-                          "&.Mui-checked": {
-                            color: "#C4084F", // Change the color of the checked state
-                          },
-                        }}
-                      />
-                    }
-                    label={
-                      <Box sx={{ display: "flex", alignItems: "center" }}>
-                        <img
-                          src={kacaPembesarSvg}
-                          alt="Image 2"
-                          style={{ marginRight: "10px" }}
-                          width="20px"
-                        />
-                        <Typography
-                          variant="body2"
-                          fontWeight="bold"
-                          fontFamily="Poppins"
-                          fontSize="15px"
-                        >
-                          Analisa Dokumen oleh Human Expert (1-2 Hari)
-                        </Typography>
-                      </Box>
-                    }
-                  />
-                </FormGroup>
-              </Card>
-            </div>
-
-            <br />
-
-            {/* Masukan file */}
+            {/* Pihak Penyelenggara */}
             <div className="text-interview-container">
               <span className="text-interview">
-                Masukan file kamu disini (.pdf):
+                Pihak Penyelenggara Beasiswa
               </span>
             </div>
-            <div className="input-group">
-              <input
-                type="file"
-                placeholder="KTP"
-                value={file}
-                onChange={handleInputFile}
+            <div className="">
+              <TextField
+                fullWidth
+                id="outlined-textfield-nama"
+                label="Tulis pihak penyedia beasiswa disini..."
+                variant="outlined"
+                width="200px"
+                sx={{
+                  // Root class for the input field
+                  "& .MuiOutlinedInput-root": {
+                    // Class for the border around the input field
+                    "& .MuiOutlinedInput-notchedOutline": {
+                      borderColor: "#C4084F",
+                      borderWidth: "2px",
+                    },
+                  },
+                  // Class for the label of the input field
+                  "& .MuiInputLabel-outlined": {
+                    color: "#121212",
+                  },
+                }}
               />
             </div>
 
             <br />
 
-            {/* Jadwalkan Interview Sekarang Button */}
+            {/* Deskripsi dan Syarat */}
+            <div className="text-interview-container">
+              <span className="text-interview">Deskripsi dan Syarat</span>
+            </div>
+            <div className="">
+              <TextField
+                fullWidth
+                id="outlined-textfield-nama"
+                label="Tulis deskripsi serta syarat beasiswa disini..."
+                variant="outlined"
+                width="200px"
+                sx={{
+                  // Root class for the input field
+                  "& .MuiOutlinedInput-root": {
+                    // Class for the border around the input field
+                    "& .MuiOutlinedInput-notchedOutline": {
+                      borderColor: "#C4084F",
+                      borderWidth: "2px",
+                    },
+                  },
+                  // Class for the label of the input field
+                  "& .MuiInputLabel-outlined": {
+                    color: "#121212",
+                  },
+                }}
+              />
+            </div>
+
+            <br />
+
+            {/* Link atau Website Pendaftaran */}
+            <div className="text-interview-container">
+              <span className="text-interview">Link atau Website Pendaftaran</span>
+            </div>
+            <div className="">
+              <TextField
+                fullWidth
+                id="outlined-textfield-nama"
+                variant="outlined"
+                width="200px"
+                sx={{
+                  // Root class for the input field
+                  "& .MuiOutlinedInput-root": {
+                    // Class for the border around the input field
+                    "& .MuiOutlinedInput-notchedOutline": {
+                      borderColor: "#C4084F",
+                      borderWidth: "2px",
+                    },
+                  },
+                  // Class for the label of the input field
+                  "& .MuiInputLabel-outlined": {
+                    color: "#121212",
+                  },
+                }}
+              />
+            </div>
+
+            <br />
+            <br />
+
+            {/* Upload Button */}
             <div>
               <Button
                 variant="contained"
@@ -397,16 +393,16 @@ const DocumentPage = () => {
                   borderRadius: "10px", // Apply rounded edges
                   width: "1000px",
                   fontWeight: "bold",
-                  background: "linear-gradient(to bottom, #940566, #C70E4E)", // Gradient background
+                  background: "linear-gradient(to bottom, #FA6339, #C73950)", // Gradient background
                   "&:hover": {
-                    background: "linear-gradient(to bottom, #940566, #C70E4E)",
+                    background: "linear-gradient(to bottom, #FA63396, #C73950)",
                   },
 
                   justifyContent: "space-between", // Distribute space between text and icon
                   px: 3, // Add some horizontal padding
                 }}
               >
-                Submit
+                Upload!
               </Button>
             </div>
             {/* Add your input form here */}
@@ -417,4 +413,4 @@ const DocumentPage = () => {
   );
 };
 
-export default DocumentPage;
+export default UploadBeasiswaPage;

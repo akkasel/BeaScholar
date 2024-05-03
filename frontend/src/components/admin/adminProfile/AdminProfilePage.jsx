@@ -1,26 +1,23 @@
 import React, { useState } from "react";
 import "../../../App.css";
-import TopBar from "../../TopBar";
+import TopBarAdmin from "../../TopBarAdmin";
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Link } from "react-router-dom";
 import homelogoSvg from "../../../img/homelogo.svg";
-import miclogoSvg from "../../../img/miclogo.svg";
 import personlogoSvg from "../../../img/personlogo.svg";
-import documentlogoSvg from "../../../img/documentlogo.svg";
-import rocketSvg from "../../../img/rocket.svg";
+import SearchBar from "../../SearchBar";
+import dokumenemotSvg from "../../../img/dokumenemot.svg";
+import verifikasilogoSvg from "../../../img/verifikasilogo.svg";
+import uploadbeasiswalogoSvg from "../../../img/uploadbeasiswalogo.svg";
 import TextField from "@mui/material/TextField";
 import MuiMenuItem from "@mui/material/MenuItem";
-import FormGroup from "@mui/material/FormGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Card from "@mui/material/Card";
 import Button from "@mui/material/Button";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import arrowrightSvg from "../../../img/arrowright.svg";
+import pencilSvg from "../../../img/pencil.svg";
+import Avatar from "@mui/material/Avatar";
+import contohprofileimageSvg from "../../../img/contohprofileimage.svg";
 
-const InterviewPage = () => {
+const AdminProfilePage = () => {
   // untuk textfield tingkat pendidikan
   const tingkatPendidikan = [
     {
@@ -45,31 +42,20 @@ const InterviewPage = () => {
     },
   ];
 
-  // untuk textfield lingkup beasiswa
-  const lingkupBeasiswa = [
-    {
-      value: "Dalam Negeri",
-      label: "Dalam Negeri",
-    },
-    {
-      value: "Luar Negeri",
-      label: "Luar Negeri",
-    },
-  ];
-
   return (
     <div>
-      <TopBar /> {/* Render the TopBar component */}
-      <div className="interview-page">
+      <TopBarAdmin /> {/* Render the TopBar component */}
+      <div className="daftar-jadwal-interview-page">
         {/* Render the SideBar component */}
+        {/* Sidebar */}
         <Sidebar backgroundColor="#CA3C4F" className="sidebar-container">
           <Menu
             menuItemStyles={{
               button: {
                 // Styling for the active menu item
                 "&.active": {
-                  backgroundColor: "#772F32", // Change this to the desired color
-                  color: "#FFFFFF", // Change this to the desired color
+                  backgroundColor: "#772F32",
+                  color: "#FFFFFF",
                 },
                 // Styling for the hover state
                 "&:hover": {
@@ -90,13 +76,13 @@ const InterviewPage = () => {
                   height: "18px",
                 }}
               />
-              <Link className="link-menu-item" to="/home">
+              <Link className="link-menu-item" to="/admin-home">
                 Dashboard
               </Link>
             </MenuItem>
             <MenuItem className="menu-item">
               <img
-                src={miclogoSvg}
+                src={verifikasilogoSvg}
                 alt="Icon"
                 style={{
                   marginTop: "5px",
@@ -105,13 +91,13 @@ const InterviewPage = () => {
                   height: "18px",
                 }}
               />
-              <Link className="link-menu-item" to="/interview">
-                Interview
+              <Link className="link-menu-item" to="/admin-verifikasi">
+                Verifikasi
               </Link>
             </MenuItem>
             <MenuItem className="menu-item">
               <img
-                src={documentlogoSvg}
+                src={uploadbeasiswalogoSvg}
                 alt="Icon"
                 style={{
                   marginTop: "5px",
@@ -120,8 +106,8 @@ const InterviewPage = () => {
                   height: "18px",
                 }}
               />
-              <Link className="link-menu-item" to="/document">
-                Dokumen
+              <Link className="link-menu-item" to="/admin-upload-beasiswa">
+                Beasiswa
               </Link>
             </MenuItem>
             <MenuItem className="menu-item">
@@ -135,7 +121,7 @@ const InterviewPage = () => {
                   height: "18px",
                 }}
               />
-              <Link className="link-menu-item" to="/profile">
+              <Link className="link-menu-item" to="/admin-profile">
                 Profile
               </Link>
             </MenuItem>
@@ -143,17 +129,23 @@ const InterviewPage = () => {
         </Sidebar>
 
         <div className="interview-page-container">
-          {/*Header text "Latihan Interview"*/}
+          {/*Header text "Profil Kamu"*/}
           <div className="interview-header-container">
-            <br />
             <img
               className="rocket-icon"
-              src={rocketSvg}
+              src={pencilSvg}
               alt="Icon"
               width={40}
               height={40}
             />
-            <h1 className="latihan-interview-text">Latihan Interview</h1>
+            <h1 className="latihan-interview-text">Profil Diri Kamu</h1>
+          </div>
+
+          <div className="container-avatar">
+            <Avatar
+              src={contohprofileimageSvg}
+              sx={{ width: 120, height: 120 }}
+            />
           </div>
 
           {/* Nama */}
@@ -221,103 +213,6 @@ const InterviewPage = () => {
 
             <br />
 
-            {/* Lingkup Beasiswa */}
-            <div className="text-interview-container">
-              <span className="text-interview">Lingkup Beasiswa</span>
-            </div>
-            <div>
-              <TextField
-                fullWidth
-                id="outlined-select-lingkup-beasiswa"
-                select
-                defaultValue="Dalam Negeri"
-                sx={{
-                  // Root class for the input field
-                  "& .MuiOutlinedInput-root": {
-                    // Class for the border around the input field
-                    "& .MuiOutlinedInput-notchedOutline": {
-                      borderColor: "#C4084F",
-                      borderWidth: "2px",
-                    },
-                  },
-                  // Class for the label of the input field
-                  "& .MuiInputLabel-outlined": {
-                    color: "#121212",
-                  },
-                }}
-              >
-                {lingkupBeasiswa.map((option) => (
-                  <MuiMenuItem key={option.value} value={option.value}>
-                    {option.label}
-                  </MuiMenuItem>
-                ))}
-              </TextField>
-            </div>
-
-            <br />
-
-            {/* Jenis Interview*/}
-            <div className="text-interview-container">
-              <span className="text-interview">Jenis Interview</span>
-            </div>
-            <div>
-              <Card
-                className="checkbox-card-container"
-                variant="outlined"
-                sx={{
-                  border: "2px solid #C4084F !important",
-                  borderColor: "#C4084F !important",
-                }}
-              >
-                <FormGroup sx={{ marginLeft: "10px" }}>
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        
-                        sx={{
-                          color: "#C4084F", // Change the checkbox color
-                          "&.Mui-checked": {
-                            color: "#C4084F", // Change the color of the checked state
-                          },
-                        }}
-                      />
-                    }
-                    label="Beasiswa S1"
-                  />
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        
-                        sx={{
-                          color: "#C4084F", // Change the checkbox color
-                          "&.Mui-checked": {
-                            color: "#C4084F", // Change the color of the checked state
-                          },
-                        }}
-                      />
-                    }
-                    label="Beasiswa S2"
-                  />
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        
-                        sx={{
-                          color: "#C4084F", // Change the checkbox color
-                          "&.Mui-checked": {
-                            color: "#C4084F", // Change the color of the checked state
-                          },
-                        }}
-                      />
-                    }
-                    label="Beasiswa S3"
-                  />
-                </FormGroup>
-              </Card>
-            </div>
-
-            <br />
-
             {/* Deskripsi Diri */}
             <div className="text-interview-container">
               <span className="text-interview">Deskripsi Diri (opsional)</span>
@@ -348,46 +243,7 @@ const InterviewPage = () => {
 
             <br />
 
-            {/* Pilih waktu interview */}
-            <div className="text-interview-container">
-              <span className="text-interview">Pilih Waktu Interview</span>
-            </div>
-            <div>
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DateTimePicker
-                  sx={{
-                    "& .MuiOutlinedInput-root": {
-                      width: "1000px",
-                      "& fieldset": {
-                        border: "2px solid",
-                        borderColor: "#C4084F", // Change the border color
-                      },
-                      "&:hover fieldset": {
-                        border: "2px solid",
-                        borderColor: "#C4084F", // Change the border color on hover
-                      },
-                      "&.Mui-focused fieldset": {
-                        border: "2px solid",
-                        borderColor: "#C4084F", // Change the border color on focus
-                      },
-                    },
-                    "& .MuiCalendarPicker-root": {
-                      border: "2px solid",
-                      color: "#C4084F", // Change the color of the calendar
-                    },
-                    "& .MuiClockPicker-root": {
-                      border: "2px solid",
-                      color: "#C4084F", // Change the color of the time picker
-                    },
-                  }}
-                />
-              </LocalizationProvider>
-            </div>
-
-            <br />
-            <br />
-
-            {/* Jadwalkan Interview Sekarang Button */}
+            {/* Simpan Button */}
             <div>
               <Button
                 variant="contained"
@@ -396,20 +252,22 @@ const InterviewPage = () => {
                   fontFamily: "'Poppins', sans-serif", // Use the Poppins font
                   textTransform: "none", // Remove capitalization
                   borderRadius: "10px", // Apply rounded edges
-                  width: "1000px",
+                  width: "100px",
                   fontWeight: "bold",
-                  background: "linear-gradient(to bottom, #940566, #C70E4E)", // Gradient background
+                  background: "linear-gradient(to right, #FA6339, #C73950)", // Gradient background
                   "&:hover": {
-                    background: "linear-gradient(to bottom, #940566, #C70E4E)",
+                    background: "linear-gradient(to right, #FA6339, #C73950)",
                   },
 
                   justifyContent: "space-between", // Distribute space between text and icon
-                  px: 3, // Add some horizontal padding
+                  position: "absolute",
+                  right: 200,
                 }}
               >
-                Jadwalkan Latihan Interview Sekarang!
+                Simpan
               </Button>
             </div>
+
             {/* Add your input form here */}
           </div>
         </div>
@@ -418,4 +276,4 @@ const InterviewPage = () => {
   );
 };
 
-export default InterviewPage;
+export default AdminProfilePage;

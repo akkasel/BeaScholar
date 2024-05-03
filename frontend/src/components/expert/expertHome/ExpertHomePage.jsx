@@ -1,31 +1,33 @@
 import React, { useState } from "react";
 import "../../../App.css";
-import TopBar from "../../TopBar";
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Link } from "react-router-dom";
+import TopBarExpert from "../../TopBarExpert";
 import homelogoSvg from "../../../img/homelogo.svg";
 import miclogoSvg from "../../../img/miclogo.svg";
 import personlogoSvg from "../../../img/personlogo.svg";
 import documentlogoSvg from "../../../img/documentlogo.svg";
-import Card from "@mui/material/Card";
+import gambarheaderSvg from "../../../img/gambarheader.svg";
+import kacaPembesarSvg from "../../../img/kacapembesar.svg";
+import InterviewHistory from "./content/expertInterviewSection/InterviewHistory";
+import DocumentHistory from "./content/expertDocumentSection/DocumentHistory";
 import SearchBar from "../../SearchBar";
-import DocumentCardItem from "./documentItem/documentCardItem";
-import dokumenemotSvg from "../../../img/dokumenemot.svg";
+import ScholarshipCard from "../../ScholarshipCard";
 
-const DaftarHasilAnalisisDokumenPage = () => {
+const ExpertHomePage = () => {
+  
   return (
     <div>
-      <TopBar /> {/* Render the TopBar component */}
-      <div className="daftar-jadwal-interview-page">
-        {/* Render the SideBar component */}
+      <TopBarExpert /> {/* Render the TopBar component */}
+      <div className="home-page">
         <Sidebar backgroundColor="#CA3C4F" className="sidebar-container">
           <Menu
             menuItemStyles={{
               button: {
                 // Styling for the active menu item
                 "&.active": {
-                  backgroundColor: "#772F32", // Change this to the desired color
-                  color: "#FFFFFF", // Change this to the desired color
+                  backgroundColor: "#772F32",
+                  color: "#FFFFFF",
                 },
                 // Styling for the hover state
                 "&:hover": {
@@ -46,7 +48,7 @@ const DaftarHasilAnalisisDokumenPage = () => {
                   height: "18px",
                 }}
               />
-              <Link className="link-menu-item" to="/home">
+              <Link className="link-menu-item" to="/expert-home">
                 Dashboard
               </Link>
             </MenuItem>
@@ -61,7 +63,7 @@ const DaftarHasilAnalisisDokumenPage = () => {
                   height: "18px",
                 }}
               />
-              <Link className="link-menu-item" to="/interview">
+              <Link className="link-menu-item" to="/expert-daftar-jadwal-interview">
                 Interview
               </Link>
             </MenuItem>
@@ -76,7 +78,7 @@ const DaftarHasilAnalisisDokumenPage = () => {
                   height: "18px",
                 }}
               />
-              <Link className="link-menu-item" to="/document">
+              <Link className="link-menu-item" to="/expert-daftar-hasil-analisis-dokumen">
                 Dokumen
               </Link>
             </MenuItem>
@@ -91,69 +93,39 @@ const DaftarHasilAnalisisDokumenPage = () => {
                   height: "18px",
                 }}
               />
-              <Link className="link-menu-item" to="/profile">
+              <Link className="link-menu-item" to="/expert-profile">
                 Profile
               </Link>
             </MenuItem>
           </Menu>
         </Sidebar>
 
-        <div className="interview-page-container">
-          {/*Header text "Daftar hasil analisis dokumen"*/}
-          <div className="interview-header-container">
+        <div className="home-content">
+          <div style={{ margin: "20px" }}>
+            <div class="welcome-section">
+              <div class="welcome-content">
+                <div class="welcome-text">
+                  <h1 className="selamat-datang">Selamat datang,</h1>
+                  <p className="nama-user">Chelsea</p>
+                </div>
+                <div class="illustration">
+                  <img src={gambarheaderSvg} alt="Illustration" />
+                </div>
+              </div>
+            </div>
+
             <br />
-            <img
-              className="rocket-icon"
-              src={dokumenemotSvg}
-              alt="Icon"
-              width={40}
-              height={40}
-            />
-            <h1 className="latihan-interview-text">Daftar Hasil Analisis Dokumen</h1>
+
+            <div className="interview-history-container">
+              <InterviewHistory />
+              <DocumentHistory />
+            </div>
           </div>
 
-          <div>
-          <Card
-                className="checkbox-card-container"
-                variant="outlined"
-                sx={{
-                    borderRadius: '16px',
-                    padding: '15px',
-                    marginBottom: '20px',
-                    marginTop: '20px',
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    backgroundColor: '#FFFFFF', // white background
-                    boxShadow: '0 4px 6px rgba(0,0,0,0.1)', // soft shadow
-                    position: 'relative', // to position the circle
-                    width:'1100px',
-                    marginLeft:'80px',
-                }}
-              >
-                <span className="text-filter">Semua Dokumen</span>
-                <span className="text-filter-not-selected">Belum Dianalisis</span>
-                <span className="text-filter-not-selected">Sudah Dianalisis</span>
-            </Card>
-          </div>
-
-          <div className="search-bar-daftar-jadwal-interview">
-            <SearchBar >
-
-            </SearchBar>
-          </div>
-
-          <DocumentCardItem />
-          <DocumentCardItem />
-          <DocumentCardItem />
-          <DocumentCardItem />
-         
-
-          {/* Add your input form here */}
         </div>
       </div>
     </div>
   );
 };
 
-export default DaftarHasilAnalisisDokumenPage;
+export default ExpertHomePage;
