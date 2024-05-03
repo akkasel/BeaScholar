@@ -20,6 +20,12 @@ import AdminVerifikasiPage from './components/admin/adminVerifikasi/AdminVerifik
 import AdminVerifikasiDetailPengajuanPage from './components/admin/adminVerifikasi/AdminVerifikasiDetailPengajuanPage';
 import UploadBeasiswaPage from './components/admin/adminBeasiswa/UploadBeasiswaPage';
 import AdminProfilePage from './components/admin/adminProfile/AdminProfilePage';
+import ExpertHomePage from './components/expert/expertHome/ExpertHomePage';
+import ExpertDaftarJadwalInterviewPage from './components/expert/expertInterview/ExpertDaftarJadwalInterviewPage';
+import ExpertFeedbackInterviewPage from './components/expert/expertInterview/ExpertFeedbackInterviewPage';
+import ExpertDaftarHasilAnalisisDokumenPage from './components/expert/expertDocument/ExpertDaftarHasilAnalisisDokumenPage';
+import ExpertFeedbackDokumenPage from './components/expert/expertDocument/ExpertFeedbackDokumenPage';
+import ExpertProfilePage from './components/expert/expertProfile/ExpertProfilePage';
 
 function App() {
   return (
@@ -47,6 +53,16 @@ function App() {
           {/* Route yang berkaitan dengan role Expert simpan dibawah sini */}
           <Route path="/expert-signin" element={<ExpertSignIn />} />
           <Route path="/expert-signup" element={<ExpertSignUp />} />
+
+          <Route path="/expert-home" element={<ExpertHomePage />} />
+
+          <Route path="/expert-daftar-jadwal-interview" element={<ExpertDaftarJadwalInterviewPage />} />
+          <Route path="/expert-feedback-interview" element={<ExpertFeedbackInterviewPage />} />
+
+          <Route path="/expert-daftar-hasil-analisis-dokumen" element={<ExpertDaftarHasilAnalisisDokumenPage />} />
+          <Route path="/expert-feedback-dokumen" element={<ExpertFeedbackDokumenPage />} />
+
+          <Route path="/expert-profile" element={<ExpertProfilePage />} />
 
           {/* Route yang berkaitan dengan role Admin simpan dibawah sini */}
           <Route path="/admin-signin" element={<AdminSignIn />} />

@@ -704,6 +704,10 @@ button {
   text-align: left;
 }
 
+.text-field-feedback-expert-container {
+  text-align: left;
+}
+
 .text-container-feedback {
   padding: 20px;
 }
