@@ -28,7 +28,7 @@ const DocumentHistoryHeader = () => {
     <div style={headerStyle}>
       <img src={pinSvg} alt="Icon" width={40} height={40} />
       <h2 style={titleStyle}>Hasil Analisis Dokumen Sebelumnya</h2>
-      <a href="#" style={allLinkStyle}>
+      <a href="/daftar-hasil-analisis-dokumen" style={allLinkStyle}>
         Lihat semuanya →
       </a>
     </div>

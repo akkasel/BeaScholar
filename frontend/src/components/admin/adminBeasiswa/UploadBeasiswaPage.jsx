@@ -351,6 +351,35 @@ const UploadBeasiswaPage = () => {
             </div>
 
             <br />
+
+            {/* Link atau Website Pendaftaran */}
+            <div className="text-interview-container">
+              <span className="text-interview">Link atau Website Pendaftaran</span>
+            </div>
+            <div className="">
+              <TextField
+                fullWidth
+                id="outlined-textfield-nama"
+                variant="outlined"
+                width="200px"
+                sx={{
+                  // Root class for the input field
+                  "& .MuiOutlinedInput-root": {
+                    // Class for the border around the input field
+                    "& .MuiOutlinedInput-notchedOutline": {
+                      borderColor: "#C4084F",
+                      borderWidth: "2px",
+                    },
+                  },
+                  // Class for the label of the input field
+                  "& .MuiInputLabel-outlined": {
+                    color: "#121212",
+                  },
+                }}
+              />
+            </div>
+
+            <br />
             <br />
 
             {/* Upload Button */}

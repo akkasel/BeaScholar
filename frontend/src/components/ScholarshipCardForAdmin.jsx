@@ -20,7 +20,9 @@ const ScholarshipCardForAdmin = () => {
         <h2 className="card-title">Beasiswa PPTI BCA</h2>
         <p className="card-subtitle">Lingkup Beasiswa: Nasional <br/> Tingkat Pendidikan: S1 <br/> Penyelenggara: PT. BCA</p>
        {/* Saat klik ubah, nanti akan bisa update informasi beasiswanya */}
-        <Button className='card-button'
+        <Button 
+        href='admin-scholarship-detail-item'
+        className='card-button'
           variant="contained"
           endIcon={<img src={arrowrightSvg} />}
           sx={{
