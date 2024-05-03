@@ -692,6 +692,8 @@ button {
   position: absolute; /* Make the button element positionable */
 }
 
+
+
 .container-feedback-title {
   text-align: left;
   margin-left: 80px;
@@ -721,6 +723,61 @@ button {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.admin-text-beasiswa-container {
+  display: inline-flex;
+  position: relative;
+  right: 21%;
+  margin-top: 16px;
+}
+
+.admin-beasiswa-text {
+  font-size: 24px;
+  
+}
+
+.container-button-pengajuan-expert-item {
+  position: absolute; /* Make the button element positionable */
+  bottom: 10px; /* Set the bottom position from the card's edge */
+  right: 20px; /* Set the left position from the card's edge */
+  margin-top: 20px;
+}
+
+.form-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  border-radius: 10px;
+  border: 2px solid #FF6C37;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  margin-right: 20px;
+}
+
+.form-field label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  text-align: left; /* Add this line */
+}
+
+.form-field input {
+  padding: 5px;
+  height: 200;
+  width: 200;
+  border: 1px solid #FF6C37;
+  border-radius: 4px;
+}
+
+.button-terima-atau-tolak-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: left;
+  padding: 15px;
 }
 
 /* Add other styles based on the design such as fonts, colors, etc. */

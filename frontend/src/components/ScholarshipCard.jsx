@@ -1,9 +1,9 @@
 import React from 'react';
-import bcalogoSvg from '../../../../img/bcalogo.svg';
+import bcalogoSvg from '../img/bcalogo.svg';
 import {
   Button,
 } from "@mui/material";
-import arrowrightSvg from "../../../../img/arrowright.svg";
+import arrowrightSvg from "../img/arrowright.svg";
 
 
 const ScholarshipCard = () => {

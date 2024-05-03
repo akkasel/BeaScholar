@@ -101,6 +101,7 @@ const DaftarHasilAnalisisDokumenPage = () => {
         <div className="interview-page-container">
           {/*Header text "Daftar hasil analisis dokumen"*/}
           <div className="interview-header-container">
+            <br />
             <img
               className="rocket-icon"
               src={dokumenemotSvg}

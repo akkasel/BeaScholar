@@ -15,6 +15,11 @@ import DocumentPage from './components/user/document/DocumentPage';
 import DaftarHasilAnalisisDokumenPage from './components/user/document/DaftarHasilAnalisisDokumenPage';
 import FeedbackDokumenPage from './components/user/document/FeedbackDokumenPage';
 import ProfilePage from './components/user/profile/ProfilePage';
+import AdminHomePage from './components/admin/adminHome/AdminHomePage';
+import AdminVerifikasiPage from './components/admin/adminVerifikasi/AdminVerifikasiPage';
+import AdminVerifikasiDetailPengajuanPage from './components/admin/adminVerifikasi/AdminVerifikasiDetailPengajuanPage';
+import UploadBeasiswaPage from './components/admin/adminBeasiswa/UploadBeasiswaPage';
+import AdminProfilePage from './components/admin/adminProfile/AdminProfilePage';
 
 function App() {
   return (
@@ -46,6 +51,15 @@ function App() {
           {/* Route yang berkaitan dengan role Admin simpan dibawah sini */}
           <Route path="/admin-signin" element={<AdminSignIn />} />
           <Route path="/admin-signup" element={<AdminSignUp />} />
+
+          <Route path="/admin-home" element={<AdminHomePage />} />
+
+          <Route path="/admin-verifikasi" element={<AdminVerifikasiPage />} />
+          <Route path="/admin-verifikasi-detail-pengajuan" element={<AdminVerifikasiDetailPengajuanPage />} />
+
+          <Route path="/admin-upload-beasiswa" element={<UploadBeasiswaPage />} />
+
+          <Route path="/admin-profile" element={<AdminProfilePage />} />
 
         </Routes>
       </div>
