@@ -9,7 +9,7 @@ import personlogoSvg from "../../../img/personlogo.svg";
 import documentlogoSvg from "../../../img/documentlogo.svg";
 import Card from "@mui/material/Card";
 import SearchBar from "../../SearchBar";
-import documentCardItem from "./documentItem/documentCardItem";
+import DocumentCardItem from "./documentItem/documentCardItem";
 import dokumenemotSvg from "../../../img/dokumenemot.svg";
 
 const DaftarHasilAnalisisDokumenPage = () => {
@@ -143,11 +143,10 @@ const DaftarHasilAnalisisDokumenPage = () => {
             </SearchBar>
           </div>
 
-          <documentCardItem />
-          <documentCardItem />
-          <documentCardItem />
-          <documentCardItem />
-          <documentCardItem />
+          <DocumentCardItem />
+          <DocumentCardItem />
+          <DocumentCardItem />
+          <DocumentCardItem />
          
 
           {/* Add your input form here */}

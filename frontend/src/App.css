@@ -717,6 +717,11 @@ button {
   height: 150vh
 }
 
+.scholarship-detail-admin-page {
+  display: flex;
+  height: 500vh;
+}
+
 .document-page {
   display: flex;
   height: 120vh;

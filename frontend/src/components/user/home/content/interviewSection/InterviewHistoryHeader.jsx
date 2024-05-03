@@ -28,7 +28,7 @@ const InterviewHistoryHeader = () => {
     <div style={headerStyle}>
       <img src={bulbSvg} alt="Icon" width={40} height={40} />
       <h2 style={titleStyle}>Interview Sebelumnya</h2>
-      <a href="#" style={allLinkStyle}>
+      <a href="/daftar-jadwal-interview" style={allLinkStyle}>
         Lihat semuanya →
       </a>
     </div>

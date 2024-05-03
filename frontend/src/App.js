@@ -26,6 +26,8 @@ import ExpertFeedbackInterviewPage from './components/expert/expertInterview/Exp
 import ExpertDaftarHasilAnalisisDokumenPage from './components/expert/expertDocument/ExpertDaftarHasilAnalisisDokumenPage';
 import ExpertFeedbackDokumenPage from './components/expert/expertDocument/ExpertFeedbackDokumenPage';
 import ExpertProfilePage from './components/expert/expertProfile/ExpertProfilePage';
+import ScholarshipDetailItemPage from './components/ScholarshipDetailItemPage';
+import ScholarshipDetailItemPageForAdmin from './components/ScholarshipDetailItemPageForAdmin';
 
 function App() {
   return (
@@ -38,6 +40,7 @@ function App() {
           <Route path="/auth-details" element={<AuthDetails />} />
 
           <Route path="/home" element={<HomePage />} />
+          <Route path="/scholarship-detail-item" element={<ScholarshipDetailItemPage />} />
 
           <Route path="/interview" element={<InterviewPage />} />
           <Route path="/daftar-jadwal-interview" element={<DaftarJadwalInterviewPage />} />
@@ -69,6 +72,7 @@ function App() {
           <Route path="/admin-signup" element={<AdminSignUp />} />
 
           <Route path="/admin-home" element={<AdminHomePage />} />
+          <Route path="/admin-scholarship-detail-item" element={<ScholarshipDetailItemPageForAdmin />} />
 
           <Route path="/admin-verifikasi" element={<AdminVerifikasiPage />} />
           <Route path="/admin-verifikasi-detail-pengajuan" element={<AdminVerifikasiDetailPengajuanPage />} />
