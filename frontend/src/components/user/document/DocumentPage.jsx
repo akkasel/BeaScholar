@@ -386,23 +386,23 @@ const DocumentPage = () => {
 
             <br />
 
-            {/* Jadwalkan Interview Sekarang Button */}
+            {/* Submit Button */}
             <div>
               <Button
                 variant="contained"
-                endIcon={<img src={arrowrightSvg} />}
+                // endIcon={<img src={arrowrightSvg} />}
                 sx={{
                   fontFamily: "'Poppins', sans-serif", // Use the Poppins font
                   textTransform: "none", // Remove capitalization
                   borderRadius: "10px", // Apply rounded edges
-                  width: "1000px",
+                  width: "100px",
                   fontWeight: "bold",
                   background: "linear-gradient(to bottom, #940566, #C70E4E)", // Gradient background
                   "&:hover": {
                     background: "linear-gradient(to bottom, #940566, #C70E4E)",
                   },
 
-                  justifyContent: "space-between", // Distribute space between text and icon
+                  justifyContent: "center", // Distribute space between text and icon
                   px: 3, // Add some horizontal padding
                 }}
               >
