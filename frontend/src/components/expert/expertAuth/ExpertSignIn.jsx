@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase";
-import '../../App.css';
-import facebookSvg from '../../img/facebook.svg';
-import microsoftSvg from '../../img/microsoft.svg';
-import googleSvg from '../../img/google.svg';
+import { auth } from "../../../firebase";
+import '../../../App.css';
+import facebookSvg from '../../../img/facebook.svg';
+import microsoftSvg from '../../../img/microsoft.svg';
+import googleSvg from '../../../img/google.svg';
 
 
-const SignIn = () => {
+const ExpertSignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -39,7 +39,7 @@ const SignIn = () => {
     <div className="login-page">
     <div className="sign-in-container">
       <form onSubmit={signIn}>
-      <h1 className="login-heading">Login</h1>
+      <h1 className="login-heading">Login sebagai Expert</h1>
         <h2>Selamat datang kembali di BeaScholar!</h2>
         
         <div className="input-group">
@@ -63,16 +63,11 @@ const SignIn = () => {
         </div>
 
         <div className="baru-di-beascholar-container"> 
-          <label className="baru-di-beascholar">Baru di BeaScholar? </label>
-          <a className="daftar-disini-text" href="/signup">Daftar disini!</a> {/* Jangan lupa di href nya nanti simpan link untuk ke page Sign Up*/}
+          <label className="belum-punya-akun-expert">Belum punya akun sebagai Expert? </label>
+          <a className="daftar-disini-expert-text" href="/expert-signup">Daftar sebagai Expert disini!</a> {/* Jangan lupa di href nya nanti simpan link untuk ke page Sign Up*/}
         </div>
 
-        <div className="apakah-kamu-expert-container"> 
-          <label className="apakah-kamu-expert">Apakah kamu seorang Expert? </label>
-          <a className="login-sebagai-expert" href="/expert-signin">Login sebagai Expert</a> {/* Jangan lupa di href nya nanti simpan link untuk ke page Sign Up*/}
-        </div>
-
-        <button type="submit">Login</button>
+        <button type="submit">Login sebagai Expert</button>
         
         <div className="social-login">
           <button onClick={handleGoogleSignIn}>
@@ -91,4 +86,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default ExpertSignIn;

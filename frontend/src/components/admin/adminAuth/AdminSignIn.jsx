@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase";
-import '../../App.css';
-import facebookSvg from '../../img/facebook.svg';
-import microsoftSvg from '../../img/microsoft.svg';
-import googleSvg from '../../img/google.svg';
+import { auth } from "../../../firebase";
+import '../../../App.css';
+import facebookSvg from '../../../img/facebook.svg';
+import microsoftSvg from '../../../img/microsoft.svg';
+import googleSvg from '../../../img/google.svg';
 
 
-const ExpertSignIn = () => {
+const AdminSignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -39,7 +39,7 @@ const ExpertSignIn = () => {
     <div className="login-page">
     <div className="sign-in-container">
       <form onSubmit={signIn}>
-      <h1 className="login-heading">Login sebagai Expert</h1>
+      <h1 className="login-heading">Login sebagai Admin</h1>
         <h2>Selamat datang kembali di BeaScholar!</h2>
         
         <div className="input-group">
@@ -62,28 +62,29 @@ const ExpertSignIn = () => {
           <i className="fas fa-lock input-icon"></i>
         </div>
 
-        <div className="baru-di-beascholar-container"> 
-          <label className="belum-punya-akun-expert">Belum punya akun sebagai Expert? </label>
-          <a className="daftar-disini-expert-text" href="/expert-signup">Daftar sebagai Expert disini!</a> {/* Jangan lupa di href nya nanti simpan link untuk ke page Sign Up*/}
+        <div className="apakah-kamu-expert-container"> 
+          <label className="apakah-kamu-expert">Belum punya akun sebagai Admin? </label>
+          <a className="login-sebagai-expert" href="/admin-signup">Daftar disini!</a> {/* Jangan lupa di href nya nanti simpan link untuk ke page Sign Up*/}
         </div>
 
-        <button type="submit">Login sebagai Expert</button>
+        <button type="submit">Login sebagai admin</button>
         
         <div className="social-login">
           <button onClick={handleGoogleSignIn}>
-          <img src={googleSvg} alt="Facebook" className="social-icon" />
+          <img src={googleSvg} alt="Google" className="social-icon" />
           </button>
           <button onClick={handleFacebookSignIn}>
           <img src={facebookSvg} alt="Facebook" className="social-icon" />
           </button>
-          <button onClick={handleFacebookSignIn}>
-          <img src={microsoftSvg} alt="Facebook" className="social-icon" />
+          <button onClick={handleMicrosoftSignIn}>
+          <img src={microsoftSvg} alt="Microsoft" className="social-icon" />
           </button>
         </div>
+
       </form>
     </div>
     </div>
   );
 };
 
-export default ExpertSignIn;
+export default AdminSignIn;

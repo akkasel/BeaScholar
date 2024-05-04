@@ -1,10 +1,9 @@
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
-import { auth } from "../../firebase";
-
-import facebookSvg from '../../img/facebook.svg';
-import microsoftSvg from '../../img/microsoft.svg';
-import googleSvg from '../../img/google.svg';
+import { auth } from "../../../firebase";
+import facebookSvg from '../../../img/facebook.svg';
+import microsoftSvg from '../../../img/microsoft.svg';
+import googleSvg from '../../../img/google.svg';
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -78,15 +77,16 @@ const SignUp = () => {
 
         <div className="social-login">
           <button onClick={handleGoogleSignUp}>
-          <img src={googleSvg} alt="Facebook" className="social-icon" />
+          <img src={googleSvg} alt="Google" className="social-icon" />
           </button>
           <button onClick={handleFacebookSignUp}>
           <img src={facebookSvg} alt="Facebook" className="social-icon" />
           </button>
-          <button onClick={handleFacebookSignUp}>
-          <img src={microsoftSvg} alt="Facebook" className="social-icon" />
+          <button onClick={handleMicrosoftSignUp}>
+          <img src={microsoftSvg} alt="Microsoft" className="social-icon" />
           </button>
         </div>
+        
       </form>
     </div>
     </div>
