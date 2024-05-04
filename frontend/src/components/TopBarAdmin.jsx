@@ -16,7 +16,7 @@ const theme = createTheme({
   },
 });
 
-function TopBar() {
+function TopBarAdmin() {
   return (
     <ThemeProvider theme={theme}>
       <AppBar position="static">
@@ -31,9 +31,9 @@ function TopBar() {
               variant="h6"
               noWrap
               component="a"
-              href="/home"
+              href="/admin-home"
               sx={{
-                mr: 2,
+                mr: 1,
                 display: { xs: "none", md: "flex" },
                 fontFamily: "Poppins",
                 fontWeight: 700,
@@ -43,6 +43,22 @@ function TopBar() {
               }}
             >
               BeaScholar
+            </Typography>
+            <Typography
+              variant="h6"
+              noWrap
+              component="a"
+              href="/admin-home"
+              sx={{
+                display: { xs: "none", md: "flex" },
+                fontFamily: "Poppins",
+                fontWeight: 700,
+                letterSpacing: "0",
+                color: "#121212",
+                textDecoration: "none",
+              }}
+            >
+              Admin
             </Typography>
             <Button
               href="/signin"
@@ -72,4 +88,4 @@ function TopBar() {
     </ThemeProvider>
   );
 }
-export default TopBar;
+export default TopBarAdmin;

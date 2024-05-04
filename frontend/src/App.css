@@ -81,6 +81,48 @@
   background-position: center; /* Center the image within the container */
   background-repeat: no-repeat; /* Prevent the image from repeating */
   position: relative; /* Add position relative for the card to be positioned on top */
+
+  z-index: 1; /* Untuk ngatur lapisannya */
+}
+
+.sign-in-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  padding: 2px;
+  background: linear-gradient(45deg, #C4084F, #FF6C37, #6B00D5);
+  -webkit-mask:
+     linear-gradient(#fff 0 0) content-box,
+     linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+
+  z-index: -1; /* untuk ngatur lapisannya */
+}
+
+.daftar-expert-container {
+  margin: auto;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1; /* untuk ngatur lapisannya */
+}
+
+.daftar-expert-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  padding: 2px;
+  background: linear-gradient(45deg, #C4084F, #FF6C37, #6B00D5);
+  -webkit-mask:
+     linear-gradient(#fff 0 0) content-box,
+     linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+
+  z-index: -1; /* untuk ngatur lapisannya */
 }
 
 .sign-in-container h1 {
@@ -650,6 +692,8 @@ button {
   position: absolute; /* Make the button element positionable */
 }
 
+
+
 .container-feedback-title {
   text-align: left;
   margin-left: 80px;
@@ -660,6 +704,10 @@ button {
   text-align: left;
 }
 
+.text-field-feedback-expert-container {
+  text-align: left;
+}
+
 .text-container-feedback {
   padding: 20px;
 }
@@ -667,6 +715,11 @@ button {
 .feedback-interview-page {
   display: flex;
   height: 150vh
+}
+
+.scholarship-detail-admin-page {
+  display: flex;
+  height: 500vh;
 }
 
 .document-page {
@@ -681,5 +734,64 @@ button {
   align-items: center;
 }
 
+.admin-text-beasiswa-container {
+  display: inline-flex;
+  position: relative;
+  right: 21%;
+  margin-top: 16px;
+}
+
+.admin-beasiswa-text {
+  font-size: 24px;
+  
+}
+
+.container-button-pengajuan-expert-item {
+  position: absolute; /* Make the button element positionable */
+  bottom: 10px; /* Set the bottom position from the card's edge */
+  right: 20px; /* Set the left position from the card's edge */
+  margin-top: 20px;
+}
+
+.form-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  border-radius: 10px;
+  border: 2px solid #FF6C37;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  margin-right: 20px;
+}
+
+.form-field label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  text-align: left; /* Add this line */
+}
+
+.form-field input {
+  padding: 5px;
+  height: 200;
+  width: 200;
+  border: 1px solid #FF6C37;
+  border-radius: 4px;
+}
+
+.button-terima-atau-tolak-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: left;
+  padding: 15px;
+}
+
 /* Add other styles based on the design such as fonts, colors, etc. */
+
+
+/* Styling & pengaturan tata letak layout aplikasinya mayoritas disini, walaupun 
+ada beberapa component UI yang code untuk stylingnya langsung ditulis di filenya masing-masing juga*/
 
