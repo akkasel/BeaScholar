@@ -88,7 +88,7 @@ const AjuanJadiExpertItem = () => {
           <span className="text-header-item">Tanggal/Waktu:</span>
         </div>
         <div className="container-text-content-item">
-          <span className="text-content-item">28 Feb/15.00 WIB</span>
+          <span className="text-content-item">28 Feb/15:00 WIB</span>
         </div>
       </div>
 
@@ -105,12 +105,11 @@ const AjuanJadiExpertItem = () => {
         <Button
           href="/admin-verifikasi-detail-pengajuan"
           variant="contained"
-          endIcon={<img src={arrowrightSvg} />}
           sx={{
             fontFamily: "'Poppins', sans-serif", // Use the Poppins font
             textTransform: "none", // Remove capitalization
             borderRadius: "20px", // Apply rounded edges
-            width: "200px",
+            width: "170px",
             padding: "0px",
             marginTop:"10px",
             fontWeight: "bold",
@@ -119,7 +118,7 @@ const AjuanJadiExpertItem = () => {
               background: "linear-gradient(to right, #FA6339, #C73950)",
             },
 
-            justifyContent: "space-between", // Distribute space between text and icon
+            justifyContent: "center", // Centralized text and icon
             px: 3, // Add some horizontal padding
           }}
         >

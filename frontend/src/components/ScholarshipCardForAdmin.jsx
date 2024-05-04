@@ -24,18 +24,18 @@ const ScholarshipCardForAdmin = () => {
         href='admin-scholarship-detail-item'
         className='card-button'
           variant="contained"
-          endIcon={<img src={arrowrightSvg} />}
+          // endIcon={<img src={arrowrightSvg} />}
           sx={{
             fontFamily: "'Poppins', sans-serif", // Use the Poppins font
             textTransform: "none", // Remove capitalization
             borderRadius: "20px", // Apply rounded edges
-            width: "200px",
+            width: "100px",
             padding: "5px",
             fontWeight: "bold",
             background: "linear-gradient(to right, #009117, #121212)", // Gradient background
             "&:hover": { background: "linear-gradient(to right, #009117, #121212)" },
 
-            justifyContent: "space-between", // Distribute space between text and icon
+            justifyContent: "center", // Distribute space between text and icon
             px: 3, // Add some horizontal padding
           }}
         >
