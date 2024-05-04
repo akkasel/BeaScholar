@@ -25,7 +25,7 @@ const AdminVerifikasiDetailPengajuanPage = () => {
           },
         }}
       >
-        Download
+        Unduh
       </Button>
     );
   };

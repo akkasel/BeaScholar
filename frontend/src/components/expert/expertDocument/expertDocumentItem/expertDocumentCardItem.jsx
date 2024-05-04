@@ -1,6 +1,5 @@
 import React from "react";
 import { Card, Button } from "@mui/material";
-import arrowrightSvg from "../../../../img/arrowright.svg";
 import downloadiconSvg from "../../../../img/downloadicon.svg";
 
 const ExpertDocumentCardItem = () => {
@@ -20,7 +19,7 @@ const ExpertDocumentCardItem = () => {
           },
         }}
       >
-        Download
+        Unduh
       </Button>
     );
   };
@@ -100,12 +99,11 @@ const ExpertDocumentCardItem = () => {
         <Button
           href="/expert-feedback-dokumen"
           variant="contained"
-          endIcon={<img src={arrowrightSvg} />}
           sx={{
             fontFamily: "'Poppins', sans-serif", // Use the Poppins font
             textTransform: "none", // Remove capitalization
             borderRadius: "20px", // Apply rounded edges
-            width: "200px",
+            width: "150px",
             padding: "0px",
             fontWeight: "bold",
             background: "linear-gradient(to right, #FA6339, #C73950)", // Gradient background
@@ -113,11 +111,11 @@ const ExpertDocumentCardItem = () => {
               background: "linear-gradient(to right, #FA6339, #C73950)",
             },
 
-            justifyContent: "space-between", // Distribute space between text and icon
+            justifyContent: "center", // Centralized text and icon
             px: 3, // Add some horizontal padding
           }}
         >
-          Feedback
+          Umpan Balik
         </Button>
       </div>
     </Card>

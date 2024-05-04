@@ -66,7 +66,7 @@ const UploadBeasiswaPage = () => {
               height={40}
             />
             <h1 className="latihan-interview-text">
-              Upload Informasi Beasiswa
+              Unggah Informasi Beasiswa
             </h1>
           </div>
 
