@@ -1,11 +1,11 @@
 import './App.css';
-import SignIn from './components/auth/SignIn';
-import SignUp from './components/auth/SignUp';
+import SignIn from './components/user/auth/SignIn';
+import SignUp from './components/user/auth/SignUp';
 import AuthDetails from './components/AuthDetails';
-import ExpertSignIn from './components/auth/ExpertSignIn';
-import ExpertSignUp from './components/auth/ExpertSignUp';
-import AdminSignIn from './components/auth/AdminSignIn';
-import AdminSignUp from './components/auth/AdminSignUp';
+import ExpertSignIn from './components/expert/expertAuth/ExpertSignIn';
+import ExpertSignUp from './components/expert/expertAuth/ExpertSignUp';
+import AdminSignIn from './components/admin/adminAuth/AdminSignIn';
+import AdminSignUp from './components/admin/adminAuth/AdminSignUp';
 import HomePage from './components/user/home/HomePage';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import InterviewPage from './components/user/interview/InterviewPage';
