@@ -3,8 +3,8 @@ import InterviewCard from './InterviewCard';
 
 const InterviewList = () => {
   const interviews = [
-    { date: '28 Feb', time: '09.00' },
-    { date: '28 Feb', time: '13.00' },
+    { date: '28 Feb', time: '15:00' },
+    { date: '28 Feb', time: '15:00' },
     // ... add more interviews attribute here
   ];
 

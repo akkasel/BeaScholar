@@ -8,9 +8,12 @@ import googleSvg from '../../../img/google.svg';
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
   const signUp = (e) => {
     e.preventDefault();
+    // Tambah logic validasi Password (?)
+    // if (validatePassword(password, passwordConfirmation) == true);
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         console.log(userCredential);
@@ -19,6 +22,14 @@ const SignUp = () => {
         console.log(error);
       });
   };
+
+  // Validate whether password and passwordConfirmation are the same
+  const validatePassword = (password, passwordConfirmation) => {
+    if (password == passwordConfirmation){
+      return true;
+    }
+    return false
+  }
 
   // Add methods to handle social SignUp here
   const handleGoogleSignUp = () => {
@@ -53,7 +64,7 @@ const SignUp = () => {
         <div className="input-group">
           <input
             type="password"
-            placeholder="Password"
+            placeholder="Kata Sandi"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           ></input>
@@ -63,14 +74,16 @@ const SignUp = () => {
         <div className="input-group">
           <input
             type="password"
-            placeholder="Konfirmasi Password"
+            placeholder="Konfirmasi Kata Sandi"
+            value={passwordConfirmation}
+            onChange={(e) => setPasswordConfirmation(e.target.value)}
           ></input>
           <i className="fas fa-lock input-icon"></i>
         </div>
 
         <div className="baru-di-beascholar-container"> 
           <label className="baru-di-beascholar">Sudah punya akun BeaScholar? </label>
-          <a className="daftar-disini-text" href="/signin">Login disini!</a> {/* Jangan lupa di href nya nanti simpan link untuk ke page Sign Up*/}
+          <a className="daftar-disini-text" href="/signin">Masuk di sini!</a>
         </div>
 
         <button type="submit">Daftar</button>

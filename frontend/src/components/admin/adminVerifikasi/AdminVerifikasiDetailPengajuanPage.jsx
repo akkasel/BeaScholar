@@ -1,21 +1,9 @@
 import React, { useState } from "react";
 import "../../../App.css";
-import TopBarAdmin from "../../TopBarAdmin";
-import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
-import { Link } from "react-router-dom";
-import homelogoSvg from "../../../img/homelogo.svg";
-import miclogoSvg from "../../../img/miclogo.svg";
-import personlogoSvg from "../../../img/personlogo.svg";
-import documentlogoSvg from "../../../img/documentlogo.svg";
-import Card from "@mui/material/Card";
-import SearchBar from "../../SearchBar";
-import AjuanJadiExpertItem from "./itemVerifikasiExpert/AjuanJadiExpertItem";
-import dokumenemotSvg from "../../../img/dokumenemot.svg";
-import verifikasilogoSvg from "../../../img/verifikasilogo.svg";
-import uploadbeasiswalogoSvg from "../../../img/uploadbeasiswalogo.svg";
+import TopBarAdmin from "../adminMasterPage/TopBarAdmin";
+import SideBarAdmin from "../adminMasterPage/SideBarAdmin";
 import { Button } from "@mui/material";
 import arrowleftSvg from "../../../img/arrowleft.svg";
-import arrowrightSvg from "../../../img/arrowright.svg";
 import downloadiconSvg from "../../../img/downloadicon.svg";
 
 const AdminVerifikasiDetailPengajuanPage = () => {
@@ -36,7 +24,7 @@ const AdminVerifikasiDetailPengajuanPage = () => {
           },
         }}
       >
-        Download
+        Unduh
       </Button>
     );
   };
@@ -45,88 +33,8 @@ const AdminVerifikasiDetailPengajuanPage = () => {
     <div>
       <TopBarAdmin /> {/* Render the TopBar component */}
       <div className="daftar-jadwal-interview-page">
-        {/* Render the SideBar component */}
-        {/* Sidebar */}
-        <Sidebar backgroundColor="#CA3C4F" className="sidebar-container">
-          <Menu
-            menuItemStyles={{
-              button: {
-                // Styling for the active menu item
-                "&.active": {
-                  backgroundColor: "#772F32",
-                  color: "#FFFFFF",
-                },
-                // Styling for the hover state
-                "&:hover": {
-                  backgroundColor: "#772F32", // Dark red color
-                  color: "#FFFFFF", // White color
-                },
-              },
-            }}
-          >
-            <MenuItem className="menu-item">
-              <img
-                src={homelogoSvg}
-                alt="Icon"
-                style={{
-                  marginTop: "5px",
-                  marginRight: "15px",
-                  width: "20px",
-                  height: "18px",
-                }}
-              />
-              <Link className="link-menu-item" to="/admin-home">
-                Dashboard
-              </Link>
-            </MenuItem>
-            <MenuItem className="menu-item">
-              <img
-                src={verifikasilogoSvg}
-                alt="Icon"
-                style={{
-                  marginTop: "5px",
-                  marginRight: "15px",
-                  width: "20px",
-                  height: "18px",
-                }}
-              />
-              <Link className="link-menu-item" to="/admin-verifikasi">
-                Verifikasi
-              </Link>
-            </MenuItem>
-            <MenuItem className="menu-item">
-              <img
-                src={uploadbeasiswalogoSvg}
-                alt="Icon"
-                style={{
-                  marginTop: "5px",
-                  marginRight: "15px",
-                  width: "20px",
-                  height: "18px",
-                }}
-              />
-              <Link className="link-menu-item" to="/admin-upload-beasiswa">
-                Beasiswa
-              </Link>
-            </MenuItem>
-            <MenuItem className="menu-item">
-              <img
-                src={personlogoSvg}
-                alt="Icon"
-                style={{
-                  marginTop: "5px",
-                  marginRight: "15px",
-                  width: "20px",
-                  height: "18px",
-                }}
-              />
-              <Link className="link-menu-item" to="/admin-profile">
-                Profile
-              </Link>
-            </MenuItem>
-          </Menu>
-        </Sidebar>
-
+        <SideBarAdmin /> {/* Render the SideBar component */}
+        
         <div className="feedback-interview-page">
           <div className="interview-page-container">
             {/*Header text "Feedback Interview"*/}
@@ -156,12 +64,12 @@ const AdminVerifikasiDetailPengajuanPage = () => {
               </div>
               <div className="text-interview-container">
                 <span className="text-interview">Tanggal Pengajuan: </span>
-                <span className="text-interview-orange">1 Maret 2024</span>
+                <span className="text-interview-orange">28 Februari 2024</span>
               </div>
 
               <div className="text-interview-container">
                 <span className="text-interview">Waktu Pengajuan: </span>
-                <span className="text-interview-orange">11.00</span>
+                <span className="text-interview-orange">15:00</span>
               </div>
 
               <br />
@@ -213,14 +121,17 @@ const AdminVerifikasiDetailPengajuanPage = () => {
                     fontFamily: "'Poppins', sans-serif", // Use the Poppins font
                     textTransform: "none", // Remove capitalization
                     borderRadius: "20px", // Apply rounded edges
-                    width: "300px",
-                    height: "70px",
+                    width: "200px",
+                    height: "40px",
                     padding: "5px",
                     fontWeight: "bold",
                     background: "linear-gradient(to right, #E75300, #121212)", // Gradient background
                     "&:hover": {
                       background: "linear-gradient(to right, #E75300, #121212)",
                     },
+
+                    justifyContent: "center", // Centralized text and icon
+                    px: 3, // Add some horizontal padding
                   }}
                 >
                   Tolak Pengajuan
@@ -228,13 +139,12 @@ const AdminVerifikasiDetailPengajuanPage = () => {
 
                 <Button
                   variant="contained"
-                  endIcon={<img src={arrowrightSvg} />}
                   sx={{
                     fontFamily: "'Poppins', sans-serif", // Use the Poppins font
                     textTransform: "none", // Remove capitalization
                     borderRadius: "20px", // Apply rounded edges
-                    width: "300px",
-                    height: "70px",
+                    width: "200px",
+                    height: "40px",
                     padding: "5px",
                     fontWeight: "bold",
                     background: "linear-gradient(to right, #009117, #121212)", // Gradient background
@@ -242,7 +152,7 @@ const AdminVerifikasiDetailPengajuanPage = () => {
                       background: "linear-gradient(to right, #009117, #121212)",
                     },
 
-                    justifyContent: "space-between", // Distribute space between text and icon
+                    justifyContent: "center", // Centralized text and icon
                     px: 3, // Add some horizontal padding
                   }}
                 >

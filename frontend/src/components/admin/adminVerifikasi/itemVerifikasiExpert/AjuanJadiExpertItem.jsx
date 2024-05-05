@@ -1,9 +1,8 @@
 import React from "react";
 import { Card, Button } from "@mui/material";
-import arrowrightSvg from "../../../../img/arrowright.svg";
 import downloadiconSvg from "../../../../img/downloadicon.svg";
 import Avatar from "@mui/material/Avatar";
-import contohprofileimageSvg from "../../../../img/contohprofileimage.svg";
+import ricoSVG from "../../../../img/rico.svg";
 
 const AjuanJadiExpertItem = () => {
   const DownloadButton = () => {
@@ -22,7 +21,7 @@ const AjuanJadiExpertItem = () => {
           },
         }}
       >
-        Download
+        Unduh
       </Button>
     );
   };
@@ -46,14 +45,14 @@ const AjuanJadiExpertItem = () => {
       }}
     >
       <div className="container-all-text-item">
-        <Avatar variant="square" src={contohprofileimageSvg} sx={{ width: 80, height: 100 }} />
+        <Avatar variant="square" src={ricoSVG} sx={{ width: 80, height: 100 }} />
       </div>
       <div className="container-all-text-item">
         <div className="container-text-header-item">
           <span className="text-header-item">Nama</span>
         </div>
         <div className="container-text-content-item">
-          <span className="text-content-item">Amanda</span>
+          <span className="text-content-item">Rico</span>
         </div>
       </div>
       <div className="container-all-text-item">
@@ -61,7 +60,7 @@ const AjuanJadiExpertItem = () => {
           <span className="text-header-item">Tingkat Pendidikan:</span>
         </div>
         <div className="container-text-content-item">
-          <span className="text-content-item">S1</span>
+          <span className="text-content-item">S2</span>
         </div>
       </div>
 
@@ -76,21 +75,14 @@ const AjuanJadiExpertItem = () => {
 
       <div className="container-all-text-item">
         <div className="container-text-header-item">
-          <span className="text-header-item">Jenis Beasiswa:</span>
+          <span className="text-header-item">Universitas:</span>
         </div>
         <div className="container-text-content-item">
-          <span className="text-content-item">Beasiswa S2</span>
+          <span className="text-content-item">BINUS University</span>
         </div>
       </div>
 
-      <div className="container-all-text-item">
-        <div className="container-text-header-item">
-          <span className="text-header-item">Tanggal/Waktu:</span>
-        </div>
-        <div className="container-text-content-item">
-          <span className="text-content-item">28 Feb/15.00 WIB</span>
-        </div>
-      </div>
+      {/* tambah deskripsi (?) */}
 
       <div className="container-all-text-item">
         <div className="container-text-header-item">
@@ -105,12 +97,11 @@ const AjuanJadiExpertItem = () => {
         <Button
           href="/admin-verifikasi-detail-pengajuan"
           variant="contained"
-          endIcon={<img src={arrowrightSvg} />}
           sx={{
             fontFamily: "'Poppins', sans-serif", // Use the Poppins font
             textTransform: "none", // Remove capitalization
             borderRadius: "20px", // Apply rounded edges
-            width: "200px",
+            width: "190px",
             padding: "0px",
             marginTop:"10px",
             fontWeight: "bold",
@@ -119,11 +110,11 @@ const AjuanJadiExpertItem = () => {
               background: "linear-gradient(to right, #FA6339, #C73950)",
             },
 
-            justifyContent: "space-between", // Distribute space between text and icon
+            justifyContent: "center", // Centralized text and icon
             px: 3, // Add some horizontal padding
           }}
         >
-          Cek Pengajuan
+          Periksa Pengajuan
         </Button>
       </div>
     </Card>

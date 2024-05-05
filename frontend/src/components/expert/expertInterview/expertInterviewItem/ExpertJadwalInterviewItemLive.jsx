@@ -6,7 +6,6 @@ import {
   Button,
 } from "@mui/material";
 import contohprofileimageSvg from "../../../../img/contohprofileimage.svg";
-import arrowrightSvg from "../../../../img/arrowright.svg";
 
 const ExpertJadwalInterviewItemLive = () => {
   return (
@@ -78,14 +77,13 @@ const ExpertJadwalInterviewItemLive = () => {
           <span className="text-header-item">Tanggal/Waktu:</span>
         </div>
         <div className="container-text-content-item">
-          <span className="text-content-item">29 Feb/11.00 WIB</span>
+          <span className="text-content-item">29 Feb/11:00 WIB</span>
         </div>
       </div>
 
       <div className="container-button-jadwal-interview-item">
         <Button
           variant="contained"
-          endIcon={<img src={arrowrightSvg} />}
           sx={{
             fontFamily: "'Poppins', sans-serif", // Use the Poppins font
             textTransform: "none", // Remove capitalization
@@ -98,7 +96,7 @@ const ExpertJadwalInterviewItemLive = () => {
               background: "linear-gradient(to bottom, #940566, #C70E4E)",
             },
 
-            justifyContent: "space-between", // Distribute space between text and icon
+            justifyContent: "center", // Centralized text and icon
             px: 3, // Add some horizontal padding
           }}
         >

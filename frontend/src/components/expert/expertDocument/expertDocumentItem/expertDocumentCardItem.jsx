@@ -1,7 +1,12 @@
 import React from "react";
-import { Card, Button } from "@mui/material";
-import arrowrightSvg from "../../../../img/arrowright.svg";
 import downloadiconSvg from "../../../../img/downloadicon.svg";
+import {
+  Card,
+  CardHeader,
+  Avatar,
+  Button,
+} from "@mui/material";
+import contohprofileimageSvg from "../../../../img/contohprofileimage.svg";
 
 const ExpertDocumentCardItem = () => {
   const DownloadButton = () => {
@@ -20,7 +25,7 @@ const ExpertDocumentCardItem = () => {
           },
         }}
       >
-        Download
+        Unduh
       </Button>
     );
   };
@@ -39,10 +44,20 @@ const ExpertDocumentCardItem = () => {
         backgroundColor: "#FFFFFF", // white background
         boxShadow: "0 4px 6px rgba(0,0,0,0.1)", // soft shadow
         position: "relative", // to position the circle
-        width: "1150px",
+        width: "1250px",
         marginLeft: "80px",
       }}
     >
+      <CardHeader
+        avatar={
+          <Avatar
+            alt="Profile Image"
+            src={contohprofileimageSvg}
+            style={{ width: "80px", height: "80px" }}
+          />
+        }
+      ></CardHeader>
+
       <div className="container-all-text-item">
         <div className="container-text-header-item">
           <span className="text-header-item">Nama:</span>
@@ -83,7 +98,7 @@ const ExpertDocumentCardItem = () => {
           <span className="text-header-item">Tanggal/Waktu:</span>
         </div>
         <div className="container-text-content-item">
-          <span className="text-content-item">28 Feb/15.00 WIB</span>
+          <span className="text-content-item">28 Feb/15:00 WIB</span>
         </div>
       </div>
 
@@ -100,7 +115,6 @@ const ExpertDocumentCardItem = () => {
         <Button
           href="/expert-feedback-dokumen"
           variant="contained"
-          endIcon={<img src={arrowrightSvg} />}
           sx={{
             fontFamily: "'Poppins', sans-serif", // Use the Poppins font
             textTransform: "none", // Remove capitalization
@@ -113,11 +127,11 @@ const ExpertDocumentCardItem = () => {
               background: "linear-gradient(to right, #FA6339, #C73950)",
             },
 
-            justifyContent: "space-between", // Distribute space between text and icon
+            justifyContent: "center", // Centralized text and icon
             px: 3, // Add some horizontal padding
           }}
         >
-          Feedback
+          Lihat Umpan Balik
         </Button>
       </div>
     </Card>

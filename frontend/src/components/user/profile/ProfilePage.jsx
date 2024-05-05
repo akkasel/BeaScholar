@@ -1,16 +1,10 @@
 import React, { useState } from "react";
 import "../../../App.css";
-import TopBar from "../../TopBar";
-import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
-import { Link } from "react-router-dom";
-import homelogoSvg from "../../../img/homelogo.svg";
-import miclogoSvg from "../../../img/miclogo.svg";
-import personlogoSvg from "../../../img/personlogo.svg";
-import documentlogoSvg from "../../../img/documentlogo.svg";
+import TopBar from "../masterPage/TopBar";
+import SideBar from "../masterPage/SideBar";
 import TextField from "@mui/material/TextField";
 import MuiMenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
-import arrowrightSvg from "../../../img/arrowright.svg";
 import pencilSvg from "../../../img/pencil.svg";
 import Avatar from "@mui/material/Avatar";
 import contohprofileimageSvg from "../../../img/contohprofileimage.svg";
@@ -44,86 +38,7 @@ const ProfilePage = () => {
     <div>
       <TopBar /> {/* Render the TopBar component */}
       <div className="interview-page">
-        {/* Render the SideBar component */}
-        <Sidebar backgroundColor="#CA3C4F" className="sidebar-container">
-          <Menu
-            menuItemStyles={{
-              button: {
-                // Styling for the active menu item
-                "&.active": {
-                  backgroundColor: "#772F32", // Change this to the desired color
-                  color: "#FFFFFF", // Change this to the desired color
-                },
-                // Styling for the hover state
-                "&:hover": {
-                  backgroundColor: "#772F32", // Dark red color
-                  color: "#FFFFFF", // White color
-                },
-              },
-            }}
-          >
-            <MenuItem className="menu-item">
-              <img
-                src={homelogoSvg}
-                alt="Icon"
-                style={{
-                  marginTop: "5px",
-                  marginRight: "15px",
-                  width: "20px",
-                  height: "18px",
-                }}
-              />
-              <Link className="link-menu-item" to="/home">
-                Dashboard
-              </Link>
-            </MenuItem>
-            <MenuItem className="menu-item">
-              <img
-                src={miclogoSvg}
-                alt="Icon"
-                style={{
-                  marginTop: "5px",
-                  marginRight: "15px",
-                  width: "20px",
-                  height: "18px",
-                }}
-              />
-              <Link className="link-menu-item" to="/interview">
-                Interview
-              </Link>
-            </MenuItem>
-            <MenuItem className="menu-item">
-              <img
-                src={documentlogoSvg}
-                alt="Icon"
-                style={{
-                  marginTop: "5px",
-                  marginRight: "15px",
-                  width: "20px",
-                  height: "18px",
-                }}
-              />
-              <Link className="link-menu-item" to="/document">
-                Dokumen
-              </Link>
-            </MenuItem>
-            <MenuItem className="menu-item">
-              <img
-                src={personlogoSvg}
-                alt="Icon"
-                style={{
-                  marginTop: "5px",
-                  marginRight: "15px",
-                  width: "20px",
-                  height: "18px",
-                }}
-              />
-              <Link className="link-menu-item" to="/profile">
-                Profile
-              </Link>
-            </MenuItem>
-          </Menu>
-        </Sidebar>
+        <SideBar /> {/* Render the SideBar component */}
 
         <div className="interview-page-container">
           {/*Header text "Profil Kamu"*/}
@@ -244,11 +159,10 @@ const ProfilePage = () => {
             <div>
               <Button
                 variant="contained"
-                endIcon={<img src={arrowrightSvg} />}
                 sx={{
                   fontFamily: "'Poppins', sans-serif", // Use the Poppins font
                   textTransform: "none", // Remove capitalization
-                  borderRadius: "10px", // Apply rounded edges
+                  borderRadius: "20px", // Apply rounded edges
                   width: "100px",
                   fontWeight: "bold",
                   background: "linear-gradient(to right, #FA6339, #C73950)", // Gradient background
@@ -256,9 +170,7 @@ const ProfilePage = () => {
                     background: "linear-gradient(to right, #FA6339, #C73950)",
                   },
 
-                  justifyContent: "space-between", // Distribute space between text and icon
-                  position: "absolute",
-                  right: 200,
+                  justifyContent: "center", // Centralized text and icon
                 }}
               >
                 Simpan
