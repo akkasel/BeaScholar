@@ -6,7 +6,7 @@ const SearchBar = () => {
       <div className="input-group">
         <input
           type="text"
-          placeholder="Masukan kata kunci disini..."
+          placeholder="Masukkan kata kunci di sini..."
           className="search-input"
         />
         <div className="search-icon">

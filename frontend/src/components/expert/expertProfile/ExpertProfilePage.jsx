@@ -5,9 +5,9 @@ import MuiMenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
 import pencilSvg from "../../../img/pencil.svg";
 import Avatar from "@mui/material/Avatar";
-import contohprofileimageSvg from "../../../img/contohprofileimage.svg";
-import TopBarExpert from "../../TopBarExpert";
-import SideBarExpert from "../../SideBarExpert";
+import TopBarExpert from "../expertMasterPage/TopBarExpert";
+import SideBarExpert from "../expertMasterPage/SideBarExpert";
+import chelseaSvg from "../../../img/chelsea.svg";
 
 const ExpertProfilePage = () => {
   // untuk textfield tingkat pendidikan
@@ -55,7 +55,7 @@ const ExpertProfilePage = () => {
 
           <div className="container-avatar">
             <Avatar
-              src={contohprofileimageSvg}
+              src={chelseaSvg}
               sx={{ width: 120, height: 120 }}
             />
           </div>
@@ -69,7 +69,7 @@ const ExpertProfilePage = () => {
               <TextField
                 fullWidth
                 id="outlined-textfield-nama"
-                label="Masukan nama disini..."
+                label="Masukkan nama di sini..."
                 variant="outlined"
                 width="200px"
                 sx={{
@@ -133,7 +133,7 @@ const ExpertProfilePage = () => {
               <TextField
                 fullWidth
                 id="outlined-textfield-nama"
-                label="Tulis deskripsi dirimu disini..."
+                label="Tuliskan deskripsi dirimu di sini..."
                 variant="outlined"
                 width="200px"
                 sx={{

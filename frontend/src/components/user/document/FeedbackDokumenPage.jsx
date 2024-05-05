@@ -1,13 +1,7 @@
 import React, { useState } from "react";
 import "../../../App.css";
-import TopBar from "../../TopBar";
-import SideBar from "../../SideBar";
-import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
-import { Link } from "react-router-dom";
-import homelogoSvg from "../../../img/homelogo.svg";
-import miclogoSvg from "../../../img/miclogo.svg";
-import personlogoSvg from "../../../img/personlogo.svg";
-import documentlogoSvg from "../../../img/documentlogo.svg";
+import TopBar from "../masterPage/TopBar";
+import SideBar from "../masterPage/SideBar";
 import Card from "@mui/material/Card";
 import Button from "@mui/material/Button";
 import arrowleftSvg from "../../../img/arrowleft.svg";
@@ -44,12 +38,12 @@ const FeedbackDokumenPage = () => {
           <div className="form-input-container">
             <div className="text-interview-container">
               <span className="text-interview">Tanggal Pengumpulan: </span>
-              <span className="text-interview-orange">1 Maret 2024</span>
+              <span className="text-interview-orange">28 Februari 2024</span>
             </div>
 
             <div className="text-interview-container">
               <span className="text-interview">Waktu: </span>
-              <span className="text-interview-orange">11.00</span>
+              <span className="text-interview-orange">15:00</span>
             </div>
 
             <div className="text-interview-container">

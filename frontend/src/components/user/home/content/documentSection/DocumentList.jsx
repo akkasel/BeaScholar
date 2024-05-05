@@ -3,8 +3,8 @@ import DocumentCard from './DocumentCard';
 
 const DocumentList = () => {
   const documents = [
-    { date: '28 Feb', time: '09.00' },
-    { date: '28 Feb', time: '13.00' },
+    { date: '28 Feb', time: '15:00' },
+    { date: '28 Feb', time: '15:00' },
     // ... add more documents date & time attribute here, or other attribute
   ];
 

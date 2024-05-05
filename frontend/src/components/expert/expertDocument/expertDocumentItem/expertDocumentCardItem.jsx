@@ -1,6 +1,12 @@
 import React from "react";
-import { Card, Button } from "@mui/material";
 import downloadiconSvg from "../../../../img/downloadicon.svg";
+import {
+  Card,
+  CardHeader,
+  Avatar,
+  Button,
+} from "@mui/material";
+import contohprofileimageSvg from "../../../../img/contohprofileimage.svg";
 
 const ExpertDocumentCardItem = () => {
   const DownloadButton = () => {
@@ -38,10 +44,20 @@ const ExpertDocumentCardItem = () => {
         backgroundColor: "#FFFFFF", // white background
         boxShadow: "0 4px 6px rgba(0,0,0,0.1)", // soft shadow
         position: "relative", // to position the circle
-        width: "1150px",
+        width: "1250px",
         marginLeft: "80px",
       }}
     >
+      <CardHeader
+        avatar={
+          <Avatar
+            alt="Profile Image"
+            src={contohprofileimageSvg}
+            style={{ width: "80px", height: "80px" }}
+          />
+        }
+      ></CardHeader>
+
       <div className="container-all-text-item">
         <div className="container-text-header-item">
           <span className="text-header-item">Nama:</span>
@@ -82,7 +98,7 @@ const ExpertDocumentCardItem = () => {
           <span className="text-header-item">Tanggal/Waktu:</span>
         </div>
         <div className="container-text-content-item">
-          <span className="text-content-item">28 Feb/15.00 WIB</span>
+          <span className="text-content-item">28 Feb/15:00 WIB</span>
         </div>
       </div>
 
@@ -103,7 +119,7 @@ const ExpertDocumentCardItem = () => {
             fontFamily: "'Poppins', sans-serif", // Use the Poppins font
             textTransform: "none", // Remove capitalization
             borderRadius: "20px", // Apply rounded edges
-            width: "150px",
+            width: "200px",
             padding: "0px",
             fontWeight: "bold",
             background: "linear-gradient(to right, #FA6339, #C73950)", // Gradient background
@@ -115,7 +131,7 @@ const ExpertDocumentCardItem = () => {
             px: 3, // Add some horizontal padding
           }}
         >
-          Umpan Balik
+          Lihat Umpan Balik
         </Button>
       </div>
     </Card>

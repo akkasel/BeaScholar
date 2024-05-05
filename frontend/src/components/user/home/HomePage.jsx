@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import "../../../App.css";
-import TopBar from "../../TopBar";
-import SideBar from "../../SideBar";
+import TopBar from "../masterPage/TopBar";
+import SideBar from "../masterPage/SideBar";
 import gambarheaderSvg from "../../../img/gambarheader.svg";
 import kacaPembesarSvg from "../../../img/kacapembesar.svg";
 import InterviewHistory from "./content/interviewSection/InterviewHistory";
 import DocumentHistory from "./content/documentSection/DocumentHistory";
 import SearchBar from "../../SearchBar";
-import ScholarshipCard from "../../ScholarshipCard";
+import ScholarshipCard from "./content/scholarshipSection/ScholarshipCard";
 
 
 const HomePage = () => {

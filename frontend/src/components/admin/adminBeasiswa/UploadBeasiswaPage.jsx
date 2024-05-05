@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../../../App.css";
-import TopBarAdmin from "../../TopBarAdmin";
-import SideBarAdmin from "../../SideBarAdmin";
+import TopBarAdmin from "../adminMasterPage/TopBarAdmin";
+import SideBarAdmin from "../adminMasterPage/SideBarAdmin";
 import Card from "@mui/material/Card";
 import TextField from "@mui/material/TextField";
 import MuiMenuItem from "@mui/material/MenuItem";
@@ -72,16 +72,17 @@ const UploadBeasiswaPage = () => {
 
           <br />
 
-          {/* Nama */}
-          <div className="form-input-container">
+          <div className="container-feedback-title">
             <div className="text-interview-container">
-              <span className="text-interview">Nama Beasiswa</span>
+              <span className="text-interview">
+                Nama atau Judul Program Beasiswa
+              </span>
             </div>
-            <div className="">
-              <TextField
+            <div>
+            <TextField
+                label="Tuliskan nama atau judul beasiswa di sini..."
                 fullWidth
                 id="outlined-textfield-nama"
-                label="Ketik nama beasiswa disini..."
                 variant="outlined"
                 width="200px"
                 sx={{
@@ -100,14 +101,15 @@ const UploadBeasiswaPage = () => {
                 }}
               />
             </div>
+          </div>
 
-            <br />
+          <br />
 
-            {/* Lingkup Beasiswa */}
+          <div className="form-input-container">
             <div className="text-interview-container">
-              <span className="text-interview">Lingkup Beasiswa</span>
-            </div>
-            <div>
+              <div className="text-interview-container">
+                <span className="text-interview">Lingkup Beasiswa</span>
+              </div>
               <TextField
                 fullWidth
                 id="outlined-select-lingkup-beasiswa"
@@ -138,155 +140,197 @@ const UploadBeasiswaPage = () => {
 
             <br />
 
-            {/* Jenis Interview*/}
             <div className="text-interview-container">
-              <span className="text-interview">Jenis Tingkatan Beasiswa</span>
-            </div>
-            <div>
-              <Card
-                className="checkbox-card-container"
-                variant="outlined"
+              <div className="text-interview-container">
+                <span className="text-interview">Tingkat Pendidikan</span>
+              </div>
+              <TextField
+                fullWidth
+                id="outlined-select-lingkup-beasiswa"
+                select
+                defaultValue="SMA"
                 sx={{
-                  border: "2px solid #C4084F !important",
-                  borderColor: "#C4084F !important",
+                  // Root class for the input field
+                  "& .MuiOutlinedInput-root": {
+                    // Class for the border around the input field
+                    "& .MuiOutlinedInput-notchedOutline": {
+                      borderColor: "#C4084F",
+                      borderWidth: "2px",
+                    },
+                  },
+                  // Class for the label of the input field
+                  "& .MuiInputLabel-outlined": {
+                    color: "#121212",
+                  },
                 }}
               >
-                <FormGroup sx={{ marginLeft: "10px" }}>
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        sx={{
-                          color: "#C4084F", // Change the checkbox color
-                          "&.Mui-checked": {
-                            color: "#C4084F", // Change the color of the checked state
-                          },
-                        }}
-                      />
-                    }
-                    label="Beasiswa S1"
-                  />
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        sx={{
-                          color: "#C4084F", // Change the checkbox color
-                          "&.Mui-checked": {
-                            color: "#C4084F", // Change the color of the checked state
-                          },
-                        }}
-                      />
-                    }
-                    label="Beasiswa S2"
-                  />
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        sx={{
-                          color: "#C4084F", // Change the checkbox color
-                          "&.Mui-checked": {
-                            color: "#C4084F", // Change the color of the checked state
-                          },
-                        }}
-                      />
-                    }
-                    label="Beasiswa S3"
-                  />
-                </FormGroup>
-              </Card>
+                {tingkatPendidikan.map((option) => (
+                  <MuiMenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MuiMenuItem>
+                ))}
+              </TextField>
             </div>
 
             <br />
 
-            {/* Pihak Penyelenggara */}
             <div className="text-interview-container">
-              <span className="text-interview">
-                Pihak Penyelenggara Beasiswa
-              </span>
-            </div>
-            <div className="">
-              <TextField
-                fullWidth
-                id="outlined-textfield-nama"
-                label="Tulis pihak penyedia beasiswa disini..."
-                variant="outlined"
-                width="200px"
-                sx={{
-                  // Root class for the input field
-                  "& .MuiOutlinedInput-root": {
-                    // Class for the border around the input field
-                    "& .MuiOutlinedInput-notchedOutline": {
-                      borderColor: "#C4084F",
-                      borderWidth: "2px",
+              <div className="text-interview-container">
+                <span className="text-interview">Penyelenggara</span>
+              </div>
+              <div>
+                <TextField
+                  label="Tuliskan penyelenggara beasiswa di sini..."
+                  fullWidth
+                  id="outlined-textfield-nama"
+                  variant="outlined"
+                  width="200px"
+                  sx={{
+                    // Root class for the input field
+                    "& .MuiOutlinedInput-root": {
+                      // Class for the border around the input field
+                      "& .MuiOutlinedInput-notchedOutline": {
+                        borderColor: "#C4084F",
+                        borderWidth: "2px",
+                      },
                     },
-                  },
-                  // Class for the label of the input field
-                  "& .MuiInputLabel-outlined": {
-                    color: "#121212",
-                  },
-                }}
-              />
+                    // Class for the label of the input field
+                    "& .MuiInputLabel-outlined": {
+                      color: "#121212",
+                    },
+                  }}
+                />
+              </div>
             </div>
 
             <br />
 
-            {/* Deskripsi dan Syarat */}
+            {/* Deskripsi */}
             <div className="text-interview-container">
-              <span className="text-interview">Deskripsi dan Syarat</span>
+              <span className="text-interview">Deskripsi</span>
             </div>
-            <div className="">
-              <TextField
-                fullWidth
-                id="outlined-textfield-nama"
-                label="Tulis deskripsi serta syarat beasiswa disini..."
-                variant="outlined"
-                width="200px"
-                sx={{
-                  // Root class for the input field
-                  "& .MuiOutlinedInput-root": {
-                    // Class for the border around the input field
-                    "& .MuiOutlinedInput-notchedOutline": {
-                      borderColor: "#C4084F",
-                      borderWidth: "2px",
+            <div className="card-feedback-interview">
+              <div className="text-field-feedback-expert-container">
+                <TextField
+                label="Tuliskan deskripsi beasiswa di sini..."
+                  fullWidth
+                  id="outlined-textfield-nama"
+                  variant="outlined"
+                  width="200px"
+                  sx={{
+                    // Root class for the input field
+                    "& .MuiOutlinedInput-root": {
+                      // Class for the border around the input field
+                      "& .MuiOutlinedInput-notchedOutline": {
+                        borderColor: "#C4084F",
+                        borderWidth: "2px",
+                      },
                     },
-                  },
-                  // Class for the label of the input field
-                  "& .MuiInputLabel-outlined": {
-                    color: "#121212",
-                  },
-                }}
-              />
+                    // Class for the label of the input field
+                    "& .MuiInputLabel-outlined": {
+                      color: "#121212",
+                    },
+                  }}
+                  multiline // Add this prop to enable multiple lines
+                />
+              </div>
             </div>
 
             <br />
 
-            {/* Link atau Website Pendaftaran */}
+            {/* Manfaat */}
             <div className="text-interview-container">
-              <span className="text-interview">Link atau Website Pendaftaran</span>
+              <span className="text-interview">Manfaat</span>
             </div>
-            <div className="">
-              <TextField
-                fullWidth
-                id="outlined-textfield-nama"
-                variant="outlined"
-                width="200px"
-                sx={{
-                  // Root class for the input field
-                  "& .MuiOutlinedInput-root": {
-                    // Class for the border around the input field
-                    "& .MuiOutlinedInput-notchedOutline": {
-                      borderColor: "#C4084F",
-                      borderWidth: "2px",
+            <div className="card-feedback-interview">
+              <div className="text-field-feedback-expert-container">
+                <TextField
+                  label="Jabarkan manfaat beasiswa di sini..."
+                  fullWidth
+                  id="outlined-textfield-nama"
+                  variant="outlined"
+                  width="200px"
+                  sx={{
+                    // Root class for the input field
+                    "& .MuiOutlinedInput-root": {
+                      // Class for the border around the input field
+                      "& .MuiOutlinedInput-notchedOutline": {
+                        borderColor: "#C4084F",
+                        borderWidth: "2px",
+                      },
                     },
-                  },
-                  // Class for the label of the input field
-                  "& .MuiInputLabel-outlined": {
-                    color: "#121212",
-                  },
-                }}
-              />
+                    // Class for the label of the input field
+                    "& .MuiInputLabel-outlined": {
+                      color: "#121212",
+                    },
+                  }}
+                  multiline // Add this prop to enable multiple lines
+                />
+              </div>
             </div>
 
             <br />
+
+            {/* Syarat dan Keperluan */}
+            <div className="text-interview-container">
+              <span className="text-interview">Syarat dan Keperluan</span>
+            </div>
+            <div className="card-feedback-interview">
+              <div className="text-field-feedback-expert-container">
+                <TextField
+                  label="Jabarkan syarat dan keperluan beasiswa di sini..."
+                  fullWidth
+                  id="outlined-textfield-nama"
+                  variant="outlined"
+                  width="200px"
+                  sx={{
+                    // Root class for the input field
+                    "& .MuiOutlinedInput-root": {
+                      // Class for the border around the input field
+                      "& .MuiOutlinedInput-notchedOutline": {
+                        borderColor: "#C4084F",
+                        borderWidth: "2px",
+                      },
+                    },
+                    // Class for the label of the input field
+                    "& .MuiInputLabel-outlined": {
+                      color: "#121212",
+                    },
+                  }}
+                  multiline // Add this prop to enable multiple lines
+                />
+              </div>
+            </div>
+
+            <br />
+
+            <div className="text-interview-container">
+              <span className="text-interview">Tautan Pendaftaran</span>
+            </div>
+            <div className="card-link-pendaftaran">
+                <TextField
+                  label="Sertakan tautan pendaftaran beasiswa di sini..."
+                  fullWidth
+                  id="outlined-textfield-nama"
+                  variant="outlined"
+                  width="200px"
+                  sx={{
+                    // Root class for the input field
+                    "& .MuiOutlinedInput-root": {
+                      // Class for the border around the input field
+                      "& .MuiOutlinedInput-notchedOutline": {
+                        borderColor: "#C4084F",
+                        borderWidth: "2px",
+                      },
+                    },
+                    // Class for the label of the input field
+                    "& .MuiInputLabel-outlined": {
+                      color: "#121212",
+                    },
+                  }}
+                />
+            </div>
+
             <br />
 
             {/* Unggah Button */}
@@ -296,7 +340,7 @@ const UploadBeasiswaPage = () => {
                 sx={{
                   fontFamily: "'Poppins', sans-serif", // Use the Poppins font
                   textTransform: "none", // Remove capitalization
-                  borderRadius: "10px", // Apply rounded edges
+                  borderRadius: "20px", // Apply rounded edges
                   width: "100px",
                   fontWeight: "bold",
                   background: "linear-gradient(to bottom, #FA6339, #C73950)", // Gradient background
@@ -305,7 +349,7 @@ const UploadBeasiswaPage = () => {
                   },
 
                   justifyContent: "center", // Centralized text and icon
-                  px: 3, // Add some horizontal padding
+                  px: 3, // Add some horizontal padding,
                 }}
               >
                 Unggah

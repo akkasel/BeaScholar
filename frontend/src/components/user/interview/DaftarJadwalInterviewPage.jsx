@@ -1,12 +1,7 @@
 import React, { useState } from "react";
 import "../../../App.css";
-import TopBar from "../../TopBar";
-import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
-import { Link } from "react-router-dom";
-import homelogoSvg from "../../../img/homelogo.svg";
-import miclogoSvg from "../../../img/miclogo.svg";
-import personlogoSvg from "../../../img/personlogo.svg";
-import documentlogoSvg from "../../../img/documentlogo.svg";
+import TopBar from "../masterPage/TopBar";
+import SideBar from "../masterPage/SideBar";
 import headphoneSvg from "../../../img/headphone.svg";
 import Card from "@mui/material/Card";
 import SearchBar from "../../SearchBar";
@@ -18,86 +13,7 @@ const DaftarJadwalInterviewPage = () => {
     <div>
       <TopBar /> {/* Render the TopBar component */}
       <div className="daftar-jadwal-interview-page">
-        {/* Render the SideBar component */}
-        <Sidebar backgroundColor="#CA3C4F" className="sidebar-container">
-          <Menu
-            menuItemStyles={{
-              button: {
-                // Styling for the active menu item
-                "&.active": {
-                  backgroundColor: "#772F32", // Change this to the desired color
-                  color: "#FFFFFF", // Change this to the desired color
-                },
-                // Styling for the hover state
-                "&:hover": {
-                  backgroundColor: "#772F32", // Dark red color
-                  color: "#FFFFFF", // White color
-                },
-              },
-            }}
-          >
-            <MenuItem className="menu-item">
-              <img
-                src={homelogoSvg}
-                alt="Icon"
-                style={{
-                  marginTop: "5px",
-                  marginRight: "15px",
-                  width: "20px",
-                  height: "18px",
-                }}
-              />
-              <Link className="link-menu-item" to="/home">
-                Dashboard
-              </Link>
-            </MenuItem>
-            <MenuItem className="menu-item">
-              <img
-                src={miclogoSvg}
-                alt="Icon"
-                style={{
-                  marginTop: "5px",
-                  marginRight: "15px",
-                  width: "20px",
-                  height: "18px",
-                }}
-              />
-              <Link className="link-menu-item" to="/interview">
-                Interview
-              </Link>
-            </MenuItem>
-            <MenuItem className="menu-item">
-              <img
-                src={documentlogoSvg}
-                alt="Icon"
-                style={{
-                  marginTop: "5px",
-                  marginRight: "15px",
-                  width: "20px",
-                  height: "18px",
-                }}
-              />
-              <Link className="link-menu-item" to="/document">
-                Dokumen
-              </Link>
-            </MenuItem>
-            <MenuItem className="menu-item">
-              <img
-                src={personlogoSvg}
-                alt="Icon"
-                style={{
-                  marginTop: "5px",
-                  marginRight: "15px",
-                  width: "20px",
-                  height: "18px",
-                }}
-              />
-              <Link className="link-menu-item" to="/profile">
-                Profile
-              </Link>
-            </MenuItem>
-          </Menu>
-        </Sidebar>
+        <SideBar /> {/* Render the SideBar component */}
 
         <div className="interview-page-container">
           {/*Header text "Latihan Interview"*/}

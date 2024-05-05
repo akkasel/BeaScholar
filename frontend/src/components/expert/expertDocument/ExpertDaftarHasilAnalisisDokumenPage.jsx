@@ -4,8 +4,8 @@ import Card from "@mui/material/Card";
 import SearchBar from "../../SearchBar";
 import ExpertDocumentCardItem from "./expertDocumentItem/expertDocumentCardItem";
 import dokumenemotSvg from "../../../img/dokumenemot.svg";
-import TopBarExpert from "../../TopBarExpert";
-import SideBarExpert from "../../SideBarExpert";
+import TopBarExpert from "../expertMasterPage/TopBarExpert";
+import SideBarExpert from "../expertMasterPage/SideBarExpert";
 
 const ExpertDaftarHasilAnalisisDokumenPage = () => {
   return (

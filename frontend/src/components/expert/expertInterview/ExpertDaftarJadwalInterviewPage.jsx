@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../../../App.css";
-import TopBarExpert from "../../TopBarExpert";
-import SideBarExpert from "../../SideBarExpert";
+import TopBarExpert from "../expertMasterPage/TopBarExpert";
+import SideBarExpert from "../expertMasterPage/SideBarExpert";
 import headphoneSvg from "../../../img/headphone.svg";
 import Card from "@mui/material/Card";
 import SearchBar from "../../SearchBar";

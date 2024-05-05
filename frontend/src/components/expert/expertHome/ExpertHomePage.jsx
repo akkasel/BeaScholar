@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../../../App.css";
-import TopBarExpert from "../../TopBarExpert";
-import SideBarExpert from "../../SideBarExpert";
+import TopBarExpert from "../expertMasterPage/TopBarExpert";
+import SideBarExpert from "../expertMasterPage/SideBarExpert";
 import gambarheaderSvg from "../../../img/gambarheader.svg";
 import InterviewHistory from "./content/expertInterviewSection/InterviewHistory";
 import DocumentHistory from "./content/expertDocumentSection/DocumentHistory";
@@ -27,8 +27,6 @@ const ExpertHomePage = () => {
                 </div>
               </div>
             </div>
-
-            <br />
 
             <div className="interview-history-container">
               <InterviewHistory />

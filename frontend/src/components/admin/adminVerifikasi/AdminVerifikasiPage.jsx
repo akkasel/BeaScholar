@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../../../App.css";
-import TopBarAdmin from "../../TopBarAdmin";
-import SideBarAdmin from "../../SideBarAdmin";
+import TopBarAdmin from "../adminMasterPage/TopBarAdmin";
+import SideBarAdmin from "../adminMasterPage/SideBarAdmin";
 import Card from "@mui/material/Card";
 import SearchBar from "../../SearchBar";
 import AjuanJadiExpertItem from "./itemVerifikasiExpert/AjuanJadiExpertItem";

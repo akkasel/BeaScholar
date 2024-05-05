@@ -1,26 +1,9 @@
 import React, { useState } from "react";
 import "../../../App.css";
-import TopBar from "../../TopBar";
-import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
-import { Link } from "react-router-dom";
-import homelogoSvg from "../../../img/homelogo.svg";
-import miclogoSvg from "../../../img/miclogo.svg";
-import personlogoSvg from "../../../img/personlogo.svg";
-import documentlogoSvg from "../../../img/documentlogo.svg";
-import rocketSvg from "../../../img/rocket.svg";
-import TextField from "@mui/material/TextField";
-import MuiMenuItem from "@mui/material/MenuItem";
-import FormGroup from "@mui/material/FormGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
+import TopBar from "../masterPage/TopBar";
+import SideBar from "../masterPage/SideBar";
 import Card from "@mui/material/Card";
 import Button from "@mui/material/Button";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import JadwalInterviewItem from "./interviewItem/JadwalInterviewItem";
-import arrowrightSvg from "../../../img/arrowright.svg";
 import arrowleftSvg from "../../../img/arrowleft.svg";
 
 const FeedbackInterviewPage = () => {
@@ -64,86 +47,7 @@ const FeedbackInterviewPage = () => {
     <div>
       <TopBar /> {/* Render the TopBar component */}
       <div className="feedback-interview-page">
-        {/* Render the SideBar component */}
-        <Sidebar backgroundColor="#CA3C4F" className="sidebar-container">
-          <Menu
-            menuItemStyles={{
-              button: {
-                // Styling for the active menu item
-                "&.active": {
-                  backgroundColor: "#772F32", // Change this to the desired color
-                  color: "#FFFFFF", // Change this to the desired color
-                },
-                // Styling for the hover state
-                "&:hover": {
-                  backgroundColor: "#772F32", // Dark red color
-                  color: "#FFFFFF", // White color
-                },
-              },
-            }}
-          >
-            <MenuItem className="menu-item">
-              <img
-                src={homelogoSvg}
-                alt="Icon"
-                style={{
-                  marginTop: "5px",
-                  marginRight: "15px",
-                  width: "20px",
-                  height: "18px",
-                }}
-              />
-              <Link className="link-menu-item" to="/home">
-                Dashboard
-              </Link>
-            </MenuItem>
-            <MenuItem className="menu-item">
-              <img
-                src={miclogoSvg}
-                alt="Icon"
-                style={{
-                  marginTop: "5px",
-                  marginRight: "15px",
-                  width: "20px",
-                  height: "18px",
-                }}
-              />
-              <Link className="link-menu-item" to="/interview">
-                Interview
-              </Link>
-            </MenuItem>
-            <MenuItem className="menu-item">
-              <img
-                src={documentlogoSvg}
-                alt="Icon"
-                style={{
-                  marginTop: "5px",
-                  marginRight: "15px",
-                  width: "20px",
-                  height: "18px",
-                }}
-              />
-              <Link className="link-menu-item" to="/document">
-                Dokumen
-              </Link>
-            </MenuItem>
-            <MenuItem className="menu-item">
-              <img
-                src={personlogoSvg}
-                alt="Icon"
-                style={{
-                  marginTop: "5px",
-                  marginRight: "15px",
-                  width: "20px",
-                  height: "18px",
-                }}
-              />
-              <Link className="link-menu-item" to="/profile">
-                Profile
-              </Link>
-            </MenuItem>
-          </Menu>
-        </Sidebar>
+        <SideBar /> {/* Render the SideBar component */}
 
         <div className="interview-page-container">
           {/*Header text "Feedback Interview"*/}
@@ -168,12 +72,12 @@ const FeedbackInterviewPage = () => {
           <div className="form-input-container">
             <div className="text-interview-container">
               <span className="text-interview">Tanggal Interview: </span>
-              <span className="text-interview-orange">1 Maret 2024</span>
+              <span className="text-interview-orange">28 Februari 2024</span>
             </div>
 
             <div className="text-interview-container">
               <span className="text-interview">Waktu: </span>
-              <span className="text-interview-orange">11.00</span>
+              <span className="text-interview-orange">15:00</span>
             </div>
 
             <div className="text-interview-container">
@@ -196,6 +100,7 @@ const FeedbackInterviewPage = () => {
                   borderColor: "#FF6C37 !important",
                 }}
               >
+                {/* harusny ga perlu pake div sama span lagi juga bisa, tinggal pakai <br /> */}
                 <div className="text-container-feedback">
                   <div>
                     <span>1. Intonasi sangat jelas</span>

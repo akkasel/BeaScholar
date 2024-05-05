@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import "../../../App.css";
-import TopBarAdmin from "../../TopBarAdmin";
-import SideBarAdmin from "../../SideBarAdmin";
+import TopBarAdmin from "../adminMasterPage/TopBarAdmin";
+import SideBarAdmin from "../adminMasterPage/SideBarAdmin";
 import gambarheaderSvg from "../../../img/gambarheader.svg";
 import kacaPembesarSvg from "../../../img/kacapembesar.svg";
 import SearchBar from "../../SearchBar";
-import ScholarshipCardForAdmin from "../../ScholarshipCardForAdmin";
+import ScholarshipCardForAdmin from "../adminBeasiswa/scholarshipItem/ScholarshipCardForAdmin";
 
 const AdminHomePage = () => {
   // placeholder data for the cards. Replace with your actual data.
@@ -24,7 +24,7 @@ const AdminHomePage = () => {
               <div class="welcome-content">
                 <div class="welcome-text">
                   <h1 className="selamat-datang">Selamat datang,</h1>
-                  <p className="nama-user">Jessica</p>
+                  <p className="nama-user">Daniel</p>
                 </div>
                 <div class="illustration">
                   <img src={gambarheaderSvg} alt="Illustration" />

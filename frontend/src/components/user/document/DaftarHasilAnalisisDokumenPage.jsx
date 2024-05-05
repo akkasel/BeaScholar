@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../../../App.css";
-import TopBar from "../../TopBar";
-import SideBar from "../../SideBar";
+import TopBar from "../masterPage/TopBar";
+import SideBar from "../masterPage/SideBar";
 import Card from "@mui/material/Card";
 import SearchBar from "../../SearchBar";
 import DocumentCardItem from "./documentItem/documentCardItem";

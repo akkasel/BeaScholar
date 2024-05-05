@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import "../../../App.css";
-import TopBarAdmin from "../../TopBarAdmin";
-import SideBarAdmin from "../../SideBarAdmin";
+import TopBarAdmin from "../adminMasterPage/TopBarAdmin";
+import SideBarAdmin from "../adminMasterPage/SideBarAdmin";
 import TextField from "@mui/material/TextField";
 import MuiMenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
 import pencilSvg from "../../../img/pencil.svg";
 import Avatar from "@mui/material/Avatar";
-import contohprofileimageSvg from "../../../img/contohprofileimage.svg";
+import danielSvg from "../../../img/daniel.svg";
 
 const AdminProfilePage = () => {
   // untuk textfield tingkat pendidikan
@@ -55,7 +55,7 @@ const AdminProfilePage = () => {
 
           <div className="container-avatar">
             <Avatar
-              src={contohprofileimageSvg}
+              src={danielSvg}
               sx={{ width: 120, height: 120 }}
             />
           </div>
@@ -162,7 +162,7 @@ const AdminProfilePage = () => {
                 sx={{
                   fontFamily: "'Poppins', sans-serif", // Use the Poppins font
                   textTransform: "none", // Remove capitalization
-                  borderRadius: "10px", // Apply rounded edges
+                  borderRadius: "20px", // Apply rounded edges
                   width: "100px",
                   fontWeight: "bold",
                   background: "linear-gradient(to right, #FA6339, #C73950)", // Gradient background
@@ -171,8 +171,6 @@ const AdminProfilePage = () => {
                   },
 
                   justifyContent: "center", // Centralized text and icon
-                  position: "absolute",
-                  right: 200,
                 }}
               >
                 Simpan

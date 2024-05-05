@@ -3,8 +3,8 @@ import "../../../App.css";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import arrowleftSvg from "../../../img/arrowleft.svg";
-import TopBarExpert from "../../TopBarExpert";
-import SideBarExpert from "../../SideBarExpert";
+import TopBarExpert from "../expertMasterPage/TopBarExpert";
+import SideBarExpert from "../expertMasterPage/SideBarExpert";
 
 const ExpertFeedbackInterviewPage = () => {
   // untuk textfield tingkat pendidikan
@@ -66,19 +66,18 @@ const ExpertFeedbackInterviewPage = () => {
           </div>
 
           <div className="container-feedback-title">
-            <h1 className="latihan-interview-text">Feedback Interview</h1>
+            <h1 className="latihan-interview-text">Umpan Balik Interview</h1>
           </div>
 
-          {/* Nama */}
           <div className="form-input-container">
             <div className="text-interview-container">
               <span className="text-interview">Tanggal Interview: </span>
-              <span className="text-interview-orange">1 Maret 2024</span>
+              <span className="text-interview-orange">28 Februari 2024</span>
             </div>
 
             <div className="text-interview-container">
               <span className="text-interview">Waktu: </span>
-              <span className="text-interview-orange">11.00</span>
+              <span className="text-interview-orange">15:00</span>
             </div>
 
             <div className="text-interview-container">
@@ -95,17 +94,23 @@ const ExpertFeedbackInterviewPage = () => {
 
             <div className="text-field-feedback-expert-container">
               <TextField
+                label="Berikan masukan positif Anda terkait Interview yang telah dilakukan..."
+                fullWidth
+                id="outlined-textfield-nama"
+                variant="outlined"
+                width="200px"
                 sx={{
+                  // Root class for the input field
                   "& .MuiOutlinedInput-root": {
-                    height: "auto",
-                    fontSize: "1.2rem", // Increase font size to match the increased height
-                    alignItems: "left",
-                    border: "2px solid #FF6C37",
-                    borderRadius: "10px",
+                    // Class for the border around the input field
+                    "& .MuiOutlinedInput-notchedOutline": {
+                      borderWidth: "2px",
+                      borderColor: "#FF6C37",
+                    },
                   },
+                  // Class for the label of the input field
                   "& .MuiOutlinedInput-input": {
-                    padding: "10px", // Adjust the padding to position the text correctly
-                    alignItems: "left",
+                    color: "#121212",
                   },
                   width: "1000px", // Adjust the width value as needed
                 }}
@@ -123,17 +128,23 @@ const ExpertFeedbackInterviewPage = () => {
             </div>
             <div className="text-field-feedback-expert-container">
               <TextField
+                label="Berikan umpan balik Anda terkait Interview yang telah dilakukan..."
+                fullWidth
+                id="outlined-textfield-nama"
+                variant="outlined"
+                width="200px"
                 sx={{
+                  // Root class for the input field
                   "& .MuiOutlinedInput-root": {
-                    height: "auto",
-                    fontSize: "1.2rem", // Increase font size to match the increased height
-                    alignItems: "left",
-                    border: "2px solid #FF6C37",
-                    borderRadius: "10px",
+                    // Class for the border around the input field
+                    "& .MuiOutlinedInput-notchedOutline": {
+                      borderWidth: "2px",
+                      borderColor: "#FF6C37",
+                    },
                   },
+                  // Class for the label of the input field
                   "& .MuiOutlinedInput-input": {
-                    padding: "10px", // Adjust the padding to position the text correctly
-                    alignItems: "left",
+                    color: "#121212",
                   },
                   width: "1000px", // Adjust the width value as needed
                 }}
@@ -151,17 +162,23 @@ const ExpertFeedbackInterviewPage = () => {
             </div>
             <div className="text-field-feedback-expert-container">
               <TextField
+                label="Berikan catatan tambahan Anda terkait Interview yang telah dilakukan..."
+                fullWidth
+                id="outlined-textfield-nama"
+                variant="outlined"
+                width="200px"
                 sx={{
+                  // Root class for the input field
                   "& .MuiOutlinedInput-root": {
-                    height: "auto",
-                    fontSize: "1.2rem", // Increase font size to match the increased height
-                    alignItems: "left",
-                    border: "2px solid #FF6C37",
-                    borderRadius: "10px",
+                    // Class for the border around the input field
+                    "& .MuiOutlinedInput-notchedOutline": {
+                      borderWidth: "2px",
+                      borderColor: "#FF6C37",
+                    },
                   },
+                  // Class for the label of the input field
                   "& .MuiOutlinedInput-input": {
-                    padding: "10px", // Adjust the padding to position the text correctly
-                    alignItems: "left",
+                    color: "#121212",
                   },
                   width: "1000px", // Adjust the width value as needed
                 }}
@@ -178,7 +195,7 @@ const ExpertFeedbackInterviewPage = () => {
                 sx={{
                   fontFamily: "'Poppins', sans-serif", // Use the Poppins font
                   textTransform: "none", // Remove capitalization
-                  borderRadius: "10px", // Apply rounded edges
+                  borderRadius: "20px", // Apply rounded edges
                   width: "100px",
                   fontWeight: "bold",
                   background: "linear-gradient(to right, #FA6339, #C73950)", // Gradient background
@@ -187,8 +204,6 @@ const ExpertFeedbackInterviewPage = () => {
                   },
 
                   justifyContent: "center", // Centralized text and icon
-                  position: "absolute",
-                  right: 100,
                 }}
               >
                 Simpan

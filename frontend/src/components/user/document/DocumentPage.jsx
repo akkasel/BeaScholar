@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../../../App.css";
-import TopBar from "../../TopBar";
-import SideBar from "../../SideBar";
+import TopBar from "../masterPage/TopBar";
+import SideBar from "../masterPage/SideBar";
 import TextField from "@mui/material/TextField";
 import MuiMenuItem from "@mui/material/MenuItem";
 import FormGroup from "@mui/material/FormGroup";
@@ -285,6 +285,7 @@ const DocumentPage = () => {
             <br />
 
             {/* Masukan file */}
+            {/* warna bordernya masih perlu diatur */}
             <div className="text-interview-container">
               <span className="text-interview">
                 Masukan file kamu disini (.pdf):
@@ -308,7 +309,7 @@ const DocumentPage = () => {
                 sx={{
                   fontFamily: "'Poppins', sans-serif", // Use the Poppins font
                   textTransform: "none", // Remove capitalization
-                  borderRadius: "10px", // Apply rounded edges
+                  borderRadius: "20px", // Apply rounded edges
                   width: "100px",
                   fontWeight: "bold",
                   background: "linear-gradient(to bottom, #940566, #C70E4E)", // Gradient background

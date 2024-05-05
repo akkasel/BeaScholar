@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../../../App.css";
-import TopBar from "../../TopBar";
-import SideBar from "../../SideBar";
+import TopBar from "../masterPage/TopBar";
+import SideBar from "../masterPage/SideBar";
 import rocketSvg from "../../../img/rocket.svg";
 import TextField from "@mui/material/TextField";
 import MuiMenuItem from "@mui/material/MenuItem";
@@ -81,7 +81,7 @@ const InterviewPage = () => {
               <TextField
                 fullWidth
                 id="outlined-textfield-nama"
-                label="Masukan nama disini..."
+                label="Masukkan nama di sini..."
                 variant="outlined"
                 width="200px"
                 sx={{
@@ -242,7 +242,7 @@ const InterviewPage = () => {
               <TextField
                 fullWidth
                 id="outlined-textfield-nama"
-                label="Tulis deskripsi dirimu disini..."
+                label="Tuliskan deskripsi dirimu di sini..."
                 variant="outlined"
                 width="200px"
                 sx={{
@@ -303,14 +303,14 @@ const InterviewPage = () => {
             <br />
             <br />
 
-            {/* Jadwal Button */}
+            {/* Kumpul Button */}
             <div>
               <Button
                 variant="contained"
                 sx={{
                   fontFamily: "'Poppins', sans-serif", // Use the Poppins font
                   textTransform: "none", // Remove capitalization
-                  borderRadius: "10px", // Apply rounded edges
+                  borderRadius: "20px", // Apply rounded edges
                   width: "100px",
                   fontWeight: "bold",
                   background: "linear-gradient(to bottom, #940566, #C70E4E)", // Gradient background
@@ -322,7 +322,7 @@ const InterviewPage = () => {
                   px: 3, // Add some horizontal padding
                 }}
               >
-                Jadwal
+                Kumpul
               </Button>
             </div>
             {/* Add your input form here */}

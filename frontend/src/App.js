@@ -26,8 +26,8 @@ import ExpertFeedbackInterviewPage from './components/expert/expertInterview/Exp
 import ExpertDaftarHasilAnalisisDokumenPage from './components/expert/expertDocument/ExpertDaftarHasilAnalisisDokumenPage';
 import ExpertFeedbackDokumenPage from './components/expert/expertDocument/ExpertFeedbackDokumenPage';
 import ExpertProfilePage from './components/expert/expertProfile/ExpertProfilePage';
-import ScholarshipDetailItemPage from './components/ScholarshipDetailItemPage';
-import ScholarshipDetailItemPageForAdmin from './components/ScholarshipDetailItemPageForAdmin';
+import ScholarshipDetailItemPage from './components/user/scholarship/ScholarshipDetailItemPage';
+import ScholarshipDetailItemPageForAdmin from './components/admin/adminBeasiswa/scholarshipItem/ScholarshipDetailItemPageForAdmin';
 
 function App() {
   return (

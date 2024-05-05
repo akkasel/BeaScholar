@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import "../../../App.css";
-import TopBarAdmin from "../../TopBarAdmin";
-import SideBarAdmin from "../../SideBarAdmin";
+import TopBarAdmin from "../adminMasterPage/TopBarAdmin";
+import SideBarAdmin from "../adminMasterPage/SideBarAdmin";
 import { Button } from "@mui/material";
 import arrowleftSvg from "../../../img/arrowleft.svg";
-import arrowrightSvg from "../../../img/arrowright.svg";
 import downloadiconSvg from "../../../img/downloadicon.svg";
 
 const AdminVerifikasiDetailPengajuanPage = () => {
@@ -123,7 +122,7 @@ const AdminVerifikasiDetailPengajuanPage = () => {
                     textTransform: "none", // Remove capitalization
                     borderRadius: "20px", // Apply rounded edges
                     width: "200px",
-                    height: "50px",
+                    height: "40px",
                     padding: "5px",
                     fontWeight: "bold",
                     background: "linear-gradient(to right, #E75300, #121212)", // Gradient background
@@ -145,7 +144,7 @@ const AdminVerifikasiDetailPengajuanPage = () => {
                     textTransform: "none", // Remove capitalization
                     borderRadius: "20px", // Apply rounded edges
                     width: "200px",
-                    height: "50px",
+                    height: "40px",
                     padding: "5px",
                     fontWeight: "bold",
                     background: "linear-gradient(to right, #009117, #121212)", // Gradient background
