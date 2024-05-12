@@ -523,7 +523,7 @@ button {
 .card-button {
   position: absolute; /* Make the button element positionable */
   top: 5px; /* Set the bottom position from the card's edge */
-  left: 40px;
+  left: 80px;
 }
 
 .card-button:hover {
