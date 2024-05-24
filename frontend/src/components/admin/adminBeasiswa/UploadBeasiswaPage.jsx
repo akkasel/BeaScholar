@@ -11,7 +11,97 @@ import Checkbox from "@mui/material/Checkbox";
 import Button from "@mui/material/Button";
 import togaiconSvg from "../../../img/togaicon.svg";
 
+import { auth, db } from "../../../firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
+import {
+  collection,
+  addDoc,
+  getDocs,
+  updateDoc,
+  deleteDoc,
+  doc,
+} from "firebase/firestore";
+
 const UploadBeasiswaPage = () => {
+  const [user] = useAuthState(auth); // Using react-firebase-hooks to manage auth state
+
+  // untuk upload masing-masing fieldnya ke database.
+  const [nama, setNama] = useState("");
+  const [lingkup, setLingkup] = useState("Dalam Negeri");
+  const [tingkat, setTingkat] = useState("SMA");
+  const [penyelenggara, setPenyelenggara] = useState("");
+  const [deskripsi, setDeskripsi] = useState("");
+  const [manfaat, setManfaat] = useState("");
+  const [syarat, setSyarat] = useState("");
+  const [tautan, setTautan] = useState("");
+  const [beasiswaList, setBeasiswaList] = useState([]);
+
+  // untuk READ data beasiswa yang ada // ga dipake disini, dipake nanti di page lain
+  /*
+  useEffect(() => {
+    fetchBeasiswa();
+  }, []);
+  */
+
+  // untuk READ data beasiswa yang ada // ga dipake disini, dipake nanti di page lain
+  /*
+  const fetchBeasiswa = async () => {
+    const querySnapshot = await getDocs(collection(db, "beasiswa"));
+    setBeasiswaList(querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+  };
+  */
+
+  // untuk CREATE data beasiswa baru (ini dipake di page ini)
+  const createBeasiswa = async () => {
+    if (!user) {
+      alert("You must be logged in to create a beasiswa.");
+      return;
+    }
+    try {
+      await addDoc(collection(db, "beasiswa"), {
+        nama,
+        lingkup,
+        tingkat,
+        penyelenggara,
+        deskripsi,
+        manfaat,
+        syarat,
+        tautan,
+      });
+      alert("Beasiswa created successfully!");
+    } catch (error) {
+      console.error("Error adding document: ", error);
+      alert("Failed to create beasiswa. Check console for details.");
+    }
+  };
+
+  // untuk UPDATE data beasiswa baru (ngga dipake disini, ini template aja, buat nanti di page lain)
+  /*
+  const updateBeasiswa = async (id) => {
+    const beasiswaDoc = doc(db, "beasiswa", id);
+    await updateDoc(beasiswaDoc, {
+      nama,
+      lingkup,
+      tingkat,
+      penyelenggara,
+      deskripsi,
+      manfaat,
+      syarat,
+      tautan,
+    });
+    fetchBeasiswa();
+  };
+  */
+
+  // untuk DELETE data beasiswa, ini template aja, dipakenya nanti di page lain.
+  /*
+  const deleteBeasiswa = async (id) => {
+    const beasiswaDoc = doc(db, "beasiswa", id);
+    await deleteDoc(beasiswaDoc);
+    fetchBeasiswa();
+  };
+  */
+
   // untuk textfield tingkat pendidikan
   const tingkatPendidikan = [
     {
@@ -53,7 +143,6 @@ const UploadBeasiswaPage = () => {
       <TopBarAdmin /> {/* Render the TopBar component */}
       <div className="daftar-jadwal-interview-page">
         <SideBarAdmin /> {/* Render the SideBar component */}
-
         <div className="interview-page-container">
           {/*Header text "Latihan Interview"*/}
           <br />
@@ -79,10 +168,12 @@ const UploadBeasiswaPage = () => {
               </span>
             </div>
             <div>
-            <TextField
+              <TextField
                 label="Tuliskan nama atau judul beasiswa di sini..."
                 fullWidth
                 id="outlined-textfield-nama"
+                value={nama}
+                onChange={(e) => setNama(e.target.value)}
                 variant="outlined"
                 width="200px"
                 sx={{
@@ -113,6 +204,8 @@ const UploadBeasiswaPage = () => {
               <TextField
                 fullWidth
                 id="outlined-select-lingkup-beasiswa"
+                value={lingkup}
+                onChange={(e) => setLingkup(e.target.value)}
                 select
                 defaultValue="Dalam Negeri"
                 sx={{
@@ -147,6 +240,8 @@ const UploadBeasiswaPage = () => {
               <TextField
                 fullWidth
                 id="outlined-select-lingkup-beasiswa"
+                value={tingkat}
+                onChange={(e) => setTingkat(e.target.value)}
                 select
                 defaultValue="SMA"
                 sx={{
@@ -183,6 +278,8 @@ const UploadBeasiswaPage = () => {
                   label="Tuliskan penyelenggara beasiswa di sini..."
                   fullWidth
                   id="outlined-textfield-nama"
+                  value={penyelenggara}
+                  onChange={(e) => setPenyelenggara(e.target.value)}
                   variant="outlined"
                   width="200px"
                   sx={{
@@ -212,9 +309,11 @@ const UploadBeasiswaPage = () => {
             <div className="card-feedback-interview">
               <div className="text-field-feedback-expert-container">
                 <TextField
-                label="Tuliskan deskripsi beasiswa di sini..."
+                  label="Tuliskan deskripsi beasiswa di sini..."
                   fullWidth
                   id="outlined-textfield-nama"
+                  value={deskripsi}
+                  onChange={(e) => setDeskripsi(e.target.value)}
                   variant="outlined"
                   width="200px"
                   sx={{
@@ -248,6 +347,8 @@ const UploadBeasiswaPage = () => {
                   label="Jabarkan manfaat beasiswa di sini..."
                   fullWidth
                   id="outlined-textfield-nama"
+                  value={manfaat}
+                  onChange={(e) => setManfaat(e.target.value)}
                   variant="outlined"
                   width="200px"
                   sx={{
@@ -281,6 +382,8 @@ const UploadBeasiswaPage = () => {
                   label="Jabarkan syarat dan keperluan beasiswa di sini..."
                   fullWidth
                   id="outlined-textfield-nama"
+                  value={syarat}
+                  onChange={(e) => setSyarat(e.target.value)}
                   variant="outlined"
                   width="200px"
                   sx={{
@@ -308,27 +411,29 @@ const UploadBeasiswaPage = () => {
               <span className="text-interview">Tautan Pendaftaran</span>
             </div>
             <div className="card-link-pendaftaran">
-                <TextField
-                  label="Sertakan tautan pendaftaran beasiswa di sini..."
-                  fullWidth
-                  id="outlined-textfield-nama"
-                  variant="outlined"
-                  width="200px"
-                  sx={{
-                    // Root class for the input field
-                    "& .MuiOutlinedInput-root": {
-                      // Class for the border around the input field
-                      "& .MuiOutlinedInput-notchedOutline": {
-                        borderColor: "#C4084F",
-                        borderWidth: "2px",
-                      },
+              <TextField
+                label="Sertakan tautan pendaftaran beasiswa di sini..."
+                fullWidth
+                id="outlined-textfield-nama"
+                value={tautan}
+                onChange={(e) => setTautan(e.target.value)}
+                variant="outlined"
+                width="200px"
+                sx={{
+                  // Root class for the input field
+                  "& .MuiOutlinedInput-root": {
+                    // Class for the border around the input field
+                    "& .MuiOutlinedInput-notchedOutline": {
+                      borderColor: "#C4084F",
+                      borderWidth: "2px",
                     },
-                    // Class for the label of the input field
-                    "& .MuiInputLabel-outlined": {
-                      color: "#121212",
-                    },
-                  }}
-                />
+                  },
+                  // Class for the label of the input field
+                  "& .MuiInputLabel-outlined": {
+                    color: "#121212",
+                  },
+                }}
+              />
             </div>
 
             <br />
@@ -337,6 +442,7 @@ const UploadBeasiswaPage = () => {
             <div>
               <Button
                 variant="contained"
+                onClick={createBeasiswa} // jalanin function createBeasiswa
                 sx={{
                   fontFamily: "'Poppins', sans-serif", // Use the Poppins font
                   textTransform: "none", // Remove capitalization

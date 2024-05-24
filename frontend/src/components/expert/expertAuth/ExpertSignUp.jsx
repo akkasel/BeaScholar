@@ -1,6 +1,7 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
 import { auth } from "../../../firebase";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 const ExpertSignUp = () => {
   const [email, setEmail] = useState("");
@@ -13,6 +14,8 @@ const ExpertSignUp = () => {
   const [essay, setEssay] = useState(null);
   const [ktp, setKtp] = useState(null);
   const [photo, setPhoto] = useState(null);
+
+  const navigate = useNavigate(); // to navigate
 
   const signUp = async (e) => {
     e.preventDefault();
@@ -27,6 +30,7 @@ const ExpertSignUp = () => {
         password
       );
       console.log(userCredential);
+      navigate("/expert-home"); // navigate to home screen
       // Further processing for file uploads goes here
     } catch (error) {
       console.log(error);
@@ -138,7 +142,7 @@ const ExpertSignUp = () => {
             {/* Jangan lupa di href nya nanti simpan link untuk ke page Sign Up*/}
           </div>
 
-          <button type="submit">Daftar sebagai Expert</button>
+          <button type="submit" onClick={signUp}>Daftar sebagai Expert</button>
         </form>
       </div>
     </div>

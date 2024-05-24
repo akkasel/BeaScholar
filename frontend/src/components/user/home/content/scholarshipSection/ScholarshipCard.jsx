@@ -1,28 +1,33 @@
 import React from "react";
 import bcalogoSvg from "../../../../../img/bcalogo.svg";
 import { Button } from "@mui/material";
+import { db } from "../../../../../firebase";
+import { deleteDoc, doc } from "firebase/firestore";
 
-const ScholarshipCard = () => {
+const ScholarshipCard = ({ scholarship }) => {
   return (
     <div className="card-container">
       <div className="card-header">
         <div className="card-header-top">
           <img src={bcalogoSvg} alt="BCA" className="card-logo" />
           <div className="card-header-badge-container">
-            <span className="card-header-badge national">Nasional</span>
+            <span className="card-header-badge national">
+              {scholarship.lingkup}
+            </span>
             <span className="card-header-badge education-level">
-              Beasiswa S1
+              Beasiswa {scholarship.tingkat}
             </span>
           </div>
         </div>
-        <h2 className="card-title">Beasiswa PPTI BCA</h2>
+        <h2 className="card-title">{scholarship.nama}</h2>
         <p className="card-subtitle">
-          Lingkup Beasiswa: Nasional <br /> Tingkat Pendidikan: S1 <br />{" "}
-          Penyelenggara: PT. BCA
+          Lingkup Beasiswa: {scholarship.lingkup} <br />
+          Tingkat Pendidikan: {scholarship.tingkat} <br />
+          Penyelenggara: {scholarship.penyelenggara} <br />
         </p>
         <Button
           className="card-button"
-          href="/scholarship-detail-item"
+          href={`/scholarship-detail-item/${scholarship.id}`}
           variant="contained"
           sx={{
             fontFamily: "'Poppins', sans-serif", // Use the Poppins font

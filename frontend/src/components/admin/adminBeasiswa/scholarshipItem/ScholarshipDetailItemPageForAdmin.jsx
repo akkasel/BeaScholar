@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import "../../../../App.css";
 import Card from "@mui/material/Card";
 import Button from "@mui/material/Button";
@@ -7,8 +8,39 @@ import { TextField } from "@mui/material";
 import MuiMenuItem from "@mui/material/MenuItem";
 import TopBarAdmin from "../../adminMasterPage/TopBarAdmin";
 import SideBarAdmin from "../../adminMasterPage/SideBarAdmin";
+import { db } from "../../../../firebase";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 
 const ScholarshipDetailItemPageForAdmin = () => {
+  const { id } = useParams();
+  const [scholarship, setScholarship] = useState(null);
+
+  useEffect(() => {
+    const fetchScholarship = async () => {
+      const docRef = doc(db, "beasiswa", id);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        setScholarship(docSnap.data());
+      } else {
+        console.error("No such document!");
+      }
+    };
+
+    fetchScholarship();
+  }, [id]);
+
+  const handleUpdate = async () => {
+    const docRef = doc(db, "beasiswa", id);
+    await updateDoc(docRef, {
+      // Add the fields to be updated here
+    });
+    alert("Beasiswa berhasil diperbarui");
+  };
+
+  if (!scholarship) {
+    return <div>Loading...</div>;
+  }
+
   // untuk textfield tingkat pendidikan
   const tingkatPendidikan = [
     {
@@ -47,12 +79,10 @@ const ScholarshipDetailItemPageForAdmin = () => {
 
   return (
     <div>
-      <TopBarAdmin /> {/* Render the TopBar component */}
+      <TopBarAdmin />
       <div className="scholarship-detail-admin-page">
-        <SideBarAdmin /> {/* Render the SideBar component */}
-
+        <SideBarAdmin />
         <div className="interview-page-container">
-          {/*Header text "Feedback Dokumen"*/}
           <div className="container-feedback-header">
             <br />
             <br />
@@ -69,31 +99,33 @@ const ScholarshipDetailItemPageForAdmin = () => {
           <br />
 
           <div className="container-feedback-title">
-            <h1 className="latihan-interview-text">Beasiswa PPTI BCA</h1>
+            <h1 className="latihan-interview-text">{scholarship.nama}</h1>
           </div>
 
-                  {/* Nama */}
-                  <div className="form-input-container">
+          <div className="form-input-container">
             <div className="text-interview-container">
               <span className="text-interview">Lingkup Beasiswa: </span>
-              <span className="text-interview-orange">Nasional</span>
+              <span className="text-interview-orange">
+                {scholarship.lingkup}
+              </span>
             </div>
 
             <div className="text-interview-container">
               <span className="text-interview">Tingkat Pendidikan: </span>
-              <span className="text-interview-orange">S1</span>
+              <span className="text-interview-orange">
+                {scholarship.tingkat}
+              </span>
             </div>
 
             <div className="text-interview-container">
               <span className="text-interview">Penyelenggara: </span>
               <span className="text-interview-orange">
-                PT. Bank Central Asia
+                {scholarship.penyelenggara}
               </span>
             </div>
 
             <br />
 
-            {/* Deskripsi */}
             <div className="text-interview-container">
               <span className="text-interview">Deskripsi</span>
             </div>
@@ -107,19 +139,7 @@ const ScholarshipDetailItemPageForAdmin = () => {
               >
                 <div className="text-container-feedback">
                   <div>
-                    <span>
-                      Pendaftaran Beasiswa BCA Tahun Ajaran 2025 merupakan pintu
-                      gerbang bagi para lulusan SMK/SMA berprestasi untuk
-                      mengakses pendidikan berkualitas tanpa biaya dan
-                      mendapatkan dukungan finansial yang berkelanjutan. Para
-                      penerima beasiswa akan memperoleh manfaat tambahan berupa
-                      laptop dan buku pelajaran, serta kesempatan untuk magang
-                      dan menerima tawaran kerja. Melalui pendidikan di BCA
-                      Learning Institute, mereka akan diperlengkapi dengan
-                      pengetahuan mendalam dan keterampilan praktis, termasuk
-                      pelatihan soft skill yang vital untuk sukses di dunia
-                      kerja.
-                    </span>
+                    <span>{scholarship.deskripsi}</span>
                   </div>
                 </div>
               </Card>
@@ -127,7 +147,6 @@ const ScholarshipDetailItemPageForAdmin = () => {
 
             <br />
 
-            {/* Manfaat */}
             <div className="text-interview-container">
               <span className="text-interview">Manfaat</span>
             </div>
@@ -141,24 +160,7 @@ const ScholarshipDetailItemPageForAdmin = () => {
               >
                 <div className="text-container-feedback">
                   <div>
-                    <span>
-                      1. Laptop dan buku pelajaran selama perkuliahan (khusus
-                      PPTI).
-                    </span>
-                  </div>
-                  <div>
-                    <span>
-                      2. Menerima sekolah gratis dan uang saku setiap bulan.
-                    </span>
-                  </div>
-                  <div>
-                    {" "}
-                    <span>3. Menerima tawaran kerja dan peluang magang. </span>
-                  </div>
-                  <div>
-                    <span>
-                      4. Makan siang, shuttle bus, dan asrama disediakan.
-                    </span>
+                    <span>{scholarship.manfaat}</span>
                   </div>
                 </div>
               </Card>
@@ -166,7 +168,6 @@ const ScholarshipDetailItemPageForAdmin = () => {
 
             <br />
 
-            {/* Syarat dan Keperluan */}
             <div className="text-interview-container">
               <span className="text-interview">Syarat dan Keperluan</span>
             </div>
@@ -175,37 +176,12 @@ const ScholarshipDetailItemPageForAdmin = () => {
                 sx={{
                   border: "2px solid #CA3C4F!important",
                   borderColor: "#CA3C4F !important",
-                  // borderRadius: "10px",
+                  borderRadius: "10px",
                 }}
               >
-                {/* ga perlu pakai div sama span, harusnya tinggal <br /> aja */}
                 <div className="text-container-feedback">
                   <div>
-                    <div>
-                      <span>
-                        1. Siswa kelas XII atau lulusan SMA baru jurusan IPA
-                        atau SMK (jurusan teknik informatika)
-                      </span>
-                    </div>
-                    <div>
-                      <span>2. Warga negara Indonesia</span>
-                    </div>
-                    <div>
-                      {" "}
-                      <span>
-                        3. Usia maksimal untuk mendaftar adalah 19 tahun.{" "}
-                      </span>
-                    </div>
-                    <div>
-                      <span>
-                        4. Nilai rata-rata matematika untuk kelas X, XI, dan XII
-                        (IPA, IPS) atau nilai produktif kelas X, XI, dan XII
-                        (khusus SMK) minimal 7,50
-                      </span>
-                    </div>
-                    <div>
-                      <span>5. Selesaikan prosedur penyaringan.</span>
-                    </div>
+                    <span>{scholarship.syarat}</span>
                   </div>
                 </div>
               </Card>
@@ -213,322 +189,303 @@ const ScholarshipDetailItemPageForAdmin = () => {
 
             <br />
 
-            {/* Link atau Website Pendaftaran */}
             <div className="text-interview-container">
               <span className="text-interview">Tautan Pendaftaran</span>
             </div>
             <div className="card-link-pendaftaran">
-            <Card
+              <Card
                 sx={{
                   border: "2px solid #CA3C4F!important",
                   borderColor: "#CA3C4F !important",
-                  // borderRadius: "10px",
+                  borderRadius: "10px",
                 }}
               >
-                {/* ga perlu pakai div sama span, harusnya tinggal <br /> aja */}
                 <div className="text-container-feedback">
                   <div>
-                    <a href="https://karir.bca.co.id/beasiswa-bca/daftar/program-pendidikan-teknologi-informasi-ppti">https://karir.bca.co.id/beasiswa-bca/daftar/program-pendidikan-teknologi-informasi-ppti</a>
+                    <a
+                      href={scholarship.tautan}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {scholarship.tautan}
+                    </a>
                   </div>
                 </div>
               </Card>
             </div>
             <br />
 
-          </div>
+            <hr />
 
-          <hr />
+            {/* DIBAWAH INI ADALAH LAYOUT UNTUK UPDATE INFORMASI BEASISWA */}
 
-          <div className="container-feedback-title">
-            <h1 className="latihan-interview-text">Update Informasi Beasiswa</h1>
-          </div>
+            <h1 className="latihan-interview-text">
+              Update Informasi Beasiswa
+            </h1>
 
-          <div className="container-feedback-title">
             <div className="text-interview-container">
               <span className="text-interview">
                 Nama atau Judul Program Beasiswa
               </span>
             </div>
             <div>
-            <TextField
-                label="Tuliskan nama atau judul beasiswa di sini..."
+              <TextField
                 fullWidth
                 id="outlined-textfield-nama"
                 variant="outlined"
+                value={scholarship.nama}
+                onChange={(e) =>
+                  setScholarship({ ...scholarship, nama: e.target.value })
+                }
                 width="200px"
                 sx={{
-                  // Root class for the input field
                   "& .MuiOutlinedInput-root": {
-                    // Class for the border around the input field
                     "& .MuiOutlinedInput-notchedOutline": {
                       borderColor: "#C4084F",
                       borderWidth: "2px",
                     },
                   },
-                  // Class for the label of the input field
                   "& .MuiInputLabel-outlined": {
                     color: "#121212",
                   },
                 }}
               />
             </div>
-          </div>
-
-          <br />
-
-          <div className="form-input-container">
-            <div className="text-interview-container">
-              <div className="text-interview-container">
-                <span className="text-interview">Lingkup Beasiswa</span>
-              </div>
-              <TextField
-                fullWidth
-                id="outlined-select-lingkup-beasiswa"
-                select
-                defaultValue="Dalam Negeri"
-                sx={{
-                  // Root class for the input field
-                  "& .MuiOutlinedInput-root": {
-                    // Class for the border around the input field
-                    "& .MuiOutlinedInput-notchedOutline": {
-                      borderColor: "#C4084F",
-                      borderWidth: "2px",
-                    },
-                  },
-                  // Class for the label of the input field
-                  "& .MuiInputLabel-outlined": {
-                    color: "#121212",
-                  },
-                }}
-              >
-                {lingkupBeasiswa.map((option) => (
-                  <MuiMenuItem key={option.value} value={option.value}>
-                    {option.label}
-                  </MuiMenuItem>
-                ))}
-              </TextField>
-            </div>
 
             <br />
 
             <div className="text-interview-container">
-              <div className="text-interview-container">
-                <span className="text-interview">Tingkat Pendidikan</span>
-              </div>
-              <TextField
-                fullWidth
-                id="outlined-select-lingkup-beasiswa"
-                select
-                defaultValue="SMA"
-                sx={{
-                  // Root class for the input field
-                  "& .MuiOutlinedInput-root": {
-                    // Class for the border around the input field
-                    "& .MuiOutlinedInput-notchedOutline": {
-                      borderColor: "#C4084F",
-                      borderWidth: "2px",
-                    },
-                  },
-                  // Class for the label of the input field
-                  "& .MuiInputLabel-outlined": {
-                    color: "#121212",
-                  },
-                }}
-              >
-                {tingkatPendidikan.map((option) => (
-                  <MuiMenuItem key={option.value} value={option.value}>
-                    {option.label}
-                  </MuiMenuItem>
-                ))}
-              </TextField>
+              <span className="text-interview">Lingkup Beasiswa</span>
             </div>
+            <TextField
+              fullWidth
+              id="outlined-select-lingkup-beasiswa"
+              select
+              value={scholarship.lingkup}
+              onChange={(e) =>
+                setScholarship({ ...scholarship, lingkup: e.target.value })
+              }
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  "& .MuiOutlinedInput-notchedOutline": {
+                    borderColor: "#C4084F",
+                    borderWidth: "2px",
+                  },
+                },
+                "& .MuiInputLabel-outlined": {
+                  color: "#121212",
+                },
+              }}
+            >
+              {lingkupBeasiswa.map((option) => (
+                <MuiMenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MuiMenuItem>
+              ))}
+            </TextField>
 
+            <br />
             <br />
 
             <div className="text-interview-container">
-              <div className="text-interview-container">
-                <span className="text-interview">Penyelenggara</span>
-              </div>
-              <div>
-                <TextField
-                  label="Tuliskan penyelenggara beasiswa di sini..."
-                  fullWidth
-                  id="outlined-textfield-nama"
-                  variant="outlined"
-                  width="200px"
-                  sx={{
-                    // Root class for the input field
-                    "& .MuiOutlinedInput-root": {
-                      // Class for the border around the input field
-                      "& .MuiOutlinedInput-notchedOutline": {
-                        borderColor: "#C4084F",
-                        borderWidth: "2px",
-                      },
-                    },
-                    // Class for the label of the input field
-                    "& .MuiInputLabel-outlined": {
-                      color: "#121212",
-                    },
-                  }}
-                />
-              </div>
+              <span className="text-interview">Tingkat Pendidikan</span>
             </div>
+            <TextField
+              fullWidth
+              id="outlined-select-lingkup-beasiswa"
+              select
+              value={scholarship.tingkat}
+              onChange={(e) =>
+                setScholarship({ ...scholarship, tingkat: e.target.value })
+              }
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  "& .MuiOutlinedInput-notchedOutline": {
+                    borderColor: "#C4084F",
+                    borderWidth: "2px",
+                  },
+                },
+                "& .MuiInputLabel-outlined": {
+                  color: "#121212",
+                },
+              }}
+            >
+              {tingkatPendidikan.map((option) => (
+                <MuiMenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MuiMenuItem>
+              ))}
+            </TextField>
 
             <br />
+            <br />
 
-            {/* Deskripsi */}
+            <div className="text-interview-container">
+              <span className="text-interview">Penyelenggara</span>
+            </div>
+            <TextField
+              fullWidth
+              id="outlined-textfield-nama"
+              variant="outlined"
+              value={scholarship.penyelenggara}
+              onChange={(e) =>
+                setScholarship({
+                  ...scholarship,
+                  penyelenggara: e.target.value,
+                })
+              }
+              width="200px"
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  "& .MuiOutlinedInput-notchedOutline": {
+                    borderColor: "#C4084F",
+                    borderWidth: "2px",
+                  },
+                },
+                "& .MuiInputLabel-outlined": {
+                  color: "#121212",
+                },
+              }}
+            />
+
+            <br />
+            <br />
+
             <div className="text-interview-container">
               <span className="text-interview">Deskripsi</span>
             </div>
-            <div className="card-feedback-interview">
-              <div className="text-field-feedback-expert-container">
-                <TextField
-                label="Tuliskan deskripsi beasiswa di sini..."
-                  fullWidth
-                  id="outlined-textfield-nama"
-                  variant="outlined"
-                  width="200px"
-                  sx={{
-                    // Root class for the input field
-                    "& .MuiOutlinedInput-root": {
-                      // Class for the border around the input field
-                      "& .MuiOutlinedInput-notchedOutline": {
-                        borderColor: "#C4084F",
-                        borderWidth: "2px",
-                      },
-                    },
-                    // Class for the label of the input field
-                    "& .MuiInputLabel-outlined": {
-                      color: "#121212",
-                    },
-                  }}
-                  multiline // Add this prop to enable multiple lines
-                />
-              </div>
-            </div>
+            <TextField
+              fullWidth
+              id="outlined-textfield-nama"
+              variant="outlined"
+              value={scholarship.deskripsi}
+              onChange={(e) =>
+                setScholarship({ ...scholarship, deskripsi: e.target.value })
+              }
+              width="200px"
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  "& .MuiOutlinedInput-notchedOutline": {
+                    borderColor: "#C4084F",
+                    borderWidth: "2px",
+                  },
+                },
+                "& .MuiInputLabel-outlined": {
+                  color: "#121212",
+                },
+              }}
+              multiline
+            />
 
             <br />
+            <br />
 
-            {/* Manfaat */}
             <div className="text-interview-container">
               <span className="text-interview">Manfaat</span>
             </div>
-            <div className="card-feedback-interview">
-              <div className="text-field-feedback-expert-container">
-                <TextField
-                  label="Jabarkan manfaat beasiswa di sini..."
-                  fullWidth
-                  id="outlined-textfield-nama"
-                  variant="outlined"
-                  width="200px"
-                  sx={{
-                    // Root class for the input field
-                    "& .MuiOutlinedInput-root": {
-                      // Class for the border around the input field
-                      "& .MuiOutlinedInput-notchedOutline": {
-                        borderColor: "#C4084F",
-                        borderWidth: "2px",
-                      },
-                    },
-                    // Class for the label of the input field
-                    "& .MuiInputLabel-outlined": {
-                      color: "#121212",
-                    },
-                  }}
-                  multiline // Add this prop to enable multiple lines
-                />
-              </div>
-            </div>
+            <TextField
+              fullWidth
+              id="outlined-textfield-nama"
+              variant="outlined"
+              value={scholarship.manfaat}
+              onChange={(e) =>
+                setScholarship({ ...scholarship, manfaat: e.target.value })
+              }
+              width="200px"
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  "& .MuiOutlinedInput-notchedOutline": {
+                    borderColor: "#C4084F",
+                    borderWidth: "2px",
+                  },
+                },
+                "& .MuiInputLabel-outlined": {
+                  color: "#121212",
+                },
+              }}
+              multiline
+            />
 
             <br />
+            <br />
 
-            {/* Syarat dan Keperluan */}
             <div className="text-interview-container">
               <span className="text-interview">Syarat dan Keperluan</span>
             </div>
-            <div className="card-feedback-interview">
-              <div className="text-field-feedback-expert-container">
-                <TextField
-                  label="Jabarkan syarat dan keperluan beasiswa di sini..."
-                  fullWidth
-                  id="outlined-textfield-nama"
-                  variant="outlined"
-                  width="200px"
-                  sx={{
-                    // Root class for the input field
-                    "& .MuiOutlinedInput-root": {
-                      // Class for the border around the input field
-                      "& .MuiOutlinedInput-notchedOutline": {
-                        borderColor: "#C4084F",
-                        borderWidth: "2px",
-                      },
-                    },
-                    // Class for the label of the input field
-                    "& .MuiInputLabel-outlined": {
-                      color: "#121212",
-                    },
-                  }}
-                  multiline // Add this prop to enable multiple lines
-                />
-              </div>
-            </div>
+            <TextField
+              fullWidth
+              id="outlined-textfield-nama"
+              variant="outlined"
+              value={scholarship.syarat}
+              onChange={(e) =>
+                setScholarship({ ...scholarship, syarat: e.target.value })
+              }
+              width="200px"
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  "& .MuiOutlinedInput-notchedOutline": {
+                    borderColor: "#C4084F",
+                    borderWidth: "2px",
+                  },
+                },
+                "& .MuiInputLabel-outlined": {
+                  color: "#121212",
+                },
+              }}
+              multiline
+            />
 
+            <br />
             <br />
 
             <div className="text-interview-container">
               <span className="text-interview">Tautan Pendaftaran</span>
             </div>
-            <div className="card-link-pendaftaran">
-                <TextField
-                  label="Sertakan tautan pendaftaran beasiswa di sini..."
-                  fullWidth
-                  id="outlined-textfield-nama"
-                  variant="outlined"
-                  width="200px"
-                  sx={{
-                    // Root class for the input field
-                    "& .MuiOutlinedInput-root": {
-                      // Class for the border around the input field
-                      "& .MuiOutlinedInput-notchedOutline": {
-                        borderColor: "#C4084F",
-                        borderWidth: "2px",
-                      },
-                    },
-                    // Class for the label of the input field
-                    "& .MuiInputLabel-outlined": {
-                      color: "#121212",
-                    },
-                  }}
-                />
-            </div>
+            <TextField
+              fullWidth
+              id="outlined-textfield-nama"
+              variant="outlined"
+              value={scholarship.tautan}
+              onChange={(e) =>
+                setScholarship({ ...scholarship, tautan: e.target.value })
+              }
+              width="200px"
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  "& .MuiOutlinedInput-notchedOutline": {
+                    borderColor: "#C4084F",
+                    borderWidth: "2px",
+                  },
+                },
+                "& .MuiInputLabel-outlined": {
+                  color: "#121212",
+                },
+              }}
+            />
 
             <br />
+            <br />
 
-            {/* Daftar Sekarang! Lalu diarahkan ke website atau link pendaftarannya */}
             <div>
               <Button
-                /* Jadi User nanti diarahkan ke link pendaftarannya, ini contoh aja */
-                href="https://karir.bca.co.id/beasiswa-bca/daftar/program-pendidikan-teknologi-informasi-ppti"
+                onClick={handleUpdate}
                 variant="contained"
                 sx={{
-                  fontFamily: "'Poppins', sans-serif", // Use the Poppins font
-                  textTransform: "none", // Remove capitalization
-                  borderRadius: "20px", // Apply rounded edges
+                  fontFamily: "'Poppins', sans-serif",
+                  textTransform: "none",
+                  borderRadius: "20px",
                   width: "120px",
                   fontWeight: "bold",
-                  background: "linear-gradient(to bottom, #009117, #121212)", // Gradient background
+                  background: "linear-gradient(to bottom, #009117, #121212)",
                   "&:hover": {
                     background: "linear-gradient(to bottom, #009117, #121212)",
                   },
-
-                  justifyContent: "center", // Centralized text and icon
+                  justifyContent: "center",
                 }}
               >
                 Perbaharui
               </Button>
             </div>
-
-            {/* Add your input form here */}
           </div>
         </div>
       </div>

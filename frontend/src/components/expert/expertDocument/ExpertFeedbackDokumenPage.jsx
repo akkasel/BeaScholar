@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import "../../../App.css";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -6,13 +7,62 @@ import arrowleftSvg from "../../../img/arrowleft.svg";
 import TopBarExpert from "../expertMasterPage/TopBarExpert";
 import SideBarExpert from "../expertMasterPage/SideBarExpert";
 import downloadiconSvg from "../../../img/downloadicon.svg";
+import { db } from "../../../firebase";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 
 const ExpertFeedbackDokumenPage = () => {
-  const DownloadButton = () => {
+  const { id } = useParams();
+  const [dokumen, setDokumen] = useState({
+    hasilAnalisa: "",
+    halYangBisaDirevisi: "",
+    catatanTambahan: "",
+    linkDokumen: "",
+  });
+
+  useEffect(() => {
+    const fetchDokumen = async () => {
+      const docRef = doc(db, "dokumen", id);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        setDokumen(docSnap.data());
+      } else {
+        console.error("No such document!");
+      }
+    };
+
+    fetchDokumen();
+  }, [id]);
+
+  const handleUpdate = async () => {
+    const docRef = doc(db, "dokumen", id);
+    await updateDoc(docRef, {
+      hasilAnalisa: dokumen.hasilAnalisa,
+      halYangBisaDirevisi: dokumen.halYangBisaDirevisi,
+      catatanTambahan: dokumen.catatanTambahan,
+    });
+    alert("Feedback terkait dokumen ini berhasil dikirim!");
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setDokumen((prevDokumen) => ({
+      ...prevDokumen,
+      [name]: value,
+    }));
+  };
+
+  if (!dokumen) {
+    return <div>Loading...</div>;
+  }
+
+  const DownloadButton = ({ href }) => {
     return (
       <Button
         variant="outlined"
-        startIcon={<img src={downloadiconSvg}></img>}
+        startIcon={<img src={downloadiconSvg} alt="Download Icon" />}
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
         sx={{
           textTransform: "none", // Remove capitalization
           borderColor: "#C4084F",
@@ -36,9 +86,8 @@ const ExpertFeedbackDokumenPage = () => {
       <TopBarExpert /> {/* Render the TopBar component */}
       <div className="feedback-interview-page">
         <SideBarExpert /> {/* Render the SideBar component */}
-
         <div className="interview-page-container">
-          {/*Header text "Feedback Interview"*/}
+          {/* Header text "Feedback Interview" */}
           <div className="container-feedback-header">
             <br />
             <br />
@@ -59,27 +108,10 @@ const ExpertFeedbackDokumenPage = () => {
 
           <div className="form-input-container">
             <div className="text-interview-container">
-              <span className="text-interview">Tanggal Pengumpulan: </span>
-              <span className="text-interview-orange">28 Februari 2024</span>
-            </div>
-
-            <div className="text-interview-container">
-              <span className="text-interview">Waktu: </span>
-              <span className="text-interview-orange">15:00</span>
-            </div>
-
-            <div className="text-interview-container">
-              <span className="text-interview">Identitas Peserta: </span>
-              <span className="text-interview-orange">Amanda</span>
-            </div>
-
-            <br />
-
-            <div className="text-interview-container">
               <span className="text-interview">Dokumen Terkait:</span>
             </div>
 
-            <DownloadButton></DownloadButton>
+            <DownloadButton href={dokumen.linkDokumen} />
 
             <br />
             <br />
@@ -88,30 +120,27 @@ const ExpertFeedbackDokumenPage = () => {
             <div className="text-interview-container">
               <span className="text-interview">Hasil Analisa</span>
             </div>
-
             <div className="text-field-feedback-expert-container">
               <TextField
-                label="Jabarkan hasil analisa Anda terkait dokumen yang dikumpulkan..."
+                label="Jabarkan hasil analisa terkait dokumen yang dikumpulkan..."
                 fullWidth
-                id="outlined-textfield-nama"
+                name="hasilAnalisa"
+                value={dokumen.hasilAnalisa}
+                onChange={handleChange}
                 variant="outlined"
-                width="200px"
+                multiline // Add this prop to enable multiple lines
                 sx={{
-                  // Root class for the input field
                   "& .MuiOutlinedInput-root": {
-                    // Class for the border around the input field
                     "& .MuiOutlinedInput-notchedOutline": {
                       borderWidth: "2px",
                       borderColor: "#FF6C37",
                     },
                   },
-                  // Class for the label of the input field
                   "& .MuiOutlinedInput-input": {
                     color: "#121212",
                   },
                   width: "1000px", // Adjust the width value as needed
                 }}
-                multiline // Add this prop to enable multiple lines
               />
             </div>
 
@@ -125,25 +154,23 @@ const ExpertFeedbackDokumenPage = () => {
               <TextField
                 label="Jabarkan hal-hal yang perlu direvisi terkait dokumen yang dikumpulkan..."
                 fullWidth
-                id="outlined-textfield-nama"
+                name="halYangBisaDirevisi"
+                value={dokumen.halYangBisaDirevisi}
+                onChange={handleChange}
                 variant="outlined"
-                width="200px"
+                multiline // Add this prop to enable multiple lines
                 sx={{
-                  // Root class for the input field
                   "& .MuiOutlinedInput-root": {
-                    // Class for the border around the input field
                     "& .MuiOutlinedInput-notchedOutline": {
                       borderWidth: "2px",
                       borderColor: "#FF6C37",
                     },
                   },
-                  // Class for the label of the input field
                   "& .MuiOutlinedInput-input": {
                     color: "#121212",
                   },
                   width: "1000px", // Adjust the width value as needed
                 }}
-                multiline // Add this prop to enable multiple lines
               />
             </div>
 
@@ -157,25 +184,23 @@ const ExpertFeedbackDokumenPage = () => {
               <TextField
                 label="Berikan catatan tambahan Anda terkait dokumen yang dikumpulkan..."
                 fullWidth
-                id="outlined-textfield-nama"
+                name="catatanTambahan"
+                value={dokumen.catatanTambahan}
+                onChange={handleChange}
                 variant="outlined"
-                width="200px"
+                multiline // Add this prop to enable multiple lines
                 sx={{
-                  // Root class for the input field
                   "& .MuiOutlinedInput-root": {
-                    // Class for the border around the input field
                     "& .MuiOutlinedInput-notchedOutline": {
                       borderWidth: "2px",
                       borderColor: "#FF6C37",
                     },
                   },
-                  // Class for the label of the input field
                   "& .MuiOutlinedInput-input": {
                     color: "#121212",
                   },
                   width: "1000px", // Adjust the width value as needed
                 }}
-                multiline // Add this prop to enable multiple lines
               />
             </div>
 
@@ -184,6 +209,7 @@ const ExpertFeedbackDokumenPage = () => {
             {/* Simpan Button */}
             <div>
               <Button
+                onClick={handleUpdate}
                 variant="contained"
                 sx={{
                   fontFamily: "'Poppins', sans-serif", // Use the Poppins font
@@ -195,15 +221,12 @@ const ExpertFeedbackDokumenPage = () => {
                   "&:hover": {
                     background: "linear-gradient(to right, #FA6339, #C73950)",
                   },
-
                   justifyContent: "center", // Centralized text and icon
                 }}
               >
                 Simpan
               </Button>
             </div>
-
-            {/* Add your input form here */}
           </div>
         </div>
       </div>

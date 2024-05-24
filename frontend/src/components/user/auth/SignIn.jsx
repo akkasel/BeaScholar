@@ -1,30 +1,42 @@
 import React, { useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 import { auth } from "../../../firebase";
+
 import '../../../App.css';
 import facebookSvg from '../../../img/facebook.svg';
 import microsoftSvg from '../../../img/microsoft.svg';
 import googleSvg from '../../../img/google.svg';
 
-
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate(); // Initialize useNavigate
 
   const signIn = (e) => {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // User signed in
+        console.log(userCredential);
+        navigate("/home"); // Navigate to home on success
       })
       .catch((error) => {
         // Handle errors here.
+        console.log(error);
       });
   };
 
-  // Add methods to handle social login here
+  // Sign in with Google
   const handleGoogleSignIn = () => {
-    // Google sign-in logic
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        console.log(result);
+        navigate("/home"); // Navigate to home on success
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const handleFacebookSignIn = () => {
