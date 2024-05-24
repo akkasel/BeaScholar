@@ -1,6 +1,8 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
 import { auth } from "../../../firebase";
+import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+
 import facebookSvg from '../../../img/facebook.svg';
 import microsoftSvg from '../../../img/microsoft.svg';
 import googleSvg from '../../../img/google.svg';
@@ -9,6 +11,7 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  const navigate = useNavigate();
 
   const signUp = (e) => {
     e.preventDefault();
@@ -17,6 +20,7 @@ const SignUp = () => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         console.log(userCredential);
+        navigate("/home"); // navigate to home screen
       })
       .catch((error) => {
         console.log(error);
@@ -33,7 +37,16 @@ const SignUp = () => {
 
   // Add methods to handle social SignUp here
   const handleGoogleSignUp = () => {
-    // Google sign-in logic
+    // Google sign-up logic
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        console.log(result);
+        navigate("/home"); // navigate to home screen
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const handleFacebookSignUp = () => {

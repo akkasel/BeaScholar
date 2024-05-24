@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../firebase";
 import '../../../App.css';
+import { useNavigate } from "react-router-dom"; // Import useNavigate
+
 import facebookSvg from '../../../img/facebook.svg';
 import microsoftSvg from '../../../img/microsoft.svg';
 import googleSvg from '../../../img/google.svg';
@@ -11,28 +13,19 @@ const AdminSignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const navigate = useNavigate(); // to navigate
+
   const signIn = (e) => {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // User signed in
+        console.log(userCredential);
+        navigate("/admin-home"); // Navigate to home on success
       })
       .catch((error) => {
         // Handle errors here.
+        console.log(error);
       });
-  };
-
-  // Add methods to handle social login here
-  const handleGoogleSignIn = () => {
-    // Google sign-in logic
-  };
-
-  const handleFacebookSignIn = () => {
-    // Facebook sign-in logic
-  };
-
-  const handleMicrosoftSignIn = () => {
-    // Microsoft sign-in logic
   };
 
   return (
@@ -67,19 +60,7 @@ const AdminSignIn = () => {
           <a className="login-sebagai-expert" href="/admin-signup">Daftar disini!</a> {/* Jangan lupa di href nya nanti simpan link untuk ke page Sign Up*/}
         </div>
 
-        <button type="submit">Login sebagai admin</button>
-        
-        <div className="social-login">
-          <button onClick={handleGoogleSignIn}>
-          <img src={googleSvg} alt="Google" className="social-icon" />
-          </button>
-          <button onClick={handleFacebookSignIn}>
-          <img src={facebookSvg} alt="Facebook" className="social-icon" />
-          </button>
-          <button onClick={handleMicrosoftSignIn}>
-          <img src={microsoftSvg} alt="Microsoft" className="social-icon" />
-          </button>
-        </div>
+        <button type="submit" onClick={signIn}>Login sebagai admin</button>
 
       </form>
     </div>
