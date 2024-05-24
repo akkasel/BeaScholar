@@ -1,18 +1,41 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import "../../../App.css";
 import TopBar from "../masterPage/TopBar";
 import SideBar from "../masterPage/SideBar";
 import Card from "@mui/material/Card";
 import Button from "@mui/material/Button";
 import arrowleftSvg from "../../../img/arrowleft.svg";
+import { db } from "../../../firebase";
+import { getDoc, deleteDoc, doc } from "firebase/firestore";
 
 const ScholarshipDetailItemPage = () => {
+  const { id } = useParams();
+  const [scholarship, setScholarship] = useState(null);
+
+  useEffect(() => {
+    const fetchScholarship = async () => {
+      const docRef = doc(db, "beasiswa", id);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        setScholarship(docSnap.data());
+      } else {
+        console.error("No such document!");
+      }
+    };
+
+    fetchScholarship();
+  }, [id]);
+
+  if (!scholarship) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div>
       <TopBar /> {/* Render the TopBar component */}
       <div className="feedback-interview-page">
         <SideBar /> {/* Render the SideBar component */}
-
         <div className="interview-page-container">
           {/*Header text "Feedback Dokumen"*/}
           <div className="container-feedback-header">
@@ -30,25 +53,29 @@ const ScholarshipDetailItemPage = () => {
           </div>
 
           <div className="container-feedback-title">
-            <h1 className="latihan-interview-text">Beasiswa PPTI BCA</h1>
+            <h1 className="latihan-interview-text">{scholarship.nama}</h1>
           </div>
 
           {/* Nama */}
           <div className="form-input-container">
             <div className="text-interview-container">
               <span className="text-interview">Lingkup Beasiswa: </span>
-              <span className="text-interview-orange">Nasional</span>
+              <span className="text-interview-orange">
+                {scholarship.lingkup}
+              </span>
             </div>
 
             <div className="text-interview-container">
               <span className="text-interview">Tingkat Pendidikan: </span>
-              <span className="text-interview-orange">S1</span>
+              <span className="text-interview-orange">
+                {scholarship.tingkat}
+              </span>
             </div>
 
             <div className="text-interview-container">
               <span className="text-interview">Penyelenggara: </span>
               <span className="text-interview-orange">
-                PT. Bank Central Asia
+                {scholarship.penyelenggara}
               </span>
             </div>
 
@@ -70,19 +97,7 @@ const ScholarshipDetailItemPage = () => {
               >
                 <div className="text-container-feedback">
                   <div>
-                    <span>
-                      Pendaftaran Beasiswa BCA Tahun Ajaran 2025 merupakan pintu
-                      gerbang bagi para lulusan SMK/SMA berprestasi untuk
-                      mengakses pendidikan berkualitas tanpa biaya dan
-                      mendapatkan dukungan finansial yang berkelanjutan. Para
-                      penerima beasiswa akan memperoleh manfaat tambahan berupa
-                      laptop dan buku pelajaran, serta kesempatan untuk magang
-                      dan menerima tawaran kerja. Melalui pendidikan di BCA
-                      Learning Institute, mereka akan diperlengkapi dengan
-                      pengetahuan mendalam dan keterampilan praktis, termasuk
-                      pelatihan soft skill yang vital untuk sukses di dunia
-                      kerja.
-                    </span>
+                    <span>{scholarship.deskripsi}</span>
                   </div>
                 </div>
               </Card>
@@ -105,26 +120,7 @@ const ScholarshipDetailItemPage = () => {
                 }}
               >
                 <div className="text-container-feedback">
-                  <div>
-                    <span>
-                      1. Laptop dan buku pelajaran selama perkuliahan (khusus
-                      PPTI).
-                    </span>
-                  </div>
-                  <div>
-                    <span>
-                      2. Menerima sekolah gratis dan uang saku setiap bulan.
-                    </span>
-                  </div>
-                  <div>
-                    {" "}
-                    <span>3. Menerima tawaran kerja dan peluang magang. </span>
-                  </div>
-                  <div>
-                    <span>
-                      4. Makan siang, shuttle bus, dan asrama disediakan.
-                    </span>
-                  </div>
+                  {scholarship.manfaat}
                 </div>
               </Card>
             </div>
@@ -146,33 +142,7 @@ const ScholarshipDetailItemPage = () => {
                 }}
               >
                 <div className="text-container-feedback">
-                  <div>
-                    <div>
-                      <span>
-                        1. Siswa kelas XII atau lulusan SMA baru jurusan IPA
-                        atau SMK (jurusan teknik informatika)
-                      </span>
-                    </div>
-                    <div>
-                      <span>2. Warga negara Indonesia</span>
-                    </div>
-                    <div>
-                      {" "}
-                      <span>
-                        3. Usia maksimal untuk mendaftar adalah 19 tahun.{" "}
-                      </span>
-                    </div>
-                    <div>
-                      <span>
-                        4. Nilai rata-rata matematika untuk kelas X, XI, dan XII
-                        (IPA, IPS) atau nilai produktif kelas X, XI, dan XII
-                        (khusus SMK) minimal 7,50
-                      </span>
-                    </div>
-                    <div>
-                      <span>5. Selesaikan prosedur penyaringan.</span>
-                    </div>
-                  </div>
+                  <div>{scholarship.syarat}</div>
                 </div>
               </Card>
             </div>
@@ -184,7 +154,7 @@ const ScholarshipDetailItemPage = () => {
               <Button
                 /* Jadi User nanti diarahkan ke link pendaftarannya, ini contoh aja */
                 // harusnya, kalau admin input link, di sini linknya auto ke-update!
-                href="https://karir.bca.co.id/beasiswa-bca/daftar/program-pendidikan-teknologi-informasi-ppti"
+                href={scholarship.tautan}
                 variant="contained"
                 sx={{
                   fontFamily: "'Poppins', sans-serif", // Use the Poppins font

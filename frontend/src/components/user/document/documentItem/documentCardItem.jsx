@@ -5,27 +5,32 @@ import {
 } from "@mui/material";
 import downloadiconSvg from "../../../../img/downloadicon.svg";
 
-const documentCardItem = () => {
-  const DownloadButton = () => {
+const documentCardItem = ({ dokumen }) => {
+  const DownloadButton = ({ href }) => {
     return (
       <Button
-        variant="outlined"
-        startIcon={<img src={downloadiconSvg}></img>}
-        sx={{
-          textTransform: "none", // Remove capitalization
-          borderColor:"#C4084F",
-          backgroundColor: "#FFFF", // Pink color
-          color: "#C4084F", // White text color for contrast
-          "&:hover": {
-            backgroundColor: "#C4084F", // Slightly lighter pink on hover
-            color:"#FFFF",
-          },
-        }}
-      >
-        Unduh
-      </Button>
+      variant="outlined"
+      startIcon={<img src={downloadiconSvg} alt="Download Icon" />}
+      href={href}
+      sx={{
+        textTransform: "none", // Remove capitalization
+        borderColor: "#C4084F",
+        backgroundColor: "#FFFF", // Pink color
+        color: "#C4084F", // White text color for contrast
+        "&:hover": {
+          backgroundColor: "#C4084F", // Slightly lighter pink on hover
+          color: "#FFFF",
+        },
+      }}
+    >
+      Unduh
+    </Button>
     );
   };
+
+  if (!dokumen) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <Card
@@ -50,7 +55,7 @@ const documentCardItem = () => {
           <span className="text-header-item">Tingkat Pendidikan:</span>
         </div>
         <div className="container-text-content-item">
-          <span className="text-content-item">S1</span>
+          <span className="text-content-item">{dokumen.tingkat}</span>
         </div>
       </div>
 
@@ -59,7 +64,7 @@ const documentCardItem = () => {
           <span className="text-header-item">Lingkup Beasiswa:</span>
         </div>
         <div className="container-text-content-item">
-          <span className="text-content-item">Internasional</span>
+          <span className="text-content-item">{dokumen.lingkup}</span>
         </div>
       </div>
 
@@ -68,7 +73,7 @@ const documentCardItem = () => {
           <span className="text-header-item">Jenis Beasiswa:</span>
         </div>
         <div className="container-text-content-item">
-          <span className="text-content-item">Beasiswa S2</span>
+          <span className="text-content-item">{dokumen.tingkat}</span>
         </div>
       </div>
 
@@ -92,7 +97,7 @@ const documentCardItem = () => {
 
       <div className="container-button-jadwal-interview-item">
         <Button
-          href="/feedback-dokumen"
+          href={`/feedback-dokumen/${dokumen.id}`}
           variant="contained"
           sx={{
             fontFamily: "'Poppins', sans-serif", // Use the Poppins font

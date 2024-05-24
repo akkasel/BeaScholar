@@ -789,6 +789,28 @@ button {
   padding: 15px;
 }
 
+.list-of-scholarship-card-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.card-container {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 20px;
+}
+
+.card-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px; /* Adjust the gap between the buttons */
+  margin-top: 10px; /* Adjust the margin as needed */
+}
+
+
 /* Add other styles based on the design such as fonts, colors, etc. */
 
 

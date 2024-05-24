@@ -14,9 +14,30 @@ import { Box, Typography } from "@mui/material";
 import pinmerahSvg from "../../../img/pinmerah.svg";
 import robotSvg from "../../../img/robot.svg";
 
+import { auth, db } from "../../../firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
+import {
+  collection,
+  addDoc,
+  getDocs,
+  updateDoc,
+  deleteDoc,
+  doc,
+} from "firebase/firestore";
+
 const DocumentPage = () => {
-  // ini untuk nampung file nya
-  const [file, setFile] = useState(null);
+  const [user] = useAuthState(auth); // Using react-firebase-hooks to manage auth state
+
+  // untuk upload masing-masing fieldnya ke database.
+  const [jenisDoc, setjenisDoc] = useState("Essay");
+  const [lingkup, setLingkup] = useState("Dalam Negeri");
+  const [tingkat, setTingkat] = useState("S1");
+  const [jenisAnalisa, setJenisAnalisa] = useState("");
+  const [linkDokumen, setLinkDokumen] = useState("");
+  const [hasilAnalisa, setHasilAnalisa] = useState("");
+  const [halYangBisaDirevisi, setHalYangBisaDirevisi] = useState("");
+  const [catatanTambahan, setCatatanTambahan] = useState("");
+  const [dokumenList, setDokumenList] = useState([]);
 
   // untuk textfield jenis dokumen
   const jenisDokumen = [
@@ -46,9 +67,65 @@ const DocumentPage = () => {
     },
   ];
 
-  // untuk handle input file dokumen
-  const handleInputFile = (e) => {
-    setFile(e.target.files[0]);
+  // Checkbox state for single selection
+  const [selectedTingkatBeasiswa, setSelectedTingkatBeasiswa] = useState("");
+
+  // Handle ceklis tingkat mahasiswa - agar cuma bisa pilih salah satu saja
+  const handleChecklistTingkatMahasiswa = (value) => {
+    setSelectedTingkatBeasiswa(value);
+    setTingkat(value);
+  };
+
+  // Checkbox state for single selection
+  const [selectedAnalysis, setSelectedAnalysis] = useState("");
+
+  // Handle analysis selection
+  const handleAnalysisSelection = (value) => {
+    setSelectedAnalysis(value);
+    setJenisAnalisa(value);
+  };
+
+  // Handle analysis submission
+  const handleSubmit = () => {
+    if (selectedAnalysis === "AI") {
+      runAIAnalysis();
+    } else if (selectedAnalysis === "Human") {
+      runHumanAnalysis();
+    }
+  };
+
+  const runAIAnalysis = () => {
+    // Your AI analysis logic here
+    console.log("Running AI analysis...");
+  };
+
+  const runHumanAnalysis = () => {
+    // Your Human analysis logic here
+    console.log("Running Human analysis...");
+  };
+
+  // untuk CREATE data dokumen baru (ini dipake di page ini)
+  const createDokumen = async () => {
+    if (!user) {
+      alert("You must be logged in to create a document.");
+      return;
+    }
+    try {
+      await addDoc(collection(db, "dokumen"), {
+        jenisDoc,
+        lingkup,
+        tingkat,
+        jenisAnalisa,
+        linkDokumen,
+        hasilAnalisa,
+        halYangBisaDirevisi,
+        catatanTambahan,
+      });
+      alert("Document created successfully!");
+    } catch (error) {
+      console.error("Error adding document: ", error);
+      alert("Failed to create dokumen. Check console for details.");
+    }
   };
 
   return (
@@ -56,7 +133,6 @@ const DocumentPage = () => {
       <TopBar /> {/* Render the TopBar component */}
       <div className="document-page">
         <SideBar /> {/* Render the SideBar component */}
-
         <div className="interview-page-container">
           {/*Header text "Latihan Interview"*/}
           <div className="interview-header-container">
@@ -80,6 +156,8 @@ const DocumentPage = () => {
               <TextField
                 fullWidth
                 id="outlined-select-tingkat-pendidikan"
+                value={jenisDoc}
+                onChange={(e) => setjenisDoc(e.target.value)}
                 select
                 defaultValue="Essay"
                 sx={{
@@ -117,6 +195,8 @@ const DocumentPage = () => {
               <TextField
                 fullWidth
                 id="outlined-select-lingkup-beasiswa"
+                value={lingkup}
+                onChange={(e) => setLingkup(e.target.value)}
                 select
                 defaultValue="Dalam Negeri"
                 sx={{
@@ -161,6 +241,8 @@ const DocumentPage = () => {
                   <FormControlLabel
                     control={
                       <Checkbox
+                        checked={selectedTingkatBeasiswa === "S1"}
+                        onChange={() => handleChecklistTingkatMahasiswa("S1")}
                         sx={{
                           color: "#C4084F", // Change the checkbox color
                           "&.Mui-checked": {
@@ -174,6 +256,8 @@ const DocumentPage = () => {
                   <FormControlLabel
                     control={
                       <Checkbox
+                        checked={selectedTingkatBeasiswa === "S2"}
+                        onChange={() => handleChecklistTingkatMahasiswa("S2")}
                         sx={{
                           color: "#C4084F", // Change the checkbox color
                           "&.Mui-checked": {
@@ -187,6 +271,8 @@ const DocumentPage = () => {
                   <FormControlLabel
                     control={
                       <Checkbox
+                        checked={selectedTingkatBeasiswa === "S3"}
+                        onChange={() => handleChecklistTingkatMahasiswa("S3")}
                         sx={{
                           color: "#C4084F", // Change the checkbox color
                           "&.Mui-checked": {
@@ -220,6 +306,8 @@ const DocumentPage = () => {
                   <FormControlLabel
                     control={
                       <Checkbox
+                      checked={selectedAnalysis === "AI"}
+                      onChange={() => handleAnalysisSelection("AI")}
                         sx={{
                           color: "#C4084F", // Change the checkbox color
                           "&.Mui-checked": {
@@ -251,6 +339,8 @@ const DocumentPage = () => {
                   <FormControlLabel
                     control={
                       <Checkbox
+                        checked={selectedAnalysis === "Human"}
+                        onChange={() => handleAnalysisSelection("Human")}
                         sx={{
                           color: "#C4084F", // Change the checkbox color
                           "&.Mui-checked": {
@@ -288,15 +378,32 @@ const DocumentPage = () => {
             {/* warna bordernya masih perlu diatur */}
             <div className="text-interview-container">
               <span className="text-interview">
-                Masukan file kamu disini (.pdf):
+                Masukan link file kamu disini (File dapat diupload ke Google
+                Drive lalu copy link ke kotak dibawah ini)
               </span>
             </div>
-            <div className="input-group">
-              <input
-                type="file"
-                placeholder="KTP"
-                value={file}
-                onChange={handleInputFile}
+            <div>
+              <TextField
+                fullWidth
+                id="outlined-textfield-nama"
+                variant="outlined"
+                value={linkDokumen}
+                onChange={(e) => setLinkDokumen(e.target.value)}
+                width="200px"
+                sx={{
+                  // Root class for the input field
+                  "& .MuiOutlinedInput-root": {
+                    // Class for the border around the input field
+                    "& .MuiOutlinedInput-notchedOutline": {
+                      borderColor: "#C4084F",
+                      borderWidth: "2px",
+                    },
+                  },
+                  // Class for the label of the input field
+                  "& .MuiInputLabel-outlined": {
+                    color: "#121212",
+                  },
+                }}
               />
             </div>
 
@@ -306,6 +413,7 @@ const DocumentPage = () => {
             <div>
               <Button
                 variant="contained"
+                onClick={createDokumen}
                 sx={{
                   fontFamily: "'Poppins', sans-serif", // Use the Poppins font
                   textTransform: "none", // Remove capitalization

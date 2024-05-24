@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../../App.css";
 import TopBar from "../masterPage/TopBar";
 import SideBar from "../masterPage/SideBar";
@@ -9,12 +9,42 @@ import DocumentHistory from "./content/documentSection/DocumentHistory";
 import SearchBar from "../../SearchBar";
 import ScholarshipCard from "./content/scholarshipSection/ScholarshipCard";
 
+import { db } from "../../../firebase";
+import { collection, getDocs } from "firebase/firestore";
+
 
 const HomePage = () => {
+  const [scholarships, setScholarships] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // placeholder data for the cards. Replace with your actual data.
-  const scholarshipCardsData = Array(6).fill(0); // example for 6 cards
+  useEffect(() => {
+    const fetchScholarships = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "beasiswa"));
+        const scholarshipsData = querySnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+        setScholarships(scholarshipsData);
+      } catch (error) {
+        console.error("Error fetching scholarships: ", error);
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
 
+    fetchScholarships();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
   
   return (
     <div>
@@ -56,8 +86,8 @@ const HomePage = () => {
 
           {/* Container for the ScholarshipCard components */}
           <div className="list-of-scholarship-card-container">
-            {scholarshipCardsData.map((_, index) => (
-              <ScholarshipCard key={index} />
+            {scholarships.map((scholarship) => (
+              <ScholarshipCard key={scholarship.id} scholarship={scholarship}/>
             ))}
           </div>
 

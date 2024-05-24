@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import "../../../App.css";
 import TopBar from "../masterPage/TopBar";
 import SideBar from "../masterPage/SideBar";
@@ -6,13 +7,41 @@ import Card from "@mui/material/Card";
 import Button from "@mui/material/Button";
 import arrowleftSvg from "../../../img/arrowleft.svg";
 
+import { db } from "../../../firebase";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
+
 const FeedbackDokumenPage = () => {
+  const { id } = useParams();
+  const [dokumen, setDokumen] = useState({
+    hasilAnalisa: "",
+    halYangBisaDirevisi: "",
+    catatanTambahan: "",
+    linkDokumen: "",
+  });
+
+  useEffect(() => {
+    const fetchDokumen = async () => {
+      const docRef = doc(db, "dokumen", id);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        setDokumen(docSnap.data());
+      } else {
+        console.error("No such document!");
+      }
+    };
+
+    fetchDokumen();
+  }, [id]);
+
+  if (!dokumen) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div>
       <TopBar /> {/* Render the TopBar component */}
       <div className="feedback-interview-page">
         <SideBar /> {/* Render the SideBar component */}
-
         <div className="interview-page-container">
           {/*Header text "Feedback Dokumen"*/}
           <div className="container-feedback-header">
@@ -36,21 +65,6 @@ const FeedbackDokumenPage = () => {
 
           {/* Nama */}
           <div className="form-input-container">
-            <div className="text-interview-container">
-              <span className="text-interview">Tanggal Pengumpulan: </span>
-              <span className="text-interview-orange">28 Februari 2024</span>
-            </div>
-
-            <div className="text-interview-container">
-              <span className="text-interview">Waktu: </span>
-              <span className="text-interview-orange">15:00</span>
-            </div>
-
-            <div className="text-interview-container">
-              <span className="text-interview">Interviewer / Expert: </span>
-              <span className="text-interview-orange">Ms. Leony</span>
-            </div>
-
             <br />
 
             {/* Masukan Positif */}
@@ -68,12 +82,7 @@ const FeedbackDokumenPage = () => {
               >
                 <div className="text-container-feedback">
                   <div>
-                    <span>
-                      Pemohon memiliki pemahaman yang mendalam tentang topik
-                      yang dibahas, menunjukkan komitmen yang kuat terhadap
-                      pendidikan, serta kemampuan untuk mengemukakan gagasan
-                      secara jelas dan persuasif.
-                    </span>
+                    <span>{dokumen.hasilAnalisa}</span>
                   </div>
                 </div>
               </Card>
@@ -96,11 +105,7 @@ const FeedbackDokumenPage = () => {
               >
                 <div className="text-container-feedback">
                   <div>
-                    <span>
-                      1. Kehalusan dan Konsistensi: Memastikan keseluruhan
-                      tulisan memiliki alur yang lancar dan konsisten dalam
-                      penggunaan bahasa dan gagasan.
-                    </span>
+                    <span>{dokumen.halYangBisaDirevisi}</span>
                   </div>
                 </div>
               </Card>
@@ -125,7 +130,7 @@ const FeedbackDokumenPage = () => {
               >
                 <div className="text-container-feedback">
                   <div>
-                    <span>Tidak ada</span>
+                    <span>{dokumen.catatanTambahan}</span>
                   </div>
                 </div>
               </Card>

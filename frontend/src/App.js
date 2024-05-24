@@ -40,7 +40,7 @@ function App() {
           <Route path="/auth-details" element={<AuthDetails />} />
 
           <Route path="/home" element={<HomePage />} />
-          <Route path="/scholarship-detail-item" element={<ScholarshipDetailItemPage />} />
+          <Route path="/scholarship-detail-item/:id" element={<ScholarshipDetailItemPage />} />
 
           <Route path="/interview" element={<InterviewPage />} />
           <Route path="/daftar-jadwal-interview" element={<DaftarJadwalInterviewPage />} />
@@ -48,7 +48,7 @@ function App() {
 
           <Route path="/document" element={<DocumentPage />} />
           <Route path="/daftar-hasil-analisis-dokumen" element={<DaftarHasilAnalisisDokumenPage />} />
-          <Route path="/feedback-dokumen" element={<FeedbackDokumenPage />} />
+          <Route path="/feedback-dokumen/:id" element={<FeedbackDokumenPage />} />
 
           <Route path="/profile" element={<ProfilePage />} />
 
@@ -63,7 +63,7 @@ function App() {
           <Route path="/expert-feedback-interview" element={<ExpertFeedbackInterviewPage />} />
 
           <Route path="/expert-daftar-hasil-analisis-dokumen" element={<ExpertDaftarHasilAnalisisDokumenPage />} />
-          <Route path="/expert-feedback-dokumen" element={<ExpertFeedbackDokumenPage />} />
+          <Route path="/expert-feedback-dokumen/:id" element={<ExpertFeedbackDokumenPage />} />
 
           <Route path="/expert-profile" element={<ExpertProfilePage />} />
 
@@ -72,10 +72,10 @@ function App() {
           <Route path="/admin-signup" element={<AdminSignUp />} />
 
           <Route path="/admin-home" element={<AdminHomePage />} />
-          <Route path="/admin-scholarship-detail-item" element={<ScholarshipDetailItemPageForAdmin />} />
+          <Route path="/admin-scholarship-detail-item/:id" element={<ScholarshipDetailItemPageForAdmin />} />
 
           <Route path="/admin-verifikasi" element={<AdminVerifikasiPage />} />
-          <Route path="/admin-verifikasi-detail-pengajuan" element={<AdminVerifikasiDetailPengajuanPage />} />
+          <Route path="/admin-verifikasi-detail-pengajuan/:id" element={<AdminVerifikasiDetailPengajuanPage />} />
 
           <Route path="/admin-upload-beasiswa" element={<UploadBeasiswaPage />} />
 

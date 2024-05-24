@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../../App.css";
 import TopBar from "../masterPage/TopBar";
 import SideBar from "../masterPage/SideBar";
@@ -7,7 +7,42 @@ import SearchBar from "../../SearchBar";
 import DocumentCardItem from "./documentItem/documentCardItem";
 import dokumenemotSvg from "../../../img/dokumenemot.svg";
 
+import { db } from "../../../firebase";
+import { collection, getDocs } from "firebase/firestore";
+
 const DaftarHasilAnalisisDokumenPage = () => {
+  const [dokumenList, setDokumenList] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchDokumen = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "dokumen"));
+        const documentsData = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setDokumenList(documentsData);
+      } catch (err) {
+        console.error("Error fetching dokumen: ", err);
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchDokumen();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
   return (
     <div>
       <TopBar /> {/* Render the TopBar component */}
@@ -59,10 +94,11 @@ const DaftarHasilAnalisisDokumenPage = () => {
             </SearchBar>
           </div>
 
-          <DocumentCardItem />
-          <DocumentCardItem />
-          <DocumentCardItem />
-          <DocumentCardItem />
+          <div>
+            {dokumenList.map((dokumen) => (
+              <DocumentCardItem key={dokumen.id} dokumen={dokumen} />
+            ))}
+          </div>
          
 
           {/* Add your input form here */}
