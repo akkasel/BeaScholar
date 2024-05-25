@@ -13,51 +13,101 @@ import Button from "@mui/material/Button";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
-import 'dayjs/locale/en-gb';
+import "dayjs/locale/en-gb";
+
+import { auth } from "../../../firebase"; // import auth from firebase
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom";
 
 const InterviewPage = () => {
-  // untuk textfield tingkat pendidikan
+  const [user] = useAuthState(auth); // Using react-firebase-hooks to manage auth state
+
+  const navigate = useNavigate();
+
+  // State for interview form fields
+  const [nama, setNama] = useState("");
+  const [tingkat, setTingkat] = useState("S1");
+  const [lingkup, setLingkup] = useState("Dalam Negeri");
+  const [jenisInterview, setJenisInterview] = useState("");
+  const [deskripsiDiri, setDeskripsiDiri] = useState("");
+  const [waktuInterview, setWaktuInterview] = useState(null);
+  const [zoomMeetingId, setZoomMeetingId] = useState("");
+  const [zoomMeetingPassword, setZoomMeetingPassword] = useState("");
+  const [zoomJoinUrl, setZoomJoinUrl] = useState("");
+  const [zoomStartUrl, setZoomStartUrl] = useState("");
+
+  // Options for tingkat pendidikan
   const tingkatPendidikan = [
-    {
-      value: "SMA",
-      label: "SMA",
-    },
-    {
-      value: "SMK",
-      label: "SMK",
-    },
-    {
-      value: "S1",
-      label: "S1",
-    },
-    {
-      value: "S2",
-      label: "S2",
-    },
-    {
-      value: "S3",
-      label: "S3",
-    },
+    { value: "SMA", label: "SMA" },
+    { value: "SMK", label: "SMK" },
+    { value: "S1", label: "S1" },
+    { value: "S2", label: "S2" },
+    { value: "S3", label: "S3" },
   ];
 
-  // untuk textfield lingkup beasiswa
+  // Options for lingkup beasiswa
   const lingkupBeasiswa = [
-    {
-      value: "Dalam Negeri",
-      label: "Dalam Negeri",
-    },
-    {
-      value: "Luar Negeri",
-      label: "Luar Negeri",
-    },
+    { value: "Dalam Negeri", label: "Dalam Negeri" },
+    { value: "Luar Negeri", label: "Luar Negeri" },
   ];
+
+  // Checkbox state for single selection
+  const [selectedTingkatBeasiswa, setSelectedTingkatBeasiswa] = useState("");
+
+  // Handle checkbox for tingkat mahasiswa
+  const handleChecklistTingkatMahasiswa = (value) => {
+    setSelectedTingkatBeasiswa(value);
+    setTingkat(value);
+  };
+
+  // Create interview by calling the backend API
+  const createInterview = async () => {
+    if (!user) {
+      alert("You must be logged in to create an Interview.");
+      return;
+    }
+
+    const interviewData = {
+      nama,
+      lingkup,
+      tingkat,
+      jenisInterview,
+      deskripsiDiri,
+      waktuInterview: waktuInterview ? waktuInterview.toISOString() : null,
+    };
+
+    try {
+      const response = await fetch("http://localhost:8080/interview", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(interviewData),
+      });
+
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to create Interview");
+      }
+
+      setZoomMeetingId(data.zoomMeetingId);
+      setZoomMeetingPassword(data.zoomMeetingPassword);
+      setZoomJoinUrl(data.zoomJoinUrl);
+      setZoomStartUrl(data.zoomStartUrl);
+
+      alert("Interview created successfully!");
+      navigate('/daftar-jadwal-interview')
+    } catch (error) {
+      console.error("Error creating interview:", error);
+      alert("Failed to create Interview. Check console for details.");
+    }
+  };
 
   return (
     <div>
       <TopBar /> {/* Render the TopBar component */}
       <div className="interview-page">
         <SideBar /> {/* Render the SideBar component */}
-
         <div className="interview-page-container">
           {/*Header text "Latihan Interview"*/}
           <div className="interview-header-container">
@@ -81,6 +131,8 @@ const InterviewPage = () => {
               <TextField
                 fullWidth
                 id="outlined-textfield-nama"
+                value={nama}
+                onChange={(e) => setNama(e.target.value)}
                 label="Masukkan nama di sini..."
                 variant="outlined"
                 width="200px"
@@ -100,7 +152,7 @@ const InterviewPage = () => {
                 }}
               />
             </div>
-            <br></br>
+            <br />
 
             {/* Tingkat Pendidikan */}
             <div className="text-interview-container">
@@ -110,6 +162,8 @@ const InterviewPage = () => {
               <TextField
                 fullWidth
                 id="outlined-select-tingkat-pendidikan"
+                value={tingkat}
+                onChange={(e) => setTingkat(e.target.value)}
                 select
                 defaultValue="SMA"
                 sx={{
@@ -145,6 +199,8 @@ const InterviewPage = () => {
               <TextField
                 fullWidth
                 id="outlined-select-lingkup-beasiswa"
+                value={lingkup}
+                onChange={(e) => setLingkup(e.target.value)}
                 select
                 defaultValue="Dalam Negeri"
                 sx={{
@@ -189,7 +245,8 @@ const InterviewPage = () => {
                   <FormControlLabel
                     control={
                       <Checkbox
-                        
+                        checked={selectedTingkatBeasiswa === "S1"}
+                        onChange={() => handleChecklistTingkatMahasiswa("S1")}
                         sx={{
                           color: "#C4084F", // Change the checkbox color
                           "&.Mui-checked": {
@@ -203,7 +260,8 @@ const InterviewPage = () => {
                   <FormControlLabel
                     control={
                       <Checkbox
-                        
+                        checked={selectedTingkatBeasiswa === "S2"}
+                        onChange={() => handleChecklistTingkatMahasiswa("S2")}
                         sx={{
                           color: "#C4084F", // Change the checkbox color
                           "&.Mui-checked": {
@@ -217,7 +275,8 @@ const InterviewPage = () => {
                   <FormControlLabel
                     control={
                       <Checkbox
-                        
+                        checked={selectedTingkatBeasiswa === "S3"}
+                        onChange={() => handleChecklistTingkatMahasiswa("S3")}
                         sx={{
                           color: "#C4084F", // Change the checkbox color
                           "&.Mui-checked": {
@@ -241,8 +300,10 @@ const InterviewPage = () => {
             <div className="">
               <TextField
                 fullWidth
-                id="outlined-textfield-nama"
+                id="outlined-textfield-deskripsiDiri"
                 label="Tuliskan deskripsi dirimu di sini..."
+                value={deskripsiDiri}
+                onChange={(e) => setDeskripsiDiri(e.target.value)}
                 variant="outlined"
                 width="200px"
                 sx={{
@@ -269,8 +330,14 @@ const InterviewPage = () => {
               <span className="text-interview">Pilih Waktu Interview</span>
             </div>
             <div>
-              <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="en-gb">
+              <LocalizationProvider
+                dateAdapter={AdapterDayjs}
+                adapterLocale="en-gb"
+              >
                 <DateTimePicker
+                  value={waktuInterview}
+                  onChange={(newValue) => setWaktuInterview(newValue)}
+                  renderInput={(params) => <TextField {...params} />}
                   sx={{
                     "& .MuiOutlinedInput-root": {
                       width: "1000px",
@@ -307,6 +374,7 @@ const InterviewPage = () => {
             <div>
               <Button
                 variant="contained"
+                onClick={createInterview}
                 sx={{
                   fontFamily: "'Poppins', sans-serif", // Use the Poppins font
                   textTransform: "none", // Remove capitalization
@@ -325,7 +393,18 @@ const InterviewPage = () => {
                 Kumpul
               </Button>
             </div>
-            {/* Add your input form here */}
+
+            {/* Display Zoom meeting details if available 
+            {zoomJoinUrl && (
+              <div className="zoom-details">
+                <h3>Zoom Meeting Details:</h3>
+                <p><strong>Meeting ID:</strong> {zoomMeetingId}</p>
+                <p><strong>Password:</strong> {zoomMeetingPassword}</p>
+                <p><strong>Join URL:</strong> <a href={zoomJoinUrl} target="_blank" rel="noopener noreferrer">{zoomJoinUrl}</a></p>
+                <p><strong>Start URL:</strong> <a href={zoomStartUrl} target="_blank" rel="noopener noreferrer">{zoomStartUrl}</a></p>
+              </div>
+            )}
+            */}
           </div>
         </div>
       </div>
@@ -334,3 +413,5 @@ const InterviewPage = () => {
 };
 
 export default InterviewPage;
+
+
