@@ -91,7 +91,7 @@ const documentCardItem = ({ dokumen }) => {
           <span className="text-header-item">Dokumen yang dikumpulkan:</span>
         </div>
         <div className="container-text-content-item">
-          <DownloadButton></DownloadButton>
+          <DownloadButton href={dokumen.linkDokumen} ></DownloadButton>
         </div>
       </div>
 

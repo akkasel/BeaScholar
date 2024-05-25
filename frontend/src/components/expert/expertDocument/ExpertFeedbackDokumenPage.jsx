@@ -74,6 +74,7 @@ const ExpertFeedbackDokumenPage = () => {
             backgroundColor: "#C4084F", // Slightly lighter pink on hover
             color: "#FFFF",
           },
+          width:"1000px"
         }}
       >
         Unduh
@@ -107,13 +108,14 @@ const ExpertFeedbackDokumenPage = () => {
           </div>
 
           <div className="form-input-container">
+            {/* Dokumen yang dikumpulkan */}
             <div className="text-interview-container">
-              <span className="text-interview">Dokumen Terkait:</span>
+              <span className="text-interview">Dokumen yang dikumpulkan:</span>
+            </div>
+            <div>
+              <DownloadButton href={dokumen.linkDokumen}></DownloadButton>
             </div>
 
-            <DownloadButton href={dokumen.linkDokumen} />
-
-            <br />
             <br />
 
             {/* Hasil Analisa */}

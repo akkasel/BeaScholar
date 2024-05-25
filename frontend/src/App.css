@@ -704,6 +704,11 @@ button {
   text-align: left;
 }
 
+.feedback-document-by-ai-page{
+  display: flex;
+  height: 1000vh
+}
+
 .text-field-feedback-expert-container {
   text-align: left;
 }

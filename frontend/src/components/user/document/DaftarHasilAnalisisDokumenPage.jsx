@@ -46,7 +46,7 @@ const DaftarHasilAnalisisDokumenPage = () => {
   return (
     <div>
       <TopBar /> {/* Render the TopBar component */}
-      <div className="daftar-jadwal-interview-page">
+      <div className="feedback-document-by-ai-page">
         <SideBar /> {/* Render the SideBar component */}
 
         <div className="interview-page-container">

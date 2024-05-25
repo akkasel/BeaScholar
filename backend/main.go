@@ -11,7 +11,10 @@ import (
 	"cloud.google.com/go/firestore"
 	"github.com/gorilla/mux"
 	"google.golang.org/api/iterator"
-	"google.golang.org/api/option" // Correct import for option
+	"google.golang.org/api/option" 
+
+	"github.com/joho/godotenv"
+    openai "github.com/sashabaranov/go-openai"
 )
 
 // if setelah tulis "go run main.go", ga muncul apa-apa lagi di terminalnya, its ok, udah di test di postman, API nya tetep udah jalan & aktif
@@ -42,12 +45,23 @@ type Dokumen struct {
 	CatatanTambahan     string `json:"catatanTambahan"`
 }
 
+// For analysis request
+type AnalysisRequest struct {
+    Text       string `json:"text"`
+    PromptType string `json:"promptType"`
+}
+
 func main() {
 	// Set the environment variable for Google Application Credentials
 	os.Setenv("GOOGLE_APPLICATION_CREDENTIALS", "./service_account_key/beascholar-d26c0-e17b1788e2b2.json")
 
 	ctx := context.Background()
 	var err error
+
+	// Load environment variables
+    if err := godotenv.Load(); err != nil {
+        log.Fatalf("Error loading .env file")
+    }
 
 	// Initialize Firestore client
 	// client, err = firestore.NewClient(ctx, "FIREBASE_PROJECT_ID")
@@ -56,10 +70,15 @@ func main() {
 	if err != nil {
 		log.Fatalf("Failed to create client: %v", err)
 	}
+
+	// Initialize OpenAI client
+    openaiClient := openai.NewClient(os.Getenv("OPENAI_API_KEY"))
+
+
 	// Create a new router
 	r := mux.NewRouter()
 
-	// Define route handlers
+	// Route Handlers (backend API CRUD, openai API, etc)
 	r.HandleFunc("/beasiswa", createBeasiswa).Methods("POST")
 	r.HandleFunc("/beasiswa", getBeasiswa).Methods("GET")
 	r.HandleFunc("/beasiswa/{id}", updateBeasiswa).Methods("PUT")
@@ -70,8 +89,14 @@ func main() {
 	r.HandleFunc("/dokumen/{id}", updateDokumen).Methods("PUT")
 	r.HandleFunc("/dokumen/{id}", deleteDokumen).Methods("DELETE")
 
+	r.HandleFunc("/generate-feedback", func(w http.ResponseWriter, r *http.Request) {
+        generateFeedback(w, r, openaiClient)
+    }).Methods("POST")
+
+	http.Handle("/", enableCORS(r))
+
 	// Start the server
-	log.Fatal(http.ListenAndServe(":8080", r))
+    log.Fatal(http.ListenAndServe(":8080", nil))
 }
 
 // POST - create new Beasiswa item
@@ -197,6 +222,73 @@ func deleteDokumen(w http.ResponseWriter, r *http.Request) {
 	}
 	fmt.Fprintln(w, "Dokumen deleted")
 }
+
+// Function to generate feedback using OpenAI API
+func generateFeedback(w http.ResponseWriter, r *http.Request, openaiClient *openai.Client) {
+    var analysisRequest AnalysisRequest
+    if err := json.NewDecoder(r.Body).Decode(&analysisRequest); err != nil {
+        http.Error(w, "Invalid request body", http.StatusBadRequest)
+        return
+    }
+
+    log.Printf("Received request for analysis with prompt type: %s", analysisRequest.PromptType)
+    log.Printf("Received request text: %s", analysisRequest.Text)
+
+    var prompt string
+    switch analysisRequest.PromptType {
+    case "hasilAnalisa":
+        prompt = "Analisa text dokumen ini dan berikan hasil analisa anda, maksimal 1 paragraf:\n\n" + analysisRequest.Text
+    case "halYangBisaDirevisi":
+        prompt = "Analisa text dokumen ini dan tuliskan hal apa yang bisa direvisi, maksimal 2 paragraf:\n\n" + analysisRequest.Text
+    case "catatanTambahan":
+        prompt = "Analisa text dokumen ini dan tuliskan catatan tambahan (jika ada), maksimal 2 paragraf:\n\n" + analysisRequest.Text
+    default:
+        http.Error(w, "Invalid prompt type", http.StatusBadRequest)
+        return
+    }
+
+    log.Printf("Generated prompt: %s", prompt)
+
+    resp, err := openaiClient.CreateChatCompletion(context.Background(), openai.ChatCompletionRequest{
+        Model: "gpt-4",
+        Messages: []openai.ChatCompletionMessage{
+            {
+                Role:    "system",
+                Content: "You are an AI trained to analyze academic documents.",
+            },
+            {
+                Role:    "user",
+                Content: prompt,
+            },
+        },
+    })
+    if err != nil {
+        http.Error(w, err.Error(), http.StatusInternalServerError)
+        return
+    }
+
+    w.Header().Set("Content-Type", "application/json")
+    json.NewEncoder(w).Encode(map[string]string{"result": resp.Choices[0].Message.Content})
+}
+
+// CORS middleware
+func enableCORS(next http.Handler) http.Handler {
+    return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+        w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
+        w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+        w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
+
+        // Handle preflight request
+        if r.Method == http.MethodOptions {
+            w.WriteHeader(http.StatusNoContent)
+            return
+        }
+
+        next.ServeHTTP(w, r)
+    })
+}
+
+
 
 /*
 // dibawah ini semua contoh code dari dokumentasinya, terkait contoh cara bikin backend api di golang

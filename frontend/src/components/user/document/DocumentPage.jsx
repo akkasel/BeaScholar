@@ -14,26 +14,23 @@ import { Box, Typography } from "@mui/material";
 import pinmerahSvg from "../../../img/pinmerah.svg";
 import robotSvg from "../../../img/robot.svg";
 
-import { auth, db } from "../../../firebase";
+import { auth, db, storage } from "../../../firebase"; // import storage from firebase
 import { useAuthState } from "react-firebase-hooks/auth";
-import {
-  collection,
-  addDoc,
-  getDocs,
-  updateDoc,
-  deleteDoc,
-  doc,
-} from "firebase/firestore";
+import { collection, addDoc } from "firebase/firestore";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage"; // import necessary functions for file upload
+import { useNavigate } from "react-router-dom";
 
 const DocumentPage = () => {
   const [user] = useAuthState(auth); // Using react-firebase-hooks to manage auth state
+
+  const navigate = useNavigate();
 
   // untuk upload masing-masing fieldnya ke database.
   const [jenisDoc, setjenisDoc] = useState("Essay");
   const [lingkup, setLingkup] = useState("Dalam Negeri");
   const [tingkat, setTingkat] = useState("S1");
   const [jenisAnalisa, setJenisAnalisa] = useState("");
-  const [linkDokumen, setLinkDokumen] = useState("");
+  const [file, setFile] = useState(null);
   const [hasilAnalisa, setHasilAnalisa] = useState("");
   const [halYangBisaDirevisi, setHalYangBisaDirevisi] = useState("");
   const [catatanTambahan, setCatatanTambahan] = useState("");
@@ -86,22 +83,28 @@ const DocumentPage = () => {
   };
 
   // Handle analysis submission
-  const handleSubmit = () => {
+  const handleSubmit = (documentId) => {
     if (selectedAnalysis === "AI") {
-      runAIAnalysis();
+      runAIAnalysis(documentId);
     } else if (selectedAnalysis === "Human") {
       runHumanAnalysis();
     }
   };
 
-  const runAIAnalysis = () => {
-    // Your AI analysis logic here
+  const runAIAnalysis = (documentId) => {
     console.log("Running AI analysis...");
+    // Navigate to the feedback-dokumen-by-ai page with the document ID
+    navigate(`/feedback-dokumen-by-ai/${documentId}`);
   };
 
   const runHumanAnalysis = () => {
     // Your Human analysis logic here
     console.log("Running Human analysis...");
+    // TODO : Kosongin lagi si form nya setelah ada tulisan "Document upload successfully"
+  };
+
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
   };
 
   // untuk CREATE data dokumen baru (ini dipake di page ini)
@@ -110,18 +113,41 @@ const DocumentPage = () => {
       alert("You must be logged in to create a document.");
       return;
     }
+    if (!file) {
+      alert("Please select a file to upload.");
+      return;
+    }
     try {
-      await addDoc(collection(db, "dokumen"), {
-        jenisDoc,
-        lingkup,
-        tingkat,
-        jenisAnalisa,
-        linkDokumen,
-        hasilAnalisa,
-        halYangBisaDirevisi,
-        catatanTambahan,
-      });
-      alert("Document created successfully!");
+      const fileRef = ref(storage, `documents/${file.name}`);
+      const uploadTask = uploadBytesResumable(fileRef, file);
+
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log("Upload is " + progress + "% done");
+        },
+        (error) => {
+          console.error("Error uploading file: ", error);
+          alert("Failed to upload file. Check console for details.");
+        },
+        async () => {
+          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+          const docRef = await addDoc(collection(db, "dokumen"), {
+            jenisDoc,
+            lingkup,
+            tingkat,
+            jenisAnalisa,
+            linkDokumen: downloadURL,
+            hasilAnalisa,
+            halYangBisaDirevisi,
+            catatanTambahan,
+          });
+          alert("Document created successfully!");
+          handleSubmit(docRef.id); // Pass the document ID to handleSubmit
+        }
+      );
     } catch (error) {
       console.error("Error adding document: ", error);
       alert("Failed to create dokumen. Check console for details.");
@@ -224,7 +250,7 @@ const DocumentPage = () => {
 
             <br />
 
-            {/* Jenis Interview*/}
+            {/* Jenis Tingkatan Beasiswa */}
             <div className="text-interview-container">
               <span className="text-interview">Jenis Tingkatan Beasiswa</span>
             </div>
@@ -306,8 +332,8 @@ const DocumentPage = () => {
                   <FormControlLabel
                     control={
                       <Checkbox
-                      checked={selectedAnalysis === "AI"}
-                      onChange={() => handleAnalysisSelection("AI")}
+                        checked={selectedAnalysis === "AI"}
+                        onChange={() => handleAnalysisSelection("AI")}
                         sx={{
                           color: "#C4084F", // Change the checkbox color
                           "&.Mui-checked": {
@@ -375,36 +401,21 @@ const DocumentPage = () => {
             <br />
 
             {/* Masukan file */}
-            {/* warna bordernya masih perlu diatur */}
             <div className="text-interview-container">
-              <span className="text-interview">
-                Masukan link file kamu disini (File dapat diupload ke Google
-                Drive lalu copy link ke kotak dibawah ini)
-              </span>
+              <span className="text-interview">Masukan file kamu disini</span>
             </div>
             <div>
-              <TextField
-                fullWidth
-                id="outlined-textfield-nama"
+              <Card
+                className="checkbox-card-container"
                 variant="outlined"
-                value={linkDokumen}
-                onChange={(e) => setLinkDokumen(e.target.value)}
-                width="200px"
                 sx={{
-                  // Root class for the input field
-                  "& .MuiOutlinedInput-root": {
-                    // Class for the border around the input field
-                    "& .MuiOutlinedInput-notchedOutline": {
-                      borderColor: "#C4084F",
-                      borderWidth: "2px",
-                    },
-                  },
-                  // Class for the label of the input field
-                  "& .MuiInputLabel-outlined": {
-                    color: "#121212",
-                  },
+                  border: "2px solid #C4084F !important",
+                  borderColor: "#C4084F !important",
+                  padding: "20px"
                 }}
-              />
+              >
+                <input type="file" onChange={handleFileChange} />
+              </Card>
             </div>
 
             <br />
@@ -424,7 +435,6 @@ const DocumentPage = () => {
                   "&:hover": {
                     background: "linear-gradient(to bottom, #940566, #C70E4E)",
                   },
-
                   justifyContent: "center", // Centralized icon and text
                   px: 3, // Add some horizontal padding
                 }}
