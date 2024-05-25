@@ -45,7 +45,7 @@ function App() {
 
           <Route path="/interview" element={<InterviewPage />} />
           <Route path="/daftar-jadwal-interview" element={<DaftarJadwalInterviewPage />} />
-          <Route path="/feedback-interview" element={<FeedbackInterviewPage />} />
+          <Route path="/feedback-interview/:id" element={<FeedbackInterviewPage />} />
 
           <Route path="/document" element={<DocumentPage />} />
           <Route path="/daftar-hasil-analisis-dokumen" element={<DaftarHasilAnalisisDokumenPage />} />
@@ -62,7 +62,7 @@ function App() {
           <Route path="/expert-home" element={<ExpertHomePage />} />
 
           <Route path="/expert-daftar-jadwal-interview" element={<ExpertDaftarJadwalInterviewPage />} />
-          <Route path="/expert-feedback-interview" element={<ExpertFeedbackInterviewPage />} />
+          <Route path="/expert-feedback-interview/:id" element={<ExpertFeedbackInterviewPage />} />
 
           <Route path="/expert-daftar-hasil-analisis-dokumen" element={<ExpertDaftarHasilAnalisisDokumenPage />} />
           <Route path="/expert-feedback-dokumen/:id" element={<ExpertFeedbackDokumenPage />} />

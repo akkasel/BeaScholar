@@ -7,7 +7,23 @@ import {
 } from "@mui/material";
 import contohprofileimageSvg from "../../../../img/contohprofileimage.svg";
 
-const ExpertJadwalInterviewItem = () => {
+const ExpertJadwalInterviewItem = ({ interview }) => {
+
+  if (!interview) {
+    return <div>Loading...</div>;
+  }
+
+  // Convert Firestore timestamp to JavaScript Date
+  const convertTimestampToDate = (timestamp) => {
+    if (timestamp && timestamp.seconds) {
+      return new Date(timestamp.seconds * 1000);
+    }
+    return null;
+  };
+
+  const interviewDate = convertTimestampToDate(interview.WaktuInterview);
+  const formattedDate = interviewDate ? interviewDate.toLocaleString() : "N/A";
+
   return (
     <Card
       className="checkbox-card-container"
@@ -22,8 +38,9 @@ const ExpertJadwalInterviewItem = () => {
         backgroundColor: "#FFFFFF", // white background
         boxShadow: "0 4px 6px rgba(0,0,0,0.1)", // soft shadow
         position: "relative", // to position the circle
-        width: "1100px",
+        width: "1130px",
         marginLeft: "80px",
+        height:"120px"
       }}
     >
       <CardHeader
@@ -41,7 +58,7 @@ const ExpertJadwalInterviewItem = () => {
           <span className="text-header-item">Nama:</span>
         </div>
         <div className="container-text-content-item">
-          <span className="text-content-item">Amanda</span>
+          <span className="text-content-item">{interview.Nama}</span>
         </div>
       </div>
 
@@ -50,7 +67,7 @@ const ExpertJadwalInterviewItem = () => {
           <span className="text-header-item">Tingkat Pendidikan:</span>
         </div>
         <div className="container-text-content-item">
-          <span className="text-content-item">S1</span>
+          <span className="text-content-item">{interview.TingkatBeasiswa}</span>
         </div>
       </div>
 
@@ -59,7 +76,7 @@ const ExpertJadwalInterviewItem = () => {
           <span className="text-header-item">Lingkup Beasiswa:</span>
         </div>
         <div className="container-text-content-item">
-          <span className="text-content-item">Internasional</span>
+          <span className="text-content-item">{interview.LingkupBeasiswa}</span>
         </div>
       </div>
 
@@ -68,37 +85,58 @@ const ExpertJadwalInterviewItem = () => {
           <span className="text-header-item">Jenis Beasiswa:</span>
         </div>
         <div className="container-text-content-item">
-          <span className="text-content-item">Beasiswa S2</span>
+          <span className="text-content-item">Beasiswa {interview.JenisInterview}</span>
         </div>
       </div>
 
       <div className="container-all-text-item">
         <div className="container-text-header-item">
-          <span className="text-header-item">Tanggal/Waktu:</span>
+          <span className="text-header-item">Tanggal, Waktu:</span>
         </div>
         <div className="container-text-content-item">
-          <span className="text-content-item">28 Feb/15:00 WIB</span>
+          <span className="text-content-item">{formattedDate}</span>
         </div>
       </div>
 
       <div className="container-button-jadwal-interview-item">
-        <Button href="/expert-feedback-interview"
+        <Button href={`/expert-feedback-interview/${interview.id}`}
           variant="contained"
           sx={{
             fontFamily: "'Poppins', sans-serif", // Use the Poppins font
             textTransform: "none", // Remove capitalization
             borderRadius: "20px", // Apply rounded edges
-            width: "200px",
+            width: "160px",
             padding: "0px",
+            fontSize:"13px",
             fontWeight: "bold",
             background: "linear-gradient(to right, #FA6339, #C73950)", // Gradient background
             "&:hover": { background: "linear-gradient(to right, #FA6339, #C73950)" },
 
             justifyContent: "center", // Centralized text and icon
-            px: 3, // Add some horizontal padding
           }}
         >
-          Lihat Umpan Balik
+          Beri Umpan Balik
+        </Button>
+      </div>
+
+      <div className="container-button-jadwal-interview-item-zoom">
+        <Button href={interview.ZoomStartUrl}
+          variant="contained"
+          sx={{
+            fontFamily: "'Poppins', sans-serif", // Use the Poppins font
+            textTransform: "none", // Remove capitalization
+            borderRadius: "20px", // Apply rounded edges
+            fontSize:"13px",
+            width: "200px",
+            padding: "0px",
+            fontWeight: "bold",
+            background: "linear-gradient(to bottom, #940566, #C70E4E)", // Gradient background
+            "&:hover": { background: "linear-gradient(to bottom, #940566, #C70E4E)" },
+
+            justifyContent: "center", // Centralized text and icon
+          }}
+        >
+          Masuk Ruang Interview
         </Button>
       </div>
     </Card>

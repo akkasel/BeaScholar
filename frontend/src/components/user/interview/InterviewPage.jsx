@@ -26,8 +26,8 @@ const InterviewPage = () => {
 
   // State for interview form fields
   const [nama, setNama] = useState("");
-  const [tingkat, setTingkat] = useState("S1");
-  const [lingkup, setLingkup] = useState("Dalam Negeri");
+  const [tingkatBeasiswa, setTingkat] = useState("S1");
+  const [lingkupBeasiswa, setLingkup] = useState("Dalam Negeri");
   const [jenisInterview, setJenisInterview] = useState("");
   const [deskripsiDiri, setDeskripsiDiri] = useState("");
   const [waktuInterview, setWaktuInterview] = useState(null);
@@ -45,19 +45,25 @@ const InterviewPage = () => {
     { value: "S3", label: "S3" },
   ];
 
-  // Options for lingkup beasiswa
-  const lingkupBeasiswa = [
-    { value: "Dalam Negeri", label: "Dalam Negeri" },
-    { value: "Luar Negeri", label: "Luar Negeri" },
+  // untuk textfield lingkup beasiswa
+  const lingkupBeasiswaPilihan = [
+    {
+      value: "Dalam Negeri",
+      label: "Dalam Negeri",
+    },
+    {
+      value: "Luar Negeri",
+      label: "Luar Negeri",
+    },
   ];
 
   // Checkbox state for single selection
-  const [selectedTingkatBeasiswa, setSelectedTingkatBeasiswa] = useState("");
+  const [selectedJenisIntreview, setSelectedJenisIntreview] = useState("");
 
-  // Handle checkbox for tingkat mahasiswa
-  const handleChecklistTingkatMahasiswa = (value) => {
-    setSelectedTingkatBeasiswa(value);
-    setTingkat(value);
+  // Handle analysis selection
+  const handleJenisInterviewSelection = (value) => {
+    setSelectedJenisIntreview(value);
+    setJenisInterview(value);
   };
 
   // Create interview by calling the backend API
@@ -69,12 +75,14 @@ const InterviewPage = () => {
 
     const interviewData = {
       nama,
-      lingkup,
-      tingkat,
+      tingkatBeasiswa,
+      lingkupBeasiswa,
       jenisInterview,
       deskripsiDiri,
       waktuInterview: waktuInterview ? waktuInterview.toISOString() : null,
     };
+
+    console.log("Sending interview data to backend:", interviewData); // Add this log
 
     try {
       const response = await fetch("http://localhost:8080/interview", {
@@ -96,11 +104,12 @@ const InterviewPage = () => {
       setZoomStartUrl(data.zoomStartUrl);
 
       alert("Interview created successfully!");
-      navigate('/daftar-jadwal-interview')
+      //navigate("/daftar-jadwal-interview");
     } catch (error) {
       console.error("Error creating interview:", error);
       alert("Failed to create Interview. Check console for details.");
     }
+    navigate("/daftar-jadwal-interview");
   };
 
   return (
@@ -162,7 +171,7 @@ const InterviewPage = () => {
               <TextField
                 fullWidth
                 id="outlined-select-tingkat-pendidikan"
-                value={tingkat}
+                value={tingkatBeasiswa}
                 onChange={(e) => setTingkat(e.target.value)}
                 select
                 defaultValue="SMA"
@@ -199,7 +208,7 @@ const InterviewPage = () => {
               <TextField
                 fullWidth
                 id="outlined-select-lingkup-beasiswa"
-                value={lingkup}
+                value={lingkupBeasiswa}
                 onChange={(e) => setLingkup(e.target.value)}
                 select
                 defaultValue="Dalam Negeri"
@@ -218,7 +227,7 @@ const InterviewPage = () => {
                   },
                 }}
               >
-                {lingkupBeasiswa.map((option) => (
+                {lingkupBeasiswaPilihan.map((option) => (
                   <MuiMenuItem key={option.value} value={option.value}>
                     {option.label}
                   </MuiMenuItem>
@@ -245,8 +254,8 @@ const InterviewPage = () => {
                   <FormControlLabel
                     control={
                       <Checkbox
-                        checked={selectedTingkatBeasiswa === "S1"}
-                        onChange={() => handleChecklistTingkatMahasiswa("S1")}
+                        checked={selectedJenisIntreview === "S1"}
+                        onChange={() => handleJenisInterviewSelection("S1")}
                         sx={{
                           color: "#C4084F", // Change the checkbox color
                           "&.Mui-checked": {
@@ -260,8 +269,8 @@ const InterviewPage = () => {
                   <FormControlLabel
                     control={
                       <Checkbox
-                        checked={selectedTingkatBeasiswa === "S2"}
-                        onChange={() => handleChecklistTingkatMahasiswa("S2")}
+                        checked={selectedJenisIntreview === "S2"}
+                        onChange={() => handleJenisInterviewSelection("S2")}
                         sx={{
                           color: "#C4084F", // Change the checkbox color
                           "&.Mui-checked": {
@@ -275,8 +284,8 @@ const InterviewPage = () => {
                   <FormControlLabel
                     control={
                       <Checkbox
-                        checked={selectedTingkatBeasiswa === "S3"}
-                        onChange={() => handleChecklistTingkatMahasiswa("S3")}
+                        checked={selectedJenisIntreview === "S3"}
+                        onChange={() => handleJenisInterviewSelection("S3")}
                         sx={{
                           color: "#C4084F", // Change the checkbox color
                           "&.Mui-checked": {
@@ -413,5 +422,3 @@ const InterviewPage = () => {
 };
 
 export default InterviewPage;
-
-

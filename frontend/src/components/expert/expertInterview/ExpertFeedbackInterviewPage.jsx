@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import "../../../App.css";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -6,7 +7,70 @@ import arrowleftSvg from "../../../img/arrowleft.svg";
 import TopBarExpert from "../expertMasterPage/TopBarExpert";
 import SideBarExpert from "../expertMasterPage/SideBarExpert";
 
+import { db } from "../../../firebase";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
+
 const ExpertFeedbackInterviewPage = () => {
+  const { id } = useParams();
+  const [interview, setInterview] = useState({
+    MasukanPositif: "",
+    HalYangPerluDitingkatkan: "",
+    CatatanTambahan: "",
+  });
+
+  // get interview data by id
+  useEffect(() => {
+    const fetchInterview = async () => {
+      const docRef = doc(db, "interview", id);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        setInterview(docSnap.data());
+      } else {
+        console.error("No such document!");
+      }
+    };
+
+    fetchInterview();
+  }, [id]);
+
+  // to update 3 fields on the interview entity, which is :
+  // interview.MasukanPositif, interview.HalYangPerluDitingkatkan, interview.CatatanTambahan
+  const handleUpdate = async () => {
+    const docRef = doc(db, "interview", id);
+    await updateDoc(docRef, {
+      MasukanPositif: interview.MasukanPositif,
+      HalYangPerluDitingkatkan: interview.HalYangPerluDitingkatkan,
+      CatatanTambahan: interview.CatatanTambahan,
+    });
+    alert("Feedback terkait Interview ini berhasil dikirim!");
+  };
+
+  // untuk handle perubahan pada interview data
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setInterview((prevInterview) => ({
+      ...prevInterview,
+      [name]: value,
+    }));
+  };
+
+  // tampilan jika data interview belum muncul alias masih loading
+  if (!interview) {
+    return <div>Loading...</div>;
+  }
+
+  // Convert Firestore timestamp to JavaScript Date
+  const convertTimestampToDate = (timestamp) => {
+    if (timestamp && timestamp.seconds) {
+      return new Date(timestamp.seconds * 1000);
+    }
+    return null;
+  };
+
+  const interviewDate = convertTimestampToDate(interview.WaktuInterview);
+  const formattedDate = interviewDate ? interviewDate.toLocaleString() : "N/A";
+
+
   // untuk textfield tingkat pendidikan
   const tingkatPendidikan = [
     {
@@ -71,18 +135,13 @@ const ExpertFeedbackInterviewPage = () => {
 
           <div className="form-input-container">
             <div className="text-interview-container">
-              <span className="text-interview">Tanggal Interview: </span>
-              <span className="text-interview-orange">28 Februari 2024</span>
-            </div>
-
-            <div className="text-interview-container">
-              <span className="text-interview">Waktu: </span>
-              <span className="text-interview-orange">15:00</span>
+              <span className="text-interview">Tanggal, Waktu Interview: </span>
+              <span className="text-interview-orange">{formattedDate}</span>
             </div>
 
             <div className="text-interview-container">
               <span className="text-interview">Identitas Peserta: </span>
-              <span className="text-interview-orange">Amanda</span>
+              <span className="text-interview-orange">{interview.Nama}</span>
             </div>
 
             <br />
@@ -96,9 +155,12 @@ const ExpertFeedbackInterviewPage = () => {
               <TextField
                 label="Berikan masukan positif Anda terkait Interview yang telah dilakukan..."
                 fullWidth
-                id="outlined-textfield-nama"
+                name="MasukanPositif"
+                value={interview.MasukanPositif}
+                onChange={handleChange}
                 variant="outlined"
                 width="200px"
+                multiline // Add this prop to enable multiple lines
                 sx={{
                   // Root class for the input field
                   "& .MuiOutlinedInput-root": {
@@ -114,7 +176,6 @@ const ExpertFeedbackInterviewPage = () => {
                   },
                   width: "1000px", // Adjust the width value as needed
                 }}
-                multiline // Add this prop to enable multiple lines
               />
             </div>
 
@@ -130,7 +191,9 @@ const ExpertFeedbackInterviewPage = () => {
               <TextField
                 label="Berikan umpan balik Anda terkait Interview yang telah dilakukan..."
                 fullWidth
-                id="outlined-textfield-nama"
+                name="HalYangPerluDitingkatkan"
+                value={interview.HalYangPerluDitingkatkan}
+                onChange={handleChange}
                 variant="outlined"
                 width="200px"
                 sx={{
@@ -164,7 +227,9 @@ const ExpertFeedbackInterviewPage = () => {
               <TextField
                 label="Berikan catatan tambahan Anda terkait Interview yang telah dilakukan..."
                 fullWidth
-                id="outlined-textfield-nama"
+                name="CatatanTambahan"
+                value={interview.CatatanTambahan}
+                onChange={handleChange}
                 variant="outlined"
                 width="200px"
                 sx={{
@@ -188,10 +253,12 @@ const ExpertFeedbackInterviewPage = () => {
 
             <br />
 
+
             {/* Simpan Button */}
             <div>
               <Button
                 variant="contained"
+                onClick={handleUpdate}
                 sx={{
                   fontFamily: "'Poppins', sans-serif", // Use the Poppins font
                   textTransform: "none", // Remove capitalization

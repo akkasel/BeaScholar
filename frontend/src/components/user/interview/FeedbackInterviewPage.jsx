@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import "../../../App.css";
 import TopBar from "../masterPage/TopBar";
 import SideBar from "../masterPage/SideBar";
@@ -6,7 +7,48 @@ import Card from "@mui/material/Card";
 import Button from "@mui/material/Button";
 import arrowleftSvg from "../../../img/arrowleft.svg";
 
+import { db } from "../../../firebase";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
+
 const FeedbackInterviewPage = () => {
+  const { id } = useParams();
+  const [interview, setInterview] = useState({
+    MasukanPositif: "",
+    HalYangPerluDitingkatkan: "",
+    CatatanTambahan: "",
+  });
+
+  // untuk ambil 1 interview data by id
+  useEffect(() => {
+    const fetchInterview = async () => {
+      const docRef = doc(db, "interview", id);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        setInterview(docSnap.data());
+      } else {
+        console.error("No such document!");
+      }
+    };
+
+    fetchInterview();
+  }, [id]);
+
+  // show loading kalo misalnya datanya belum keluar / lagi loading
+  if (!interview) {
+    return <div>Loading...</div>;
+  }
+
+  // Convert Firestore timestamp to JavaScript Date
+  const convertTimestampToDate = (timestamp) => {
+    if (timestamp && timestamp.seconds) {
+      return new Date(timestamp.seconds * 1000);
+    }
+    return null;
+  };
+
+  const interviewDate = convertTimestampToDate(interview.WaktuInterview);
+  const formattedDate = interviewDate ? interviewDate.toLocaleString() : "N/A";
+
   // untuk textfield tingkat pendidikan
   const tingkatPendidikan = [
     {
@@ -70,19 +112,17 @@ const FeedbackInterviewPage = () => {
 
           {/* Nama */}
           <div className="form-input-container">
-            <div className="text-interview-container">
-              <span className="text-interview">Tanggal Interview: </span>
-              <span className="text-interview-orange">28 Februari 2024</span>
+
+          <div className="text-interview-container">
+              <span className="text-interview">ID Interview: </span>
+              <span className="text-interview-orange">{id}</span>
             </div>
 
-            <div className="text-interview-container">
-              <span className="text-interview">Waktu: </span>
-              <span className="text-interview-orange">15:00</span>
-            </div>
+            <br />
 
             <div className="text-interview-container">
-              <span className="text-interview">Interviewer / Expert: </span>
-              <span className="text-interview-orange">Ms. Leony</span>
+              <span className="text-interview">Tanggal, Waktu Interview: </span>
+              <span className="text-interview-orange">{formattedDate}</span>
             </div>
 
             <br />
@@ -103,18 +143,7 @@ const FeedbackInterviewPage = () => {
                 {/* harusny ga perlu pake div sama span lagi juga bisa, tinggal pakai <br /> */}
                 <div className="text-container-feedback">
                   <div>
-                    <span>1. Intonasi sangat jelas</span>
-                  </div>
-
-                  <div>
-                    <span>2. Penggunaan bahasa Inggris yang baik</span>
-                  </div>
-
-                  <div>
-                    <span>
-                      3. Percaya diri, dan mampu menjawab semua pertanyaan
-                      dengan lancar
-                    </span>
+                    <span>{interview.MasukanPositif}</span>
                   </div>
                 </div>
               </Card>
@@ -139,7 +168,7 @@ const FeedbackInterviewPage = () => {
               >
                 <div className="text-container-feedback">
                   <div>
-                    <span>Tidak ada</span>
+                    <span>{interview.HalYangPerluDitingkatkan}</span>
                   </div>
                 </div>
               </Card>
@@ -164,7 +193,7 @@ const FeedbackInterviewPage = () => {
               >
                 <div className="text-container-feedback">
                   <div>
-                    <span>Tidak ada</span>
+                    <span>{interview.CatatanTambahan}</span>
                   </div>
                 </div>
               </Card>

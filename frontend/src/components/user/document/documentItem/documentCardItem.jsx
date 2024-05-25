@@ -95,7 +95,7 @@ const documentCardItem = ({ dokumen }) => {
         </div>
       </div>
 
-      <div className="container-button-jadwal-interview-item">
+      <div className="container-button-document-item">
         <Button
           href={`/feedback-dokumen/${dokumen.id}`}
           variant="contained"

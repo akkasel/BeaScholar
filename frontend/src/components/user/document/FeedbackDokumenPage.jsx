@@ -20,6 +20,7 @@ const FeedbackDokumenPage = () => {
     linkDokumen: "",
   });
 
+  // untuk ambil 1 dokumen by id
   useEffect(() => {
     const fetchDokumen = async () => {
       const docRef = doc(db, "dokumen", id);

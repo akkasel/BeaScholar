@@ -52,18 +52,21 @@ type Dokumen struct {
 
 // untuk entity interview
 type Interview struct {
-	Nama                string    `json:"nama"`
-	TingkatBeasiswa     string    `json:"tingkatBeasiswa"`
-	LingkupBeasiswa     string    `json:"lingkupBeasiswa"`
-	JenisInterview      string    `json:"jenisInterview"`
-	DeskripsiDiri       string    `json:"deskripsiDiri"`
-	WaktuInterview      time.Time `json:"waktuInterview"`
-	ZoomMeetingId       string    `json:"zoomMeetingId,omitempty"`
-	ZoomMeetingPassword string    `json:"zoomMeetingPassword,omitempty"`
-	ZoomJoinUrl         string    `json:"zoomJoinUrl,omitempty"`
-	ZoomStartUrl        string    `json:"zoomStartUrl,omitempty"`
-	CreatedAt           time.Time `json:"createdAt,omitempty"`
-	UpdatedAt           time.Time `json:"updatedAt,omitempty"`
+	Nama                     string    `json:"nama"`
+	TingkatBeasiswa          string    `json:"tingkatBeasiswa"`
+	LingkupBeasiswa          string    `json:"lingkupBeasiswa"`
+	JenisInterview           string    `json:"jenisInterview"`
+	DeskripsiDiri            string    `json:"deskripsiDiri"`
+	WaktuInterview           time.Time `json:"waktuInterview"`
+	ZoomMeetingId            string    `json:"zoomMeetingId,omitempty"`
+	ZoomMeetingPassword      string    `json:"zoomMeetingPassword,omitempty"`
+	ZoomJoinUrl              string    `json:"zoomJoinUrl,omitempty"`
+	ZoomStartUrl             string    `json:"zoomStartUrl,omitempty"`
+	CreatedAt                time.Time `json:"createdAt,omitempty"`
+	UpdatedAt                time.Time `json:"updatedAt,omitempty"`
+	MasukanPositif           string    `json:"masukanPositif"`
+	HalYangPerluDitingkatkan string    `json:"halYangPerluDitingkatkan"`
+	CatatanTambahan          string    `json:"catatanTambahan"`
 }
 
 // For analysis request
@@ -272,54 +275,53 @@ func deleteDokumen(w http.ResponseWriter, r *http.Request) {
 
 // POST - create new Interview item & NEW ZOOM MEETING
 func createInterview(w http.ResponseWriter, r *http.Request) {
-    ctx := context.Background()
-    var interview Interview
-    if err := json.NewDecoder(r.Body).Decode(&interview); err != nil {
-        w.Header().Set("Content-Type", "application/json")
-        w.WriteHeader(http.StatusBadRequest)
-        json.NewEncoder(w).Encode(map[string]string{"error": "Invalid request body"})
-        return
-    }
+	ctx := context.Background()
+	var interview Interview
+	if err := json.NewDecoder(r.Body).Decode(&interview); err != nil {
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusBadRequest)
+		json.NewEncoder(w).Encode(map[string]string{"error": "Invalid request body"})
+		return
+	}
 
-    log.Printf("Received interview creation request: %+v", interview)
+	log.Printf("Received interview creation request: %+v", interview)
 
-    zoomResponse, err := createZoomMeeting(interview)
-    if err != nil {
-        w.Header().Set("Content-Type", "application/json")
-        w.WriteHeader(http.StatusInternalServerError)
-        json.NewEncoder(w).Encode(map[string]string{"error": "Failed to create Zoom meeting: " + err.Error()})
-        return
-    }
+	zoomResponse, err := createZoomMeeting(interview)
+	if err != nil {
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusInternalServerError)
+		json.NewEncoder(w).Encode(map[string]string{"error": "Failed to create Zoom meeting: " + err.Error()})
+		return
+	}
 
-    // Fill Zoom-related attributes to the Interview entity
-    interview.ZoomMeetingId = zoomResponse.MeetingID
-    interview.ZoomMeetingPassword = zoomResponse.Password
-    interview.ZoomJoinUrl = zoomResponse.JoinURL
-    interview.ZoomStartUrl = zoomResponse.StartURL
-    interview.CreatedAt = time.Now()
-    interview.UpdatedAt = time.Now()
+	// Fill Zoom-related attributes to the Interview entity
+	interview.ZoomMeetingId = zoomResponse.MeetingID
+	interview.ZoomMeetingPassword = zoomResponse.Password
+	interview.ZoomJoinUrl = zoomResponse.JoinURL
+	interview.ZoomStartUrl = zoomResponse.StartURL
+	interview.CreatedAt = time.Now()
+	interview.UpdatedAt = time.Now()
 
-    // Add interview to Firestore
-    _, _, err = client.Collection("interview").Add(ctx, interview)
-    if err != nil {
-        w.Header().Set("Content-Type", "application/json")
-        w.WriteHeader(http.StatusInternalServerError)
-        json.NewEncoder(w).Encode(map[string]string{"error": "Failed to create interview: " + err.Error()})
-        return
-    }
+	// Add interview to Firestore
+	_, _, err = client.Collection("interview").Add(ctx, interview)
+	if err != nil {
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusInternalServerError)
+		json.NewEncoder(w).Encode(map[string]string{"error": "Failed to create interview: " + err.Error()})
+		return
+	}
 
-    // Prepare response
-    response := map[string]string{
-        "message":             "Interview and Zoom meeting created successfully",
-        "zoomMeetingId":       interview.ZoomMeetingId,
-        "zoomMeetingPassword": interview.ZoomMeetingPassword,
-        "zoomJoinUrl":         interview.ZoomJoinUrl,
-        "zoomStartUrl":        interview.ZoomStartUrl,
-    }
-    w.Header().Set("Content-Type", "application/json")
-    json.NewEncoder(w).Encode(response)
+	// Prepare response
+	response := map[string]string{
+		"message":             "Interview and Zoom meeting created successfully",
+		"zoomMeetingId":       interview.ZoomMeetingId,
+		"zoomMeetingPassword": interview.ZoomMeetingPassword,
+		"zoomJoinUrl":         interview.ZoomJoinUrl,
+		"zoomStartUrl":        interview.ZoomStartUrl,
+	}
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(response)
 }
-
 
 // GET - get Interview item
 func getInterview(w http.ResponseWriter, r *http.Request) {
@@ -437,26 +439,25 @@ func enableCORS(next http.Handler) http.Handler {
 
 // BELOW THIS IS FOR THE ZOOM FUNCTIONALITY
 func getZoomOAuthToken() (*oauth2.Token, error) {
-    conf := &clientcredentials.Config{
-        ClientID:     os.Getenv("ZOOM_CLIENT_ID"),
-        ClientSecret: os.Getenv("ZOOM_CLIENT_SECRET"),
-        TokenURL:     "https://zoom.us/oauth/token",
-        EndpointParams: map[string][]string{
-            "grant_type": {"account_credentials"},
-            "account_id": {os.Getenv("ZOOM_ACCOUNT_ID")},
-        },
-        Scopes: []string{"meeting:write:admin", "meeting:write"},
-    }
+	conf := &clientcredentials.Config{
+		ClientID:     os.Getenv("ZOOM_CLIENT_ID"),
+		ClientSecret: os.Getenv("ZOOM_CLIENT_SECRET"),
+		TokenURL:     "https://zoom.us/oauth/token",
+		EndpointParams: map[string][]string{
+			"grant_type": {"account_credentials"},
+			"account_id": {os.Getenv("ZOOM_ACCOUNT_ID")},
+		},
+		Scopes: []string{"meeting:write:admin", "meeting:write"},
+	}
 
-    token, err := conf.Token(context.Background())
-    if err != nil {
-        log.Printf("Error retrieving OAuth token: %v", err)
-        return nil, err
-    }
-    log.Printf("Successfully retrieved OAuth token: %v", token)
-    return token, nil
+	token, err := conf.Token(context.Background())
+	if err != nil {
+		log.Printf("Error retrieving OAuth token: %v", err)
+		return nil, err
+	}
+	log.Printf("Successfully retrieved OAuth token: %v", token)
+	return token, nil
 }
-
 
 // to create zoom meeting
 func createZoomMeeting(interview Interview) (*ZoomMeetingResponse, error) {

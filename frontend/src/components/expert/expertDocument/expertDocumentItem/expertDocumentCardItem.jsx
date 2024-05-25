@@ -101,7 +101,7 @@ const ExpertDocumentCardItem = ({ dokumen }) => {
         </div>
       </div>
 
-      <div className="container-button-jadwal-interview-item">
+      <div className="container-button-document-item">
         <Button
           href={`/expert-feedback-dokumen/${dokumen.id}`}
           variant="contained"
