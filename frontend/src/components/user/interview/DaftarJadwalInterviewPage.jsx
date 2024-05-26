@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../../App.css";
 import TopBar from "../masterPage/TopBar";
 import SideBar from "../masterPage/SideBar";
@@ -8,11 +8,48 @@ import SearchBar from "../../SearchBar";
 import JadwalInterviewItem from "./interviewItem/JadwalInterviewItem";
 import JadwalInterviewItemLive from "./interviewItem/JadwalInterviewItemLive";
 
+import { db } from "../../../firebase";
+import { collection, getDocs } from "firebase/firestore";
+
 const DaftarJadwalInterviewPage = () => {
+
+  const [interviewList, setInterviewList] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // get all interview data
+  useEffect(() => {
+    const fetchInterview = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "interview"));
+        const documentsData = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setInterviewList(documentsData);
+      } catch (err) {
+        console.error("Error fetching data interview: ", err);
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchInterview();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
   return (
     <div>
       <TopBar /> {/* Render the TopBar component */}
-      <div className="daftar-jadwal-interview-page">
+      <div className="feedback-document-by-ai-page">
         <SideBar /> {/* Render the SideBar component */}
 
         <div className="interview-page-container">
@@ -60,14 +97,12 @@ const DaftarJadwalInterviewPage = () => {
             </SearchBar>
           </div>
 
-          {/* Ini contoh frontend dari jadwal interview untuk yang Live (saat ini bisa zoom sekarang)
-          & yang biasa (yang bukan live, yang bukan live itu artinya belum jam nya) */}
-          <JadwalInterviewItemLive />
-          <JadwalInterviewItem />
-          <JadwalInterviewItem />
-          <JadwalInterviewItem />
-          <JadwalInterviewItem />
-         
+          {/* Display all interview data */}
+          <div>
+            {interviewList.map((interview) => (
+              <JadwalInterviewItem key={interview.id} interview={interview} />
+            ))}
+          </div>
 
           {/* Add your input form here */}
         </div>

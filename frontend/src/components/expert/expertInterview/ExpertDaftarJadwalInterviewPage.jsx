@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../../App.css";
 import TopBarExpert from "../expertMasterPage/TopBarExpert";
 import SideBarExpert from "../expertMasterPage/SideBarExpert";
@@ -8,7 +8,45 @@ import SearchBar from "../../SearchBar";
 import ExpertJadwalInterviewItem from "./expertInterviewItem/ExpertJadwalInterviewItem";
 import ExpertJadwalInterviewItemLive from "./expertInterviewItem/ExpertJadwalInterviewItemLive";
 
+import { db } from "../../../firebase";
+import { collection, getDocs } from "firebase/firestore";
+
 const ExpertDaftarJadwalInterviewPage = () => {
+
+  const [interviewList, setInterviewList] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // get all interview data
+  useEffect(() => {
+    const fetchInterview = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "interview"));
+        const documentsData = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setInterviewList(documentsData);
+      } catch (err) {
+        console.error("Error fetching data interview: ", err);
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchInterview();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+
   return (
     <div>
       <TopBarExpert /> {/* Render the TopBar component */}
@@ -60,13 +98,11 @@ const ExpertDaftarJadwalInterviewPage = () => {
             </SearchBar>
           </div>
 
-          {/* Ini contoh frontend dari jadwal interview untuk yang Live (saat ini bisa zoom sekarang)
-          & yang biasa (yang bukan live, yang bukan live itu artinya belum jam nya) */}
-          <ExpertJadwalInterviewItemLive />
-          <ExpertJadwalInterviewItem />
-          <ExpertJadwalInterviewItem />
-          <ExpertJadwalInterviewItem />
-          <ExpertJadwalInterviewItem />
+          <div>
+            {interviewList.map((interview) => (
+              <ExpertJadwalInterviewItem key={interview.id} interview={interview} />
+            ))}
+          </div>
          
 
           {/* Add your input form here */}

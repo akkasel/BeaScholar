@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../../App.css";
 import TopBarAdmin from "../adminMasterPage/TopBarAdmin";
 import SideBarAdmin from "../adminMasterPage/SideBarAdmin";
@@ -9,7 +9,44 @@ import dokumenemotSvg from "../../../img/dokumenemot.svg";
 import verifikasilogoSvg from "../../../img/verifikasilogo.svg";
 import uploadbeasiswalogoSvg from "../../../img/uploadbeasiswalogo.svg";
 
+import { db } from "../../../firebase";
+import { collection, getDocs } from "firebase/firestore";
+
 const AdminVerifikasiPage = () => {
+  const [expertList, setExpertList] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // get all Expert data
+  useEffect(() => {
+    const fetchExpert = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "expert"));
+        const documentsData = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setExpertList(documentsData);
+      } catch (err) {
+        console.error("Error fetching expert data: ", err);
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchExpert();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+
   return (
     <div>
       <TopBarAdmin /> {/* Render the TopBar component */}
@@ -65,10 +102,12 @@ const AdminVerifikasiPage = () => {
             <SearchBar></SearchBar>
           </div>
 
-          <AjuanJadiExpertItem />
-          <AjuanJadiExpertItem />
-          <AjuanJadiExpertItem />
-          <AjuanJadiExpertItem />
+          {/* Display UI of all Expert item */}
+          <div>
+            {expertList.map((expert) => (
+              <AjuanJadiExpertItem key={expert.id} expert={expert} />
+            ))}
+          </div>
 
           {/* Add your input form here */}
         </div>

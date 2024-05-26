@@ -19,6 +19,7 @@ const ExpertFeedbackDokumenPage = () => {
     linkDokumen: "",
   });
 
+  // get dokumen by id
   useEffect(() => {
     const fetchDokumen = async () => {
       const docRef = doc(db, "dokumen", id);
@@ -33,6 +34,8 @@ const ExpertFeedbackDokumenPage = () => {
     fetchDokumen();
   }, [id]);
 
+  // to update 3 fields on the dokumen entity, which is :
+  // dokumen.hasilAnalisa, dokumen.halYangBisaDirevisi, dokumen.catatanTambahan
   const handleUpdate = async () => {
     const docRef = doc(db, "dokumen", id);
     await updateDoc(docRef, {
@@ -43,6 +46,7 @@ const ExpertFeedbackDokumenPage = () => {
     alert("Feedback terkait dokumen ini berhasil dikirim!");
   };
 
+  // untuk handle perubahan pada dokumen
   const handleChange = (e) => {
     const { name, value } = e.target;
     setDokumen((prevDokumen) => ({
@@ -51,6 +55,7 @@ const ExpertFeedbackDokumenPage = () => {
     }));
   };
 
+  // tampilan jika data dokumen belum muncul alias masih loading
   if (!dokumen) {
     return <div>Loading...</div>;
   }
@@ -74,6 +79,7 @@ const ExpertFeedbackDokumenPage = () => {
             backgroundColor: "#C4084F", // Slightly lighter pink on hover
             color: "#FFFF",
           },
+          width:"1000px"
         }}
       >
         Unduh
@@ -107,13 +113,14 @@ const ExpertFeedbackDokumenPage = () => {
           </div>
 
           <div className="form-input-container">
+            {/* Dokumen yang dikumpulkan */}
             <div className="text-interview-container">
-              <span className="text-interview">Dokumen Terkait:</span>
+              <span className="text-interview">Dokumen yang dikumpulkan:</span>
+            </div>
+            <div>
+              <DownloadButton href={dokumen.linkDokumen}></DownloadButton>
             </div>
 
-            <DownloadButton href={dokumen.linkDokumen} />
-
-            <br />
             <br />
 
             {/* Hasil Analisa */}

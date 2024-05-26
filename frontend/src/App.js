@@ -28,6 +28,7 @@ import ExpertFeedbackDokumenPage from './components/expert/expertDocument/Expert
 import ExpertProfilePage from './components/expert/expertProfile/ExpertProfilePage';
 import ScholarshipDetailItemPage from './components/user/scholarship/ScholarshipDetailItemPage';
 import ScholarshipDetailItemPageForAdmin from './components/admin/adminBeasiswa/scholarshipItem/ScholarshipDetailItemPageForAdmin';
+import FeedbackDokumenByAIPage from './components/user/document/FeedbackDokumenByAIPage';
 
 function App() {
   return (
@@ -44,11 +45,12 @@ function App() {
 
           <Route path="/interview" element={<InterviewPage />} />
           <Route path="/daftar-jadwal-interview" element={<DaftarJadwalInterviewPage />} />
-          <Route path="/feedback-interview" element={<FeedbackInterviewPage />} />
+          <Route path="/feedback-interview/:id" element={<FeedbackInterviewPage />} />
 
           <Route path="/document" element={<DocumentPage />} />
           <Route path="/daftar-hasil-analisis-dokumen" element={<DaftarHasilAnalisisDokumenPage />} />
           <Route path="/feedback-dokumen/:id" element={<FeedbackDokumenPage />} />
+          <Route path="/feedback-dokumen-by-ai/:id" element={<FeedbackDokumenByAIPage />} />
 
           <Route path="/profile" element={<ProfilePage />} />
 
@@ -60,7 +62,7 @@ function App() {
           <Route path="/expert-home" element={<ExpertHomePage />} />
 
           <Route path="/expert-daftar-jadwal-interview" element={<ExpertDaftarJadwalInterviewPage />} />
-          <Route path="/expert-feedback-interview" element={<ExpertFeedbackInterviewPage />} />
+          <Route path="/expert-feedback-interview/:id" element={<ExpertFeedbackInterviewPage />} />
 
           <Route path="/expert-daftar-hasil-analisis-dokumen" element={<ExpertDaftarHasilAnalisisDokumenPage />} />
           <Route path="/expert-feedback-dokumen/:id" element={<ExpertFeedbackDokumenPage />} />

@@ -4,12 +4,13 @@ import downloadiconSvg from "../../../../img/downloadicon.svg";
 import Avatar from "@mui/material/Avatar";
 import ricoSVG from "../../../../img/rico.svg";
 
-const AjuanJadiExpertItem = () => {
-  const DownloadButton = () => {
+const AjuanJadiExpertItem = ({ expert }) => {
+  const DownloadButton = ({ href }) => {
     return (
       <Button
         variant="outlined"
         startIcon={<img src={downloadiconSvg}></img>}
+        href={href}
         sx={{
           textTransform: "none", // Remove capitalization
           borderColor: "#C4084F",
@@ -19,12 +20,17 @@ const AjuanJadiExpertItem = () => {
             backgroundColor: "#C4084F", // Slightly lighter pink on hover
             color: "#FFFF",
           },
+          height: "30px"
         }}
       >
         Unduh
       </Button>
     );
   };
+
+  if (!expert) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <Card
@@ -45,14 +51,14 @@ const AjuanJadiExpertItem = () => {
       }}
     >
       <div className="container-all-text-item">
-        <Avatar variant="square" src={ricoSVG} sx={{ width: 80, height: 100 }} />
+        <Avatar variant="square" src={expert.linkFotoDiri} sx={{ width: 80, height: 100 }} />
       </div>
       <div className="container-all-text-item">
         <div className="container-text-header-item">
           <span className="text-header-item">Nama</span>
         </div>
         <div className="container-text-content-item">
-          <span className="text-content-item">Rico</span>
+          <span className="text-content-item">{expert.nama}</span>
         </div>
       </div>
       <div className="container-all-text-item">
@@ -60,25 +66,16 @@ const AjuanJadiExpertItem = () => {
           <span className="text-header-item">Tingkat Pendidikan:</span>
         </div>
         <div className="container-text-content-item">
-          <span className="text-content-item">S2</span>
+          <span className="text-content-item">{expert.tingkatPendidikan}</span>
         </div>
       </div>
 
       <div className="container-all-text-item">
         <div className="container-text-header-item">
-          <span className="text-header-item">Lingkup Beasiswa:</span>
+          <span className="text-header-item">Universitas/Almamater:</span>
         </div>
         <div className="container-text-content-item">
-          <span className="text-content-item">Internasional</span>
-        </div>
-      </div>
-
-      <div className="container-all-text-item">
-        <div className="container-text-header-item">
-          <span className="text-header-item">Universitas:</span>
-        </div>
-        <div className="container-text-content-item">
-          <span className="text-content-item">BINUS University</span>
+          <span className="text-content-item">{expert.universitasAtauAlmamater}</span>
         </div>
       </div>
 
@@ -86,16 +83,16 @@ const AjuanJadiExpertItem = () => {
 
       <div className="container-all-text-item">
         <div className="container-text-header-item">
-          <span className="text-header-item">Dokumen yang dikumpulkan:</span>
+          <span className="text-header-item">CV yang dikumpulkan:</span>
         </div>
         <div className="container-text-content-item">
-          <DownloadButton></DownloadButton>
+            <DownloadButton href={expert.linkCV} />
         </div>
       </div>
 
       <div className="container-button-pengajuan-expert-item">
         <Button
-          href="/admin-verifikasi-detail-pengajuan"
+          href={`/admin-verifikasi-detail-pengajuan/${expert.id}`}
           variant="contained"
           sx={{
             fontFamily: "'Poppins', sans-serif", // Use the Poppins font

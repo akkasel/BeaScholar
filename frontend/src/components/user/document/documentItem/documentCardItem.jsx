@@ -91,11 +91,11 @@ const documentCardItem = ({ dokumen }) => {
           <span className="text-header-item">Dokumen yang dikumpulkan:</span>
         </div>
         <div className="container-text-content-item">
-          <DownloadButton></DownloadButton>
+          <DownloadButton href={dokumen.linkDokumen} ></DownloadButton>
         </div>
       </div>
 
-      <div className="container-button-jadwal-interview-item">
+      <div className="container-button-document-item">
         <Button
           href={`/feedback-dokumen/${dokumen.id}`}
           variant="contained"

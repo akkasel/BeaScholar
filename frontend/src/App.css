@@ -675,9 +675,21 @@ button {
   display: inline-block;
 }
 
-.container-button-jadwal-interview-item {
+.container-button-document-item {
   position: absolute; /* Make the button element positionable */
   bottom: 10px; /* Set the bottom position from the card's edge */
+  right: 12px;
+}
+
+.container-button-jadwal-interview-item {
+  position: absolute; /* Make the button element positionable */
+  bottom: 8px; /* Set the bottom position from the card's edge */
+  left: 755px; /* Set the left position from the card's edge */
+}
+
+.container-button-jadwal-interview-item-zoom {
+  position: absolute; /* Make the button element positionable */
+  bottom: 8px; /* Set the bottom position from the card's edge */
   right: 20px; /* Set the left position from the card's edge */
 }
 
@@ -702,6 +714,11 @@ button {
 
 .card-feedback-interview {
   text-align: left;
+}
+
+.feedback-document-by-ai-page{
+  display: flex;
+  height: 1000vh
 }
 
 .text-field-feedback-expert-container {
