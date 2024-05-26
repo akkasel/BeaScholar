@@ -50,6 +50,17 @@ type Dokumen struct {
 	CatatanTambahan     string `json:"catatanTambahan"`
 }
 
+// untuk entity expert
+type Expert struct {
+	Nama                     string `json:"nama"`
+	TingkatPendidikan        string `json:"tingkatPendidikan"`
+	UniversitasAtauAlmamater string `json:"universitasAtauAlmamater"`
+	LinkCV                   string `json:"linkCV"`
+	LinkFotoKTP              string `json:"linkFotoKTP"`
+	LinkEssay                string `json:"linkEssay"`
+	LinkFotoDiri             string `json:"linkFotoDiri"`
+}
+
 // untuk entity interview
 type Interview struct {
 	Nama                     string    `json:"nama"`
@@ -132,6 +143,11 @@ func main() {
 	r.HandleFunc("/dokumen", getDokumen).Methods("GET")
 	r.HandleFunc("/dokumen/{id}", updateDokumen).Methods("PUT")
 	r.HandleFunc("/dokumen/{id}", deleteDokumen).Methods("DELETE")
+
+	r.HandleFunc("/expert", createExpert).Methods("POST")
+	r.HandleFunc("/expert", getExpert).Methods("GET")
+	r.HandleFunc("/expert/{id}", updateExpert).Methods("PUT")
+	r.HandleFunc("/expert/{id}", deleteExpert).Methods("DELETE")
 
 	r.HandleFunc("/interview", createInterview).Methods("POST")
 	r.HandleFunc("/interview", getInterview).Methods("GET")
@@ -271,6 +287,68 @@ func deleteDokumen(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	fmt.Fprintln(w, "Dokumen deleted")
+}
+
+// POST - create new Expert item
+func createExpert(w http.ResponseWriter, r *http.Request) {
+	ctx := context.Background()
+	var expert Expert
+	json.NewDecoder(r.Body).Decode(&expert)
+	_, _, err := client.Collection("expert").Add(ctx, expert)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	fmt.Fprintln(w, "Expert created")
+}
+
+// GET - get Expert item
+func getExpert(w http.ResponseWriter, r *http.Request) {
+	ctx := context.Background()
+	var expert []Expert
+	iter := client.Collection("expert").Documents(ctx)
+	for {
+		doc, err := iter.Next()
+		if err == iterator.Done {
+			break
+		}
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		var e Expert
+		doc.DataTo(&e)
+		expert = append(expert, e)
+	}
+	json.NewEncoder(w).Encode(expert)
+}
+
+// UPDATE - expert item
+func updateExpert(w http.ResponseWriter, r *http.Request) {
+	ctx := context.Background()
+	vars := mux.Vars(r)
+	id := vars["id"]
+	var expert Expert
+	json.NewDecoder(r.Body).Decode(&expert)
+	_, err := client.Collection("expert").Doc(id).Set(ctx, expert)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	fmt.Fprintln(w, "Expert updated")
+}
+
+// DELETE - expert item
+func deleteExpert(w http.ResponseWriter, r *http.Request) {
+	ctx := context.Background()
+	vars := mux.Vars(r)
+	id := vars["id"]
+	_, err := client.Collection("expert").Doc(id).Delete(ctx)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	fmt.Fprintln(w, "Expert deleted")
 }
 
 // POST - create new Interview item & NEW ZOOM MEETING

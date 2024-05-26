@@ -14,6 +14,7 @@ const ExpertDaftarHasilAnalisisDokumenPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // get all Dokumen data
   useEffect(() => {
     const fetchDokumen = async () => {
       try {

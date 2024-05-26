@@ -1,14 +1,8 @@
 import React from "react";
-import {
-  Card,
-  CardHeader,
-  Avatar,
-  Button,
-} from "@mui/material";
+import { Card, CardHeader, Avatar, Button } from "@mui/material";
 import contohprofileimageSvg from "../../../../img/contohprofileimage.svg";
 
 const JadwalInterviewItem = ({ interview }) => {
-
   if (!interview) {
     return <div>Loading...</div>;
   }
@@ -40,7 +34,7 @@ const JadwalInterviewItem = ({ interview }) => {
         position: "relative", // to position the circle
         width: "1130px",
         marginLeft: "80px",
-        height:"120px"
+        height: "120px",
       }}
     >
       <CardHeader
@@ -85,7 +79,9 @@ const JadwalInterviewItem = ({ interview }) => {
           <span className="text-header-item">Jenis Interview:</span>
         </div>
         <div className="container-text-content-item">
-          <span className="text-content-item">Beasiswa {interview.JenisInterview}</span>
+          <span className="text-content-item">
+            Beasiswa {interview.JenisInterview}
+          </span>
         </div>
       </div>
 
@@ -99,7 +95,7 @@ const JadwalInterviewItem = ({ interview }) => {
       </div>
 
       <div className="container-button-jadwal-interview-item">
-        <Button 
+        <Button
           href={`/feedback-interview/${interview.id}`}
           variant="contained"
           sx={{
@@ -108,10 +104,12 @@ const JadwalInterviewItem = ({ interview }) => {
             borderRadius: "20px", // Apply rounded edges
             width: "160px",
             padding: "0px",
-            fontSize:"13px",
+            fontSize: "13px",
             fontWeight: "bold",
             background: "linear-gradient(to right, #FA6339, #C73950)", // Gradient background
-            "&:hover": { background: "linear-gradient(to right, #FA6339, #C73950)" },
+            "&:hover": {
+              background: "linear-gradient(to right, #FA6339, #C73950)",
+            },
 
             justifyContent: "center", // Centralized text and icon
           }}
@@ -121,18 +119,23 @@ const JadwalInterviewItem = ({ interview }) => {
       </div>
 
       <div className="container-button-jadwal-interview-item-zoom">
-        <Button href={interview.ZoomJoinUrl}
+        <Button
+          href={interview.ZoomJoinUrl}
+          target="_blank" // to open the new tab for zoom join meeting room url
+          rel="noopener noreferrer"
           variant="contained"
           sx={{
             fontFamily: "'Poppins', sans-serif", // Use the Poppins font
             textTransform: "none", // Remove capitalization
             borderRadius: "20px", // Apply rounded edges
-            fontSize:"13px",
+            fontSize: "13px",
             width: "200px",
             padding: "0px",
             fontWeight: "bold",
             background: "linear-gradient(to bottom, #940566, #C70E4E)", // Gradient background
-            "&:hover": { background: "linear-gradient(to bottom, #940566, #C70E4E)" },
+            "&:hover": {
+              background: "linear-gradient(to bottom, #940566, #C70E4E)",
+            },
 
             justifyContent: "center", // Centralized text and icon
           }}
