@@ -155,6 +155,8 @@ const ScholarshipDetailItemPage = () => {
                 /* Jadi User nanti diarahkan ke link pendaftarannya, ini contoh aja */
                 // harusnya, kalau admin input link, di sini linknya auto ke-update!
                 href={scholarship.tautan}
+                target="_blank" // to open the new tab after click
+                rel="noopener noreferrer"
                 variant="contained"
                 sx={{
                   fontFamily: "'Poppins', sans-serif", // Use the Poppins font

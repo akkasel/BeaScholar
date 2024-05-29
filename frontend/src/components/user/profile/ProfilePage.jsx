@@ -1,46 +1,47 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { auth, storage, db } from "../../../firebase"; // Import db
 import "../../../App.css";
 import TopBar from "../masterPage/TopBar";
 import SideBar from "../masterPage/SideBar";
-import TextField from "@mui/material/TextField";
-import MuiMenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
-import pencilSvg from "../../../img/pencil.svg";
 import Avatar from "@mui/material/Avatar";
-import contohprofileimageSvg from "../../../img/contohprofileimage.svg";
+import pencilSvg from "../../../img/pencil.svg";
+import noprofileSvg from "../../../img/noprofile.svg";
+import Card from "@mui/material/Card";
 
 const ProfilePage = () => {
-  // untuk textfield tingkat pendidikan
-  const tingkatPendidikan = [
-    {
-      value: "SMA",
-      label: "SMA",
-    },
-    {
-      value: "SMK",
-      label: "SMK",
-    },
-    {
-      value: "S1",
-      label: "S1",
-    },
-    {
-      value: "S2",
-      label: "S2",
-    },
-    {
-      value: "S3",
-      label: "S3",
-    },
-  ];
+  const [user, setUser] = useState(null);
+  const [name, setName] = useState("");
+  const [educationLevel, setEducationLevel] = useState("");
+  const [description, setDescription] = useState("");
+  const [profilePicUrl, setProfilePicUrl] = useState(noprofileSvg); // Default profile picture
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const currentUser = auth.currentUser;
+      if (currentUser) {
+        setUser(currentUser);
+        setName(currentUser.displayName || "");
+        setProfilePicUrl(currentUser.photoURL || noprofileSvg);
+        
+        // Fetch additional user info from Firestore
+        const doc = await db.collection("userProfiles").doc(currentUser.uid).get();
+        if (doc.exists) {
+          const data = doc.data();
+          setEducationLevel(data.educationLevel || "SMA");
+          setDescription(data.description || "Tidak ada deskripsi");
+        }
+      }
+    };
+    fetchUserData();
+  }, []);
 
   return (
-    <div>
+    <div className="profile-page">
       <TopBar /> {/* Render the TopBar component */}
-      <div className="interview-page">
+      <div className="profile-page-container">
         <SideBar /> {/* Render the SideBar component */}
-
-        <div className="interview-page-container">
+        <div className="profile-content">
           {/*Header text "Profil Kamu"*/}
           <div className="interview-header-container">
             <img
@@ -53,131 +54,73 @@ const ProfilePage = () => {
             <h1 className="latihan-interview-text">Profil Diri Kamu</h1>
           </div>
 
-          <div className="container-avatar">
+          <div className="profile-avatar-container">
             <Avatar
-              src={contohprofileimageSvg}
+              src={profilePicUrl}
               sx={{ width: 120, height: 120 }}
             />
           </div>
 
-          {/* Nama */}
-          <div className="form-input-container">
-            <div className="text-interview-container">
-              <span className="text-interview">Nama</span>
-            </div>
-            <div className="">
-              <TextField
-                fullWidth
-                id="outlined-textfield-nama"
-                label="Masukan nama disini..."
-                variant="outlined"
-                width="200px"
-                sx={{
-                  // Root class for the input field
-                  "& .MuiOutlinedInput-root": {
-                    // Class for the border around the input field
-                    "& .MuiOutlinedInput-notchedOutline": {
-                      borderColor: "#C4084F",
-                      borderWidth: "2px",
-                    },
-                  },
-                  // Class for the label of the input field
-                  "& .MuiInputLabel-outlined": {
-                    color: "#121212",
-                  },
-                }}
-              />
-            </div>
-            <br></br>
+          <div className="profile-form-container">
+            <Card
+              variant="outlined"
+              sx={{
+                borderRadius: "16px",
+                padding: "10px",
+                marginTop: "20px",
+                alignItems: "center",
+                backgroundColor: "#FFFFFF", // white background
+                boxShadow: "0 4px 6px rgba(0,0,0,0.1)", // soft shadow
+                width: "1100px",
+                marginLeft: "80px",
+              }}
+            >
+              {/* Nama */}
+              <div className="profile-form-group">
+                <div className="profile-form-label">Nama:</div>
+                <div className="profile-form-value">Amanda</div>
+              </div>
 
-            {/* Tingkat Pendidikan */}
-            <div className="text-interview-container">
-              <span className="text-interview">Tingkat Pendidikan</span>
-            </div>
-            <div>
-              <TextField
-                fullWidth
-                id="outlined-select-tingkat-pendidikan"
-                select
-                defaultValue="SMA"
-                sx={{
-                  // Root class for the input field
-                  "& .MuiOutlinedInput-root": {
-                    // Class for the border around the input field
-                    "& .MuiOutlinedInput-notchedOutline": {
-                      borderColor: "#C4084F",
-                      borderWidth: "2px",
-                    },
-                  },
-                  // Class for the label of the input field
-                  "& .MuiInputLabel-outlined": {
-                    color: "#121212",
-                  },
-                }}
-              >
-                {tingkatPendidikan.map((option) => (
-                  <MuiMenuItem key={option.value} value={option.value}>
-                    {option.label}
-                  </MuiMenuItem>
-                ))}
-              </TextField>
-            </div>
+              <hr className="solid" color="lightgrey" />
 
-            <br />
+              {/* Tingkat Pendidikan */}
+              <div className="profile-form-group">
+                <div className="profile-form-label">Tingkat Pendidikan:</div>
+                <div className="profile-form-value">SMA</div>
+              </div>
 
-            {/* Deskripsi Diri */}
-            <div className="text-interview-container">
-              <span className="text-interview">Deskripsi Diri (opsional)</span>
-            </div>
-            <div className="">
-              <TextField
-                fullWidth
-                id="outlined-textfield-nama"
-                label="Tulis deskripsi dirimu disini..."
-                variant="outlined"
-                width="200px"
-                sx={{
-                  // Root class for the input field
-                  "& .MuiOutlinedInput-root": {
-                    // Class for the border around the input field
-                    "& .MuiOutlinedInput-notchedOutline": {
-                      borderColor: "#C4084F",
-                      borderWidth: "2px",
-                    },
-                  },
-                  // Class for the label of the input field
-                  "& .MuiInputLabel-outlined": {
-                    color: "#121212",
-                  },
-                }}
-              />
-            </div>
+              <hr className="solid" color="lightgrey" />
 
-            <br />
+              {/* Deskripsi Diri */}
+              <div className="profile-form-group">
+                <div className="profile-form-label">
+                  Deskripsi Diri (opsional):
+                </div>
+                <div className="profile-form-value">Tidak ada deskripsi</div>
+              </div>
+            </Card>
 
-            {/* Simpan Button */}
-            <div>
+            {/* Ubah Button */}
+            <div className="profile-button-container">
               <Button
+                href="/change-profile"
                 variant="contained"
                 sx={{
-                  fontFamily: "'Poppins', sans-serif", // Use the Poppins font
-                  textTransform: "none", // Remove capitalization
-                  borderRadius: "20px", // Apply rounded edges
+                  fontFamily: "'Poppins', sans-serif",
+                  textTransform: "none",
+                  borderRadius: "20px",
                   width: "100px",
                   fontWeight: "bold",
-                  background: "linear-gradient(to right, #FA6339, #C73950)", // Gradient background
+                  background: "linear-gradient(to right, #FA6339, #C73950)",
                   "&:hover": {
                     background: "linear-gradient(to right, #FA6339, #C73950)",
                   },
-
-                  justifyContent: "center", // Centralized text and icon
+                  justifyContent: "center",
                 }}
               >
-                Simpan
+                Ubah
               </Button>
             </div>
-
-            {/* Add your input form here */}
           </div>
         </div>
       </div>
@@ -186,3 +129,4 @@ const ProfilePage = () => {
 };
 
 export default ProfilePage;
+

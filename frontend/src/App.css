@@ -332,7 +332,7 @@ button {
 
 .home-page {
   display: flex;
-  height: 200vh; /* Set the height to 100vh to make it full-screen */
+  height: 300vh;
 }
 
 .home-content {
@@ -450,10 +450,10 @@ button {
 }
 
 .card-container {
-  width: 300px;
+  width: 270px;
   border-radius: 8px;
   margin-left: 10px;
-  margin-top: 20px;
+  margin-top: 10px;
   overflow: hidden;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   border: 1px solid #FA6339;
@@ -534,8 +534,8 @@ button {
 .list-of-scholarship-card-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* Creates a 4-column grid */
-  gap: 20px; /* Adjust the gap between cards as needed */
-  margin: 20px; /* Adjust margin as needed */
+  gap: 10px; /* Adjust the gap between cards as needed */
+  margin: 10px; /* Adjust margin as needed */
 }
 
 /* Ensure the ScholarshipCard has a max-width to control its size */
@@ -634,7 +634,7 @@ button {
 
 .daftar-jadwal-interview-page {
   display: flex;
-  height: 300vh; /* Set the height to 100vh to make it full-screen */
+  height: 300vh;
 }
 
 .search-bar-daftar-jadwal-interview {
@@ -704,6 +704,54 @@ button {
   position: absolute; /* Make the button element positionable */
 }
 
+.input-group {
+  position: relative;
+  margin-bottom: 15px;
+  transition: all 0.3s ease;
+}
+
+.input-group.active {
+  border: 2px solid #c70e4e;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: transparent;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.9em;
+  margin-bottom: 10px;
+}
+
+.social-login button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.submit-button {
+  background-color: #C4084F; /* Default background color */
+  color: white; /* Default text color */
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s; /* Add transition for smooth effect */
+}
+
+.submit-button:hover {
+  background-color: #A50C21; /* Background color on hover */
+  color: #ffffff; /* Text color on hover */
+}
 
 
 .container-feedback-title {
@@ -816,8 +864,8 @@ button {
   background: #fff;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  margin: 20px;
+  padding: 10px;
+  margin: 10px;
 }
 
 .card-buttons {
@@ -826,6 +874,66 @@ button {
   gap: 10px; /* Adjust the gap between the buttons */
   margin-top: 10px; /* Adjust the margin as needed */
 }
+
+.profile-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.profile-page-container {
+  display: flex;
+  flex: 1;
+}
+
+.profile-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 20px;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+
+.profile-avatar-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.profile-form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.profile-form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-form-label {
+  font-size: 18px;
+  font-weight: normal;
+}
+
+.profile-form-value {
+  font-size: 16px;
+  color: #C4084F;
+  font-weight: bold;
+}
+
+.profile-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
 
 
 /* Add other styles based on the design such as fonts, colors, etc. */

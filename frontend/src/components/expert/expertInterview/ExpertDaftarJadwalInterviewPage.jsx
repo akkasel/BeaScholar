@@ -6,7 +6,6 @@ import headphoneSvg from "../../../img/headphone.svg";
 import Card from "@mui/material/Card";
 import SearchBar from "../../SearchBar";
 import ExpertJadwalInterviewItem from "./expertInterviewItem/ExpertJadwalInterviewItem";
-import ExpertJadwalInterviewItemLive from "./expertInterviewItem/ExpertJadwalInterviewItemLive";
 
 import { db } from "../../../firebase";
 import { collection, getDocs } from "firebase/firestore";

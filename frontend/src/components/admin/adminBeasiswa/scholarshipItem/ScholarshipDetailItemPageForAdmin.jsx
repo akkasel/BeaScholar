@@ -11,9 +11,15 @@ import SideBarAdmin from "../../adminMasterPage/SideBarAdmin";
 import { db } from "../../../../firebase";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 
+import Alert from "@mui/material/Alert";
+import CheckIcon from "@mui/icons-material/Check";
+
 const ScholarshipDetailItemPageForAdmin = () => {
   const { id } = useParams();
   const [scholarship, setScholarship] = useState(null);
+
+  // untuk alertnya
+  const [alert, setAlert] = useState({ show: false, type: "", message: "" });
 
   useEffect(() => {
     const fetchScholarship = async () => {
@@ -34,7 +40,13 @@ const ScholarshipDetailItemPageForAdmin = () => {
     await updateDoc(docRef, {
       // Add the fields to be updated here
     });
-    alert("Beasiswa berhasil diperbarui");
+    // alert("Beasiswa berhasil diperbarui");
+    // for success alert
+    setAlert({
+      show: true,
+      type: "success",
+      message: "Data Beasiswa ini berhasil diperbarui!",
+    });
   };
 
   if (!scholarship) {
@@ -486,6 +498,21 @@ const ScholarshipDetailItemPageForAdmin = () => {
                 Perbaharui
               </Button>
             </div>
+
+            {/* This is to show the alert*/}
+            {alert.show && (
+              <Alert
+                icon={
+                  alert.type === "success" ? (
+                    <CheckIcon fontSize="inherit" />
+                  ) : undefined
+                }
+                severity={alert.type}
+                onClose={() => setAlert({ show: false, type: "", message: "" })}
+              >
+                {alert.message}
+              </Alert>
+            )}
           </div>
         </div>
       </div>

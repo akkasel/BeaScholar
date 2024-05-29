@@ -29,6 +29,7 @@ import ExpertProfilePage from './components/expert/expertProfile/ExpertProfilePa
 import ScholarshipDetailItemPage from './components/user/scholarship/ScholarshipDetailItemPage';
 import ScholarshipDetailItemPageForAdmin from './components/admin/adminBeasiswa/scholarshipItem/ScholarshipDetailItemPageForAdmin';
 import FeedbackDokumenByAIPage from './components/user/document/FeedbackDokumenByAIPage';
+import ChangeProfilePage from './components/user/profile/ChangeProfilePage';
 
 function App() {
   return (
@@ -53,6 +54,7 @@ function App() {
           <Route path="/feedback-dokumen-by-ai/:id" element={<FeedbackDokumenByAIPage />} />
 
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/change-profile" element={<ChangeProfilePage />} />
 
 
           {/* Route yang berkaitan dengan role Expert simpan dibawah sini */}

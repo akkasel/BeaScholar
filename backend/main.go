@@ -464,11 +464,11 @@ func generateFeedback(w http.ResponseWriter, r *http.Request, openaiClient *open
 	var prompt string
 	switch analysisRequest.PromptType {
 	case "hasilAnalisa":
-		prompt = "Analisa text dokumen ini dan berikan hasil analisa anda, maksimal 1 paragraf:\n\n" + analysisRequest.Text
+		prompt = "Analisa text dokumen ini dan berikan hasil analisa anda, maksimal 1 paragraf, gunakan bahasa Indonesia:\n\n" + analysisRequest.Text
 	case "halYangBisaDirevisi":
-		prompt = "Analisa text dokumen ini dan tuliskan hal apa yang bisa direvisi, maksimal 2 paragraf:\n\n" + analysisRequest.Text
+		prompt = "Analisa text dokumen ini dan tuliskan hal apa yang bisa direvisi, maksimal 3 poin saja, gunakan bahasa Indonesia:\n\n" + analysisRequest.Text
 	case "catatanTambahan":
-		prompt = "Analisa text dokumen ini dan tuliskan catatan tambahan (jika ada), maksimal 2 paragraf:\n\n" + analysisRequest.Text
+		prompt = "Analisa text dokumen ini dan tuliskan catatan tambahan (jika ada), maksimal 3 poin saja, gunakan bahasa Indonesia:\n\n" + analysisRequest.Text
 	default:
 		http.Error(w, "Invalid prompt type", http.StatusBadRequest)
 		return
@@ -488,6 +488,7 @@ func generateFeedback(w http.ResponseWriter, r *http.Request, openaiClient *open
 				Content: prompt,
 			},
 		},
+		MaxTokens: 300,
 	})
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)

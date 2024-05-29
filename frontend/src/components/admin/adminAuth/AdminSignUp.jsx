@@ -14,6 +14,9 @@ const AdminSignUp = () => {
 
   const navigate = useNavigate(); // to navigate
 
+  const [error, setError] = useState("");
+  const [activeField, setActiveField] = useState("");
+
   const signUp = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
@@ -40,32 +43,48 @@ const AdminSignUp = () => {
         <form onSubmit={signUp}>
           <h1 className="daftar-sebagai-admin-heading">Daftar sebagai Admin</h1>
 
-          <div className="input-group">
+          <div
+            className={`input-group ${activeField === "email" ? "active" : ""}`}
+          >
             <input
               type="email"
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              onFocus={() => setActiveField("email")}
+              onBlur={() => setActiveField("")}
             ></input>
             <i className="fas fa-envelope input-icon"></i>
           </div>
 
-          <div className="input-group">
+          <div
+            className={`input-group ${
+              activeField === "password" ? "active" : ""
+            }`}
+          >
             <input
               type="password"
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              onFocus={() => setActiveField("password")}
+              onBlur={() => setActiveField("")}
             ></input>
             <i className="fas fa-lock input-icon"></i>
           </div>
 
-          <div className="input-group">
+          <div
+            className={`input-group ${
+              activeField === "passwordConfirmation" ? "active" : ""
+            }`}
+          >
             <input
               value={confirmPassword}
               type="password"
               placeholder="Konfirmasi Password"
               onChange={(e) => setConfirmPassword(e.target.value)}
+              onFocus={() => setActiveField("passwordConfirmation")}
+              onBlur={() => setActiveField("")}
             >
             </input>
             <i className="fas fa-lock input-icon"></i>
@@ -81,7 +100,7 @@ const AdminSignUp = () => {
             {/* Jangan lupa di href nya nanti simpan link untuk ke page Sign Up*/}
           </div>
 
-          <button type="submit" onClick={signUp}>
+          <button type="submit" class="submit-button" onClick={signUp}>
             Daftar sebagai Admin
           </button>
         </form>

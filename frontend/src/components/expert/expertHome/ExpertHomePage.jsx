@@ -20,7 +20,7 @@ const ExpertHomePage = () => {
               <div class="welcome-content">
                 <div class="welcome-text">
                   <h1 className="selamat-datang">Selamat datang,</h1>
-                  <p className="nama-user">Chelsea</p>
+                  <p className="nama-user">di Beascholar for Expert</p>
                 </div>
                 <div class="illustration">
                   <img src={gambarheaderSvg} alt="Illustration" />

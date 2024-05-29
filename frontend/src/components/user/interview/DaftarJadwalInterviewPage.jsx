@@ -6,7 +6,6 @@ import headphoneSvg from "../../../img/headphone.svg";
 import Card from "@mui/material/Card";
 import SearchBar from "../../SearchBar";
 import JadwalInterviewItem from "./interviewItem/JadwalInterviewItem";
-import JadwalInterviewItemLive from "./interviewItem/JadwalInterviewItemLive";
 
 import { db } from "../../../firebase";
 import { collection, getDocs } from "firebase/firestore";

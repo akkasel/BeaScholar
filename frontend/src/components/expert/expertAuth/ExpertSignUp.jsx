@@ -11,6 +11,9 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { collection, addDoc } from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage"; // import necessary functions for file upload
 
+import Alert from "@mui/material/Alert";
+import CheckIcon from "@mui/icons-material/Check";
+
 const ExpertSignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,7 +28,13 @@ const ExpertSignUp = () => {
 
   const [loading, setLoading] = useState(false); // Add loading state
 
+  // untuk alertnya
+  const [alert, setAlert] = useState({ show: false, type: "", message: "" });
+
   const navigate = useNavigate(); // to navigate
+
+  const [error, setError] = useState("");
+  const [activeField, setActiveField] = useState("");
 
   // to upload the files
   const uploadFile = async (file) => {
@@ -82,10 +91,14 @@ const ExpertSignUp = () => {
         linkFotoDiri,
       });
 
-      alert("Pengajuan diri kamu sebagai expert telah kami terima! Tunggu verifikasi dari Admin");
+      // alert("Pengajuan diri kamu sebagai expert telah kami terima! Tunggu verifikasi dari Admin");
+      // for success alert
+      setAlert({
+        show: true,
+        type: "success",
+        message: "Pengajuan diri kamu sebagai expert telah kami terima! Tunggu verifikasi dari Admin.",
+      });
       // TODO : kosongin lagi semua fieldnya setelah submit
-      
-      
     } catch (error) {
       alert(error);
     }
@@ -119,59 +132,91 @@ const ExpertSignUp = () => {
             Pengguna, Upload Informasi Beasiswa Terbaru
           </h2>
 
-          <div className="input-group">
+          <div
+            className={`input-group ${activeField === "email" ? "active" : ""}`}
+          >
             <input
               type="text"
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              onFocus={() => setActiveField("email")}
+              onBlur={() => setActiveField("")}
             />
           </div>
 
-          <div className="input-group">
+          <div
+            className={`input-group ${
+              activeField === "password" ? "active" : ""
+            }`}
+          >
             <input
               type="password"
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              onFocus={() => setActiveField("password")}
+              onBlur={() => setActiveField("")}
             />
           </div>
 
-          <div className="input-group">
+          <div
+            className={`input-group ${
+              activeField === "passwordConfirmation" ? "active" : ""
+            }`}
+          >
             <input
               type="password"
               placeholder="Konfirmasi Password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
+              onFocus={() => setActiveField("passwordConfirmation")}
+              onBlur={() => setActiveField("")}
             />
           </div>
 
-          <div className="input-group">
+          <div
+            className={`input-group ${activeField === "nama" ? "active" : ""}`}
+          >
             <input
               type="text"
               placeholder="Nama Lengkap"
               value={nama}
               onChange={(e) => setNama(e.target.value)}
+              onFocus={() => setActiveField("nama")}
+              onBlur={() => setActiveField("")}
             />
             <i className="fas fa-user input-icon"></i>
           </div>
 
-          <div className="input-group">
+          <div
+            className={`input-group ${
+              activeField === "tingkatPendidikan" ? "active" : ""
+            }`}
+          >
             <input
               type="text"
               placeholder="Tingkat Pendidikan"
               value={tingkatPendidikan}
               onChange={(e) => setTingkatPendidikan(e.target.value)}
+              onFocus={() => setActiveField("tingkatPendidikan")}
+              onBlur={() => setActiveField("")}
             />
             <i className="fas fa-graduation-cap input-icon"></i>
           </div>
 
-          <div className="input-group">
+          <div
+            className={`input-group ${
+              activeField === "universitasAtauAlmamater" ? "active" : ""
+            }`}
+          >
             <input
               type="text"
               placeholder="Universitas / Almamater"
               value={universitasAtauAlmamater}
               onChange={(e) => setUniversitasAtauAlmamater(e.target.value)}
+              onFocus={() => setActiveField("universitasAtauAlmamater")}
+              onBlur={() => setActiveField("")}
             />
             <i className="fas fa-university input-icon"></i>
           </div>
@@ -215,9 +260,29 @@ const ExpertSignUp = () => {
             {/* Jangan lupa di href nya nanti simpan link untuk ke page Sign Up*/}
           </div>
 
-          <button type="submit" onClick={signUp} disabled={loading}>
-          {loading ? "Loading..." : "Daftar sebagai Expert"}
+          <button
+            type="submit"
+            class="submit-button"
+            onClick={signUp}
+            disabled={loading}
+          >
+            {loading ? "Loading..." : "Daftar sebagai Expert"}
           </button>
+
+          {/* This is to show the alert*/}
+          {alert.show && (
+            <Alert
+              icon={
+                alert.type === "success" ? (
+                  <CheckIcon fontSize="inherit" />
+                ) : undefined
+              }
+              severity={alert.type}
+              onClose={() => setAlert({ show: false, type: "", message: "" })}
+            >
+              {alert.message}
+            </Alert>
+          )}
         </form>
       </div>
     </div>

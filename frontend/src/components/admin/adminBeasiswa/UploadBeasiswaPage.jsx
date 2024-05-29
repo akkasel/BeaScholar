@@ -22,6 +22,9 @@ import {
   doc,
 } from "firebase/firestore";
 
+import Alert from "@mui/material/Alert";
+import CheckIcon from "@mui/icons-material/Check";
+
 const UploadBeasiswaPage = () => {
   const [user] = useAuthState(auth); // Using react-firebase-hooks to manage auth state
 
@@ -35,6 +38,9 @@ const UploadBeasiswaPage = () => {
   const [syarat, setSyarat] = useState("");
   const [tautan, setTautan] = useState("");
   const [beasiswaList, setBeasiswaList] = useState([]);
+
+  // untuk alertnya
+  const [alert, setAlert] = useState({ show: false, type: "", message: "" });
 
   // untuk READ data beasiswa yang ada // ga dipake disini, dipake nanti di page lain
   /*
@@ -68,7 +74,13 @@ const UploadBeasiswaPage = () => {
         syarat,
         tautan,
       });
-      alert("Beasiswa created successfully!");
+      // alert("Beasiswa created successfully!");
+      // for success alert
+      setAlert({
+        show: true,
+        type: "success",
+        message: "Data Beasiswa telah berhasil diupload!",
+      });
     } catch (error) {
       console.error("Error adding document: ", error);
       alert("Failed to create beasiswa. Check console for details.");
@@ -461,6 +473,24 @@ const UploadBeasiswaPage = () => {
                 Unggah
               </Button>
             </div>
+
+            <br />
+
+            {/* This is to show the alert*/}
+            {alert.show && (
+              <Alert
+                icon={
+                  alert.type === "success" ? (
+                    <CheckIcon fontSize="inherit" />
+                  ) : undefined
+                }
+                severity={alert.type}
+                onClose={() => setAlert({ show: false, type: "", message: "" })}
+              >
+                {alert.message}
+              </Alert>
+            )}
+
             {/* Add your input form here */}
           </div>
         </div>

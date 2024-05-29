@@ -20,7 +20,7 @@ const AjuanJadiExpertItem = ({ expert }) => {
             backgroundColor: "#C4084F", // Slightly lighter pink on hover
             color: "#FFFF",
           },
-          height: "30px"
+          height: "30px",
         }}
       >
         Unduh
@@ -51,7 +51,11 @@ const AjuanJadiExpertItem = ({ expert }) => {
       }}
     >
       <div className="container-all-text-item">
-        <Avatar variant="square" src={expert.linkFotoDiri} sx={{ width: 80, height: 100 }} />
+        <Avatar
+          variant="square"
+          src={expert.linkFotoDiri}
+          sx={{ width: 80, height: 100 }}
+        />
       </div>
       <div className="container-all-text-item">
         <div className="container-text-header-item">
@@ -75,7 +79,9 @@ const AjuanJadiExpertItem = ({ expert }) => {
           <span className="text-header-item">Universitas/Almamater:</span>
         </div>
         <div className="container-text-content-item">
-          <span className="text-content-item">{expert.universitasAtauAlmamater}</span>
+          <span className="text-content-item">
+            {expert.universitasAtauAlmamater}
+          </span>
         </div>
       </div>
 
@@ -86,7 +92,11 @@ const AjuanJadiExpertItem = ({ expert }) => {
           <span className="text-header-item">CV yang dikumpulkan:</span>
         </div>
         <div className="container-text-content-item">
-            <DownloadButton href={expert.linkCV} />
+          <DownloadButton
+            href={expert.linkCV}
+            target="_blank" // to open the new tab after click
+            rel="noopener noreferrer"
+          />
         </div>
       </div>
 
@@ -94,13 +104,15 @@ const AjuanJadiExpertItem = ({ expert }) => {
         <Button
           href={`/admin-verifikasi-detail-pengajuan/${expert.id}`}
           variant="contained"
+          target="_blank" // to open the new tab after click
+          rel="noopener noreferrer"
           sx={{
             fontFamily: "'Poppins', sans-serif", // Use the Poppins font
             textTransform: "none", // Remove capitalization
             borderRadius: "20px", // Apply rounded edges
             width: "190px",
             padding: "0px",
-            marginTop:"10px",
+            marginTop: "10px",
             fontWeight: "bold",
             background: "linear-gradient(to right, #FA6339, #C73950)", // Gradient background
             "&:hover": {

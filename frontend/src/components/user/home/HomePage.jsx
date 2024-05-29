@@ -58,7 +58,7 @@ const HomePage = () => {
               <div class="welcome-content">
                 <div class="welcome-text">
                   <h1 className="selamat-datang">Selamat datang,</h1>
-                  <p className="nama-user">Amanda</p>
+                  <p className="nama-user">di Beascholar</p>
                 </div>
                 <div class="illustration">
                   <img src={gambarheaderSvg} alt="Illustration" />
