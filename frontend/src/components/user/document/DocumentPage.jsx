@@ -20,6 +20,9 @@ import { collection, addDoc } from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage"; // import necessary functions for file upload
 import { useNavigate } from "react-router-dom";
 
+import Alert from "@mui/material/Alert";
+import CheckIcon from "@mui/icons-material/Check";
+
 const DocumentPage = () => {
   const [user] = useAuthState(auth); // Using react-firebase-hooks to manage auth state
 
@@ -35,6 +38,9 @@ const DocumentPage = () => {
   const [halYangBisaDirevisi, setHalYangBisaDirevisi] = useState("");
   const [catatanTambahan, setCatatanTambahan] = useState("");
   const [dokumenList, setDokumenList] = useState([]);
+
+  // untuk alertnya
+  const [alert, setAlert] = useState({ show: false, type: "", message: "" });
 
   // untuk textfield jenis dokumen
   const jenisDokumen = [
@@ -110,11 +116,13 @@ const DocumentPage = () => {
   // untuk CREATE data dokumen baru (ini dipake di page ini)
   const createDokumen = async () => {
     if (!user) {
-      alert("You must be logged in to create a document.");
+      // alert("You must be logged in to create a document.");
+      setAlert({ show: true, type: 'error', message: 'You must be logged in to create a document.' });
       return;
     }
     if (!file) {
-      alert("Please select a file to upload.");
+      // alert("Please select a file to upload.");
+      setAlert({ show: true, type: 'error', message: 'Please select a file to upload.' });
       return;
     }
     try {
@@ -130,7 +138,8 @@ const DocumentPage = () => {
         },
         (error) => {
           console.error("Error uploading file: ", error);
-          alert("Failed to upload file. Check console for details.");
+          // alert("Failed to upload file. Check console for details.");
+          setAlert({ show: true, type: 'error', message: 'Failed to upload file. Check console for details.' });
         },
         async () => {
           const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
@@ -144,14 +153,26 @@ const DocumentPage = () => {
             halYangBisaDirevisi,
             catatanTambahan,
           });
-          alert("Document created successfully!");
+          // alert("Document created successfully!");
+          setAlert({ show: true, type: 'success', message: 'Dokumen berhasil dikirim!' });
           handleSubmit(docRef.id); // Pass the document ID to handleSubmit
+          resetFields();
         }
       );
     } catch (error) {
       console.error("Error adding document: ", error);
-      alert("Failed to create dokumen. Check console for details.");
+      // alert("Failed to create dokumen. Check console for details.");
+      setAlert({ show: true, type: 'error', message: 'Failed to create dokumen. Check console for details.' });
     }
+  };
+
+  // Function to reset all fields
+  const resetFields = () => {
+    setjenisDoc("Essay");
+    setTingkat("S1");
+    setLingkup("Dalam Negeri");
+    setJenisAnalisa("");
+    setFile(null);
   };
 
   return (
@@ -411,7 +432,7 @@ const DocumentPage = () => {
                 sx={{
                   border: "2px solid #C4084F !important",
                   borderColor: "#C4084F !important",
-                  padding: "20px"
+                  padding: "20px",
                 }}
               >
                 <input type="file" onChange={handleFileChange} />
@@ -442,6 +463,21 @@ const DocumentPage = () => {
                 Kumpul
               </Button>
             </div>
+
+            {/* This is to show the alert*/}
+            {alert.show && (
+              <Alert
+                icon={
+                  alert.type === "success" ? (
+                    <CheckIcon fontSize="inherit" />
+                  ) : undefined
+                }
+                severity={alert.type}
+                onClose={() => setAlert({ show: false, type: "", message: "" })}
+              >
+                {alert.message}
+              </Alert>
+            )}
             {/* Add your input form here */}
           </div>
         </div>

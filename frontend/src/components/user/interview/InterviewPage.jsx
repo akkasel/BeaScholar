@@ -19,6 +19,9 @@ import { auth } from "../../../firebase"; // import auth from firebase
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 
+import Alert from "@mui/material/Alert";
+import CheckIcon from "@mui/icons-material/Check";
+
 const InterviewPage = () => {
   const [user] = useAuthState(auth); // Using react-firebase-hooks to manage auth state
 
@@ -35,6 +38,9 @@ const InterviewPage = () => {
   const [zoomMeetingPassword, setZoomMeetingPassword] = useState("");
   const [zoomJoinUrl, setZoomJoinUrl] = useState("");
   const [zoomStartUrl, setZoomStartUrl] = useState("");
+
+  // for the alert
+  const [alert, setAlert] = useState({ show: false, type: '', message: '' });
 
   // Options for tingkat pendidikan
   const tingkatPendidikan = [
@@ -69,7 +75,8 @@ const InterviewPage = () => {
   // Create interview by calling the backend API
   const createInterview = async () => {
     if (!user) {
-      alert("You must be logged in to create an Interview.");
+      // alert("You must be logged in to create an Interview.");
+      setAlert({ show: true, type: 'error', message: 'You must be logged in to create an Interview.' });
       return;
     }
 
@@ -103,13 +110,30 @@ const InterviewPage = () => {
       setZoomJoinUrl(data.zoomJoinUrl);
       setZoomStartUrl(data.zoomStartUrl);
 
-      alert("Interview created successfully!");
+      // alert("Interview created successfully!");
+      setAlert({ show: true, type: 'success', message: 'Jadwal Interview berhasil dibuat!' });
+      resetFields();
       //navigate("/daftar-jadwal-interview");
     } catch (error) {
       console.error("Error creating interview:", error);
-      alert("Failed to create Interview. Check console for details.");
+      // alert("Failed to create Interview. Check console for details.");
+      setAlert({ show: true, type: 'error', message: 'Failed to create Interview. Check console for details.' });
     }
     navigate("/daftar-jadwal-interview");
+  };
+
+  // Function to reset all fields
+  const resetFields = () => {
+    setNama("");
+    setTingkat("S1");
+    setLingkup("Dalam Negeri");
+    setSelectedJenisIntreview("");
+    setDeskripsiDiri("");
+    setWaktuInterview(null);
+    setZoomMeetingId("");
+    setZoomMeetingPassword("");
+    setZoomJoinUrl("");
+    setZoomStartUrl("");
   };
 
   return (
@@ -162,7 +186,6 @@ const InterviewPage = () => {
               />
             </div>
             <br />
-
             {/* Tingkat Pendidikan */}
             <div className="text-interview-container">
               <span className="text-interview">Tingkat Pendidikan</span>
@@ -197,9 +220,7 @@ const InterviewPage = () => {
                 ))}
               </TextField>
             </div>
-
             <br />
-
             {/* Lingkup Beasiswa */}
             <div className="text-interview-container">
               <span className="text-interview">Lingkup Beasiswa</span>
@@ -234,9 +255,7 @@ const InterviewPage = () => {
                 ))}
               </TextField>
             </div>
-
             <br />
-
             {/* Jenis Interview*/}
             <div className="text-interview-container">
               <span className="text-interview">Jenis Interview</span>
@@ -299,9 +318,7 @@ const InterviewPage = () => {
                 </FormGroup>
               </Card>
             </div>
-
             <br />
-
             {/* Deskripsi Diri */}
             <div className="text-interview-container">
               <span className="text-interview">Deskripsi Diri (opsional)</span>
@@ -331,9 +348,7 @@ const InterviewPage = () => {
                 }}
               />
             </div>
-
             <br />
-
             {/* Pilih waktu interview */}
             <div className="text-interview-container">
               <span className="text-interview">Pilih Waktu Interview</span>
@@ -375,10 +390,8 @@ const InterviewPage = () => {
                 />
               </LocalizationProvider>
             </div>
-
             <br />
             <br />
-
             {/* Kumpul Button */}
             <div>
               <Button
@@ -402,18 +415,21 @@ const InterviewPage = () => {
                 Kumpul
               </Button>
             </div>
-
-            {/* Display Zoom meeting details if available 
-            {zoomJoinUrl && (
-              <div className="zoom-details">
-                <h3>Zoom Meeting Details:</h3>
-                <p><strong>Meeting ID:</strong> {zoomMeetingId}</p>
-                <p><strong>Password:</strong> {zoomMeetingPassword}</p>
-                <p><strong>Join URL:</strong> <a href={zoomJoinUrl} target="_blank" rel="noopener noreferrer">{zoomJoinUrl}</a></p>
-                <p><strong>Start URL:</strong> <a href={zoomStartUrl} target="_blank" rel="noopener noreferrer">{zoomStartUrl}</a></p>
-              </div>
+            
+            {/* This is to show the alert*/}
+            {alert.show && (
+              <Alert
+                icon={
+                  alert.type === "success" ? (
+                    <CheckIcon fontSize="inherit" />
+                  ) : undefined
+                }
+                severity={alert.type}
+                onClose={() => setAlert({ show: false, type: "", message: "" })}
+              >
+                {alert.message}
+              </Alert>
             )}
-            */}
           </div>
         </div>
       </div>

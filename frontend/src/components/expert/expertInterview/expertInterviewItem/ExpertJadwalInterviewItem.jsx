@@ -37,6 +37,7 @@ const ExpertJadwalInterviewItem = ({ interview }) => {
         height: "120px",
       }}
     >
+      {/* Ga usah pake gambar dulu
       <CardHeader
         avatar={
           <Avatar
@@ -47,6 +48,7 @@ const ExpertJadwalInterviewItem = ({ interview }) => {
         }
       ></CardHeader>
 
+      */}
       <div className="container-all-text-item">
         <div className="container-text-header-item">
           <span className="text-header-item">Nama:</span>
@@ -55,6 +57,8 @@ const ExpertJadwalInterviewItem = ({ interview }) => {
           <span className="text-content-item">{interview.Nama}</span>
         </div>
       </div>
+
+      
 
       <div className="container-all-text-item">
         <div className="container-text-header-item">

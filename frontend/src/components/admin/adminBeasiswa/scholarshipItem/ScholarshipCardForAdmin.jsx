@@ -1,16 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import bcalogoSvg from "../../../../img/bcalogo.svg";
 import { Button } from "@mui/material";
 import { db } from "../../../../firebase";
 import { deleteDoc, doc } from "firebase/firestore";
 
+import Alert from "@mui/material/Alert";
+import CheckIcon from "@mui/icons-material/Check";
+
 const ScholarshipCardForAdmin = ({ scholarship, onDelete }) => {
+  // untuk alertnya
+  const [alert, setAlert] = useState({ show: false, type: "", message: "" });
 
   const deleteBeasiswa = async (id) => {
     try {
       const docRef = doc(db, "beasiswa", id);
       await deleteDoc(docRef);
-      alert("Beasiswa berhasil dihapus");
+      // alert("Beasiswa berhasil dihapus");
+      // for success alert
+      setAlert({
+        show: true,
+        type: "success",
+        message: "Beasiswa ini berhasil dihapus!",
+      });
       if (onDelete) {
         onDelete(id);
       }
@@ -23,7 +34,9 @@ const ScholarshipCardForAdmin = ({ scholarship, onDelete }) => {
     <div className="card-container">
       <div className="card-header">
         <div className="card-header-top">
+          {/* // gajadi pake gambar, kaya gaperlu
           <img src={bcalogoSvg} alt="BCA" className="card-logo" />
+          */}
           <div className="card-header-badge-container">
             <span className="card-header-badge national">
               {scholarship.lingkup}
@@ -57,7 +70,7 @@ const ScholarshipCardForAdmin = ({ scholarship, onDelete }) => {
               },
               justifyContent: "center",
               px: 3,
-              left: 2
+              left: 2,
             }}
           >
             Hapus
@@ -86,10 +99,26 @@ const ScholarshipCardForAdmin = ({ scholarship, onDelete }) => {
             Perbaharui
           </Button>
         </div>
+
+        
       </div>
+      {/* This is to show the alert*/}
+      {alert.show && (
+          <Alert
+            icon={
+              alert.type === "success" ? (
+                <CheckIcon fontSize="inherit" />
+              ) : undefined
+            }
+            severity={alert.type}
+            onClose={() => setAlert({ show: false, type: "", message: "" })}
+          >
+            {alert.message}
+          </Alert>
+        )}
     </div>
+    
   );
 };
 
 export default ScholarshipCardForAdmin;
-

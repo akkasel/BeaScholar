@@ -10,6 +10,9 @@ import downloadiconSvg from "../../../img/downloadicon.svg";
 import { db } from "../../../firebase";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 
+import Alert from "@mui/material/Alert";
+import CheckIcon from "@mui/icons-material/Check";
+
 const ExpertFeedbackDokumenPage = () => {
   const { id } = useParams();
   const [dokumen, setDokumen] = useState({
@@ -18,6 +21,9 @@ const ExpertFeedbackDokumenPage = () => {
     catatanTambahan: "",
     linkDokumen: "",
   });
+
+  // untuk alertnya
+  const [alert, setAlert] = useState({ show: false, type: "", message: "" });
 
   // get dokumen by id
   useEffect(() => {
@@ -43,7 +49,13 @@ const ExpertFeedbackDokumenPage = () => {
       halYangBisaDirevisi: dokumen.halYangBisaDirevisi,
       catatanTambahan: dokumen.catatanTambahan,
     });
-    alert("Feedback terkait dokumen ini berhasil dikirim!");
+    // alert("Feedback terkait dokumen ini berhasil dikirim!");
+    // for success alert
+    setAlert({
+      show: true,
+      type: "success",
+      message: "Feedback terkait dokumen ini berhasil dikirim!",
+    });
   };
 
   // untuk handle perubahan pada dokumen
@@ -79,7 +91,7 @@ const ExpertFeedbackDokumenPage = () => {
             backgroundColor: "#C4084F", // Slightly lighter pink on hover
             color: "#FFFF",
           },
-          width:"1000px"
+          width: "1000px",
         }}
       >
         Unduh
@@ -118,7 +130,11 @@ const ExpertFeedbackDokumenPage = () => {
               <span className="text-interview">Dokumen yang dikumpulkan:</span>
             </div>
             <div>
-              <DownloadButton href={dokumen.linkDokumen}></DownloadButton>
+              <DownloadButton
+                href={dokumen.linkDokumen}
+                target="_blank" // to open the new tab after click
+                rel="noopener noreferrer"
+              ></DownloadButton>
             </div>
 
             <br />
@@ -185,7 +201,9 @@ const ExpertFeedbackDokumenPage = () => {
 
             {/* Catatan tambahan dari Interviewer */}
             <div className="text-interview-container">
-              <span className="text-interview">Catatan tambahan dari Interviewer</span>
+              <span className="text-interview">
+                Catatan tambahan dari Interviewer
+              </span>
             </div>
             <div className="text-field-feedback-expert-container">
               <TextField
@@ -234,6 +252,21 @@ const ExpertFeedbackDokumenPage = () => {
                 Simpan
               </Button>
             </div>
+
+            {/* This is to show the alert*/}
+            {alert.show && (
+              <Alert
+                icon={
+                  alert.type === "success" ? (
+                    <CheckIcon fontSize="inherit" />
+                  ) : undefined
+                }
+                severity={alert.type}
+                onClose={() => setAlert({ show: false, type: "", message: "" })}
+              >
+                {alert.message}
+              </Alert>
+            )}
           </div>
         </div>
       </div>

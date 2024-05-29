@@ -7,6 +7,9 @@ import arrowleftSvg from "../../../img/arrowleft.svg";
 import TopBarExpert from "../expertMasterPage/TopBarExpert";
 import SideBarExpert from "../expertMasterPage/SideBarExpert";
 
+import Alert from "@mui/material/Alert";
+import CheckIcon from "@mui/icons-material/Check";
+
 import { db } from "../../../firebase";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 
@@ -17,6 +20,9 @@ const ExpertFeedbackInterviewPage = () => {
     HalYangPerluDitingkatkan: "",
     CatatanTambahan: "",
   });
+
+  // untuk alertnya
+  const [alert, setAlert] = useState({ show: false, type: "", message: "" });
 
   // get interview data by id
   useEffect(() => {
@@ -42,7 +48,8 @@ const ExpertFeedbackInterviewPage = () => {
       HalYangPerluDitingkatkan: interview.HalYangPerluDitingkatkan,
       CatatanTambahan: interview.CatatanTambahan,
     });
-    alert("Feedback terkait Interview ini berhasil dikirim!");
+    // alert("Feedback terkait Interview ini berhasil dikirim!");
+    setAlert({ show: true, type: 'success', message: 'Feedback terkait Interview ini berhasil dikirim!' });
   };
 
   // untuk handle perubahan pada interview data
@@ -69,7 +76,6 @@ const ExpertFeedbackInterviewPage = () => {
 
   const interviewDate = convertTimestampToDate(interview.WaktuInterview);
   const formattedDate = interviewDate ? interviewDate.toLocaleString() : "N/A";
-
 
   // untuk textfield tingkat pendidikan
   const tingkatPendidikan = [
@@ -112,7 +118,6 @@ const ExpertFeedbackInterviewPage = () => {
       <TopBarExpert /> {/* Render the TopBar component */}
       <div className="feedback-interview-page">
         <SideBarExpert /> {/* Render the SideBar component */}
-
         <div className="interview-page-container">
           {/*Header text "Feedback Interview"*/}
           <div className="container-feedback-header">
@@ -253,7 +258,6 @@ const ExpertFeedbackInterviewPage = () => {
 
             <br />
 
-
             {/* Simpan Button */}
             <div>
               <Button
@@ -276,6 +280,21 @@ const ExpertFeedbackInterviewPage = () => {
                 Simpan
               </Button>
             </div>
+
+            {/* This is to show the alert*/}
+            {alert.show && (
+              <Alert
+                icon={
+                  alert.type === "success" ? (
+                    <CheckIcon fontSize="inherit" />
+                  ) : undefined
+                }
+                severity={alert.type}
+                onClose={() => setAlert({ show: false, type: "", message: "" })}
+              >
+                {alert.message}
+              </Alert>
+            )}
 
             {/* Add your input form here */}
           </div>

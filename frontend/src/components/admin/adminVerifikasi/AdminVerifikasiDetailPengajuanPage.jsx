@@ -11,9 +11,15 @@ import { useNavigate } from "react-router-dom";
 import { db } from "../../../firebase";
 import { doc, getDoc, updateDoc, deleteDoc } from "firebase/firestore";
 
+import Alert from "@mui/material/Alert";
+import CheckIcon from "@mui/icons-material/Check";
+
 const AdminVerifikasiDetailPengajuanPage = () => {
   const { id } = useParams();
   const [expert, setExpert] = useState(null);
+
+  // untuk alertnya
+  const [alert, setAlert] = useState({ show: false, type: "", message: "" });
 
   const navigate = useNavigate(); // to navigate
 
@@ -42,7 +48,14 @@ const AdminVerifikasiDetailPengajuanPage = () => {
   };
 
   const TolakPengajuan = async () => {
-    alert("Pengajuan Expert ini berhasil kamu tolak!");
+    // alert("Pengajuan Expert ini berhasil kamu tolak!");
+
+    // for success alert
+    setAlert({
+      show: true,
+      type: "success",
+      message: "Pengajuan Expert ini berhasil kamu tolak!",
+    });
     await deleteExpert(id); // Pass the id to deleteExpert function
     navigate("/admin-verifikasi");
   };
@@ -54,8 +67,15 @@ const AdminVerifikasiDetailPengajuanPage = () => {
   };
 
   const TerimaPengajuan = () => {
-    alert("Pengajuan Expert ini berhasil kamu terima!")
-  }
+    // alert("Pengajuan Expert ini berhasil kamu terima!");
+
+    // for success alert
+    setAlert({
+      show: true,
+      type: "success",
+      message: "Pengajuan Expert ini berhasil kamu terima!",
+    });
+  };
 
   // tampilan jika data Expert belum muncul alias masih loading
   if (!expert) {
@@ -92,7 +112,6 @@ const AdminVerifikasiDetailPengajuanPage = () => {
       <TopBarAdmin /> {/* Render the TopBar component */}
       <div className="daftar-jadwal-interview-page">
         <SideBarAdmin /> {/* Render the SideBar component */}
-        
         <div className="feedback-interview-page">
           <div className="interview-page-container">
             {/*Header text "Feedback Interview"*/}
@@ -130,11 +149,15 @@ const AdminVerifikasiDetailPengajuanPage = () => {
                 </div>
                 <div className="form-field">
                   <label>Tingkat Pendidikan:</label>
-                  <span className="text-interview-orange">{expert.tingkatPendidikan}</span>
+                  <span className="text-interview-orange">
+                    {expert.tingkatPendidikan}
+                  </span>
                 </div>
                 <div className="form-field">
                   <label>Universitas/Almamater:</label>
-                  <span className="text-interview-orange">{expert.universitasAtauAlmamater}</span>
+                  <span className="text-interview-orange">
+                    {expert.universitasAtauAlmamater}
+                  </span>
                 </div>
               </div>
 
@@ -142,14 +165,22 @@ const AdminVerifikasiDetailPengajuanPage = () => {
 
               <div className="form-field">
                 <label>Lihat KTP:</label>
-                <DownloadButton href={expert.linkKTP}></DownloadButton>
+                <DownloadButton
+                  href={expert.linkKTP}
+                  target="_blank" // to open the new tab after click
+                  rel="noopener noreferrer"
+                ></DownloadButton>
               </div>
 
               <br />
 
               <div className="form-field">
                 <label>Lihat CV:</label>
-                <DownloadButton href={expert.linkCV}></DownloadButton>
+                <DownloadButton
+                  href={expert.linkCV}
+                  target="_blank" // to open the new tab after click
+                  rel="noopener noreferrer"
+                ></DownloadButton>
               </div>
 
               <br />
@@ -158,7 +189,11 @@ const AdminVerifikasiDetailPengajuanPage = () => {
                 <label>
                   Lihat Deskripsi Diri dan Alasan Tertarik menjadi Expert:
                 </label>
-                <DownloadButton href={expert.linkEssay}></DownloadButton>
+                <DownloadButton
+                  href={expert.linkEssay}
+                  target="_blank" // to open the new tab after click
+                  rel="noopener noreferrer"
+                ></DownloadButton>
               </div>
 
               <br />
@@ -210,6 +245,23 @@ const AdminVerifikasiDetailPengajuanPage = () => {
                   Terima Pengajuan
                 </Button>
               </div>
+
+              {/* This is to show the alert*/}
+              {alert.show && (
+                <Alert
+                  icon={
+                    alert.type === "success" ? (
+                      <CheckIcon fontSize="inherit" />
+                    ) : undefined
+                  }
+                  severity={alert.type}
+                  onClose={() =>
+                    setAlert({ show: false, type: "", message: "" })
+                  }
+                >
+                  {alert.message}
+                </Alert>
+              )}
 
               {/* Add your input form here */}
             </div>

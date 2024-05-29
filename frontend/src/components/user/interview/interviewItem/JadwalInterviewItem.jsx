@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, CardHeader, Avatar, Button } from "@mui/material";
 import contohprofileimageSvg from "../../../../img/contohprofileimage.svg";
+import noprofileSvg from "../../../../img/noprofile.svg";
 
 const JadwalInterviewItem = ({ interview }) => {
   if (!interview) {
@@ -41,12 +42,13 @@ const JadwalInterviewItem = ({ interview }) => {
         avatar={
           <Avatar
             alt="Profile Image"
-            src={contohprofileimageSvg}
+            src={noprofileSvg}
             style={{ width: "80px", height: "80px" }}
           />
         }
       ></CardHeader>
 
+      {/* Untuk tampilin nama
       <div className="container-all-text-item">
         <div className="container-text-header-item">
           <span className="text-header-item">Nama:</span>
@@ -55,6 +57,7 @@ const JadwalInterviewItem = ({ interview }) => {
           <span className="text-content-item">{interview.Nama}</span>
         </div>
       </div>
+      */}
 
       <div className="container-all-text-item">
         <div className="container-text-header-item">

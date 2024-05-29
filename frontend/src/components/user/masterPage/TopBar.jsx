@@ -21,7 +21,7 @@ function TopBar() {
     <ThemeProvider theme={theme}>
       <AppBar position="static">
         <Container maxWidth="xl">
-          <Toolbar disableGutters>
+          <Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
             <img
               src={require("../../../img/logo.svg").default}
               alt="Logo"
@@ -40,6 +40,7 @@ function TopBar() {
                 letterSpacing: "0",
                 color: "#C4084F",
                 textDecoration: "none",
+                flexGrow: 1,
               }}
             >
               BeaScholar
@@ -54,14 +55,11 @@ function TopBar() {
                 width: "100px",
                 padding: "5px",
                 fontWeight: "bold",
-                color: "#FFFF",
+                color: "#FFFFFF",
                 backgroundColor: "#C70E4E",
                 "&:hover": {
                   backgroundColor: "#C70E4E",
                 },
-
-                position: "absolute",
-                right: 10,
               }}
             >
               Log Out

@@ -9,7 +9,9 @@ const ScholarshipCard = ({ scholarship }) => {
     <div className="card-container">
       <div className="card-header">
         <div className="card-header-top">
+          {/* Gajadi pake gambar, kaya gaperlu
           <img src={bcalogoSvg} alt="BCA" className="card-logo" />
+          */}
           <div className="card-header-badge-container">
             <span className="card-header-badge national">
               {scholarship.lingkup}

@@ -48,6 +48,7 @@ const ExpertDocumentCardItem = ({ dokumen }) => {
         marginLeft: "80px",
       }}
     >
+      {/* Ga usah pake gambar dulu
       <CardHeader
         avatar={
           <Avatar
@@ -57,6 +58,7 @@ const ExpertDocumentCardItem = ({ dokumen }) => {
           />
         }
       />
+      */}
       <div className="container-all-text-item">
         <div className="container-text-header-item">
           <span className="text-header-item">Nama:</span>
@@ -65,6 +67,7 @@ const ExpertDocumentCardItem = ({ dokumen }) => {
           <span className="text-content-item">Amanda</span>
         </div>
       </div>
+      
       <div className="container-all-text-item">
         <div className="container-text-header-item">
           <span className="text-header-item">Tingkat Pendidikan:</span>
@@ -97,7 +100,11 @@ const ExpertDocumentCardItem = ({ dokumen }) => {
           <span className="text-header-item">Dokumen yang dikumpulkan:</span>
         </div>
         <div className="container-text-content-item">
-          <DownloadButton href={dokumen.linkDokumen} />
+          <DownloadButton
+            href={dokumen.linkDokumen}
+            target="_blank" // to open the new tab after click
+            rel="noopener noreferrer"
+          />
         </div>
       </div>
 
@@ -129,4 +136,3 @@ const ExpertDocumentCardItem = ({ dokumen }) => {
 };
 
 export default ExpertDocumentCardItem;
-

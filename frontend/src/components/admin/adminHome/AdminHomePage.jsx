@@ -57,7 +57,7 @@ const AdminHomePage = () => {
               <div className="welcome-content">
                 <div className="welcome-text">
                   <h1 className="selamat-datang">Selamat datang,</h1>
-                  <p className="nama-user">Daniel</p>
+                  <p className="nama-user">di Beascholar for Admin</p>
                 </div>
                 <div className="illustration">
                   <img src={gambarheaderSvg} alt="Illustration" />
