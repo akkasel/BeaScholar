@@ -246,7 +246,7 @@ const FeedbackDokumenByAIPage = () => {
             {/* Catatan tambahan dari Interviewer */}
             <div className="text-interview-container">
               <span className="text-interview">
-                Catatan tambahan dari Interviewer
+                Catatan tambahan
               </span>
             </div>
             <div className="card-feedback-interview">

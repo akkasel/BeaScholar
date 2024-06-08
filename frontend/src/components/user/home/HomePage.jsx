@@ -6,7 +6,7 @@ import gambarheaderSvg from "../../../img/gambarheader.svg";
 import kacaPembesarSvg from "../../../img/kacapembesar.svg";
 import InterviewHistory from "./content/interviewSection/InterviewHistory";
 import DocumentHistory from "./content/documentSection/DocumentHistory";
-import SearchBar from "../../SearchBar";
+import SearchScholarshipBar from "../../SearchScholarshipBar";
 import ScholarshipCard from "./content/scholarshipSection/ScholarshipCard";
 
 import { db } from "../../../firebase";
@@ -18,6 +18,12 @@ const HomePage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // add state for search query
+  const [searchQuery, setSearchQuery] = useState("");
+
+  // add state for filtered scholarships
+  const [filteredScholarships, setFilteredScholarships] = useState([]); 
+
   useEffect(() => {
     const fetchScholarships = async () => {
       try {
@@ -27,6 +33,8 @@ const HomePage = () => {
           ...doc.data()
         }));
         setScholarships(scholarshipsData);
+        // set filtered scholarships initially to all scholarships
+        setFilteredScholarships(scholarshipsData); 
       } catch (error) {
         console.error("Error fetching scholarships: ", error);
         setError(error.message);
@@ -37,6 +45,21 @@ const HomePage = () => {
 
     fetchScholarships();
   }, []);
+
+  // to handle search bar input change
+  const handleSearchInputChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  // to search scholarship data
+  const handleSearch = () => {
+    const filtered = scholarships.filter(
+      (scholarship) =>
+        scholarship.nama &&
+        scholarship.nama.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilteredScholarships(filtered);
+  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -81,12 +104,15 @@ const HomePage = () => {
           </div>
 
           <div>
-            <SearchBar />
+            <SearchScholarshipBar 
+              value={searchQuery} 
+              onChange={handleSearchInputChange} 
+              onSearch={handleSearch} // Pass handleSearch to SearchBar
+            /> 
           </div>
 
-          {/* Container for the ScholarshipCard components */}
           <div className="list-of-scholarship-card-container">
-            {scholarships.map((scholarship) => (
+            {filteredScholarships.map((scholarship) => (
               <ScholarshipCard key={scholarship.id} scholarship={scholarship}/>
             ))}
           </div>

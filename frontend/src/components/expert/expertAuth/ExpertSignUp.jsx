@@ -29,7 +29,7 @@ const ExpertSignUp = () => {
   const [loading, setLoading] = useState(false); // Add loading state
 
   // untuk alertnya
-  const [alert, setAlert] = useState({ show: false, type: "", message: "" });
+  // const [alert, setAlert] = useState({ show: false, type: "", message: "" });
 
   const navigate = useNavigate(); // to navigate
 
@@ -91,13 +91,9 @@ const ExpertSignUp = () => {
         linkFotoDiri,
       });
 
-      // alert("Pengajuan diri kamu sebagai expert telah kami terima! Tunggu verifikasi dari Admin");
+      alert("Pengajuan diri kamu sebagai expert telah kami terima! Tunggu verifikasi dari Admin");
       // for success alert
-      setAlert({
-        show: true,
-        type: "success",
-        message: "Pengajuan diri kamu sebagai expert telah kami terima! Tunggu verifikasi dari Admin.",
-      });
+      
       // TODO : kosongin lagi semua fieldnya setelah submit
     } catch (error) {
       alert(error);
@@ -128,8 +124,8 @@ const ExpertSignUp = () => {
         <form onSubmit={signUp}>
           <h1 className="daftar-expert-heading">Daftar sebagai Expert</h1>
           <h2 className="daftar-expert-h2">
-            Kewajiban seorang Expert : Interview Pengguna, Analisa Dokumen
-            Pengguna, Upload Informasi Beasiswa Terbaru
+            Kewajiban seorang Expert : Interview Pengguna, dan Analisa Dokumen
+            Pengguna
           </h2>
 
           <div
@@ -269,20 +265,7 @@ const ExpertSignUp = () => {
             {loading ? "Loading..." : "Daftar sebagai Expert"}
           </button>
 
-          {/* This is to show the alert*/}
-          {alert.show && (
-            <Alert
-              icon={
-                alert.type === "success" ? (
-                  <CheckIcon fontSize="inherit" />
-                ) : undefined
-              }
-              severity={alert.type}
-              onClose={() => setAlert({ show: false, type: "", message: "" })}
-            >
-              {alert.message}
-            </Alert>
-          )}
+          
         </form>
       </div>
     </div>

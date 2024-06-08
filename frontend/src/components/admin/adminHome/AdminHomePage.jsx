@@ -4,9 +4,9 @@ import TopBarAdmin from "../adminMasterPage/TopBarAdmin";
 import SideBarAdmin from "../adminMasterPage/SideBarAdmin";
 import gambarheaderSvg from "../../../img/gambarheader.svg";
 import kacaPembesarSvg from "../../../img/kacapembesar.svg";
-import SearchBar from "../../SearchBar";
+import SearchScholarshipBar from "../../SearchScholarshipBar.jsx";
 import ScholarshipCardForAdmin from "../adminBeasiswa/scholarshipItem/ScholarshipCardForAdmin";
-import { db } from '../../../firebase';
+import { db } from "../../../firebase";
 import { collection, getDocs } from "firebase/firestore";
 
 const AdminHomePage = () => {
@@ -14,15 +14,23 @@ const AdminHomePage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // add state for search query
+  const [searchQuery, setSearchQuery] = useState("");
+
+  // add state for filtered scholarships
+  const [filteredScholarships, setFilteredScholarships] = useState([]); 
+
   useEffect(() => {
     const fetchScholarships = async () => {
       try {
         const querySnapshot = await getDocs(collection(db, "beasiswa"));
-        const scholarshipsData = querySnapshot.docs.map(doc => ({
+        const scholarshipsData = querySnapshot.docs.map((doc) => ({
           id: doc.id,
-          ...doc.data()
+          ...doc.data(),
         }));
         setScholarships(scholarshipsData);
+        // set filtered scholarships initially to all scholarships
+        setFilteredScholarships(scholarshipsData); 
       } catch (error) {
         console.error("Error fetching scholarships: ", error);
         setError(error.message);
@@ -35,7 +43,26 @@ const AdminHomePage = () => {
   }, []);
 
   const handleDelete = (id) => {
-    setScholarships(scholarships.filter(scholarship => scholarship.id !== id));
+    setScholarships(
+      scholarships.filter((scholarship) => scholarship.id !== id)
+    );
+     // update filtered scholarships too when deleting
+    setFilteredScholarships(scholarships.filter((scholarship) => scholarship.id !== id));
+  };
+
+  // to handle search bar input change
+  const handleSearchInputChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  // to search scholarship data
+  const handleSearch = () => {
+    const filtered = scholarships.filter(
+      (scholarship) =>
+        scholarship.nama &&
+        scholarship.nama.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilteredScholarships(filtered);
   };
 
   if (loading) {
@@ -77,14 +104,19 @@ const AdminHomePage = () => {
           </div>
 
           <div>
-            <SearchBar />
+            <SearchScholarshipBar 
+              value={searchQuery} 
+              onChange={handleSearchInputChange} 
+              onSearch={handleSearch} // Pass handleSearch to SearchBar
+            /> 
           </div>
 
           <div className="list-of-scholarship-card-container">
-            {scholarships.map((scholarship) => (
+            {filteredScholarships.map((scholarship) => (
               <ScholarshipCardForAdmin key={scholarship.id} scholarship={scholarship} onDelete={handleDelete} />
             ))}
           </div>
+
         </div>
       </div>
     </div>
@@ -92,6 +124,3 @@ const AdminHomePage = () => {
 };
 
 export default AdminHomePage;
-
-
-

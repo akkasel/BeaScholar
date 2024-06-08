@@ -15,6 +15,12 @@ const DaftarHasilAnalisisDokumenPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // add state for search query
+  const [searchQuery, setSearchQuery] = useState("");
+
+  // add state for filtered daftar hasil analisis dokumen
+  const [filteredDaftarDokumen, setFilteredDaftarDokumen] = useState([]); 
+
   useEffect(() => {
     const fetchDokumen = async () => {
       try {
@@ -24,6 +30,8 @@ const DaftarHasilAnalisisDokumenPage = () => {
           ...doc.data(),
         }));
         setDokumenList(documentsData);
+        // set filtered daftar dokumen data initially to all hasil analisis dokumen item
+        setFilteredDaftarDokumen(documentsData); 
       } catch (err) {
         console.error("Error fetching dokumen: ", err);
         setError(err.message);
@@ -34,6 +42,21 @@ const DaftarHasilAnalisisDokumenPage = () => {
 
     fetchDokumen();
   }, []);
+
+  // to handle search bar input change
+  const handleSearchInputChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  // to search data hasil analisis dokumen data
+  const handleSearch = () => {
+    const filtered = dokumenList.filter(
+      (dokumen) =>
+        dokumen.id &&
+        dokumen.id.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilteredDaftarDokumen(filtered);
+  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -89,19 +112,19 @@ const DaftarHasilAnalisisDokumenPage = () => {
           </div>
 
           <div className="search-bar-daftar-jadwal-interview">
-            <SearchBar >
-
-            </SearchBar>
+            <SearchBar 
+              value={searchQuery} 
+              onChange={handleSearchInputChange} 
+              onSearch={handleSearch} // Pass handleSearch to SearchBar
+            /> 
           </div>
 
           <div>
-            {dokumenList.map((dokumen) => (
+            {filteredDaftarDokumen.map((dokumen) => (
               <DocumentCardItem key={dokumen.id} dokumen={dokumen} />
             ))}
           </div>
-         
 
-          {/* Add your input form here */}
         </div>
       </div>
     </div>
