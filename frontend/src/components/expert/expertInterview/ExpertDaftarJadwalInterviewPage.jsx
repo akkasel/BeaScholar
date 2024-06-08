@@ -16,6 +16,12 @@ const ExpertDaftarJadwalInterviewPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // add state for search query
+  const [searchQuery, setSearchQuery] = useState("");
+
+  // add state for filtered jadwal interview
+  const [filteredJadwalInterview, setFilteredJadwalInterview] = useState([]); 
+
   // get all interview data
   useEffect(() => {
     const fetchInterview = async () => {
@@ -26,6 +32,8 @@ const ExpertDaftarJadwalInterviewPage = () => {
           ...doc.data(),
         }));
         setInterviewList(documentsData);
+        // set filtered jadwal interview initially to all jadwal interview item
+        setFilteredJadwalInterview(documentsData); 
       } catch (err) {
         console.error("Error fetching data interview: ", err);
         setError(err.message);
@@ -36,6 +44,21 @@ const ExpertDaftarJadwalInterviewPage = () => {
 
     fetchInterview();
   }, []);
+
+  // to handle search bar input change
+  const handleSearchInputChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  // to search scholarship data
+  const handleSearch = () => {
+    const filtered = interviewList.filter(
+      (interview) =>
+        interview.Nama &&
+        interview.Nama.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilteredJadwalInterview(filtered);
+  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -92,19 +115,19 @@ const ExpertDaftarJadwalInterviewPage = () => {
           </div>
 
           <div className="search-bar-daftar-jadwal-interview">
-            <SearchBar >
-
-            </SearchBar>
+            <SearchBar 
+              value={searchQuery} 
+              onChange={handleSearchInputChange} 
+              onSearch={handleSearch} // Pass handleSearch to SearchBar
+            /> 
           </div>
 
           <div>
-            {interviewList.map((interview) => (
-              <ExpertJadwalInterviewItem key={interview.id} interview={interview} />
+            {filteredJadwalInterview.map((interview) => (
+              <ExpertJadwalInterviewItem key={interview.id} interview={interview}   />
             ))}
           </div>
          
-
-          {/* Add your input form here */}
         </div>
       </div>
     </div>

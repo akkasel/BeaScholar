@@ -16,6 +16,7 @@ const ProfilePage = () => {
   const [description, setDescription] = useState("");
   const [profilePicUrl, setProfilePicUrl] = useState(noprofileSvg); // Default profile picture
 
+  /*
   useEffect(() => {
     const fetchUserData = async () => {
       const currentUser = auth.currentUser;
@@ -36,6 +37,7 @@ const ProfilePage = () => {
     fetchUserData();
   }, []);
 
+  */
   return (
     <div className="profile-page">
       <TopBar /> {/* Render the TopBar component */}

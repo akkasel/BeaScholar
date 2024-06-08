@@ -934,6 +934,33 @@ button {
   margin-top: 20px;
 }
 
+.search-input.glow-red {
+  box-shadow: 0 0 10px #C4084F;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.input-group {
+  display: flex;
+}
+
+.search-input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.search-icon i {
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.search-icon i:hover {
+  color: #C4084F;
+}
+
+
+
+
 
 
 /* Add other styles based on the design such as fonts, colors, etc. */

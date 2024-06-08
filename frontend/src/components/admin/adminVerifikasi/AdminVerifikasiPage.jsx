@@ -17,6 +17,12 @@ const AdminVerifikasiPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // add state for search query
+  const [searchQuery, setSearchQuery] = useState("");
+
+  // add state for filtered verification data
+  const [filteredData, setFilteredData] = useState([]); 
+
   // get all Expert data
   useEffect(() => {
     const fetchExpert = async () => {
@@ -27,6 +33,8 @@ const AdminVerifikasiPage = () => {
           ...doc.data(),
         }));
         setExpertList(documentsData);
+        // set filtered expert verification initially to all expert item
+       setFilteredData(documentsData); 
       } catch (err) {
         console.error("Error fetching expert data: ", err);
         setError(err.message);
@@ -37,6 +45,21 @@ const AdminVerifikasiPage = () => {
 
     fetchExpert();
   }, []);
+
+  // to handle search bar input change
+  const handleSearchInputChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  // to search expert data
+  const handleSearch = () => {
+    const filtered = expertList.filter(
+      (expert) =>
+        expert.nama &&
+        expert.nama.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilteredData(filtered);
+  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -99,17 +122,19 @@ const AdminVerifikasiPage = () => {
           </div>
 
           <div className="search-bar-daftar-jadwal-interview">
-            <SearchBar></SearchBar>
+            <SearchBar 
+              value={searchQuery} 
+              onChange={handleSearchInputChange} 
+              onSearch={handleSearch} // Pass handleSearch to SearchBar
+            /> 
           </div>
 
-          {/* Display UI of all Expert item */}
           <div>
-            {expertList.map((expert) => (
-              <AjuanJadiExpertItem key={expert.id} expert={expert} />
+            {filteredData.map((expert) => (
+              <AjuanJadiExpertItem key={expert.id} expert={expert}  />
             ))}
           </div>
 
-          {/* Add your input form here */}
         </div>
       </div>
     </div>

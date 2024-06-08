@@ -4,8 +4,11 @@ import {
   Button,
 } from "@mui/material";
 import downloadiconSvg from "../../../../img/downloadicon.svg";
+import { useParams } from "react-router-dom";
+
 
 const documentCardItem = ({ dokumen }) => {
+
   const DownloadButton = ({ href }) => {
     return (
       <Button
@@ -74,15 +77,6 @@ const documentCardItem = ({ dokumen }) => {
         </div>
         <div className="container-text-content-item">
           <span className="text-content-item">{dokumen.tingkat}</span>
-        </div>
-      </div>
-
-      <div className="container-all-text-item">
-        <div className="container-text-header-item">
-          <span className="text-header-item">Tanggal/Waktu:</span>
-        </div>
-        <div className="container-text-content-item">
-          <span className="text-content-item">28 Feb/15:00 WIB</span>
         </div>
       </div>
 

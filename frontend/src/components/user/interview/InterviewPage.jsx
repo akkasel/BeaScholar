@@ -119,7 +119,7 @@ const InterviewPage = () => {
       // alert("Failed to create Interview. Check console for details.");
       setAlert({ show: true, type: 'error', message: 'Failed to create Interview. Check console for details.' });
     }
-    navigate("/daftar-jadwal-interview");
+   //  navigate("/daftar-jadwal-interview");
   };
 
   // Function to reset all fields

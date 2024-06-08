@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const SearchBar = ({ value, onChange, onSearch }) => {
+const SearchScholarshipBar = ({ value, onChange, onSearch }) => {
   const [isClicked, setIsClicked] = useState(false);
 
   const handleKeyPress = (event) => {
@@ -18,7 +18,7 @@ const SearchBar = ({ value, onChange, onSearch }) => {
       <div className="input-group">
         <input
           type="text"
-          placeholder="Masukkan kata kunci di sini..."
+          placeholder="Masukkan judul beasiswa di sini..."
           className={`search-input ${isClicked ? "glow-red" : ""}`}
           value={value}
           onChange={onChange}
@@ -38,4 +38,5 @@ const SearchBar = ({ value, onChange, onSearch }) => {
   );
 };
 
-export default SearchBar;
+export default SearchScholarshipBar;
+

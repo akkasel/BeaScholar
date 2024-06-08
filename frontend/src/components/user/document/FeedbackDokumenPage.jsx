@@ -92,6 +92,11 @@ const FeedbackDokumenPage = () => {
           <div className="form-input-container">
             <br />
             <div className="text-interview-container">
+              <span className="text-interview">ID Dokumen: </span>
+              <span className="text-interview-orange">{id}</span>
+            </div>
+            <br />
+            <div className="text-interview-container">
               <span className="text-interview">Dokumen yang dikumpulkan:</span>
             </div>
             <div>
@@ -149,7 +154,7 @@ const FeedbackDokumenPage = () => {
             {/* Catatan tambahan dari Interviewer */}
             <div className="text-interview-container">
               <span className="text-interview">
-                Catatan tambahan dari Interviewer
+                Catatan tambahan
               </span>
             </div>
             <div className="card-feedback-interview">

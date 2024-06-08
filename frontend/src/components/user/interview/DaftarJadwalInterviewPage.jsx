@@ -11,10 +11,15 @@ import { db } from "../../../firebase";
 import { collection, getDocs } from "firebase/firestore";
 
 const DaftarJadwalInterviewPage = () => {
-
   const [interviewList, setInterviewList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  // add state for search query
+  const [searchQuery, setSearchQuery] = useState("");
+
+  // add state for filtered jadwal interview
+  const [filteredJadwalInterview, setFilteredJadwalInterview] = useState([]);
 
   // get all interview data
   useEffect(() => {
@@ -26,6 +31,8 @@ const DaftarJadwalInterviewPage = () => {
           ...doc.data(),
         }));
         setInterviewList(documentsData);
+        // set filtered jadwal interview initially to all jadwal interview item
+        setFilteredJadwalInterview(documentsData);
       } catch (err) {
         console.error("Error fetching data interview: ", err);
         setError(err.message);
@@ -36,6 +43,21 @@ const DaftarJadwalInterviewPage = () => {
 
     fetchInterview();
   }, []);
+
+  // to handle search bar input change
+  const handleSearchInputChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  // to search scholarship data
+  const handleSearch = () => {
+    const filtered = interviewList.filter(
+      (interview) =>
+        interview.Nama &&
+        interview.Nama.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilteredJadwalInterview(filtered);
+  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -50,7 +72,6 @@ const DaftarJadwalInterviewPage = () => {
       <TopBar /> {/* Render the TopBar component */}
       <div className="feedback-document-by-ai-page">
         <SideBar /> {/* Render the SideBar component */}
-
         <div className="interview-page-container">
           {/*Header text "Latihan Interview"*/}
           <div className="interview-header-container">
@@ -66,44 +87,46 @@ const DaftarJadwalInterviewPage = () => {
           </div>
 
           <div>
-          <Card
-                className="checkbox-card-container"
-                variant="outlined"
-                sx={{
-                    borderRadius: '16px',
-                    padding: '15px',
-                    marginBottom: '20px',
-                    marginTop: '20px',
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    backgroundColor: '#FFFFFF', // white background
-                    boxShadow: '0 4px 6px rgba(0,0,0,0.1)', // soft shadow
-                    position: 'relative', // to position the circle
-                    width:'1100px',
-                    marginLeft:'80px',
-                }}
-              >
-                <span className="text-filter">Semua Interview</span>
-                <span className="text-filter-not-selected">Interview Live</span>
-                <span className="text-filter-not-selected">Interview Selesai</span>
+            <Card
+              className="checkbox-card-container"
+              variant="outlined"
+              sx={{
+                borderRadius: "16px",
+                padding: "15px",
+                marginBottom: "20px",
+                marginTop: "20px",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                backgroundColor: "#FFFFFF", // white background
+                boxShadow: "0 4px 6px rgba(0,0,0,0.1)", // soft shadow
+                position: "relative", // to position the circle
+                width: "1100px",
+                marginLeft: "80px",
+              }}
+            >
+              <span className="text-filter">Semua Interview</span>
+              <span className="text-filter-not-selected">Interview Live</span>
+              <span className="text-filter-not-selected">
+                Interview Selesai
+              </span>
             </Card>
           </div>
 
           <div className="search-bar-daftar-jadwal-interview">
-            <SearchBar >
-
-            </SearchBar>
+            <SearchBar
+              value={searchQuery}
+              onChange={handleSearchInputChange}
+              onSearch={handleSearch} // Pass handleSearch to SearchBar
+            />
           </div>
 
-          {/* Display all interview data */}
           <div>
-            {interviewList.map((interview) => (
+            {filteredJadwalInterview.map((interview) => (
               <JadwalInterviewItem key={interview.id} interview={interview} />
             ))}
           </div>
-
-          {/* Add your input form here */}
+          
         </div>
       </div>
     </div>
