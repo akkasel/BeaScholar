@@ -70,25 +70,25 @@ const DocumentPage = () => {
     },
   ];
 
-  // Checkbox state for single selection
+  // checkbox state for single selection
   const [selectedTingkatBeasiswa, setSelectedTingkatBeasiswa] = useState("");
 
-  // Handle ceklis tingkat mahasiswa - agar cuma bisa pilih salah satu saja
+  // handle ceklis tingkat mahasiswa - agar cuma bisa pilih salah satu saja
   const handleChecklistTingkatMahasiswa = (value) => {
     setSelectedTingkatBeasiswa(value);
     setTingkat(value);
   };
 
-  // Checkbox state for single selection
+  // checkbox state for single selection
   const [selectedAnalysis, setSelectedAnalysis] = useState("");
 
-  // Handle analysis selection
+  // handle analysis selection
   const handleAnalysisSelection = (value) => {
     setSelectedAnalysis(value);
     setJenisAnalisa(value);
   };
 
-  // Handle analysis submission
+  // handle analysis submission
   const handleSubmit = (documentId) => {
     if (selectedAnalysis === "AI") {
       runAIAnalysis(documentId);
@@ -99,12 +99,11 @@ const DocumentPage = () => {
 
   const runAIAnalysis = (documentId) => {
     console.log("Running AI analysis...");
-    // Navigate to the feedback-dokumen-by-ai page with the document ID
+    // navigate to the feedback-dokumen-by-ai page with the document ID
     navigate(`/feedback-dokumen-by-ai/${documentId}`);
   };
 
   const runHumanAnalysis = () => {
-    // Your Human analysis logic here
     console.log("Running Human analysis...");
     // TODO : Kosongin lagi si form nya setelah ada tulisan "Document upload successfully"
   };
@@ -166,7 +165,7 @@ const DocumentPage = () => {
     }
   };
 
-  // Function to reset all fields
+  // to reset all fields
   const resetFields = () => {
     setjenisDoc("Essay");
     setTingkat("S1");
@@ -177,11 +176,11 @@ const DocumentPage = () => {
 
   return (
     <div>
-      <TopBar /> {/* Render the TopBar component */}
+      <TopBar />
       <div className="document-page">
-        <SideBar /> {/* Render the SideBar component */}
+        <SideBar />
         <div className="interview-page-container">
-          {/*Header text "Latihan Interview"*/}
+          {/*header text "Latihan Interview"*/}
           <div className="interview-header-container">
             <br />
             <img
@@ -208,15 +207,12 @@ const DocumentPage = () => {
                 select
                 defaultValue="Essay"
                 sx={{
-                  // Root class for the input field
                   "& .MuiOutlinedInput-root": {
-                    // Class for the border around the input field
                     "& .MuiOutlinedInput-notchedOutline": {
                       borderColor: "#C4084F",
                       borderWidth: "2px",
                     },
                   },
-                  // Class for the label of the input field
                   "& .MuiInputLabel-outlined": {
                     color: "#121212",
                   },
@@ -247,15 +243,12 @@ const DocumentPage = () => {
                 select
                 defaultValue="Dalam Negeri"
                 sx={{
-                  // Root class for the input field
                   "& .MuiOutlinedInput-root": {
-                    // Class for the border around the input field
                     "& .MuiOutlinedInput-notchedOutline": {
                       borderColor: "#C4084F",
                       borderWidth: "2px",
                     },
                   },
-                  // Class for the label of the input field
                   "& .MuiInputLabel-outlined": {
                     color: "#121212",
                   },
@@ -389,9 +382,9 @@ const DocumentPage = () => {
                         checked={selectedAnalysis === "Human"}
                         onChange={() => handleAnalysisSelection("Human")}
                         sx={{
-                          color: "#C4084F", // Change the checkbox color
+                          color: "#C4084F", // change the checkbox color
                           "&.Mui-checked": {
-                            color: "#C4084F", // Change the color of the checked state
+                            color: "#C4084F", // change the color of the checked state
                           },
                         }}
                       />
@@ -447,24 +440,24 @@ const DocumentPage = () => {
                 variant="contained"
                 onClick={createDokumen}
                 sx={{
-                  fontFamily: "'Poppins', sans-serif", // Use the Poppins font
-                  textTransform: "none", // Remove capitalization
-                  borderRadius: "20px", // Apply rounded edges
+                  fontFamily: "'Poppins', sans-serif", 
+                  textTransform: "none", // remove capital
+                  borderRadius: "20px", 
                   width: "100px",
                   fontWeight: "bold",
-                  background: "linear-gradient(to bottom, #940566, #C70E4E)", // Gradient background
+                  background: "linear-gradient(to bottom, #940566, #C70E4E)", // gradient background
                   "&:hover": {
                     background: "linear-gradient(to bottom, #940566, #C70E4E)",
                   },
-                  justifyContent: "center", // Centralized icon and text
-                  px: 3, // Add some horizontal padding
+                  justifyContent: "center",
+                  px: 3, 
                 }}
               >
                 Kumpul
               </Button>
             </div>
 
-            {/* This is to show the alert*/}
+            {/* this is to show the alert*/}
             {alert.show && (
               <Alert
                 icon={
@@ -478,7 +471,6 @@ const DocumentPage = () => {
                 {alert.message}
               </Alert>
             )}
-            {/* Add your input form here */}
           </div>
         </div>
       </div>

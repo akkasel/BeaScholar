@@ -31,7 +31,6 @@ const AdminSignUp = () => {
       );
       console.log(userCredential);
       navigate("/admin-home"); // navigate to home screen
-      // Further processing for file uploads goes here
     } catch (error) {
       console.log(error);
     }
@@ -97,7 +96,6 @@ const AdminSignUp = () => {
             <a className="daftar-disini-text" href="/admin-signin">
               Login disini!
             </a>{" "}
-            {/* Jangan lupa di href nya nanti simpan link untuk ke page Sign Up*/}
           </div>
 
           <button type="submit" class="submit-button" onClick={signUp}>

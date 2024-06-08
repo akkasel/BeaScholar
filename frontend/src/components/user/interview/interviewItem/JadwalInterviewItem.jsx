@@ -8,7 +8,7 @@ const JadwalInterviewItem = ({ interview }) => {
     return <div>Loading...</div>;
   }
 
-  // Convert Firestore timestamp to JavaScript Date
+  // convert Firestore timestamp to JavaScript Date
   const convertTimestampToDate = (timestamp) => {
     if (timestamp && timestamp.seconds) {
       return new Date(timestamp.seconds * 1000);
@@ -102,19 +102,19 @@ const JadwalInterviewItem = ({ interview }) => {
           href={`/feedback-interview/${interview.id}`}
           variant="contained"
           sx={{
-            fontFamily: "'Poppins', sans-serif", // Use the Poppins font
-            textTransform: "none", // Remove capitalization
-            borderRadius: "20px", // Apply rounded edges
+            fontFamily: "'Poppins', sans-serif", 
+            textTransform: "none", 
+            borderRadius: "20px",
             width: "160px",
             padding: "0px",
             fontSize: "13px",
             fontWeight: "bold",
-            background: "linear-gradient(to right, #FA6339, #C73950)", // Gradient background
+            background: "linear-gradient(to right, #FA6339, #C73950)", 
             "&:hover": {
               background: "linear-gradient(to right, #FA6339, #C73950)",
             },
 
-            justifyContent: "center", // Centralized text and icon
+            justifyContent: "center", 
           }}
         >
           Lihat Umpan Balik
@@ -128,19 +128,19 @@ const JadwalInterviewItem = ({ interview }) => {
           rel="noopener noreferrer"
           variant="contained"
           sx={{
-            fontFamily: "'Poppins', sans-serif", // Use the Poppins font
-            textTransform: "none", // Remove capitalization
-            borderRadius: "20px", // Apply rounded edges
+            fontFamily: "'Poppins', sans-serif", 
+            textTransform: "none", 
+            borderRadius: "20px", 
             fontSize: "13px",
             width: "200px",
             padding: "0px",
             fontWeight: "bold",
-            background: "linear-gradient(to bottom, #940566, #C70E4E)", // Gradient background
+            background: "linear-gradient(to bottom, #940566, #C70E4E)", 
             "&:hover": {
               background: "linear-gradient(to bottom, #940566, #C70E4E)",
             },
 
-            justifyContent: "center", // Centralized text and icon
+            justifyContent: "center", 
           }}
         >
           Masuk Ruang Interview

@@ -25,6 +25,7 @@ const HomePage = () => {
   const [filteredScholarships, setFilteredScholarships] = useState([]); 
 
   useEffect(() => {
+    // get beasiswa data
     const fetchScholarships = async () => {
       try {
         const querySnapshot = await getDocs(collection(db, "beasiswa"));
@@ -107,7 +108,7 @@ const HomePage = () => {
             <SearchScholarshipBar 
               value={searchQuery} 
               onChange={handleSearchInputChange} 
-              onSearch={handleSearch} // Pass handleSearch to SearchBar
+              onSearch={handleSearch}
             /> 
           </div>
 

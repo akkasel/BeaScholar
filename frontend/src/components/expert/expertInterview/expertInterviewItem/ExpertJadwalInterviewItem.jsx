@@ -7,7 +7,7 @@ const ExpertJadwalInterviewItem = ({ interview }) => {
     return <div>Loading...</div>;
   }
 
-  // Convert Firestore timestamp to JavaScript Date
+  // convert Firestore timestamp to JavaScript Date
   const convertTimestampToDate = (timestamp) => {
     if (timestamp && timestamp.seconds) {
       return new Date(timestamp.seconds * 1000);

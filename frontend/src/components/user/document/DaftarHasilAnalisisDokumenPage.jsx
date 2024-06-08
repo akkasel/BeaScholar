@@ -21,6 +21,7 @@ const DaftarHasilAnalisisDokumenPage = () => {
   // add state for filtered daftar hasil analisis dokumen
   const [filteredDaftarDokumen, setFilteredDaftarDokumen] = useState([]); 
 
+  // to get all hasil analisis dokumen data item
   useEffect(() => {
     const fetchDokumen = async () => {
       try {
@@ -68,12 +69,12 @@ const DaftarHasilAnalisisDokumenPage = () => {
 
   return (
     <div>
-      <TopBar /> {/* Render the TopBar component */}
+      <TopBar /> {/* render the TopBar component */}
       <div className="feedback-document-by-ai-page">
-        <SideBar /> {/* Render the SideBar component */}
+        <SideBar /> {/* render the SideBar component */}
 
         <div className="interview-page-container">
-          {/*Header text "Daftar hasil analisis dokumen"*/}
+          {/* header text "Daftar hasil analisis dokumen"*/}
           <div className="interview-header-container">
             <br />
             <img

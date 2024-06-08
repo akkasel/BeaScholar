@@ -20,6 +20,7 @@ const AdminHomePage = () => {
   // add state for filtered scholarships
   const [filteredScholarships, setFilteredScholarships] = useState([]); 
 
+  // to get all beasiswa data
   useEffect(() => {
     const fetchScholarships = async () => {
       try {
@@ -42,6 +43,7 @@ const AdminHomePage = () => {
     fetchScholarships();
   }, []);
 
+  // to handle DELETE beasiswa data operation
   const handleDelete = (id) => {
     setScholarships(
       scholarships.filter((scholarship) => scholarship.id !== id)

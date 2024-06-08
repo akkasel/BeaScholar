@@ -35,6 +35,7 @@ const ScholarshipDetailItemPageForAdmin = () => {
     fetchScholarship();
   }, [id]);
 
+  // to handle UPDATE beasiswa data
   const handleUpdate = async () => {
     const docRef = doc(db, "beasiswa", id);
     await updateDoc(docRef, {

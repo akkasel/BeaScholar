@@ -476,7 +476,7 @@ const UploadBeasiswaPage = () => {
 
             <br />
 
-            {/* This is to show the alert*/}
+            {/* this is to show the alert*/}
             {alert.show && (
               <Alert
                 icon={
@@ -491,7 +491,6 @@ const UploadBeasiswaPage = () => {
               </Alert>
             )}
 
-            {/* Add your input form here */}
           </div>
         </div>
       </div>

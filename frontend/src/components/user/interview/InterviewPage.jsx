@@ -122,7 +122,7 @@ const InterviewPage = () => {
    //  navigate("/daftar-jadwal-interview");
   };
 
-  // Function to reset all fields
+  // function to reset all fields
   const resetFields = () => {
     setNama("");
     setTingkat("S1");
@@ -138,11 +138,11 @@ const InterviewPage = () => {
 
   return (
     <div>
-      <TopBar /> {/* Render the TopBar component */}
+      <TopBar /> 
       <div className="interview-page">
-        <SideBar /> {/* Render the SideBar component */}
+        <SideBar /> 
         <div className="interview-page-container">
-          {/*Header text "Latihan Interview"*/}
+         
           <div className="interview-header-container">
             <br />
             <img
@@ -276,9 +276,9 @@ const InterviewPage = () => {
                         checked={selectedJenisIntreview === "S1"}
                         onChange={() => handleJenisInterviewSelection("S1")}
                         sx={{
-                          color: "#C4084F", // Change the checkbox color
+                          color: "#C4084F", 
                           "&.Mui-checked": {
-                            color: "#C4084F", // Change the color of the checked state
+                            color: "#C4084F",
                           },
                         }}
                       />
@@ -291,9 +291,9 @@ const InterviewPage = () => {
                         checked={selectedJenisIntreview === "S2"}
                         onChange={() => handleJenisInterviewSelection("S2")}
                         sx={{
-                          color: "#C4084F", // Change the checkbox color
+                          color: "#C4084F",
                           "&.Mui-checked": {
-                            color: "#C4084F", // Change the color of the checked state
+                            color: "#C4084F", 
                           },
                         }}
                       />
@@ -306,9 +306,9 @@ const InterviewPage = () => {
                         checked={selectedJenisIntreview === "S3"}
                         onChange={() => handleJenisInterviewSelection("S3")}
                         sx={{
-                          color: "#C4084F", // Change the checkbox color
+                          color: "#C4084F", 
                           "&.Mui-checked": {
-                            color: "#C4084F", // Change the color of the checked state
+                            color: "#C4084F", 
                           },
                         }}
                       />
@@ -398,18 +398,18 @@ const InterviewPage = () => {
                 variant="contained"
                 onClick={createInterview}
                 sx={{
-                  fontFamily: "'Poppins', sans-serif", // Use the Poppins font
-                  textTransform: "none", // Remove capitalization
-                  borderRadius: "20px", // Apply rounded edges
+                  fontFamily: "'Poppins', sans-serif", 
+                  textTransform: "none", 
+                  borderRadius: "20px", 
                   width: "100px",
                   fontWeight: "bold",
-                  background: "linear-gradient(to bottom, #940566, #C70E4E)", // Gradient background
+                  background: "linear-gradient(to bottom, #940566, #C70E4E)", 
                   "&:hover": {
                     background: "linear-gradient(to bottom, #940566, #C70E4E)",
                   },
 
-                  justifyContent: "center", // Centralized text and icon
-                  px: 3, // Add some horizontal padding
+                  justifyContent: "center", 
+                  px: 3,
                 }}
               >
                 Kumpul
