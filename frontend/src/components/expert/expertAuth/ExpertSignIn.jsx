@@ -69,7 +69,6 @@ const ExpertSignIn = () => {
             <a className="daftar-disini-expert-text" href="/expert-signup">
               Daftar sebagai Expert disini!
             </a>{" "}
-            {/* Jangan lupa di href nya nanti simpan link untuk ke page Sign Up*/}
           </div>
 
           <button type="submit" class="submit-button" onClick={signIn}>

@@ -94,19 +94,19 @@ const documentCardItem = ({ dokumen }) => {
           href={`/feedback-dokumen/${dokumen.id}`}
           variant="contained"
           sx={{
-            fontFamily: "'Poppins', sans-serif", // Use the Poppins font
-            textTransform: "none", // Remove capitalization
-            borderRadius: "20px", // Apply rounded edges
+            fontFamily: "'Poppins', sans-serif", 
+            textTransform: "none", 
+            borderRadius: "20px", 
             width: "200px",
             padding: "0px",
             fontWeight: "bold",
-            background: "linear-gradient(to right, #FA6339, #C73950)", // Gradient background
+            background: "linear-gradient(to right, #FA6339, #C73950)", 
             "&:hover": {
               background: "linear-gradient(to right, #FA6339, #C73950)",
             },
 
-            justifyContent: "center", // Centralized text and icon
-            px: 3, // Add some horizontal padding
+            justifyContent: "center", 
+            px: 3, 
           }}
         >
           Lihat Umpan Balik

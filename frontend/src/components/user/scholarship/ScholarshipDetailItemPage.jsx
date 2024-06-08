@@ -13,6 +13,7 @@ const ScholarshipDetailItemPage = () => {
   const { id } = useParams();
   const [scholarship, setScholarship] = useState(null);
 
+  // get beasiswa data by ID
   useEffect(() => {
     const fetchScholarship = async () => {
       const docRef = doc(db, "beasiswa", id);
@@ -33,11 +34,11 @@ const ScholarshipDetailItemPage = () => {
 
   return (
     <div>
-      <TopBar /> {/* Render the TopBar component */}
+      <TopBar /> 
       <div className="feedback-interview-page">
-        <SideBar /> {/* Render the SideBar component */}
+        <SideBar /> 
         <div className="interview-page-container">
-          {/*Header text "Feedback Dokumen"*/}
+         
           <div className="container-feedback-header">
             <br />
             <br />
@@ -152,19 +153,17 @@ const ScholarshipDetailItemPage = () => {
             {/* Daftar Sekarang! Lalu diarahkan ke website atau link pendaftarannya */}
             <div>
               <Button
-                /* Jadi User nanti diarahkan ke link pendaftarannya, ini contoh aja */
-                // harusnya, kalau admin input link, di sini linknya auto ke-update!
                 href={scholarship.tautan}
                 target="_blank" // to open the new tab after click
                 rel="noopener noreferrer"
                 variant="contained"
                 sx={{
-                  fontFamily: "'Poppins', sans-serif", // Use the Poppins font
-                  textTransform: "none", // Remove capitalization
-                  borderRadius: "20px", // Apply rounded edges
+                  fontFamily: "'Poppins', sans-serif",
+                  textTransform: "none", 
+                  borderRadius: "20px", 
                   width: "100px",
                   fontWeight: "bold",
-                  background: "linear-gradient(to bottom, #C4084F, #FF6C37)", // Gradient background
+                  background: "linear-gradient(to bottom, #C4084F, #FF6C37)", 
                   "&:hover": {
                     background: "linear-gradient(to bottom, #C4084F, #FF6C37)",
                   },
@@ -176,7 +175,6 @@ const ScholarshipDetailItemPage = () => {
               </Button>
             </div>
 
-            {/* Add your input form here */}
           </div>
         </div>
       </div>

@@ -38,7 +38,7 @@ const FeedbackInterviewPage = () => {
     return <div>Loading...</div>;
   }
 
-  // Convert Firestore timestamp to JavaScript Date
+  // to convert Firestore timestamp to JavaScript Date
   const convertTimestampToDate = (timestamp) => {
     if (timestamp && timestamp.seconds) {
       return new Date(timestamp.seconds * 1000);
@@ -87,12 +87,12 @@ const FeedbackInterviewPage = () => {
 
   return (
     <div>
-      <TopBar /> {/* Render the TopBar component */}
+      <TopBar /> 
       <div className="feedback-interview-page">
-        <SideBar /> {/* Render the SideBar component */}
+        <SideBar />
 
         <div className="interview-page-container">
-          {/*Header text "Feedback Interview"*/}
+     
           <div className="container-feedback-header">
             <br />
             <Button href="/daftar-jadwal-interview">
@@ -199,7 +199,6 @@ const FeedbackInterviewPage = () => {
               </Card>
             </div>
 
-            {/* Add your input form here */}
           </div>
         </div>
       </div>

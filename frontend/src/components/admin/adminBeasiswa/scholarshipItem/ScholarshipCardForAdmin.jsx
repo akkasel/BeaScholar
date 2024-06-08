@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import bcalogoSvg from "../../../../img/bcalogo.svg";
 import { Button } from "@mui/material";
 import { db } from "../../../../firebase";
 import { deleteDoc, doc } from "firebase/firestore";

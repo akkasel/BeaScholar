@@ -2,11 +2,7 @@ import React, { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../firebase";
 import "../../../App.css";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
-
-import facebookSvg from "../../../img/facebook.svg";
-import microsoftSvg from "../../../img/microsoft.svg";
-import googleSvg from "../../../img/google.svg";
+import { useNavigate } from "react-router-dom";
 
 const AdminSignIn = () => {
   const [email, setEmail] = useState("");
@@ -22,10 +18,9 @@ const AdminSignIn = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         console.log(userCredential);
-        navigate("/admin-home"); // Navigate to home on success
+        navigate("/admin-home"); // navigate to home on success
       })
       .catch((error) => {
-        // Handle errors here.
         console.log(error);
       });
   };
@@ -74,7 +69,6 @@ const AdminSignIn = () => {
             <a className="login-sebagai-expert" href="/admin-signup">
               Daftar disini!
             </a>{" "}
-            {/* Jangan lupa di href nya nanti simpan link untuk ke page Sign Up*/}
           </div>
 
           <button type="submit" class="submit-button" onClick={signIn}>

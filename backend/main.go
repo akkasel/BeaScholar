@@ -22,7 +22,8 @@ import (
 	openai "github.com/sashabaranov/go-openai"
 )
 
-// if setelah tulis "go run main.go", ga muncul apa-apa lagi di terminalnya, its ok, udah di test di postman, API nya tetep udah jalan & aktif
+// CATATAN :
+// Udah di test di postman, API nya tetep udah jalan & aktif
 
 var client *firestore.Client
 
@@ -80,7 +81,7 @@ type Interview struct {
 	CatatanTambahan          string    `json:"catatanTambahan"`
 }
 
-// For analysis request
+// for analysis request
 type AnalysisRequest struct {
 	Text       string `json:"text"`
 	PromptType string `json:"promptType"`
@@ -108,32 +109,33 @@ type ZoomMeetingResponse struct {
 }
 
 func main() {
-	// Set the environment variable for Google Application Credentials
+	// set the environment variable for Google Application Credentials
 	os.Setenv("GOOGLE_APPLICATION_CREDENTIALS", "./service_account_key/beascholar-d26c0-e17b1788e2b2.json")
 
 	ctx := context.Background()
 	var err error
 
-	// Load environment variables
+	// load environment variables
 	if err := godotenv.Load(); err != nil {
 		log.Fatalf("Error loading .env file")
 	}
 
-	// Initialize Firestore client
+	// initialize Firestore client
 	// client, err = firestore.NewClient(ctx, "FIREBASE_PROJECT_ID")
-	// Use the service account key file for authentication
+
+	// use the service account key file for authentication
 	client, err = firestore.NewClient(ctx, "beascholar-d26c0", option.WithCredentialsFile(os.Getenv("GOOGLE_APPLICATION_CREDENTIALS")))
 	if err != nil {
 		log.Fatalf("Failed to create client: %v", err)
 	}
 
-	// Initialize OpenAI client
+	// initialize OpenAI client
 	openaiClient := openai.NewClient(os.Getenv("OPENAI_API_KEY"))
 
-	// Create a new router
+	// create a new router
 	r := mux.NewRouter()
 
-	// Route Handlers (backend API CRUD, openai API, etc)
+	// route Handlers (backend API CRUD, openai API, etc)
 	r.HandleFunc("/beasiswa", createBeasiswa).Methods("POST")
 	r.HandleFunc("/beasiswa", getBeasiswa).Methods("GET")
 	r.HandleFunc("/beasiswa/{id}", updateBeasiswa).Methods("PUT")
@@ -161,7 +163,7 @@ func main() {
 	// to enable CORS, ini tu supaya bisa diakses backend nya di frontend
 	http.Handle("/", enableCORS(r))
 
-	// Start the server
+	// start the server
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 
@@ -372,7 +374,7 @@ func createInterview(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Fill Zoom-related attributes to the Interview entity
+	// fill Zoom-related attributes to the Interview entity
 	interview.ZoomMeetingId = zoomResponse.MeetingID
 	interview.ZoomMeetingPassword = zoomResponse.Password
 	interview.ZoomJoinUrl = zoomResponse.JoinURL
@@ -380,7 +382,7 @@ func createInterview(w http.ResponseWriter, r *http.Request) {
 	interview.CreatedAt = time.Now()
 	interview.UpdatedAt = time.Now()
 
-	// Add interview to Firestore
+	// add interview data to Firestore database
 	_, _, err = client.Collection("interview").Add(ctx, interview)
 	if err != nil {
 		w.Header().Set("Content-Type", "application/json")
@@ -389,7 +391,7 @@ func createInterview(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Prepare response
+	// prepare response
 	response := map[string]string{
 		"message":             "Interview and Zoom meeting created successfully",
 		"zoomMeetingId":       interview.ZoomMeetingId,
@@ -450,7 +452,7 @@ func deleteInterview(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintln(w, "Interview deleted")
 }
 
-// Function to generate feedback using OpenAI API
+// to generate feedback using OpenAI API
 func generateFeedback(w http.ResponseWriter, r *http.Request, openaiClient *openai.Client) {
 	var analysisRequest AnalysisRequest
 	if err := json.NewDecoder(r.Body).Decode(&analysisRequest); err != nil {
@@ -461,6 +463,7 @@ func generateFeedback(w http.ResponseWriter, r *http.Request, openaiClient *open
 	log.Printf("Received request for analysis with prompt type: %s", analysisRequest.PromptType)
 	log.Printf("Received request text: %s", analysisRequest.Text)
 
+	// tulis prompt untuk GPT nya disini
 	var prompt string
 	switch analysisRequest.PromptType {
 	case "hasilAnalisa":
@@ -476,6 +479,7 @@ func generateFeedback(w http.ResponseWriter, r *http.Request, openaiClient *open
 
 	log.Printf("Generated prompt: %s", prompt)
 
+	// template dari dokumentasi
 	resp, err := openaiClient.CreateChatCompletion(context.Background(), openai.ChatCompletionRequest{
 		Model: "gpt-4",
 		Messages: []openai.ChatCompletionMessage{
@@ -488,6 +492,7 @@ func generateFeedback(w http.ResponseWriter, r *http.Request, openaiClient *open
 				Content: prompt,
 			},
 		},
+		// 1 token = 3/4 words, so 100 token = 75 words
 		MaxTokens: 300,
 	})
 	if err != nil {
@@ -499,7 +504,7 @@ func generateFeedback(w http.ResponseWriter, r *http.Request, openaiClient *open
 	json.NewEncoder(w).Encode(map[string]string{"result": resp.Choices[0].Message.Content})
 }
 
-// CORS middleware
+// implement CORS middleware
 func enableCORS(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
@@ -518,6 +523,7 @@ func enableCORS(next http.Handler) http.Handler {
 
 // BELOW THIS IS FOR THE ZOOM FUNCTIONALITY
 func getZoomOAuthToken() (*oauth2.Token, error) {
+	
 	conf := &clientcredentials.Config{
 		ClientID:     os.Getenv("ZOOM_CLIENT_ID"),
 		ClientSecret: os.Getenv("ZOOM_CLIENT_SECRET"),
@@ -529,6 +535,7 @@ func getZoomOAuthToken() (*oauth2.Token, error) {
 		Scopes: []string{"meeting:write:admin", "meeting:write"},
 	}
 
+	
 	token, err := conf.Token(context.Background())
 	if err != nil {
 		log.Printf("Error retrieving OAuth token: %v", err)
@@ -540,11 +547,13 @@ func getZoomOAuthToken() (*oauth2.Token, error) {
 
 // to create zoom meeting
 func createZoomMeeting(interview Interview) (*ZoomMeetingResponse, error) {
+	// get the OAuth token required for authentication with the zoom api.
 	token, err := getZoomOAuthToken()
 	if err != nil {
 		return nil, err
 	}
 
+	// prepare the zoom meeting details.
 	zoomMeeting := ZoomMeeting{
 		Topic:     "Interview with " + interview.Nama,
 		Type:      2,
@@ -555,21 +564,25 @@ func createZoomMeeting(interview Interview) (*ZoomMeetingResponse, error) {
 		Agenda:    "Interview",
 	}
 
+	// marshal the Zoom meeting details into json.
 	zoomMeetingData, err := json.Marshal(zoomMeeting)
 	if err != nil {
 		log.Printf("Error marshalling Zoom meeting data: %v", err)
 		return nil, err
 	}
 
+	// create a new POST request to the Zoom API to create new meeting room.
 	req, err := http.NewRequest("POST", "https://api.zoom.us/v2/users/"+os.Getenv("ZOOM_USER_ID")+"/meetings", bytes.NewBuffer(zoomMeetingData))
 	if err != nil {
 		log.Printf("Error creating Zoom meeting request: %v", err)
 		return nil, err
 	}
 
+	// set the necessary headers for the Zoom API request.
 	req.Header.Set("Authorization", "Bearer "+token.AccessToken)
 	req.Header.Set("Content-Type", "application/json")
 
+	// send the request using an HTTP client.
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
@@ -578,6 +591,7 @@ func createZoomMeeting(interview Interview) (*ZoomMeetingResponse, error) {
 	}
 	defer resp.Body.Close()
 
+	// check if the response status code is 201 Created.
 	if resp.StatusCode != http.StatusCreated {
 		log.Printf("Zoom API responded with status code: %d", resp.StatusCode)
 		var zoomErr map[string]interface{}
@@ -587,6 +601,7 @@ func createZoomMeeting(interview Interview) (*ZoomMeetingResponse, error) {
 		return nil, fmt.Errorf("failed to create Zoom meeting, status code: %d", resp.StatusCode)
 	}
 
+	// decode the successful response into the ZoomMeetingResponse struct.
 	var zoomResponse ZoomMeetingResponse
 	if err := json.NewDecoder(resp.Body).Decode(&zoomResponse); err != nil {
 		log.Printf("Error decoding Zoom meeting response: %v", err)

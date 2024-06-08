@@ -46,12 +46,12 @@ const FeedbackDokumenPage = () => {
         startIcon={<img src={downloadiconSvg} alt="Download Icon" />}
         href={href}
         sx={{
-          textTransform: "none", // Remove capitalization
+          textTransform: "none", 
           borderColor: "#C4084F",
-          backgroundColor: "#FFFF", // Pink color
-          color: "#C4084F", // White text color for contrast
+          backgroundColor: "#FFFF", 
+          color: "#C4084F", 
           "&:hover": {
-            backgroundColor: "#C4084F", // Slightly lighter pink on hover
+            backgroundColor: "#C4084F", 
             color: "#FFFF",
           },
           width: "1000px",
@@ -174,7 +174,6 @@ const FeedbackDokumenPage = () => {
               </Card>
             </div>
 
-            {/* Add your input form here */}
           </div>
         </div>
       </div>
