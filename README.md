@@ -1,4 +1,4 @@
-# BeaScholar
+# BeaScholar Web App
 
 ## Overview
 BeaScholar is a comprehensive web application dedicated to assisting students in their pursuit of scholarships. Designed to streamline the entire scholarship search and application process, BeaScholar offers tools for discovering scholarships, preparing for interviews, and reviewing crucial documents like essays and CVs.
@@ -19,6 +19,10 @@ Watch our demo video to see BeaScholar in action: [BeaScholar Demo Video](https:
 - **Scholarship Search**: Use our search tools to find and apply for scholarships.
 - **Interview Preparation**: Schedule and participate in mock interviews with experts to prepare effectively for your scholarship interviews.
 - **Document Review**: Choose between human expert reviews and instant AI-assisted review and get feedback for your essays and CVs.
+
+## Tech Stack
+- **Frontend**: React JSX
+- **Backend**: Go, Firebase Firestore, Firebase Storage
 
 ## Group Members
 1. Raymond Akkasel Jaya Imanuel (2602128094)
