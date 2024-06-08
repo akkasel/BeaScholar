@@ -6,14 +6,13 @@ BeaScholar is a comprehensive web application dedicated to assisting students in
 ## Demo Video
 Watch our demo video to see BeaScholar in action: [BeaScholar Demo Video](https://www.youtube.com/watch?v=K63vh7QgksY)
 
-## Screenshots & GIFs
-
-
 ## Features
-- **Scholarship Search**: Utilize an advanced search engine to find scholarships that match your academic interests and career aspirations.
-- **Interview Preparation**: Schedule one-on-one practice sessions with experts to prepare for scholarship interviews. Gain insights and feedback to enhance your performance.
-- **Document Review by Expert**: Opt for expert-driven reviews for a thorough critique of your essays and CVs.
-- **Document Review by AI**: Get instant feedback with our AI-driven review tool, ensuring your documents are polished and compelling.
+- **1. Scholarship Search**: Utilize an advanced search engine to find scholarships that match your academic interests and career aspirations.
+-  ![BeaScholar Usage GIF](frontend/src/img/searchgif.gif)
+-  *Above is the demonstration of search feature within BeaScholar.*
+- **2. Interview Preparation**: Schedule one-on-one practice sessions with experts to prepare for scholarship interviews. Gain insights and feedback to enhance your performance.
+- **3. Document Review by Expert**: Opt for expert-driven reviews for a thorough critique of your essays and CVs.
+- **4. Document Review by AI**: Get instant feedback with our AI-driven review tool, ensuring your documents are polished and compelling.
 
 ## Usage
 - **Sign Up/Login**: Register for a new account or log into your existing account.
