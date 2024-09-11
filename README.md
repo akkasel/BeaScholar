@@ -12,10 +12,6 @@ Watch our demo video to see BeaScholar in action: [BeaScholar Demo Video](https:
 - **3. Document Review by Expert**: Opt for expert-driven reviews for a thorough critique of your essays and CVs.
 - **4. Document Review by AI**: Get instant feedback with our AI-driven review tool, ensuring your documents are polished and compelling.
 
-## Screenshots & GIFs
--  ![BeaScholar Usage GIF](frontend/src/img/searchgif.gif)
--  *Above is the demonstration of search feature within BeaScholar.*
-
 ## Usage
 - **Sign Up/Login**: Register for a new account or log into your existing account.
 - **Scholarship Search**: Use our search tools to find and apply for scholarships.
@@ -25,6 +21,16 @@ Watch our demo video to see BeaScholar in action: [BeaScholar Demo Video](https:
 ## Tech Stack
 - **Frontend**: React JSX
 - **Backend**: Go, Firebase Firestore, Firebase Storage
+
+## Screenshots & GIFs
+-  ![BeaScholar Usage GIF](frontend/src/img/searchgif.gif)
+-  *Above is the demonstration of search feature within BeaScholar.*
+-  ![Beascholar](frontend/src/img/beascholar_home.jpg)
+-  ![Beascholar](frontend/src/img/beascholar_search.jpg)
+-  ![Beascholar](frontend/src/img/beascholar_home.jpg)
+-  ![Beascholar](frontend/src/img/beascholar_jadwalkan_latihan.jpg)
+-  ![Beascholar](frontend/src/img/beascholar_time.jpg)
+-  ![Beascholar](frontend/src/img/beascholar_beasiswa.jpg)
 
 ## Group Members
 1. Raymond Akkasel Jaya Imanuel (2602128094)
