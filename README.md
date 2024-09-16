@@ -30,7 +30,6 @@ Watch our demo video to see BeaScholar in action: [BeaScholar Demo Video](https:
 -  ![Beascholar](frontend/src/img/beascholar_home.jpg)
 -  ![Beascholar](frontend/src/img/beascholar_jadwalkan_latihan.jpg)
 -  ![Beascholar](frontend/src/img/beascholar_time.jpg)
--  ![Beascholar](frontend/src/img/beascholar_beasiswa.jpg)
 
 ## Group Members
 1. Raymond Akkasel Jaya Imanuel (2602128094)
